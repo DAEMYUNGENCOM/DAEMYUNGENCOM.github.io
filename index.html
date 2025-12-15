@@ -36,10 +36,26 @@
       justify-content: space-between;
     }
 
+    /* ✅ 로고 영역 (이미지 + 텍스트) */
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #111;
+    }
+
+    .logo img {
+      height: 32px;   /* 로고 크기 */
+      width: auto;
+      display: block;
+    }
+
+    .logo span {
       font-weight: 700;
       letter-spacing: 0.12em;
-      color: #111;
+      font-size: 14px;
+      white-space: nowrap;
     }
 
     .menu a {
@@ -138,7 +154,13 @@
   <!-- NAVBAR -->
   <nav>
     <div class="nav-inner">
-      <div class="logo">DAE MYUNG ENCOM</div>
+
+      <!-- ✅ 로고 수정된 부분 -->
+      <a href="#" class="logo">
+        <img src="대명엔컴-영문로고 (워터마크).png" alt="DAE MYUNG ENCOM 로고">
+        <span>DAE MYUNG ENCOM</span>
+      </a>
+
       <div class="menu">
         <a href="#about">회사소개</a>
         <a href="#products">제품</a>
@@ -200,3 +222,4 @@
 
 </body>
 </html>
+
