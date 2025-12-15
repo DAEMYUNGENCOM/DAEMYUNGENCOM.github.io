@@ -40,12 +40,12 @@
   <p>합리적인 가격과 다양한 라인업의 타일 브랜드</p>
 </header>
 
-<section>
+<section class="fade-up">
   <h2>브랜드 소개</h2>
   <p>여기에 브랜드 설명을 적어보세요.</p>
 </section>
 
-<section>
+<section class="fade-up">
   <h2>제품 소개</h2>
 
   <div class="product-card">
@@ -64,6 +64,19 @@
   </div>
 
 </section>
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.fade-up').forEach(el => {
+    observer.observe(el);
+  });
+</script>
 
 </body>
 </html>
