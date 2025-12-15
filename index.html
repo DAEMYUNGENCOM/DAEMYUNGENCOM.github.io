@@ -10,8 +10,9 @@
   <style>
     body {
       font-family: 'Noto Sans KR', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+  margin: 0;
+  padding: 0;
+  padding-top: 70px; /* fixed nav 보정 */
     }
 
     /* ===== NAVBAR ===== */
@@ -71,13 +72,14 @@
 
     /* ===== HERO ===== */
     .hero {
+      margin-bottom: 80px;
       height: 90vh;
   background: url('hero-tile.jpg') center / cover no-repeat;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
     }
 
     .hero::before {
@@ -89,23 +91,24 @@
 
     .hero-inner {
       position: relative;
-      z-index: 1;
-      color: #fff;
-      max-width: 900px;
-      padding: 0 20px;
+  z-index: 1;
+  color: #fff;
+  max-width: 600px;
+  margin-left: 120px;
+  padding: 0 20px;
     }
 
     .hero h1 {
-      font-size: 56px;
-      letter-spacing: 0.15em;
-      margin-bottom: 20px;
-      color: #ffffff;
+      font-size: 52px;
+  letter-spacing: 0.18em;
+  margin-bottom: 24px;
+  color: #ffffff;
     }
 
     .hero p {
-      font-size: 20px;
-      color: #f1f1f1;
-      line-height: 1.6;
+      font-size: 18px;
+  line-height: 1.7;
+  color: #f1f1f1;
     }
 
     section {
@@ -139,8 +142,8 @@
     /* SCROLL ANIMATION */
     .fade-up {
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.6s ease-out;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .fade-up.show {
