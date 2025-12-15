@@ -1,97 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>내 첫 GitHub 페이지</title>
+  <title>DAE MYUNG ENCOM</title>
+
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family:'Noto Sans KR',Arial, sans-serif;
-      margin:0; padding:0;
-      text-align:center;
+      font-family: 'Noto Sans KR', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
     }
+
+    /* HEADER (임시 – 나중에 히어로로 교체 예정) */
     header {
-      background:#ffffff;
-      color:#1E90FF;
-      padding:50px 0;
+      background: #ffffff;
+      color: #1E90FF;
+      padding: 60px 20px;
     }
+
     section {
-      padding:50px 20px;
+      padding: 80px 20px;
     }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    /* PRODUCT CARD */
     .product-card {
-      display:inline-block;
-      width:250px;
-      border:1px solid #ddd;
-      border-radius:10px;
-      padding:20px;
-      margin:10px;
-      box-shadow:0 2px 5px rgba(0,0,0,0.1);
-      transition:0.3s;
+      display: inline-block;
+      width: 260px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      background: #fff;
     }
+
     .product-card:hover {
-      transform:scale(1.05);
-      box-shadow:0 5px 20px rgba(0,0,0,0.2);
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    /* SCROLL ANIMATION */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s ease-out;
+    }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1>DAE MYUNG ENCOM</h1>
-  <p>합리적인 가격과 다양한 라인업의 타일 브랜드</p>
-</header>
+  <header>
+    <h1>DAE MYUNG ENCOM</h1>
+    <p>합리적인 가격과 다양한 라인업의 타일 브랜드</p>
+  </header>
 
-<section class="fade-up">
-  <h2>브랜드 소개</h2>
-  <p>여기에 브랜드 설명을 적어보세요.</p>
-</section>
+  <section class="fade-up">
+    <h2>브랜드 소개</h2>
+    <p>여기에 브랜드 설명을 적어보세요.</p>
+  </section>
 
-<section class="fade-up">
-  <h2>제품 소개</h2>
+  <section class="fade-up">
+    <h2>제품 소개</h2>
 
-  <div class="product-card">
-    <h3>제품 1</h3>
-    <p>설명글…</p>
-  </div>
+    <div class="product-card">
+      <h3>제품 1</h3>
+      <p>설명글…</p>
+    </div>
 
-  <div class="product-card">
-    <h3>제품 2</h3>
-    <p>설명글…</p>
-  </div>
+    <div class="product-card">
+      <h3>제품 2</h3>
+      <p>설명글…</p>
+    </div>
 
-  <div class="product-card">
-    <h3>제품 3</h3>
-    <p>설명글…</p>
-  </div>
+    <div class="product-card">
+      <h3>제품 3</h3>
+      <p>설명글…</p>
+    </div>
+  </section>
 
-</section>
-<script>
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      }
+  <!-- Scroll Animation Script -->
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.fade-up').forEach(el => {
+      observer.observe(el);
     });
-  }, { threshold: 0.2 });
-
-  document.querySelectorAll('.fade-up').forEach(el => {
-    observer.observe(el);
-  });
-</script>
+  </script>
 
 </body>
 </html>
-/* 스크롤 애니메이션 기본 상태 */
-.fade-up {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s ease-out;
-}
-
-/* 화면에 들어오면 활성화 */
-.fade-up.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
