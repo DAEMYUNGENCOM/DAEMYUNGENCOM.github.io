@@ -67,4 +67,16 @@
 
 </body>
 </html>
+/* 스크롤 애니메이션 기본 상태 */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease-out;
+}
+
+/* 화면에 들어오면 활성화 */
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
