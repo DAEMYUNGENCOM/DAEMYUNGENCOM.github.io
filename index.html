@@ -12,7 +12,7 @@
       font-family: 'Noto Sans KR', Arial, sans-serif;
       margin: 0;
       padding: 0;
-      padding-top: 70px; /* fixed nav 보정 */
+      padding-top: 70px;
     }
 
     /* ===== NAVBAR ===== */
@@ -126,35 +126,74 @@
       background: rgba(255,255,255,0.15);
     }
 
+    /* ===== SECTION ===== */
     section {
-      padding: 100px 20px;
+      padding: 120px 20px;
       text-align: center;
     }
 
     h2 {
       font-size: 32px;
       margin-bottom: 20px;
+      letter-spacing: 0.12em;
     }
 
-    /* PRODUCT CARD */
-    .product-card {
-      display: inline-block;
-      width: 260px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 10px;
+    /* ===== PRODUCT CATEGORY ===== */
+    .product-grid {
+      max-width: 1200px;
+      margin: 80px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .product-item {
       background: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: 0.3s;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
-    .product-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    .product-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
     }
 
-    /* SCROLL ANIMATION */
+    .product-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 30px;
+      text-align: left;
+    }
+
+    .product-info h3 {
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      margin-bottom: 12px;
+    }
+
+    .product-info p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .product-btn {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: #111;
+      border-bottom: 1px solid #111;
+      padding-bottom: 4px;
+    }
+
+    /* ===== SCROLL ===== */
     .fade-up {
       opacity: 0;
       transform: translateY(30px);
@@ -165,73 +204,17 @@
       opacity: 1;
       transform: translateY(0);
     }
-    /* ===== PRODUCT CATEGORY ===== */
-.product-grid {
-  max-width: 1200px;
-  margin: 60px auto 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-}
-
-.product-item {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.product-item:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-}
-
-.product-item img {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-}
-
-.product-info {
-  padding: 30px;
-  text-align: left;
-}
-
-.product-info h3 {
-  font-size: 20px;
-  letter-spacing: 0.12em;
-  margin-bottom: 12px;
-}
-
-.product-info p {
-  font-size: 14px;
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.product-btn {
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  color: #111;
-  border-bottom: 1px solid #111;
-  padding-bottom: 4px;
-}
-
   </style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="#" class="logo">
-        <img src="대명엔컴-영문로고 (워터마크).png" alt="DAE MYUNG ENCOM 로고">
+        <img src="대명엔컴-영문로고 (워터마크).png" alt="DAE MYUNG ENCOM">
       </a>
-
       <div class="menu">
         <a href="#about">회사소개</a>
         <a href="#products">제품</a>
@@ -243,15 +226,11 @@
   <!-- HERO -->
   <header class="hero">
     <div class="hero-inner">
-      <h1>
-        ARCHITECTURAL<br>
-        CERAMIC SOLUTIONS
-      </h1>
+      <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
       <p>
-        정밀한 품질 기준과 안정적인 공급 시스템으로<br>
-        공간의 완성도를 높이는 세라믹 타일 솔루션
+        건축 공간의 품질을 완성하는<br>
+        토탈 세라믹 & 욕실 자재 솔루션
       </p>
-
       <div class="hero-buttons">
         <a href="#products" class="btn primary">제품 보기</a>
         <a href="#contact" class="btn secondary">문의하기</a>
@@ -259,32 +238,54 @@
     </div>
   </header>
 
+  <!-- ABOUT -->
   <section id="about" class="fade-up">
-    <h2>브랜드 소개</h2>
-    <p>여기에 브랜드 설명을 적어보세요.</p>
+    <h2>ABOUT US</h2>
+    <p>
+      대명엔컴은 타일, 위생도기, 수전 등<br>
+      건축 마감 자재를 전문으로 공급하는 기업입니다.
+    </p>
   </section>
 
+  <!-- PRODUCTS -->
   <section id="products" class="fade-up">
-    <h2>제품 소개</h2>
+    <h2>PRODUCT CATEGORY</h2>
 
-    <div class="product-card">
-      <h3>바닥 타일</h3>
-      <p>내구성과 디자인을 모두 만족하는 바닥 타일</p>
-    </div>
+    <div class="product-grid">
 
-    <div class="product-card">
-      <h3>벽 타일</h3>
-      <p>공간의 분위기를 완성하는 벽 마감 솔루션</p>
-    </div>
+      <div class="product-item">
+        <img src="product-tile.jpg" alt="타일">
+        <div class="product-info">
+          <h3>TILE</h3>
+          <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
+          <a href="#" class="product-btn">자세히 보기</a>
+        </div>
+      </div>
 
-    <div class="product-card">
-      <h3>대형 타일</h3>
-      <p>현대적인 공간을 위한 대형 포맷 타일</p>
+      <div class="product-item">
+        <img src="product-sanitary.jpg" alt="위생도기">
+        <div class="product-info">
+          <h3>SANITARY WARE</h3>
+          <p>양변기, 세면기 등 욕실 공간을 위한 위생도기</p>
+          <a href="#" class="product-btn">자세히 보기</a>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <img src="product-faucet.jpg" alt="수전">
+        <div class="product-info">
+          <h3>FAUCET</h3>
+          <p>디자인과 내구성을 겸비한 욕실·주방 수전</p>
+          <a href="#" class="product-btn">자세히 보기</a>
+        </div>
+      </div>
+
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact" class="fade-up">
-    <h2>문의</h2>
+    <h2>CONTACT</h2>
     <p>contact@daemyung.com</p>
   </section>
 
@@ -304,4 +305,3 @@
 
 </body>
 </html>
-
