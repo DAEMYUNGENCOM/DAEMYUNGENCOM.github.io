@@ -10,9 +10,9 @@
   <style>
     body {
       font-family: 'Noto Sans KR', Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  padding-top: 70px; /* fixed nav 보정 */
+      margin: 0;
+      padding: 0;
+      padding-top: 70px; /* fixed nav 보정 */
     }
 
     /* ===== NAVBAR ===== */
@@ -37,26 +37,9 @@
       justify-content: space-between;
     }
 
-    /* ✅ 로고 영역 (이미지 + 텍스트) */
-    .logo {
-      display: flex;
-      align-items: center;
-
-      text-decoration: none;
-
-    }
-
     .logo img {
-      height: 29px;   /* 로고 크기 */
-      width: auto;
+      height: 29px;
       display: block;
-    }
-
-    .logo span {
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      font-size: 14px;
-      white-space: nowrap;
     }
 
     .menu a {
@@ -72,43 +55,75 @@
 
     /* ===== HERO ===== */
     .hero {
-      margin-bottom: 80px;
       height: 90vh;
-  background: url('hero-tile.jpg') center / cover no-repeat;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: left;
+      background: url('hero-tile.jpg') center / cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.35);
     }
 
     .hero-inner {
       position: relative;
-  z-index: 1;
-  color: #fff;
-  max-width: 600px;
-  margin-left: 120px;
-  padding: 0 20px;
+      z-index: 1;
+      color: #fff;
+      max-width: 600px;
+      margin-left: 120px;
+      padding: 0 20px;
     }
 
     .hero h1 {
-      font-size: 52px;
-  letter-spacing: 0.18em;
-  margin-bottom: 24px;
-  color: #ffffff;
+      font-size: 56px;
+      letter-spacing: 0.18em;
+      line-height: 1.2;
+      margin-bottom: 28px;
     }
 
     .hero p {
       font-size: 18px;
-  line-height: 1.7;
-  color: #f1f1f1;
+      line-height: 1.7;
+      color: #eaeaea;
+      margin-bottom: 40px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn.primary {
+      background: #ffffff;
+      color: #111;
+    }
+
+    .btn.primary:hover {
+      background: #f1f1f1;
+    }
+
+    .btn.secondary {
+      border: 1px solid rgba(255,255,255,0.6);
+      color: #ffffff;
+    }
+
+    .btn.secondary:hover {
+      background: rgba(255,255,255,0.15);
     }
 
     section {
@@ -142,8 +157,8 @@
     /* SCROLL ANIMATION */
     .fade-up {
       opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .fade-up.show {
@@ -158,11 +173,8 @@
   <!-- NAVBAR -->
   <nav>
     <div class="nav-inner">
-
-      <!-- ✅ 로고 수정된 부분 -->
       <a href="#" class="logo">
         <img src="대명엔컴-영문로고 (워터마크).png" alt="DAE MYUNG ENCOM 로고">
-  
       </a>
 
       <div class="menu">
@@ -176,8 +188,19 @@
   <!-- HERO -->
   <header class="hero">
     <div class="hero-inner">
-      <h1>DAE MYUNG ENCOM</h1>
-      <p>합리적인 가격과 다양한 라인업의 타일 브랜드</p>
+      <h1>
+        ARCHITECTURAL<br>
+        CERAMIC SOLUTIONS
+      </h1>
+      <p>
+        정밀한 품질 기준과 안정적인 공급 시스템으로<br>
+        공간의 완성도를 높이는 세라믹 타일 솔루션
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#products" class="btn primary">제품 보기</a>
+        <a href="#contact" class="btn secondary">문의하기</a>
+      </div>
     </div>
   </header>
 
@@ -190,18 +213,18 @@
     <h2>제품 소개</h2>
 
     <div class="product-card">
-      <h3>제품 1</h3>
-      <p>설명글…</p>
+      <h3>바닥 타일</h3>
+      <p>내구성과 디자인을 모두 만족하는 바닥 타일</p>
     </div>
 
     <div class="product-card">
-      <h3>제품 2</h3>
-      <p>설명글…</p>
+      <h3>벽 타일</h3>
+      <p>공간의 분위기를 완성하는 벽 마감 솔루션</p>
     </div>
 
     <div class="product-card">
-      <h3>제품 3</h3>
-      <p>설명글…</p>
+      <h3>대형 타일</h3>
+      <p>현대적인 공간을 위한 대형 포맷 타일</p>
     </div>
   </section>
 
