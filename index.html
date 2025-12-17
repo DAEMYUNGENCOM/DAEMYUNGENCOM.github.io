@@ -138,6 +138,37 @@
     }
 
     /* ===== PRODUCT CATEGORY ===== */
+    .product-item {
+  position: relative;
+}
+
+.product-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.product-overlay span {
+  color: #fff;
+  font-size: 24px;
+  letter-spacing: 0.2em;
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+}
+
+.product-item:hover .product-overlay {
+  opacity: 1;
+}
+
+.product-item:hover .product-overlay span {
+  transform: translateY(0);
+}
+
     .product-grid {
       max-width: 1200px;
       margin: 80px auto 0;
@@ -410,6 +441,9 @@
 
     <div class="product-item">
       <img src="tile.jpg" alt="타일">
+      <div class="product-overlay">
+    <span>TILE</span>
+  </div>
       <div class="product-info">
         <h3>TILE</h3>
         <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
@@ -419,6 +453,9 @@
 
     <div class="product-item">
       <img src="product-sanitary.jpg" alt="위생도기">
+      <div class="product-overlay">
+    <span>SANITARY</span>
+  </div>
       <div class="product-info">
         <h3>SANITARY WARE</h3>
         <p>양변기, 세면기 등 욕실 공간을 위한 위생도기</p>
@@ -428,6 +465,9 @@
 
     <div class="product-item">
       <img src="product-faucet.jpg" alt="수전">
+      <div class="product-overlay">
+    <span>FAUCET</span>
+  </div>
       <div class="product-info">
         <h3>FAUCET</h3>
         <p>디자인과 내구성을 겸비한 욕실·주방 수전</p>
