@@ -222,6 +222,11 @@
       border-bottom: 1px solid #111;
       padding-bottom: 4px;
     }
+    .product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
     /* ===== PRODUCT IMAGE HOVER EFFECT (추가) ===== */
 .product-item img {
   transition: transform 0.6s ease, filter 0.6s ease;
@@ -439,17 +444,16 @@
 
   <div class="product-grid">
 
-    <div class="product-item">
-      <img src="tile.jpg" alt="타일">
-      <div class="product-overlay">
-    <span>TILE</span>
-  </div>
-      <div class="product-info">
-        <h3>TILE</h3>
-        <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
-<a href="tile.html" class="product-btn">자세히 보기</a>
-      </div>
+    <a href="tile.html" class="product-link">
+  <div class="product-item">
+    <img src="tile.jpg" alt="타일">
+    <div class="product-info">
+      <h3>TILE</h3>
+      <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
+      <span class="product-btn">자세히 보기</span>
     </div>
+  </div>
+</a>
 
     <div class="product-item">
       <img src="product-sanitary.jpg" alt="위생도기">
