@@ -191,6 +191,16 @@
       border-bottom: 1px solid #111;
       padding-bottom: 4px;
     }
+    /* ===== PRODUCT IMAGE HOVER EFFECT (추가) ===== */
+.product-item img {
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.product-item:hover img {
+  filter: brightness(0.75);
+  transform: scale(1.03);
+}
+
     /* ===== PRODUCT HOVER TEXT ANIMATION ===== */
 .product-info h3,
 .product-info p,
