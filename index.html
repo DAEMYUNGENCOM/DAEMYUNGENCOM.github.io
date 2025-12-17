@@ -178,6 +178,7 @@
     }
 
     .product-item {
+      position: relative;
       background: #fff;
       border-radius: 12px;
       overflow: hidden;
@@ -446,13 +447,19 @@
 
     <a href="tile.html" class="product-link">
   <div class="product-item">
-    <img src="tile.jpg" alt="타일">
-    <div class="product-info">
-      <h3>TILE</h3>
-      <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
-     <a href="tile.html" class="product-btn">자세히 보기</a>
-    </div>
+  <img src="tile.jpg" alt="타일">
+
+  <div class="product-overlay">
+    <span>TILE</span>
   </div>
+
+  <div class="product-info">
+    <h3>TILE</h3>
+    <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
+    <a href="tile.html" class="product-btn">자세히 보기</a>
+  </div>
+</div>
+
 </a>
 
     <div class="product-item">
