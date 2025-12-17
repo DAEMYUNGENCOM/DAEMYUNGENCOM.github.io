@@ -193,6 +193,40 @@
       padding-bottom: 4px;
     }
 
+    /* ===== WHY SECTION ===== */
+    .why-grid {
+      max-width: 1200px;
+      margin: 80px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .why-item {
+      background: #ffffff;
+      padding: 50px 30px;
+      border-radius: 14px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .why-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    }
+
+    .why-item h3 {
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+    }
+
+    .why-item p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #555;
+    }
+
     /* ===== SCROLL ===== */
     .fade-up {
       opacity: 0;
@@ -252,7 +286,6 @@
     <h2>PRODUCT CATEGORY</h2>
 
     <div class="product-grid">
-
       <div class="product-item">
         <img src="tile.jpg" alt="타일">
         <div class="product-info">
@@ -279,7 +312,28 @@
           <a href="#" class="product-btn">자세히 보기</a>
         </div>
       </div>
+    </div>
+  </section>
 
+  <!-- WHY -->
+  <section class="fade-up">
+    <h2>WHY DAE MYUNG ENCOM</h2>
+
+    <div class="why-grid">
+      <div class="why-item">
+        <h3>STABLE SUPPLY</h3>
+        <p>프로젝트 일정에 맞춘 안정적인 자재 공급 시스템</p>
+      </div>
+
+      <div class="why-item">
+        <h3>QUALITY STANDARD</h3>
+        <p>엄격한 품질 기준과 검수 프로세스를 통한 신뢰</p>
+      </div>
+
+      <div class="why-item">
+        <h3>PROJECT EXPERIENCE</h3>
+        <p>주거 · 상업 · 공공 프로젝트 전반의 납품 경험</p>
+      </div>
     </div>
   </section>
 
