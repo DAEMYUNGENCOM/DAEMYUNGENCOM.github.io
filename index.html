@@ -191,6 +191,25 @@
       border-bottom: 1px solid #111;
       padding-bottom: 4px;
     }
+    /* ===== PRODUCT HOVER TEXT ANIMATION ===== */
+.product-info h3,
+.product-info p,
+.product-btn {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.product-item:hover .product-info h3 {
+  transform: translateY(-6px);
+}
+
+.product-item:hover .product-info p {
+  transform: translateY(-6px);
+}
+
+.product-item:hover .product-btn {
+  transform: translateY(-6px);
+}
+
 
     /* ===== WHY ===== */
     .why-grid {
