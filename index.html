@@ -263,6 +263,83 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* =========================
+   📱 MOBILE RESPONSIVE
+   ========================= */
+@media (max-width: 768px) {
+
+  /* NAV */
+  .nav-inner {
+    padding: 0 16px;
+  }
+
+  .menu a {
+    margin-left: 16px;
+    font-size: 14px;
+  }
+
+  /* HERO */
+  .hero {
+    height: 80vh;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-inner {
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    letter-spacing: 0.12em;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* SECTION */
+  section {
+    padding: 80px 16px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  /* PRODUCT */
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .product-item img {
+    height: 200px;
+  }
+
+  /* WHY */
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  /* TRUST */
+  .trust-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .trust-item strong {
+    font-size: 40px;
+  }
+}
+
   </style>
 </head>
 
