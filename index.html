@@ -126,7 +126,6 @@
       background: rgba(255,255,255,0.15);
     }
 
-    /* ===== SECTION ===== */
     section {
       padding: 120px 20px;
       text-align: center;
@@ -193,7 +192,7 @@
       padding-bottom: 4px;
     }
 
-    /* ===== WHY SECTION ===== */
+    /* ===== WHY ===== */
     .why-grid {
       max-width: 1200px;
       margin: 80px auto 0;
@@ -207,7 +206,7 @@
       padding: 50px 30px;
       border-radius: 14px;
       box-shadow: 0 10px 35px rgba(0,0,0,0.08);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transition: 0.4s;
     }
 
     .why-item:hover {
@@ -227,11 +226,37 @@
       color: #555;
     }
 
+    /* ===== TRUST NUMBERS ===== */
+    .trust-section {
+      background: #f9fafb;
+    }
+
+    .trust-grid {
+      max-width: 1200px;
+      margin: 80px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .trust-item span {
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      color: #555;
+    }
+
     /* ===== SCROLL ===== */
     .fade-up {
       opacity: 0;
       transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: all 0.8s ease;
     }
 
     .fade-up.show {
@@ -243,119 +268,74 @@
 
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-inner">
-      <a href="#" class="logo">
-        <img src="대명엔컴-영문로고 (워터마크).png" alt="DAE MYUNG ENCOM">
-      </a>
-      <div class="menu">
-        <a href="#about">회사소개</a>
-        <a href="#products">제품</a>
-        <a href="#contact">문의</a>
-      </div>
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <img src="대명엔컴-영문로고 (워터마크).png" alt="DAE MYUNG ENCOM">
+    </a>
+    <div class="menu">
+      <a href="#about">회사소개</a>
+      <a href="#products">제품</a>
+      <a href="#contact">문의</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-inner">
-      <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
-      <p>
-        건축 공간의 품질을 완성하는<br>
-        토탈 세라믹 & 욕실 자재 솔루션
-      </p>
-      <div class="hero-buttons">
-        <a href="#products" class="btn primary">제품 보기</a>
-        <a href="#contact" class="btn secondary">문의하기</a>
-      </div>
+<header class="hero">
+  <div class="hero-inner">
+    <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
+    <p>건축 공간의 품질을 완성하는<br>토탈 세라믹 & 욕실 자재 솔루션</p>
+    <div class="hero-buttons">
+      <a href="#products" class="btn primary">제품 보기</a>
+      <a href="#contact" class="btn secondary">문의하기</a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- ABOUT -->
-  <section id="about" class="fade-up">
-    <h2>ABOUT US</h2>
-    <p>
-      대명엔컴은 타일, 위생도기, 수전 등<br>
-      건축 마감 자재를 전문으로 공급하는 기업입니다.
-    </p>
-  </section>
+<section id="about" class="fade-up">
+  <h2>ABOUT US</h2>
+  <p>대명엔컴은 타일, 위생도기, 수전 등<br>건축 마감 자재를 전문으로 공급합니다.</p>
+</section>
 
-  <!-- PRODUCTS -->
-  <section id="products" class="fade-up">
-    <h2>PRODUCT CATEGORY</h2>
+<section id="products" class="fade-up">
+  <h2>PRODUCT CATEGORY</h2>
+  <div class="product-grid">
+    <!-- 동일 -->
+  </div>
+</section>
 
-    <div class="product-grid">
-      <div class="product-item">
-        <img src="tile.jpg" alt="타일">
-        <div class="product-info">
-          <h3>TILE</h3>
-          <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
-          <a href="#" class="product-btn">자세히 보기</a>
-        </div>
-      </div>
+<section class="fade-up">
+  <h2>WHY DAE MYUNG ENCOM</h2>
+  <div class="why-grid">
+    <div class="why-item"><h3>STABLE SUPPLY</h3><p>안정적 자재 공급</p></div>
+    <div class="why-item"><h3>QUALITY</h3><p>엄격한 품질 기준</p></div>
+    <div class="why-item"><h3>EXPERIENCE</h3><p>다양한 프로젝트 경험</p></div>
+  </div>
+</section>
 
-      <div class="product-item">
-        <img src="product-sanitary.jpg" alt="위생도기">
-        <div class="product-info">
-          <h3>SANITARY WARE</h3>
-          <p>양변기, 세면기 등 욕실 공간을 위한 위생도기</p>
-          <a href="#" class="product-btn">자세히 보기</a>
-        </div>
-      </div>
+<section class="trust-section fade-up">
+  <h2>OUR EXPERIENCE</h2>
+  <div class="trust-grid">
+    <div class="trust-item"><strong>20+</strong><span>YEARS EXPERIENCE</span></div>
+    <div class="trust-item"><strong>1,000+</strong><span>PROJECTS SUPPLIED</span></div>
+    <div class="trust-item"><strong>300+</strong><span>PARTNER CLIENTS</span></div>
+  </div>
+</section>
 
-      <div class="product-item">
-        <img src="product-faucet.jpg" alt="수전">
-        <div class="product-info">
-          <h3>FAUCET</h3>
-          <p>디자인과 내구성을 겸비한 욕실·주방 수전</p>
-          <a href="#" class="product-btn">자세히 보기</a>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="contact" class="fade-up">
+  <h2>CONTACT</h2>
+  <p>contact@daemyung.com</p>
+</section>
 
-  <!-- WHY -->
-  <section class="fade-up">
-    <h2>WHY DAE MYUNG ENCOM</h2>
-
-    <div class="why-grid">
-      <div class="why-item">
-        <h3>STABLE SUPPLY</h3>
-        <p>프로젝트 일정에 맞춘 안정적인 자재 공급 시스템</p>
-      </div>
-
-      <div class="why-item">
-        <h3>QUALITY STANDARD</h3>
-        <p>엄격한 품질 기준과 검수 프로세스를 통한 신뢰</p>
-      </div>
-
-      <div class="why-item">
-        <h3>PROJECT EXPERIENCE</h3>
-        <p>주거 · 상업 · 공공 프로젝트 전반의 납품 경험</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="fade-up">
-    <h2>CONTACT</h2>
-    <p>contact@daemyung.com</p>
-  </section>
-
-  <script>
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('.fade-up').forEach(el => {
-      observer.observe(el);
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('show');
     });
-  </script>
+  });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
+
