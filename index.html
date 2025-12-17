@@ -14,7 +14,6 @@
       padding-top: 70px;
     }
 
-    /* ===== NAVBAR ===== */
     nav {
       position: fixed;
       top: 0;
@@ -47,7 +46,6 @@
       font-weight: 500;
     }
 
-    /* ===== HERO ===== */
     .hero {
       height: 90vh;
       background: url('hero.jpg') center / cover no-repeat;
@@ -71,7 +69,6 @@
       margin-left: 120px;
     }
 
-    /* ===== SECTION ===== */
     section {
       padding: 120px 20px;
       text-align: center;
@@ -82,7 +79,7 @@
       letter-spacing: 0.12em;
     }
 
-    /* ===== PRODUCT ===== */
+    /* PRODUCT */
     .product-grid {
       max-width: 1200px;
       margin: 80px auto 0;
@@ -97,7 +94,12 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-      transition: 0.4s;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .product-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
     }
 
     .product-item img {
@@ -114,20 +116,9 @@
     .product-info {
       padding: 30px;
       text-align: left;
-      transition: transform 0.4s ease;
     }
 
-    .product-item:hover .product-info {
-      transform: translateY(-6px);
-    }
-
-    .product-btn {
-      font-size: 13px;
-      text-decoration: none;
-      border-bottom: 1px solid #111;
-    }
-
-    /* ===== SCROLL ===== */
+    /* SCROLL */
     .fade-up {
       opacity: 0;
       transform: translateY(30px);
@@ -139,7 +130,6 @@
       transform: translateY(0);
     }
 
-    /* ===== MOBILE ===== */
     @media (max-width: 768px) {
       .product-grid {
         grid-template-columns: 1fr;
@@ -158,6 +148,7 @@
   <div class="nav-inner">
     <img src="대명엔컴-영문로고 (워터마크).png">
     <div class="menu">
+      <a href="#about">회사소개</a>
       <a href="#products">제품</a>
       <a href="#contact">문의</a>
     </div>
@@ -170,6 +161,10 @@
   </div>
 </header>
 
+<section id="about" class="fade-up">
+  <h2>ABOUT US</h2>
+</section>
+
 <section id="products" class="fade-up">
   <h2>PRODUCT CATEGORY</h2>
 
@@ -179,7 +174,6 @@
       <div class="product-info">
         <h3>TILE</h3>
         <p>세라믹 타일</p>
-        <a href="#" class="product-btn">자세히 보기</a>
       </div>
     </div>
 
@@ -188,7 +182,6 @@
       <div class="product-info">
         <h3>SANITARY WARE</h3>
         <p>위생도기</p>
-        <a href="#" class="product-btn">자세히 보기</a>
       </div>
     </div>
 
@@ -197,7 +190,6 @@
       <div class="product-info">
         <h3>FAUCET</h3>
         <p>수전</p>
-        <a href="#" class="product-btn">자세히 보기</a>
       </div>
     </div>
   </div>
@@ -217,5 +209,6 @@
 
 </body>
 </html>
+
 
 
