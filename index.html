@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>DAE MYUNG ENCOM</title>
 
-  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
@@ -39,7 +38,6 @@
 
     .logo img {
       height: 29px;
-      display: block;
     }
 
     .menu a {
@@ -49,10 +47,6 @@
       font-weight: 500;
     }
 
-    .menu a:hover {
-      color: #1E90FF;
-    }
-
     /* ===== HERO ===== */
     .hero {
       height: 90vh;
@@ -60,7 +54,6 @@
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
     }
 
     .hero::before {
@@ -76,56 +69,9 @@
       color: #fff;
       max-width: 600px;
       margin-left: 120px;
-      padding: 0 20px;
     }
 
-    .hero h1 {
-      font-size: 56px;
-      letter-spacing: 0.18em;
-      line-height: 1.2;
-      margin-bottom: 28px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      line-height: 1.7;
-      color: #eaeaea;
-      margin-bottom: 40px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 32px;
-      border-radius: 30px;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .btn.primary {
-      background: #ffffff;
-      color: #111;
-    }
-
-    .btn.primary:hover {
-      background: #f1f1f1;
-    }
-
-    .btn.secondary {
-      border: 1px solid rgba(255,255,255,0.6);
-      color: #ffffff;
-    }
-
-    .btn.secondary:hover {
-      background: rgba(255,255,255,0.15);
-    }
-
+    /* ===== SECTION ===== */
     section {
       padding: 120px 20px;
       text-align: center;
@@ -133,11 +79,10 @@
 
     h2 {
       font-size: 32px;
-      margin-bottom: 20px;
       letter-spacing: 0.12em;
     }
 
-    /* ===== PRODUCT CATEGORY ===== */
+    /* ===== PRODUCT ===== */
     .product-grid {
       max-width: 1200px;
       margin: 80px auto 0;
@@ -148,108 +93,38 @@
 
     .product-item {
       background: #fff;
+      min-height: 420px;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .product-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      transition: 0.4s;
     }
 
     .product-item img {
       width: 100%;
       height: 240px;
       object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .product-item:hover img {
+      transform: scale(1.08);
     }
 
     .product-info {
       padding: 30px;
       text-align: left;
+      transition: transform 0.4s ease;
     }
 
-    .product-info h3 {
-      font-size: 20px;
-      letter-spacing: 0.12em;
-      margin-bottom: 12px;
-    }
-
-    .product-info p {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.6;
-      margin-bottom: 20px;
+    .product-item:hover .product-info {
+      transform: translateY(-6px);
     }
 
     .product-btn {
       font-size: 13px;
-      letter-spacing: 0.08em;
       text-decoration: none;
-      color: #111;
       border-bottom: 1px solid #111;
-      padding-bottom: 4px;
-    }
-
-    /* ===== WHY ===== */
-    .why-grid {
-      max-width: 1200px;
-      margin: 80px auto 0;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-    }
-
-    .why-item {
-      background: #ffffff;
-      padding: 50px 30px;
-      border-radius: 14px;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.08);
-      transition: 0.4s;
-    }
-
-    .why-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-    }
-
-    .why-item h3 {
-      font-size: 18px;
-      letter-spacing: 0.12em;
-      margin-bottom: 16px;
-    }
-
-    .why-item p {
-      font-size: 14px;
-      line-height: 1.7;
-      color: #555;
-    }
-
-    /* ===== TRUST NUMBERS ===== */
-    .trust-section {
-      background: #f9fafb;
-    }
-
-    .trust-grid {
-      max-width: 1200px;
-      margin: 80px auto 0;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-    }
-
-    .trust-item strong {
-      display: block;
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .trust-item span {
-      font-size: 14px;
-      letter-spacing: 0.15em;
-      color: #555;
     }
 
     /* ===== SCROLL ===== */
@@ -263,83 +138,17 @@
       opacity: 1;
       transform: translateY(0);
     }
-    /* =========================
-   📱 MOBILE RESPONSIVE
-   ========================= */
-@media (max-width: 768px) {
 
-  /* NAV */
-  .nav-inner {
-    padding: 0 16px;
-  }
-
-  .menu a {
-    margin-left: 16px;
-    font-size: 14px;
-  }
-
-  /* HERO */
-  .hero {
-    height: 80vh;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .hero-inner {
-    margin-left: 0;
-    max-width: 100%;
-  }
-
-  .hero h1 {
-    font-size: 36px;
-    letter-spacing: 0.12em;
-  }
-
-  .hero p {
-    font-size: 15px;
-  }
-
-  .hero-buttons {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  /* SECTION */
-  section {
-    padding: 80px 16px;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
-
-  /* PRODUCT */
-  .product-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .product-item img {
-    height: 200px;
-  }
-
-  /* WHY */
-  .why-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  /* TRUST */
-  .trust-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .trust-item strong {
-    font-size: 40px;
-  }
-}
-
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-inner {
+        margin-left: 0;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 
@@ -347,11 +156,8 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="#" class="logo">
-      <img src="대명엔컴-영문로고 (워터마크).png" alt="DAE MYUNG ENCOM">
-    </a>
+    <img src="대명엔컴-영문로고 (워터마크).png">
     <div class="menu">
-      <a href="#about">회사소개</a>
       <a href="#products">제품</a>
       <a href="#contact">문의</a>
     </div>
@@ -361,75 +167,40 @@
 <header class="hero">
   <div class="hero-inner">
     <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
-    <p>건축 공간의 품질을 완성하는<br>토탈 세라믹 & 욕실 자재 솔루션</p>
-    <div class="hero-buttons">
-      <a href="#products" class="btn primary">제품 보기</a>
-      <a href="#contact" class="btn secondary">문의하기</a>
-    </div>
   </div>
 </header>
 
-<section id="about" class="fade-up">
-  <h2>ABOUT US</h2>
-  <p>대명엔컴은 타일, 위생도기, 수전 등<br>건축 마감 자재를 전문으로 공급합니다.</p>
-</section>
-
-<section id="products">
+<section id="products" class="fade-up">
   <h2>PRODUCT CATEGORY</h2>
 
   <div class="product-grid">
-
     <div class="product-item">
-      <img src="tile.jpg" alt="타일">
+      <img src="tile.jpg">
       <div class="product-info">
         <h3>TILE</h3>
-        <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
+        <p>세라믹 타일</p>
         <a href="#" class="product-btn">자세히 보기</a>
       </div>
     </div>
 
     <div class="product-item">
-      <img src="product-sanitary.jpg" alt="위생도기">
+      <img src="product-sanitary.jpg">
       <div class="product-info">
         <h3>SANITARY WARE</h3>
-        <p>양변기, 세면기 등 욕실 공간을 위한 위생도기</p>
+        <p>위생도기</p>
         <a href="#" class="product-btn">자세히 보기</a>
       </div>
     </div>
 
     <div class="product-item">
-      <img src="product-faucet.jpg" alt="수전">
+      <img src="product-faucet.jpg">
       <div class="product-info">
         <h3>FAUCET</h3>
-        <p>디자인과 내구성을 겸비한 욕실·주방 수전</p>
+        <p>수전</p>
         <a href="#" class="product-btn">자세히 보기</a>
       </div>
     </div>
-
   </div>
-</section>
-
-<section class="fade-up">
-  <h2>WHY DAE MYUNG ENCOM</h2>
-  <div class="why-grid">
-    <div class="why-item"><h3>STABLE SUPPLY</h3><p>안정적 자재 공급</p></div>
-    <div class="why-item"><h3>QUALITY</h3><p>엄격한 품질 기준</p></div>
-    <div class="why-item"><h3>EXPERIENCE</h3><p>다양한 프로젝트 경험</p></div>
-  </div>
-</section>
-
-<section class="trust-section fade-up">
-  <h2>OUR EXPERIENCE</h2>
-  <div class="trust-grid">
-    <div class="trust-item"><strong>20+</strong><span>YEARS EXPERIENCE</span></div>
-    <div class="trust-item"><strong>1,000+</strong><span>PROJECTS SUPPLIED</span></div>
-    <div class="trust-item"><strong>300+</strong><span>PARTNER CLIENTS</span></div>
-  </div>
-</section>
-
-<section id="contact" class="fade-up">
-  <h2>CONTACT</h2>
-  <p>contact@daemyung.com</p>
 </section>
 
 <script>
@@ -437,20 +208,14 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('show');
-        observer.unobserve(entry.target);
       }
     });
-  }, {
-    threshold: 0.1,
-    rootMargin: "0px 0px -100px 0px"
   });
 
-  document.querySelectorAll('.fade-up').forEach(el => {
-    observer.observe(el);
-  });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
-
 
 </body>
 </html>
+
 
