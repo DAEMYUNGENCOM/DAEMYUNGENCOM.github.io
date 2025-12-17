@@ -407,11 +407,21 @@
 <script>
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('show');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
     });
+  }, {
+    threshold: 0.1,
+    rootMargin: "0px 0px -100px 0px"
   });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.fade-up').forEach(el => {
+    observer.observe(el);
+  });
 </script>
+
 
 </body>
 </html>
