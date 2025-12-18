@@ -10,16 +10,13 @@
     body {
       font-family: 'Noto Sans KR', Arial, sans-serif;
       margin: 0;
-      padding: 0;
       background: #f9fafb;
       color: #111;
     }
 
-    /* ===== SUB HERO ===== */
     .sub-hero {
       padding: 120px 20px 80px;
       text-align: center;
-      background: #f9fafb;
     }
 
     .sub-hero h1 {
@@ -34,26 +31,17 @@
       color: #666;
     }
 
-    /* ===== CATEGORY INTRO ===== */
     .category-intro {
       padding: 80px 20px;
       text-align: center;
-    }
-
-    .category-intro p {
-      font-size: 16px;
-      line-height: 1.8;
-      color: #444;
     }
 
     section {
       max-width: 1200px;
       margin: 0 auto 100px;
       padding: 0 20px;
-      text-align: center;
     }
 
-    /* ===== PRODUCT GRID ===== */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -61,84 +49,53 @@
       margin-top: 60px;
     }
 
-    /* 카드 전체 링크 */
-    .product-card {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-    }
-
     .product-item {
       background: #fff;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .product-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
     }
 
     .product-item img {
       width: 100%;
       height: 240px;
       object-fit: cover;
-      transition: transform 0.6s ease, filter 0.6s ease;
     }
 
-    .product-item:hover img {
-      transform: scale(1.05);
-      filter: brightness(0.75);
-    }
-
-    /* ===== PRODUCT INFO ===== */
     .product-info {
-      padding: 24px;
-      text-align: left;
+      padding: 20px;
     }
 
     .product-info h3 {
       font-size: 18px;
       letter-spacing: 0.08em;
-      margin-bottom: 8px;
-      transition: transform 0.4s ease;
     }
 
     .product-info p {
       font-size: 14px;
       color: #666;
-      margin-bottom: 16px;
-      line-height: 1.6;
-      transition: transform 0.4s ease;
+      margin: 8px 0 16px;
     }
 
     .product-btn {
       font-size: 13px;
       letter-spacing: 0.08em;
       border-bottom: 1px solid #111;
-      display: inline-block;
-      transition: transform 0.4s ease;
-    }
-
-    .product-item:hover .product-info h3,
-    .product-item:hover .product-info p,
-    .product-item:hover .product-btn {
-      transform: translateY(-6px);
+      color: #111;
+      text-decoration: none;
     }
 
     .back {
       margin-top: 80px;
+      text-align: center;
     }
 
     .back a {
-      text-decoration: none;
       font-size: 14px;
       letter-spacing: 0.1em;
-      color: #111;
       border-bottom: 1px solid #111;
-      padding-bottom: 4px;
+      text-decoration: none;
+      color: #111;
     }
 
     @media (max-width: 768px) {
@@ -171,38 +128,32 @@
 <section>
   <div class="product-grid">
 
-    <a href="sanitary-toilet.html" class="product-card">
-      <div class="product-item">
-        <img src="product-sanitary.jpg" alt="Toilet">
-        <div class="product-info">
-          <h3>TOILET</h3>
-          <p>욕실 공간에 최적화된 고급 양변기</p>
-          <span class="product-btn">DETAIL VIEW</span>
-        </div>
+    <div class="product-item">
+      <img src="product-sanitary.jpg" alt="Toilet">
+      <div class="product-info">
+        <h3>TOILET</h3>
+        <p>욕실 공간에 최적화된 고급 양변기</p>
+        <a href="sanitary-toilet.html" class="product-btn">DETAIL VIEW</a>
       </div>
-    </a>
+    </div>
 
-    <a href="sanitary-basin.html" class="product-card">
-      <div class="product-item">
-        <img src="product-sanitary.jpg" alt="Wash Basin">
-        <div class="product-info">
-          <h3>WASH BASIN</h3>
-          <p>디자인과 실용성을 갖춘 세면기</p>
-          <span class="product-btn">DETAIL VIEW</span>
-        </div>
+    <div class="product-item">
+      <img src="product-sanitary.jpg" alt="Wash Basin">
+      <div class="product-info">
+        <h3>WASH BASIN</h3>
+        <p>디자인과 실용성을 갖춘 세면기</p>
+        <a href="sanitary-basin.html" class="product-btn">DETAIL VIEW</a>
       </div>
-    </a>
+    </div>
 
-    <a href="sanitary-urinal.html" class="product-card">
-      <div class="product-item">
-        <img src="product-sanitary.jpg" alt="Urinal">
-        <div class="product-info">
-          <h3>URINAL</h3>
-          <p>상업 공간을 위한 위생적인 소변기</p>
-          <span class="product-btn">DETAIL VIEW</span>
-        </div>
+    <div class="product-item">
+      <img src="product-sanitary.jpg" alt="Urinal">
+      <div class="product-info">
+        <h3>URINAL</h3>
+        <p>상업 공간을 위한 위생적인 소변기</p>
+        <a href="sanitary-urinal.html" class="product-btn">DETAIL VIEW</a>
       </div>
-    </a>
+    </div>
 
   </div>
 
