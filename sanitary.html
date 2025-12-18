@@ -1,22 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <body>
-
-<header class="sub-hero">
-  <h1>SANITARY</h1>
-  <p>ARCHITECTURAL CERAMIC SOLUTIONS</p>
-</header>
-
-<section class="category-intro">
-  <p>
-    욕실 공간의 위생과 품질을 책임지는<br>
-    위생도기 제품을 제공합니다.
-  </p>
-</section>
-
-</body>
-
   <meta charset="UTF-8">
   <title>SANITARY | DAE MYUNG ENCOM</title>
 
@@ -26,74 +10,136 @@
     body {
       font-family: 'Noto Sans KR', Arial, sans-serif;
       margin: 0;
-      padding-top: 70px;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 70px;
-      background: #fff;
-      border-bottom: 1px solid #e5e7eb;
-      z-index: 1000;
-    }
-
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      height: 100%;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .menu a {
-      margin-left: 30px;
-      text-decoration: none;
+      padding: 0;
+      background: #f9fafb;
       color: #111;
-      font-weight: 500;
+    }
+
+    /* ===== SUB HERO ===== */
+    .sub-hero {
+      padding: 120px 20px 80px;
+      text-align: center;
+      background: #f9fafb;
+    }
+
+    .sub-hero h1 {
+      font-size: 56px;
+      letter-spacing: 0.25em;
+      margin-bottom: 16px;
+    }
+
+    .sub-hero p {
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      color: #666;
+    }
+
+    /* ===== CATEGORY INTRO ===== */
+    .category-intro {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .category-intro p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #444;
     }
 
     section {
       max-width: 1200px;
-      margin: 0 auto;
-      padding: 120px 20px;
+      margin: 0 auto 100px;
+      padding: 0 20px;
+      text-align: center;
     }
 
-    h1 {
-      font-size: 40px;
-      letter-spacing: 0.15em;
-      margin-bottom: 20px;
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 60px;
     }
 
-    p {
-      font-size: 16px;
-      color: #555;
-      line-height: 1.8;
+    .product-item {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .product-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .product-item h3 {
+      padding: 20px;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+    }
+
+    .back {
+      margin-top: 80px;
+    }
+
+    .back a {
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      color: #111;
+      border-bottom: 1px solid #111;
+      padding-bottom: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sub-hero h1 {
+        font-size: 36px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <a href="index.html">DAE MYUNG ENCOM</a>
-    <div class="menu">
-      <a href="index.html#products">제품</a>
-      <a href="index.html#contact">문의</a>
-    </div>
-  </div>
-</nav>
+<header class="sub-hero">
+  <h1>SANITARY</h1>
+  <p>BATHROOM SANITARY WARE SOLUTIONS</p>
+</header>
+
+<section class="category-intro">
+  <p>
+    양변기, 세면기 등<br>
+    욕실 공간의 위생과 디자인을 완성하는<br>
+    고품질 위생도기 제품을 제공합니다.
+  </p>
+</section>
 
 <section>
-  <h1>SANITARY WARE</h1>
-  <p>
-    양변기, 세면기 등 욕실 공간을 위한 위생도기 제품을 소개합니다.<br>
-    기능성과 디자인을 모두 만족시키는 제품 라인업을 제공합니다.
-  </p>
+  <div class="product-grid">
+    <div class="product-item">
+      <img src="product-sanitary.jpg" alt="Toilet">
+      <h3>TOILET</h3>
+    </div>
+
+    <div class="product-item">
+      <img src="product-sanitary.jpg" alt="Wash Basin">
+      <h3>WASH BASIN</h3>
+    </div>
+
+    <div class="product-item">
+      <img src="product-sanitary.jpg" alt="Urinal">
+      <h3>URINAL</h3>
+    </div>
+  </div>
+
+  <div class="back">
+    <a href="index.html">← BACK TO MAIN</a>
+  </div>
 </section>
 
 </body>
