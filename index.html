@@ -257,6 +257,29 @@
 .product-item:hover .product-btn {
   transform: translateY(-6px);
 }
+/* =========================
+   카드 전체 클릭용 링크 (PC + 모바일 공통)
+   ========================= */
+.product-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
+/* overlay / info는 클릭 막지 않게 */
+.product-overlay,
+.product-info {
+  pointer-events: none;
+}
+
+/* 버튼만 다시 클릭 가능 */
+.product-btn {
+  pointer-events: auto;
+  position: relative;
+  z-index: 6;
+}
+
+    
 
 
     /* ===== WHY ===== */
@@ -405,25 +428,6 @@
   .trust-item strong {
     font-size: 40px;
   }
-  /* 카드 전체 클릭용 링크 */
-.product-card-link {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-}
-
-/* 클릭 방해 제거 */
-.product-overlay,
-.product-info {
-  pointer-events: none;
-}
-
-/* 버튼만 다시 클릭 가능 */
-.product-btn {
-  pointer-events: auto;
-  position: relative;
-  z-index: 6;
-}
 
 }
 
