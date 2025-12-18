@@ -224,11 +224,7 @@
       border-bottom: 1px solid #111;
       padding-bottom: 4px;
     }
-    .product-link {
-  text-decoration: none;
-  color: inherit;
-  display: inline-block;
-}
+
     /* ===== PRODUCT IMAGE HOVER EFFECT (추가) ===== */
 .product-item img {
   transition: transform 0.6s ease, filter 0.6s ease;
@@ -258,27 +254,26 @@
   transform: translateY(-6px);
 }
 /* =========================
-   카드 전체 클릭용 링크 (PC + 모바일 공통)
+   PRODUCT CARD FINAL (정답)
    ========================= */
-.product-card-link {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
+
+/* 카드 전체가 링크 */
+.product-card {
   display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* overlay / info는 클릭 막지 않게 */
-.product-overlay,
-.product-info {
+/* overlay는 클릭 방해 금지 */
+.product-overlay {
   pointer-events: none;
 }
 
-/* 버튼만 다시 클릭 가능 */
+/* 버튼은 시각 요소만 */
 .product-btn {
-  pointer-events: auto;
-  position: relative;
-  z-index: 6;
+  pointer-events: none;
 }
+
 /* =========================
    PRODUCT CARD LINK (FIX)
    ========================= */
