@@ -279,9 +279,28 @@
   position: relative;
   z-index: 6;
 }
+/* =========================
+   PRODUCT CARD LINK (FIX)
+   ========================= */
+.product-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
 
-    
+.product-card .product-item {
+  height: 100%;
+}
 
+/* overlay가 클릭 막지 않게 */
+.product-overlay {
+  pointer-events: none;
+}
+
+/* 버튼은 시각적 요소만 */
+.product-btn {
+  pointer-events: none;
+}
 
     /* ===== WHY ===== */
     .why-grid {
@@ -471,59 +490,66 @@
 
   <div class="product-grid">
 
-  <!-- TILE -->
-  <div class="product-item">
-    <a href="tile.html" class="product-card-link"></a>
+    <!-- TILE -->
+    <a href="tile.html" class="product-card">
+      <div class="product-item">
 
-    <img src="tile.jpg" alt="타일">
+        <img src="tile.jpg" alt="타일">
 
-    <div class="product-overlay">
-      <span>TILE</span>
-    </div>
+        <div class="product-overlay">
+          <span>TILE</span>
+        </div>
 
-    <div class="product-info">
-      <h3>TILE</h3>
-      <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
-      <a href="tile.html" class="product-btn">자세히 보기</a>
-    </div>
+        <div class="product-info">
+          <h3>TILE</h3>
+          <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
+          <span class="product-btn">자세히 보기</span>
+        </div>
+
+      </div>
+    </a>
+
+    <!-- SANITARY -->
+    <a href="sanitary.html" class="product-card">
+      <div class="product-item">
+
+        <img src="product-sanitary.jpg" alt="위생도기">
+
+        <div class="product-overlay">
+          <span>SANITARY</span>
+        </div>
+
+        <div class="product-info">
+          <h3>SANITARY WARE</h3>
+          <p>양변기, 세면기 등 욕실 공간을 위한 위생도기</p>
+          <span class="product-btn">자세히 보기</span>
+        </div>
+
+      </div>
+    </a>
+
+    <!-- FAUCET -->
+    <a href="faucet.html" class="product-card">
+      <div class="product-item">
+
+        <img src="product-faucet.jpg" alt="수전">
+
+        <div class="product-overlay">
+          <span>FAUCET</span>
+        </div>
+
+        <div class="product-info">
+          <h3>FAUCET</h3>
+          <p>디자인과 내구성을 겸비한 욕실·주방 수전</p>
+          <span class="product-btn">자세히 보기</span>
+        </div>
+
+      </div>
+    </a>
+
   </div>
-
-  <!-- SANITARY -->
-  <div class="product-item">
-    <a href="sanitary.html" class="product-card-link"></a>
-
-    <img src="product-sanitary.jpg" alt="위생도기">
-
-    <div class="product-overlay">
-      <span>SANITARY</span>
-    </div>
-
-    <div class="product-info">
-      <h3>SANITARY WARE</h3>
-      <p>양변기, 세면기 등 욕실 공간을 위한 위생도기</p>
-      <a href="sanitary.html" class="product-btn">자세히 보기</a>
-    </div>
-  </div>
-
-  <!-- FAUCET -->
-  <div class="product-item">
-    <a href="faucet.html" class="product-card-link"></a>
-
-    <img src="product-faucet.jpg" alt="수전">
-
-    <div class="product-overlay">
-      <span>FAUCET</span>
-    </div>
-
-    <div class="product-info">
-      <h3>FAUCET</h3>
-      <p>디자인과 내구성을 겸비한 욕실·주방 수전</p>
-      <a href="faucet.html" class="product-btn">자세히 보기</a>
-    </div>
-  </div>
-
-</div>
 </section>
+
 
 <section class="fade-up">
   <h2>WHY DAE MYUNG ENCOM</h2>
