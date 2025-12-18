@@ -73,10 +73,28 @@
       object-fit: cover;
     }
 
-    .tile-item h3 {
+    /* ===== STEP 3 : PRODUCT INFO ===== */
+    .tile-info {
       padding: 20px;
+      text-align: left;
+    }
+
+    .tile-info h3 {
       font-size: 18px;
       letter-spacing: 0.08em;
+    }
+
+    .tile-info p {
+      font-size: 14px;
+      color: #666;
+      margin: 8px 0 16px;
+    }
+
+    .tile-btn {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid #111;
+      display: inline-block;
     }
 
     .back {
@@ -120,20 +138,34 @@
 
 <section>
   <div class="tile-grid">
+
     <div class="tile-item">
-      <img src="tile.jpg" alt="Tile Sample">
-      <h3>PORCELAIN TILE</h3>
+      <img src="tile.jpg" alt="Porcelain Tile">
+      <div class="tile-info">
+        <h3>PORCELAIN TILE</h3>
+        <p>내구성과 디자인을 갖춘 포세린 타일</p>
+        <span class="tile-btn">DETAIL VIEW</span>
+      </div>
     </div>
 
     <div class="tile-item">
-      <img src="tile.jpg" alt="Tile Sample">
-      <h3>LARGE FORMAT TILE</h3>
+      <img src="tile.jpg" alt="Large Format Tile">
+      <div class="tile-info">
+        <h3>LARGE FORMAT TILE</h3>
+        <p>넓은 공간에 최적화된 대형 포맷 타일</p>
+        <span class="tile-btn">DETAIL VIEW</span>
+      </div>
     </div>
 
     <div class="tile-item">
-      <img src="tile.jpg" alt="Tile Sample">
-      <h3>WALL & FLOOR TILE</h3>
+      <img src="tile.jpg" alt="Wall Floor Tile">
+      <div class="tile-info">
+        <h3>WALL & FLOOR TILE</h3>
+        <p>벽과 바닥 모두 적용 가능한 범용 타일</p>
+        <span class="tile-btn">DETAIL VIEW</span>
+      </div>
     </div>
+
   </div>
 
   <div class="back">
