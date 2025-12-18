@@ -8,79 +8,66 @@
 
   <style>
     body {
-      font-family: 'Noto Sans KR', Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: 'Noto Sans KR', Arial, sans-serif;
       background: #f9fafb;
       color: #111;
     }
 
-    /* ===== SUB HERO ===== */
-    .sub-hero {
-      padding: 120px 20px 80px;
+    header {
+      padding: 100px 20px;
       text-align: center;
-      background: #f9fafb;
+      background: #111;
+      color: #fff;
     }
 
-    .sub-hero h1 {
-      font-size: 56px;
+    header h1 {
+      font-size: 48px;
       letter-spacing: 0.25em;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
-    .sub-hero p {
+    header p {
       font-size: 14px;
-      letter-spacing: 0.18em;
-      color: #666;
-    }
-
-    /* ===== CATEGORY INTRO ===== */
-    .category-intro {
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    .category-intro p {
-      font-size: 16px;
-      line-height: 1.8;
-      color: #444;
+      letter-spacing: 0.15em;
+      color: #ccc;
     }
 
     section {
       max-width: 1200px;
-      margin: 0 auto 100px;
+      margin: 80px auto;
       padding: 0 20px;
-      text-align: center;
     }
 
-    .tile-grid {
+    .product-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 40px;
-      margin-top: 60px;
     }
 
-    .tile-item {
+    .product-item {
       background: #fff;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      text-align: center;
     }
 
-    .tile-item img {
+    .product-item img {
       width: 100%;
       height: 240px;
       object-fit: cover;
     }
 
-    .tile-item h3 {
+    .product-item h3 {
       padding: 20px;
-      font-size: 18px;
+      font-size: 16px;
       letter-spacing: 0.08em;
     }
 
     .back {
-      margin-top: 80px;
+      margin: 100px 0;
+      text-align: center;
     }
 
     .back a {
@@ -93,12 +80,8 @@
     }
 
     @media (max-width: 768px) {
-      .tile-grid {
+      .product-grid {
         grid-template-columns: 1fr;
-      }
-
-      .sub-hero h1 {
-        font-size: 36px;
       }
     }
   </style>
@@ -106,40 +89,36 @@
 
 <body>
 
-<header class="sub-hero">
+<header>
   <h1>TILE</h1>
-  <p>ARCHITECTURAL CERAMIC SOLUTIONS</p>
+  <p>ARCHITECTURAL CERAMIC TILE</p>
 </header>
 
-<section class="category-intro">
-  <p>
-    바닥 · 벽 · 대형 포맷까지 아우르는<br>
-    건축용 세라믹 타일 제품을 제공합니다.
-  </p>
-</section>
-
 <section>
-  <div class="tile-grid">
-    <div class="tile-item">
-      <img src="tile.jpg" alt="Tile Sample">
+  <div class="product-grid">
+
+    <div class="product-item">
+      <img src="tile.jpg" alt="">
       <h3>PORCELAIN TILE</h3>
     </div>
 
-    <div class="tile-item">
-      <img src="tile.jpg" alt="Tile Sample">
+    <div class="product-item">
+      <img src="tile.jpg" alt="">
       <h3>LARGE FORMAT TILE</h3>
     </div>
 
-    <div class="tile-item">
-      <img src="tile.jpg" alt="Tile Sample">
+    <div class="product-item">
+      <img src="tile.jpg" alt="">
       <h3>WALL & FLOOR TILE</h3>
     </div>
-  </div>
 
-  <div class="back">
-    <a href="index.html">← BACK TO MAIN</a>
   </div>
 </section>
 
+<div class="back">
+  <a href="index.html">← BACK TO MAIN</a>
+</div>
+
 </body>
 </html>
+
