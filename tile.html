@@ -53,6 +53,7 @@
       text-align: center;
     }
 
+    /* ===== PRODUCT GRID ===== */
     .tile-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -60,34 +61,57 @@
       margin-top: 60px;
     }
 
+    /* 카드 전체 링크 */
+    .product-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
     .tile-item {
       background: #fff;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .tile-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
     }
 
     .tile-item img {
       width: 100%;
       height: 240px;
       object-fit: cover;
+      transition: transform 0.6s ease, filter 0.6s ease;
     }
 
-    /* ===== STEP 3 : PRODUCT INFO ===== */
+    .tile-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(0.75);
+    }
+
+    /* ===== PRODUCT INFO ===== */
     .tile-info {
-      padding: 20px;
+      padding: 24px;
       text-align: left;
     }
 
     .tile-info h3 {
       font-size: 18px;
       letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      transition: transform 0.4s ease;
     }
 
     .tile-info p {
       font-size: 14px;
       color: #666;
-      margin: 8px 0 16px;
+      margin-bottom: 16px;
+      line-height: 1.6;
+      transition: transform 0.4s ease;
     }
 
     .tile-btn {
@@ -95,6 +119,13 @@
       letter-spacing: 0.08em;
       border-bottom: 1px solid #111;
       display: inline-block;
+      transition: transform 0.4s ease;
+    }
+
+    .tile-item:hover .tile-info h3,
+    .tile-item:hover .tile-info p,
+    .tile-item:hover .tile-btn {
+      transform: translateY(-6px);
     }
 
     .back {
@@ -139,32 +170,38 @@
 <section>
   <div class="tile-grid">
 
-    <div class="tile-item">
-      <img src="tile.jpg" alt="Porcelain Tile">
-      <div class="tile-info">
-        <h3>PORCELAIN TILE</h3>
-        <p>내구성과 디자인을 갖춘 포세린 타일</p>
-        <span class="tile-btn">DETAIL VIEW</span>
+    <a href="tile-porcelain.html" class="product-card">
+      <div class="tile-item">
+        <img src="tile.jpg" alt="Porcelain Tile">
+        <div class="tile-info">
+          <h3>PORCELAIN TILE</h3>
+          <p>내구성과 디자인을 갖춘 포세린 타일</p>
+          <span class="tile-btn">DETAIL VIEW</span>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <div class="tile-item">
-      <img src="tile.jpg" alt="Large Format Tile">
-      <div class="tile-info">
-        <h3>LARGE FORMAT TILE</h3>
-        <p>넓은 공간에 최적화된 대형 포맷 타일</p>
-        <span class="tile-btn">DETAIL VIEW</span>
+    <a href="tile-large.html" class="product-card">
+      <div class="tile-item">
+        <img src="tile.jpg" alt="Large Format Tile">
+        <div class="tile-info">
+          <h3>LARGE FORMAT TILE</h3>
+          <p>넓은 공간에 최적화된 대형 포맷 타일</p>
+          <span class="tile-btn">DETAIL VIEW</span>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <div class="tile-item">
-      <img src="tile.jpg" alt="Wall Floor Tile">
-      <div class="tile-info">
-        <h3>WALL & FLOOR TILE</h3>
-        <p>벽과 바닥 모두 적용 가능한 범용 타일</p>
-        <span class="tile-btn">DETAIL VIEW</span>
+    <a href="tile-wallfloor.html" class="product-card">
+      <div class="tile-item">
+        <img src="tile.jpg" alt="Wall & Floor Tile">
+        <div class="tile-info">
+          <h3>WALL & FLOOR TILE</h3>
+          <p>벽과 바닥 모두 적용 가능한 범용 타일</p>
+          <span class="tile-btn">DETAIL VIEW</span>
+        </div>
       </div>
-    </div>
+    </a>
 
   </div>
 
