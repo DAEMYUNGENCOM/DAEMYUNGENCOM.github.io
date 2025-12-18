@@ -405,6 +405,26 @@
   .trust-item strong {
     font-size: 40px;
   }
+  /* 카드 전체 클릭용 링크 */
+.product-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
+/* 클릭 방해 제거 */
+.product-overlay,
+.product-info {
+  pointer-events: none;
+}
+
+/* 버튼만 다시 클릭 가능 */
+.product-btn {
+  pointer-events: auto;
+  position: relative;
+  z-index: 6;
+}
+
 }
 
   </style>
@@ -446,48 +466,58 @@
 
   <div class="product-grid">
 
-    <div class="product-item">
-  <a href="tile.html" class="product-card-link"></a>
-  <img src="tile.jpg" alt="타일">
+  <!-- TILE -->
+  <div class="product-item">
+    <a href="tile.html" class="product-card-link"></a>
 
-  <div class="product-overlay">
-    <span>TILE</span>
+    <img src="tile.jpg" alt="타일">
+
+    <div class="product-overlay">
+      <span>TILE</span>
+    </div>
+
+    <div class="product-info">
+      <h3>TILE</h3>
+      <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
+      <a href="tile.html" class="product-btn">자세히 보기</a>
+    </div>
   </div>
 
-  <div class="product-info">
-    <h3>TILE</h3>
-    <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
-    <a href="tile.html" class="product-btn">자세히 보기</a>
+  <!-- SANITARY -->
+  <div class="product-item">
+    <a href="sanitary.html" class="product-card-link"></a>
+
+    <img src="product-sanitary.jpg" alt="위생도기">
+
+    <div class="product-overlay">
+      <span>SANITARY</span>
+    </div>
+
+    <div class="product-info">
+      <h3>SANITARY WARE</h3>
+      <p>양변기, 세면기 등 욕실 공간을 위한 위생도기</p>
+      <a href="sanitary.html" class="product-btn">자세히 보기</a>
+    </div>
   </div>
+
+  <!-- FAUCET -->
+  <div class="product-item">
+    <a href="faucet.html" class="product-card-link"></a>
+
+    <img src="product-faucet.jpg" alt="수전">
+
+    <div class="product-overlay">
+      <span>FAUCET</span>
+    </div>
+
+    <div class="product-info">
+      <h3>FAUCET</h3>
+      <p>디자인과 내구성을 겸비한 욕실·주방 수전</p>
+      <a href="faucet.html" class="product-btn">자세히 보기</a>
+    </div>
+  </div>
+
 </div>
-
-
-
-    <div class="product-item">
-      <img src="product-sanitary.jpg" alt="위생도기">
-      <div class="product-overlay">
-    <span>SANITARY</span>
-  </div>
-      <div class="product-info">
-        <h3>SANITARY WARE</h3>
-        <p>양변기, 세면기 등 욕실 공간을 위한 위생도기</p>
-<a href="sanitary.html" class="product-btn">자세히 보기</a>
-      </div>
-    </div>
-
-    <div class="product-item">
-      <img src="product-faucet.jpg" alt="수전">
-      <div class="product-overlay">
-    <span>FAUCET</span>
-  </div>
-      <div class="product-info">
-        <h3>FAUCET</h3>
-        <p>디자인과 내구성을 겸비한 욕실·주방 수전</p>
-<a href="faucet.html" class="product-btn">자세히 보기</a>
-      </div>
-    </div>
-
-  </div>
 </section>
 
 <section class="fade-up">
