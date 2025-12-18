@@ -73,10 +73,28 @@
       object-fit: cover;
     }
 
-    .product-item h3 {
+    /* ===== STEP 3 : PRODUCT INFO ===== */
+    .product-info {
       padding: 20px;
+      text-align: left;
+    }
+
+    .product-info h3 {
       font-size: 18px;
       letter-spacing: 0.08em;
+    }
+
+    .product-info p {
+      font-size: 14px;
+      color: #666;
+      margin: 8px 0 16px;
+    }
+
+    .product-btn {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid #111;
+      display: inline-block;
     }
 
     .back {
@@ -121,20 +139,34 @@
 
 <section>
   <div class="product-grid">
+
     <div class="product-item">
       <img src="product-faucet.jpg" alt="Bathroom Faucet">
-      <h3>BATHROOM FAUCET</h3>
+      <div class="product-info">
+        <h3>BATHROOM FAUCET</h3>
+        <p>욕실 공간을 위한 프리미엄 수전</p>
+        <span class="product-btn">DETAIL VIEW</span>
+      </div>
     </div>
 
     <div class="product-item">
       <img src="product-faucet.jpg" alt="Kitchen Faucet">
-      <h3>KITCHEN FAUCET</h3>
+      <div class="product-info">
+        <h3>KITCHEN FAUCET</h3>
+        <p>주방 환경에 최적화된 고급 수전</p>
+        <span class="product-btn">DETAIL VIEW</span>
+      </div>
     </div>
 
     <div class="product-item">
       <img src="product-faucet.jpg" alt="Shower Set">
-      <h3>SHOWER SET</h3>
+      <div class="product-info">
+        <h3>SHOWER SET</h3>
+        <p>편안한 사용감을 제공하는 샤워 시스템</p>
+        <span class="product-btn">DETAIL VIEW</span>
+      </div>
     </div>
+
   </div>
 
   <div class="back">
