@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <header class="sub-hero">
-    <section class="category-intro">
-  <p>
-    바닥 · 벽 · 대형 포맷까지 아우르는<br>
-    건축용 세라믹 타일 제품을 제공합니다.
-  </p>
-</section>
-
-  <h1>TILE</h1>
-  <p>ARCHITECTURAL CERAMIC SOLUTIONS</p>
-</header>
-
   <meta charset="UTF-8">
   <title>TILE | DAE MYUNG ENCOM</title>
 
@@ -27,27 +15,40 @@
       color: #111;
     }
 
-    header {
-      background: #111;
-      color: #fff;
+    /* ===== SUB HERO ===== */
+    .sub-hero {
+      padding: 120px 20px 80px;
+      text-align: center;
+      background: #f9fafb;
+    }
+
+    .sub-hero h1 {
+      font-size: 56px;
+      letter-spacing: 0.25em;
+      margin-bottom: 16px;
+    }
+
+    .sub-hero p {
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      color: #666;
+    }
+
+    /* ===== CATEGORY INTRO ===== */
+    .category-intro {
       padding: 80px 20px;
       text-align: center;
     }
 
-    header h1 {
-      font-size: 42px;
-      letter-spacing: 0.15em;
-      margin-bottom: 16px;
-    }
-
-    header p {
+    .category-intro p {
       font-size: 16px;
-      color: #ccc;
+      line-height: 1.8;
+      color: #444;
     }
 
     section {
       max-width: 1200px;
-      margin: 80px auto;
+      margin: 0 auto 100px;
       padding: 0 20px;
       text-align: center;
     }
@@ -95,47 +96,27 @@
       .tile-grid {
         grid-template-columns: 1fr;
       }
-      /* ===== SUB HERO ===== */
-.sub-hero {
-  padding: 120px 20px 80px;
-  text-align: center;
-  background: #f9fafb;
-}
 
-.sub-hero h1 {
-  font-size: 56px;
-  letter-spacing: 0.25em;
-  margin-bottom: 16px;
-}
-
-.sub-hero p {
-  font-size: 14px;
-  letter-spacing: 0.18em;
-  color: #666;
-}
-      /* ===== CATEGORY INTRO ===== */
-.category-intro {
-  padding: 80px 20px;
-  text-align: center;
-}
-
-.category-intro p {
-  font-size: 16px;
-  line-height: 1.8;
-  color: #444;
-}
-
-
+      .sub-hero h1 {
+        font-size: 36px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<header>
+<header class="sub-hero">
   <h1>TILE</h1>
-  <p>ARCHITECTURAL CERAMIC TILE COLLECTION</p>
+  <p>ARCHITECTURAL CERAMIC SOLUTIONS</p>
 </header>
+
+<section class="category-intro">
+  <p>
+    바닥 · 벽 · 대형 포맷까지 아우르는<br>
+    건축용 세라믹 타일 제품을 제공합니다.
+  </p>
+</section>
 
 <section>
   <div class="tile-grid">
