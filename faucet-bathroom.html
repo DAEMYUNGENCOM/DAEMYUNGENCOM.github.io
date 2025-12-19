@@ -2,90 +2,173 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>BATHROOM FAUCET | DAE MYUNG ENCOM</title>
+  <title>PRODUCT DETAIL | DAE MYUNG ENCOM</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family: 'Noto Sans KR', Arial, sans-serif;
       margin: 0;
+      font-family: 'Noto Sans KR', Arial, sans-serif;
       background: #f9fafb;
       color: #111;
     }
 
+    /* ===== SUB HERO ===== */
     .detail-hero {
-      padding: 120px 20px;
+      padding: 120px 20px 80px;
       text-align: center;
-      background: #111;
-      color: #fff;
+      background: #fff;
     }
 
     .detail-hero h1 {
       font-size: 48px;
-      letter-spacing: 0.2em;
-      margin-bottom: 16px;
+      letter-spacing: 0.18em;
+      margin-bottom: 12px;
     }
 
     .detail-hero p {
       font-size: 14px;
-      letter-spacing: 0.15em;
-      color: #ccc;
+      letter-spacing: 0.12em;
+      color: #666;
     }
 
-    .detail-section {
+    /* ===== CONTENT ===== */
+    .detail-wrap {
       max-width: 1000px;
-      margin: 100px auto;
-      padding: 0 20px;
+      margin: 0 auto;
+      padding: 0 20px 120px;
+    }
+
+    .detail-image {
+      margin: 80px 0;
       text-align: center;
     }
 
-    .detail-section img {
+    .detail-image img {
       width: 100%;
-      max-width: 700px;
+      max-width: 720px;
       border-radius: 12px;
-      margin-bottom: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
     }
 
-    .detail-section p {
-      font-size: 16px;
+    .detail-info {
+      margin-bottom: 80px;
+      text-align: center;
+    }
+
+    .detail-info h2 {
+      font-size: 28px;
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+
+    .detail-info p {
+      font-size: 15px;
       line-height: 1.8;
       color: #444;
     }
 
+    /* ===== SPEC TABLE ===== */
+    .spec-table {
+      max-width: 700px;
+      margin: 0 auto 80px;
+      border-top: 1px solid #ddd;
+    }
+
+    .spec-row {
+      display: flex;
+      padding: 14px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+    .spec-row strong {
+      width: 160px;
+      color: #111;
+    }
+
+    .spec-row span {
+      color: #555;
+    }
+
+    /* ===== BACK ===== */
     .back {
-      margin-top: 80px;
+      text-align: center;
     }
 
     .back a {
-      text-decoration: none;
       font-size: 14px;
       letter-spacing: 0.1em;
-      border-bottom: 1px solid #111;
+      text-decoration: none;
       color: #111;
+      border-bottom: 1px solid #111;
+      padding-bottom: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .detail-hero h1 {
+        font-size: 34px;
+      }
+
+      .spec-row {
+        flex-direction: column;
+      }
+
+      .spec-row strong {
+        margin-bottom: 6px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<section class="detail-hero">
+<!-- 1. HERO -->
+<header class="detail-hero">
   <h1>BATHROOM FAUCET</h1>
-  <p>PREMIUM BATHROOM FITTING</p>
-</section>
+  <p>PREMIUM FAUCET COLLECTION</p>
+</header>
 
-<section class="detail-section">
-  <img src="product-faucet.jpg" alt="Bathroom Faucet">
+<!-- 2. CONTENT -->
+<div class="detail-wrap">
 
-  <p>
-    욕실 공간에 최적화된 프리미엄 수전 제품으로<br>
-    심플한 디자인과 뛰어난 내구성을 갖추었습니다.
-  </p>
+  <!-- IMAGE -->
+  <div class="detail-image">
+    <img src="product-faucet.jpg" alt="Bathroom Faucet">
+  </div>
 
+  <!-- INFO -->
+  <div class="detail-info">
+    <h2>PRODUCT DESCRIPTION</h2>
+    <p>
+      욕실 공간의 품격을 높이는 프리미엄 수전 제품으로<br>
+      세련된 디자인과 뛰어난 내구성을 갖추었습니다.
+    </p>
+  </div>
+
+  <!-- SPEC -->
+  <div class="spec-table">
+    <div class="spec-row">
+      <strong>TYPE</strong>
+      <span>Bathroom Faucet</span>
+    </div>
+    <div class="spec-row">
+      <strong>MATERIAL</strong>
+      <span>Brass</span>
+    </div>
+    <div class="spec-row">
+      <strong>FINISH</strong>
+      <span>Chrome</span>
+    </div>
+  </div>
+
+  <!-- BACK -->
   <div class="back">
     <a href="faucet.html">← BACK TO FAUCET</a>
   </div>
-</section>
+
+</div>
 
 </body>
 </html>
