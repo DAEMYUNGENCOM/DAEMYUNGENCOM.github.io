@@ -50,22 +50,28 @@
     .product-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 50px;
+      gap: 60px;
       margin-top: 80px;
     }
 
-    .product-item {
-      position: relative;
-      overflow: hidden;
-      background: #fff;
+    /* ===== CARD (TILE과 동일 구조) ===== */
+    .product-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
       opacity: 0;
       transform: translateY(40px);
       transition: all 0.8s ease;
     }
 
-    .product-item.show {
+    .product-card.show {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .product-item {
+      overflow: hidden;
+      background: none;
     }
 
     .product-item img {
@@ -75,48 +81,34 @@
       transition: transform 0.8s ease, filter 0.6s ease;
     }
 
-    .product-item:hover img {
+    .product-card:hover img {
       transform: scale(1.05);
-      filter: brightness(0.7);
+      filter: brightness(0.85);
     }
 
-    /* ===== OVERLAY TEXT ===== */
     .product-info {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 30px;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-
-    .product-item:hover .product-info {
-      opacity: 1;
+      padding-top: 24px;
+      text-align: left;
     }
 
     .product-info h3 {
       font-size: 22px;
-      letter-spacing: 0.15em;
-      color: #fff;
-      margin-bottom: 8px;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
     }
 
     .product-info p {
       font-size: 14px;
-      color: #ddd;
-      margin-bottom: 16px;
+      color: #666;
+      margin-bottom: 14px;
+      line-height: 1.6;
     }
 
     .product-btn {
       font-size: 13px;
-      letter-spacing: 0.12em;
-      color: #fff;
-      text-decoration: none;
-      align-self: flex-start;
+      letter-spacing: 0.1em;
       position: relative;
+      display: inline-block;
     }
 
     .product-btn::after {
@@ -124,12 +116,12 @@
       display: block;
       width: 0;
       height: 1px;
-      background: #fff;
+      background: #111;
       margin-top: 6px;
       transition: width 0.4s ease;
     }
 
-    .product-item:hover .product-btn::after {
+    .product-card:hover .product-btn::after {
       width: 100%;
     }
 
@@ -181,32 +173,41 @@
 <section>
   <div class="product-grid">
 
-    <div class="product-item">
-      <img src="product-sanitary.jpg" alt="Toilet">
-      <div class="product-info">
-        <h3>TOILET</h3>
-        <p>욕실 공간에 최적화된 고급 양변기</p>
-        <a href="sanitary-toilet.html" class="product-btn">DETAIL VIEW</a>
+    <!-- TOILET -->
+    <a href="sanitary-toilet.html" class="product-card">
+      <div class="product-item">
+        <img src="product-sanitary.jpg" alt="Toilet">
+        <div class="product-info">
+          <h3>TOILET</h3>
+          <p>욕실 공간에 최적화된 고급 양변기</p>
+          <span class="product-btn">DETAIL VIEW</span>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <div class="product-item">
-      <img src="product-sanitary.jpg" alt="Wash Basin">
-      <div class="product-info">
-        <h3>WASH BASIN</h3>
-        <p>디자인과 실용성을 갖춘 세면기</p>
-        <a href="sanitary-basin.html" class="product-btn">DETAIL VIEW</a>
+    <!-- WASH BASIN -->
+    <a href="sanitary-basin.html" class="product-card">
+      <div class="product-item">
+        <img src="product-sanitary.jpg" alt="Wash Basin">
+        <div class="product-info">
+          <h3>WASH BASIN</h3>
+          <p>디자인과 실용성을 갖춘 세면기</p>
+          <span class="product-btn">DETAIL VIEW</span>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <div class="product-item">
-      <img src="product-sanitary.jpg" alt="Urinal">
-      <div class="product-info">
-        <h3>URINAL</h3>
-        <p>상업 공간을 위한 위생적인 소변기</p>
-        <a href="sanitary-urinal.html" class="product-btn">DETAIL VIEW</a>
+    <!-- URINAL -->
+    <a href="sanitary-urinal.html" class="product-card">
+      <div class="product-item">
+        <img src="product-sanitary.jpg" alt="Urinal">
+        <div class="product-info">
+          <h3>URINAL</h3>
+          <p>상업 공간을 위한 위생적인 소변기</p>
+          <span class="product-btn">DETAIL VIEW</span>
+        </div>
       </div>
-    </div>
+    </a>
 
   </div>
 
@@ -216,7 +217,7 @@
 </section>
 
 <script>
-  const items = document.querySelectorAll('.product-item');
+  const cards = document.querySelectorAll('.product-card');
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -226,7 +227,7 @@
     });
   }, { threshold: 0.2 });
 
-  items.forEach(item => observer.observe(item));
+  cards.forEach(card => observer.observe(card));
 </script>
 
 </body>
