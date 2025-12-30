@@ -10,17 +10,16 @@
     body {
       font-family: 'Noto Sans KR', Arial, sans-serif;
       margin: 0;
-      padding: 0;
       padding-top: 70px;
     }
 
-    /* ===== NAVBAR ===== */
+    /* ===== NAV ===== */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
       height: 70px;
-      background: #ffffff;
+      background: #fff;
       border-bottom: 1px solid #e5e7eb;
       z-index: 1000;
     }
@@ -31,8 +30,8 @@
       height: 100%;
       padding: 0 20px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
     }
 
     .menu a {
@@ -60,20 +59,19 @@
 
     .hero-inner {
       position: relative;
-      z-index: 1;
       color: #fff;
-      max-width: 600px;
       margin-left: 120px;
+      max-width: 600px;
     }
 
     .hero h1 {
       font-size: 56px;
       letter-spacing: 0.18em;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     section {
-      padding: 120px 20px;
+      padding: 140px 20px;
       text-align: center;
     }
 
@@ -83,25 +81,21 @@
       margin-bottom: 20px;
     }
 
-    /* =========================
-       PRODUCT CATEGORY (UPGRADE)
-       ========================= */
-
+    /* ===== PRODUCT GRID ===== */
     .product-grid {
-      max-width: 1200px;
+      max-width: 1300px;
       margin: 100px auto 0;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 60px;
+      gap: 70px;
     }
 
     .product-card {
-      display: block;
       text-decoration: none;
       color: inherit;
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease;
+      transform: translateY(50px);
+      transition: all 1s ease;
     }
 
     .product-card.show {
@@ -111,22 +105,20 @@
 
     .product-item {
       position: relative;
-      background: none;
-      box-shadow: none;
-      border-radius: 0;
       overflow: hidden;
     }
 
     .product-item img {
       width: 100%;
-      height: 360px;
+      height: 420px;
       object-fit: cover;
-      transition: transform 1s ease, filter 0.6s ease;
+      transition: transform 1.2s ease, filter 0.6s ease;
     }
 
+    /* hover 효과 */
     .product-item:hover img {
-      transform: scale(1.06);
-      filter: brightness(0.75);
+      transform: scale(1.08);
+      filter: brightness(0.65);
     }
 
     .product-overlay {
@@ -135,10 +127,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0,0,0,0.35);
       opacity: 0;
       transition: opacity 0.6s ease;
-      pointer-events: none;
     }
 
     .product-item:hover .product-overlay {
@@ -147,29 +137,32 @@
 
     .product-overlay span {
       color: #fff;
-      font-size: 26px;
-      letter-spacing: 0.25em;
+      font-size: 30px;
+      letter-spacing: 0.3em;
     }
 
+    /* ===== INFO (항상 보임) ===== */
     .product-info {
-      padding-top: 24px;
+      padding-top: 26px;
       text-align: left;
     }
 
     .product-info h3 {
-      font-size: 22px;
+      font-size: 24px;
+      letter-spacing: 0.12em;
       margin-bottom: 10px;
     }
 
     .product-info p {
-      font-size: 14px;
+      font-size: 15px;
       color: #666;
-      margin-bottom: 12px;
+      line-height: 1.7;
+      margin-bottom: 14px;
     }
 
     .product-btn {
       font-size: 13px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       position: relative;
       display: inline-block;
     }
@@ -188,11 +181,11 @@
       width: 100%;
     }
 
-    /* ===== SCROLL FADE ===== */
+    /* ===== SCROLL ===== */
     .fade-up {
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
+      transform: translateY(40px);
+      transition: all 1s ease;
     }
 
     .fade-up.show {
@@ -207,7 +200,7 @@
       }
 
       .product-item img {
-        height: 220px;
+        height: 260px;
       }
 
       .hero-inner {
@@ -222,9 +215,7 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="#" class="logo">
-      <img src="대명엔컴-영문로고 (워터마크).png" alt="DAE MYUNG ENCOM" height="29">
-    </a>
+    <img src="대명엔컴-영문로고 (워터마크).png" height="28">
     <div class="menu">
       <a href="#about">회사소개</a>
       <a href="#products">제품</a>
@@ -240,11 +231,6 @@
   </div>
 </header>
 
-<section id="about" class="fade-up">
-  <h2>ABOUT US</h2>
-  <p>대명엔컴은 타일, 위생도기, 수전 등<br>건축 마감 자재를 전문으로 공급합니다.</p>
-</section>
-
 <section id="products">
   <h2>PRODUCT CATEGORY</h2>
 
@@ -252,7 +238,7 @@
 
     <a href="tile.html" class="product-card">
       <div class="product-item">
-        <img src="tile.jpg" alt="타일">
+        <img src="tile.jpg">
         <div class="product-overlay"><span>TILE</span></div>
         <div class="product-info">
           <h3>TILE</h3>
@@ -264,7 +250,7 @@
 
     <a href="sanitary.html" class="product-card">
       <div class="product-item">
-        <img src="product-sanitary.jpg" alt="위생도기">
+        <img src="product-sanitary.jpg">
         <div class="product-overlay"><span>SANITARY</span></div>
         <div class="product-info">
           <h3>SANITARY WARE</h3>
@@ -276,7 +262,7 @@
 
     <a href="faucet.html" class="product-card">
       <div class="product-item">
-        <img src="product-faucet.jpg" alt="수전">
+        <img src="product-faucet.jpg">
         <div class="product-overlay"><span>FAUCET</span></div>
         <div class="product-info">
           <h3>FAUCET</h3>
@@ -289,23 +275,14 @@
   </div>
 </section>
 
-<section id="contact" class="fade-up">
-  <h2>CONTACT</h2>
-  <p>contact@daemyung.com</p>
-</section>
-
 <script>
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('show');
     });
   }, { threshold: 0.2 });
 
-  document.querySelectorAll('.fade-up, .product-card').forEach(el => {
-    observer.observe(el);
-  });
+  document.querySelectorAll('.product-card').forEach(el => observer.observe(el));
 </script>
 
 </body>
