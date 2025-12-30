@@ -74,39 +74,40 @@
     }
 
     section {
-      padding: 120px 0;
+      padding: 120px 20px;
+      text-align: center;
     }
 
     h2 {
-      text-align: center;
       font-size: 32px;
       letter-spacing: 0.12em;
       margin-bottom: 60px;
     }
 
-    /* ===== SLIDER ===== */
-    .slider-wrap {
-      position: relative;
-      max-width: 100%;
-      overflow: hidden;
-    }
-
-    .slider {
-      display: flex;
-      gap: 40px;
-      padding: 0 80px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-    }
-
-    .slider::-webkit-scrollbar {
-      display: none;
+    /* ===== PRODUCT GRID ===== */
+    .product-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 60px;
     }
 
     .product-card {
-      flex: 0 0 420px;
       text-decoration: none;
       color: inherit;
+      opacity: 0;
+      transition: all 1s ease;
+    }
+
+    /* 등장 방향 */
+    .from-left { transform: translateX(-80px); }
+    .from-bottom { transform: translateY(80px); }
+    .from-right { transform: translateX(80px); }
+
+    .product-card.show {
+      opacity: 1;
+      transform: translate(0,0);
     }
 
     .product-item {
@@ -116,13 +117,13 @@
 
     .product-item img {
       width: 100%;
-      height: 300px;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       transition: transform 0.8s ease, filter 0.6s ease;
     }
 
     .product-card:hover img {
-      transform: scale(1.05);
+      transform: scale(1.06);
       filter: brightness(0.8);
     }
 
@@ -150,6 +151,7 @@
 
     .product-info {
       padding-top: 22px;
+      text-align: left;
     }
 
     .product-info h3 {
@@ -185,36 +187,15 @@
       width: 100%;
     }
 
-    /* ===== ARROWS ===== */
-    .arrow {
-      position: absolute;
-      top: 40%;
-      width: 48px;
-      height: 48px;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-size: 20px;
-      z-index: 10;
-    }
-
-    .arrow.left { left: 20px; }
-    .arrow.right { right: 20px; }
-
     /* ===== MOBILE ===== */
     @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
       .hero-inner {
         margin-left: 0;
         text-align: center;
-      }
-
-      .product-card {
-        flex: 0 0 280px;
-      }
-
-      .product-item img {
-        height: 220px;
       }
     }
   </style>
@@ -240,64 +221,67 @@
   </div>
 </header>
 
+  <section id="about">
+  <h2>ABOUT US</h2>
+  <p>대명엔컴은 타일, 위생도기, 수전 등<br>건축 마감 자재를 전문으로 공급합니다.</p>
+</section>
+  
 <section id="products">
   <h2>PRODUCT CATEGORY</h2>
 
-  <div class="slider-wrap">
-    <button class="arrow left" onclick="slide(-1)">‹</button>
-    <button class="arrow right" onclick="slide(1)">›</button>
+  <div class="product-grid">
 
-    <div class="slider" id="slider">
+    <a href="tile.html" class="product-card from-left">
+      <div class="product-item">
+        <img src="tile.jpg">
+        <div class="product-overlay"><span>TILE</span></div>
+      </div>
+      <div class="product-info">
+        <h3>TILE</h3>
+        <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
+        <span class="product-btn">자세히 보기</span>
+      </div>
+    </a>
 
-      <a href="tile.html" class="product-card">
-        <div class="product-item">
-          <img src="tile.jpg">
-          <div class="product-overlay"><span>TILE</span></div>
-        </div>
-        <div class="product-info">
-          <h3>TILE</h3>
-          <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
-          <span class="product-btn">자세히 보기</span>
-        </div>
-      </a>
+    <a href="sanitary.html" class="product-card from-bottom">
+      <div class="product-item">
+        <img src="product-sanitary.jpg">
+        <div class="product-overlay"><span>SANITARY</span></div>
+      </div>
+      <div class="product-info">
+        <h3>SANITARY WARE</h3>
+        <p>욕실 공간을 위한 위생도기 제품</p>
+        <span class="product-btn">자세히 보기</span>
+      </div>
+    </a>
 
-      <a href="sanitary.html" class="product-card">
-        <div class="product-item">
-          <img src="product-sanitary.jpg">
-          <div class="product-overlay"><span>SANITARY</span></div>
-        </div>
-        <div class="product-info">
-          <h3>SANITARY WARE</h3>
-          <p>욕실 공간을 위한 위생도기 제품</p>
-          <span class="product-btn">자세히 보기</span>
-        </div>
-      </a>
+    <a href="faucet.html" class="product-card from-right">
+      <div class="product-item">
+        <img src="product-faucet.jpg">
+        <div class="product-overlay"><span>FAUCET</span></div>
+      </div>
+      <div class="product-info">
+        <h3>FAUCET</h3>
+        <p>디자인과 내구성을 겸비한 수전</p>
+        <span class="product-btn">자세히 보기</span>
+      </div>
+    </a>
 
-      <a href="faucet.html" class="product-card">
-        <div class="product-item">
-          <img src="product-faucet.jpg">
-          <div class="product-overlay"><span>FAUCET</span></div>
-        </div>
-        <div class="product-info">
-          <h3>FAUCET</h3>
-          <p>디자인과 내구성을 겸비한 수전</p>
-          <span class="product-btn">자세히 보기</span>
-        </div>
-      </a>
-
-    </div>
   </div>
 </section>
 
 <script>
-  const slider = document.getElementById('slider');
-
-  function slide(dir) {
-    slider.scrollBy({
-      left: dir * 460,
-      behavior: 'smooth'
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
     });
-  }
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.product-card').forEach(card => {
+    observer.observe(card);
+  });
 </script>
 
 </body>
