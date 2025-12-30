@@ -74,36 +74,39 @@
     }
 
     section {
-      padding: 120px 20px;
-      text-align: center;
+      padding: 120px 0;
     }
 
     h2 {
+      text-align: center;
       font-size: 32px;
       letter-spacing: 0.12em;
-      margin-bottom: 20px;
+      margin-bottom: 60px;
     }
 
-    /* ===== PRODUCT GRID ===== */
-    .product-grid {
-      max-width: 1400px;
-      margin: 100px auto 0;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    /* ===== SLIDER ===== */
+    .slider-wrap {
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .slider {
+      display: flex;
       gap: 40px;
+      padding: 0 80px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+
+    .slider::-webkit-scrollbar {
+      display: none;
     }
 
     .product-card {
+      flex: 0 0 420px;
       text-decoration: none;
       color: inherit;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease;
-    }
-
-    .product-card.show {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .product-item {
@@ -111,20 +114,18 @@
       overflow: hidden;
     }
 
-    /* ★ 핵심: 가로 직사각형 + 안 잘림 */
     .product-item img {
       width: 100%;
-      height: 280px;
+      height: 300px;
       object-fit: cover;
       transition: transform 0.8s ease, filter 0.6s ease;
     }
 
     .product-card:hover img {
-      transform: scale(1.04);
+      transform: scale(1.05);
       filter: brightness(0.8);
     }
 
-    /* OVERLAY */
     .product-overlay {
       position: absolute;
       inset: 0;
@@ -143,14 +144,12 @@
 
     .product-overlay span {
       color: #fff;
-      font-size: 26px;
+      font-size: 28px;
       letter-spacing: 0.3em;
     }
 
-    /* TEXT (항상 보임) */
     .product-info {
       padding-top: 22px;
-      text-align: left;
     }
 
     .product-info h3 {
@@ -186,31 +185,36 @@
       width: 100%;
     }
 
-    /* SCROLL */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
+    /* ===== ARROWS ===== */
+    .arrow {
+      position: absolute;
+      top: 40%;
+      width: 48px;
+      height: 48px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      z-index: 10;
     }
 
-    .fade-up.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .arrow.left { left: 20px; }
+    .arrow.right { right: 20px; }
 
-    /* MOBILE */
+    /* ===== MOBILE ===== */
     @media (max-width: 768px) {
-      .product-grid {
-        grid-template-columns: 1fr;
+      .hero-inner {
+        margin-left: 0;
+        text-align: center;
+      }
+
+      .product-card {
+        flex: 0 0 280px;
       }
 
       .product-item img {
         height: 220px;
-      }
-
-      .hero-inner {
-        margin-left: 0;
-        text-align: center;
       }
     }
   </style>
@@ -220,9 +224,7 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="#">
-      <img src="대명엔컴-영문로고 (워터마크).png" height="29">
-    </a>
+    <img src="대명엔컴-영문로고 (워터마크).png" height="29">
     <div class="menu">
       <a href="#about">회사소개</a>
       <a href="#products">제품</a>
@@ -238,72 +240,64 @@
   </div>
 </header>
 
-<section id="about" class="fade-up">
-  <h2>ABOUT US</h2>
-  <p>대명엔컴은 타일, 위생도기, 수전 등<br>건축 마감 자재를 전문으로 공급합니다.</p>
-</section>
-
 <section id="products">
   <h2>PRODUCT CATEGORY</h2>
 
-  <div class="product-grid">
+  <div class="slider-wrap">
+    <button class="arrow left" onclick="slide(-1)">‹</button>
+    <button class="arrow right" onclick="slide(1)">›</button>
 
-    <a href="tile.html" class="product-card">
-      <div class="product-item">
-        <img src="tile.jpg">
-        <div class="product-overlay"><span>TILE</span></div>
+    <div class="slider" id="slider">
+
+      <a href="tile.html" class="product-card">
+        <div class="product-item">
+          <img src="tile.jpg">
+          <div class="product-overlay"><span>TILE</span></div>
+        </div>
         <div class="product-info">
           <h3>TILE</h3>
           <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
           <span class="product-btn">자세히 보기</span>
         </div>
-      </div>
-    </a>
+      </a>
 
-    <a href="sanitary.html" class="product-card">
-      <div class="product-item">
-        <img src="product-sanitary.jpg">
-        <div class="product-overlay"><span>SANITARY</span></div>
+      <a href="sanitary.html" class="product-card">
+        <div class="product-item">
+          <img src="product-sanitary.jpg">
+          <div class="product-overlay"><span>SANITARY</span></div>
+        </div>
         <div class="product-info">
           <h3>SANITARY WARE</h3>
           <p>욕실 공간을 위한 위생도기 제품</p>
           <span class="product-btn">자세히 보기</span>
         </div>
-      </div>
-    </a>
+      </a>
 
-    <a href="faucet.html" class="product-card">
-      <div class="product-item">
-        <img src="product-faucet.jpg">
-        <div class="product-overlay"><span>FAUCET</span></div>
+      <a href="faucet.html" class="product-card">
+        <div class="product-item">
+          <img src="product-faucet.jpg">
+          <div class="product-overlay"><span>FAUCET</span></div>
+        </div>
         <div class="product-info">
           <h3>FAUCET</h3>
           <p>디자인과 내구성을 겸비한 수전</p>
           <span class="product-btn">자세히 보기</span>
         </div>
-      </div>
-    </a>
+      </a>
 
+    </div>
   </div>
 </section>
 
-<section id="contact" class="fade-up">
-  <h2>CONTACT</h2>
-  <p>contact@daemyung.com</p>
-</section>
-
 <script>
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      }
-    });
-  }, { threshold: 0.2 });
+  const slider = document.getElementById('slider');
 
-  document.querySelectorAll('.fade-up, .product-card').forEach(el => {
-    observer.observe(el);
-  });
+  function slide(dir) {
+    slider.scrollBy({
+      left: dir * 460,
+      behavior: 'smooth'
+    });
+  }
 </script>
 
 </body>
