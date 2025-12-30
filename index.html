@@ -25,13 +25,13 @@
     }
 
     .nav-inner {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       height: 100%;
-      padding: 0 20px;
+      padding: 0 30px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
 
     .menu a {
@@ -59,15 +59,16 @@
 
     .hero-inner {
       position: relative;
+      z-index: 1;
       color: #fff;
+      max-width: 700px;
       margin-left: 120px;
-      max-width: 600px;
     }
 
     .hero h1 {
       font-size: 56px;
       letter-spacing: 0.18em;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     section {
@@ -76,21 +77,22 @@
     }
 
     h2 {
-      font-size: 32px;
-      letter-spacing: 0.12em;
-      margin-bottom: 20px;
+      font-size: 34px;
+      letter-spacing: 0.14em;
+      margin-bottom: 40px;
     }
 
-    /* ===== PRODUCT GRID ===== */
+    /* ===== PRODUCT GRID (FINAL) ===== */
     .product-grid {
-      max-width: 1300px;
-      margin: 100px auto 0;
+      max-width: 1400px;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 70px;
+      grid-template-columns: 1fr;
+      gap: 120px;
     }
 
     .product-card {
+      display: block;
       text-decoration: none;
       color: inherit;
       opacity: 0;
@@ -110,53 +112,57 @@
 
     .product-item img {
       width: 100%;
-      height: 420px;
+      height: 420px;              /* 🔥 가로형 핵심 */
       object-fit: cover;
-      transition: transform 1.2s ease, filter 0.6s ease;
+      transform: scale(1.15);
+      transition: transform 1.4s ease, filter 0.6s ease;
     }
 
-    /* hover 효과 */
-    .product-item:hover img {
-      transform: scale(1.08);
+    .product-card:hover img {
+      transform: scale(1.05);
       filter: brightness(0.65);
     }
 
+    /* ===== OVERLAY ===== */
     .product-overlay {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      background: rgba(0,0,0,0.35);
       opacity: 0;
       transition: opacity 0.6s ease;
+      pointer-events: none;
     }
 
-    .product-item:hover .product-overlay {
+    .product-card:hover .product-overlay {
       opacity: 1;
     }
 
     .product-overlay span {
       color: #fff;
-      font-size: 30px;
-      letter-spacing: 0.3em;
+      font-size: 36px;
+      letter-spacing: 0.35em;
     }
 
-    /* ===== INFO (항상 보임) ===== */
+    /* ===== INFO ===== */
     .product-info {
-      padding-top: 26px;
+      margin-top: 28px;
       text-align: left;
+      max-width: 700px;
     }
 
     .product-info h3 {
-      font-size: 24px;
+      font-size: 26px;
+      margin-bottom: 12px;
       letter-spacing: 0.12em;
-      margin-bottom: 10px;
     }
 
     .product-info p {
       font-size: 15px;
-      color: #666;
-      line-height: 1.7;
+      line-height: 1.8;
+      color: #555;
       margin-bottom: 14px;
     }
 
@@ -177,35 +183,23 @@
       transition: width 0.4s ease;
     }
 
-    .product-item:hover .product-btn::after {
+    .product-card:hover .product-btn::after {
       width: 100%;
-    }
-
-    /* ===== SCROLL ===== */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease;
-    }
-
-    .fade-up.show {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     /* ===== MOBILE ===== */
     @media (max-width: 768px) {
-      .product-grid {
-        grid-template-columns: 1fr;
+      .hero-inner {
+        margin-left: 0;
+        text-align: center;
       }
 
       .product-item img {
         height: 260px;
       }
 
-      .hero-inner {
-        margin-left: 0;
-        text-align: center;
+      .product-info {
+        max-width: 100%;
       }
     }
   </style>
@@ -238,37 +232,37 @@
 
     <a href="tile.html" class="product-card">
       <div class="product-item">
-        <img src="tile.jpg">
+        <img src="tile.jpg" data-speed="0.25">
         <div class="product-overlay"><span>TILE</span></div>
-        <div class="product-info">
-          <h3>TILE</h3>
-          <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
-          <span class="product-btn">자세히 보기</span>
-        </div>
+      </div>
+      <div class="product-info">
+        <h3>TILE</h3>
+        <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
+        <span class="product-btn">자세히 보기</span>
       </div>
     </a>
 
     <a href="sanitary.html" class="product-card">
       <div class="product-item">
-        <img src="product-sanitary.jpg">
+        <img src="product-sanitary.jpg" data-speed="0.3">
         <div class="product-overlay"><span>SANITARY</span></div>
-        <div class="product-info">
-          <h3>SANITARY WARE</h3>
-          <p>욕실 공간을 위한 위생도기 제품</p>
-          <span class="product-btn">자세히 보기</span>
-        </div>
+      </div>
+      <div class="product-info">
+        <h3>SANITARY WARE</h3>
+        <p>욕실 공간을 위한 위생도기 제품</p>
+        <span class="product-btn">자세히 보기</span>
       </div>
     </a>
 
     <a href="faucet.html" class="product-card">
       <div class="product-item">
-        <img src="product-faucet.jpg">
+        <img src="product-faucet.jpg" data-speed="0.28">
         <div class="product-overlay"><span>FAUCET</span></div>
-        <div class="product-info">
-          <h3>FAUCET</h3>
-          <p>디자인과 내구성을 겸비한 수전</p>
-          <span class="product-btn">자세히 보기</span>
-        </div>
+      </div>
+      <div class="product-info">
+        <h3>FAUCET</h3>
+        <p>디자인과 내구성을 겸비한 수전</p>
+        <span class="product-btn">자세히 보기</span>
       </div>
     </a>
 
@@ -276,13 +270,25 @@
 </section>
 
 <script>
+  const cards = document.querySelectorAll('.product-card');
+
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('show');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
     });
   }, { threshold: 0.2 });
 
-  document.querySelectorAll('.product-card').forEach(el => observer.observe(el));
+  cards.forEach(card => observer.observe(card));
+
+  /* ===== PARALLAX ===== */
+  window.addEventListener('scroll', () => {
+    document.querySelectorAll('[data-speed]').forEach(img => {
+      const y = window.scrollY * img.dataset.speed;
+      img.style.transform = `translateY(${y}px) scale(1.15)`;
+    });
+  });
 </script>
 
 </body>
