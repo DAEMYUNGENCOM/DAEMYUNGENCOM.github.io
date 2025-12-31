@@ -383,6 +383,21 @@ const countObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.6 });
 
 countObserver.observe(counter);
+  <script>
+/* ABOUT FADE-UP */
+const fades = document.querySelectorAll('.fade-up');
+
+const fadeObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.4 });
+
+fades.forEach(el => fadeObserver.observe(el));
+</script>
+
 </script>
 
 </body>
