@@ -50,6 +50,7 @@
       position: relative;
       display: flex;
       align-items: center;
+      overflow: hidden;
     }
 
     .hero::before {
@@ -57,14 +58,26 @@
       position: absolute;
       inset: 0;
       background: rgba(0,0,0,0.35);
+      z-index: 1;
     }
 
     .hero-inner {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       color: #fff;
       max-width: 600px;
       margin-left: 120px;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroFadeUp 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes heroFadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero h1 {
@@ -154,7 +167,7 @@
       color: #fff;
       font-size: 28px;
       letter-spacing: 0.3em;
-      transform: translateY(6px);
+      transform: translateY(8px);
       opacity: 0;
       transition:
         transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
@@ -235,7 +248,7 @@
   </div>
 </nav>
 
-<header class="hero">
+<header class="hero" id="hero">
   <div class="hero-inner">
     <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
     <p>건축 공간의 품질을 완성하는<br>토탈 세라믹 & 욕실 자재 솔루션</p>
@@ -292,6 +305,7 @@
 </section>
 
 <script>
+  /* ===== CARD APPEAR ===== */
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -302,6 +316,15 @@
 
   document.querySelectorAll('.product-card').forEach(card => {
     observer.observe(card);
+  });
+
+  /* ===== HERO PARALLAX ===== */
+  const hero = document.getElementById('hero');
+
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth < 768) return;
+    const offset = window.scrollY * 0.35;
+    hero.style.backgroundPosition = `center calc(50% + ${offset}px)`;
   });
 </script>
 
