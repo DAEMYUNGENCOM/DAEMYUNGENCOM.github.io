@@ -7,31 +7,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
+    /* =========================
+       BRAND COLOR SYSTEM
+       ========================= */
     :root {
+      --color-bg: #f9fafb;
+      --color-white: #ffffff;
+
+      --color-text-main: #111111;
+      --color-text-sub: #555555;
+      --color-text-muted: #888888;
+
+      --color-line: #e5e7eb;
+      --color-accent: #1f2937;
+
       --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
+    /* ===== BASE ===== */
     body {
       font-family: 'Noto Sans KR', Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
       margin: 0;
       padding-top: 70px;
-      background: #f9fafb;
-      color: #111;
-    }
-
-    /* ===== PAGE TRANSITION ===== */
-    .page-cover {
-      position: fixed;
-      inset: 0;
-      background: #111;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.8s var(--ease-brand);
-      z-index: 2000;
-    }
-
-    .page-cover.active {
-      opacity: 1;
+      background: var(--color-bg);
+      color: var(--color-text-main);
     }
 
     /* ===== NAV ===== */
@@ -40,8 +41,8 @@
       top: 0;
       width: 100%;
       height: 70px;
-      background: #fff;
-      border-bottom: 1px solid #e5e7eb;
+      background: var(--color-white);
+      border-bottom: 1px solid var(--color-line);
       z-index: 1000;
     }
 
@@ -58,8 +59,9 @@
     .menu a {
       margin-left: 30px;
       text-decoration: none;
-      color: #111;
+      color: var(--color-text-main);
       font-weight: 500;
+      letter-spacing: 0.08em;
     }
 
     /* ===== HERO ===== */
@@ -69,7 +71,6 @@
       position: relative;
       display: flex;
       align-items: center;
-      overflow: hidden;
     }
 
     .hero::before {
@@ -77,31 +78,24 @@
       position: absolute;
       inset: 0;
       background: rgba(0,0,0,0.35);
-      z-index: 1;
     }
 
     .hero-inner {
       position: relative;
-      z-index: 2;
+      z-index: 1;
       color: #fff;
       max-width: 600px;
       margin-left: 120px;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: heroIn 1.4s var(--ease-brand) forwards;
-      animation-delay: 0.4s;
-    }
-
-    @keyframes heroIn {
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .hero h1 {
       font-size: 56px;
+      font-weight: 500;
       letter-spacing: 0.18em;
       margin-bottom: 28px;
     }
 
+    /* ===== SECTION ===== */
     section {
       padding: 120px 20px;
       text-align: center;
@@ -109,7 +103,8 @@
 
     h2 {
       font-size: 32px;
-      letter-spacing: 0.12em;
+      font-weight: 500;
+      letter-spacing: 0.14em;
       margin-bottom: 60px;
     }
 
@@ -127,9 +122,8 @@
       color: inherit;
       opacity: 0;
       transition:
-        opacity 1.2s var(--ease-brand),
+        opacity 1.2s ease,
         transform 1.2s var(--ease-brand);
-      cursor: pointer;
     }
 
     .from-left   { transform: translateX(-120px); }
@@ -155,7 +149,7 @@
       aspect-ratio: 1 / 1;
       object-fit: cover;
       transition:
-        transform 0.9s var(--ease-brand),
+        transform 1s var(--ease-brand),
         filter 0.6s ease;
     }
 
@@ -170,7 +164,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0,0,0,0.35);
+      background: rgba(0,0,0,0.4);
       opacity: 0;
       transition: opacity 0.6s ease;
       pointer-events: none;
@@ -182,45 +176,44 @@
 
     .product-overlay span {
       color: #fff;
-      font-size: 28px;
+      font-size: 26px;
+      font-weight: 500;
       letter-spacing: 0.3em;
       transform: translateY(8px);
-      opacity: 0;
-      transition:
-        transform 0.6s var(--ease-brand),
-        opacity 0.6s ease;
+      transition: transform 0.6s var(--ease-brand);
     }
 
     .product-card:hover .product-overlay span {
       transform: translateY(0);
-      opacity: 1;
     }
 
     .product-info {
       padding-top: 22px;
       text-align: left;
-      transition: transform 0.6s var(--ease-brand);
+      transition: transform 0.4s var(--ease-brand);
     }
 
     .product-card:hover .product-info {
-      transform: translateY(-6px);
+      transform: translateY(-4px);
     }
 
     .product-info h3 {
       font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
       margin-bottom: 10px;
     }
 
     .product-info p {
       font-size: 14px;
-      color: #666;
+      color: var(--color-text-sub);
       line-height: 1.6;
       margin-bottom: 12px;
     }
 
     .product-btn {
-      font-size: 13px;
-      letter-spacing: 0.08em;
+      font-size: 12px;
+      letter-spacing: 0.12em;
       position: relative;
       display: inline-block;
     }
@@ -230,7 +223,7 @@
       display: block;
       width: 0;
       height: 1px;
-      background: #111;
+      background: var(--color-text-main);
       margin-top: 6px;
       transition: width 0.4s var(--ease-brand);
     }
@@ -239,10 +232,12 @@
       width: 100%;
     }
 
+    /* ===== MOBILE ===== */
     @media (max-width: 768px) {
       .product-grid {
         grid-template-columns: 1fr;
       }
+
       .hero-inner {
         margin-left: 0;
         text-align: center;
@@ -252,8 +247,6 @@
 </head>
 
 <body>
-
-<div class="page-cover" id="pageCover"></div>
 
 <nav>
   <div class="nav-inner">
@@ -266,7 +259,7 @@
   </div>
 </nav>
 
-<header class="hero" id="hero">
+<header class="hero">
   <div class="hero-inner">
     <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
     <p>건축 공간의 품질을 완성하는<br>토탈 세라믹 & 욕실 자재 솔루션</p>
@@ -275,6 +268,14 @@
   <section id="about">
   <h2>ABOUT US</h2>
   <p>대명엔컴은 타일, 위생도기, 수전 등<br>건축 마감 자재를 전문으로 공급합니다.</p>
+</section>
+
+<section id="about">
+  <h2>ABOUT US</h2>
+  <p>
+    대명엔컴은 타일, 위생도기, 수전 등<br>
+    건축 마감 자재를 전문으로 공급합니다.
+  </p>
 </section>
 
 <section id="products">
@@ -322,27 +323,16 @@
 </section>
 
 <script>
-  /* ===== CARD APPEAR ===== */
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('show');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
     });
   }, { threshold: 0.3 });
 
-  document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
-
-  /* ===== PAGE TRANSITION ===== */
-  const cover = document.getElementById('pageCover');
-
   document.querySelectorAll('.product-card').forEach(card => {
-    card.addEventListener('click', e => {
-      e.preventDefault();
-      const url = card.getAttribute('href');
-      cover.classList.add('active');
-      setTimeout(() => {
-        window.location.href = url;
-      }, 700);
-    });
+    observer.observe(card);
   });
 </script>
 
