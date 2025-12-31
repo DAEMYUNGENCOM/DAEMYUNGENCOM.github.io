@@ -347,7 +347,11 @@
   display: flex;
   gap: 40px;
 }
-
+        
+.parallax-hero {
+  transition: transform 0.15s linear;
+}
+        
 .about-stats div strong {
   display: block;
   font-size: 28px;
@@ -395,7 +399,7 @@
 </nav>
 
 <header class="hero">
-  <div class="hero-inner">
+  <div class="hero-inner parallax-hero">
     <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
     <p>건축 공간의 품질을 완성하는<br>토탈 세라믹 & 욕실 자재 솔루션</p>
   </div>
@@ -422,7 +426,7 @@
 
       <div class="about-stats">
         <div>
-          <strong>15+</strong>
+          <strong data-count="15">0</strong>
           <span>YEARS EXPERIENCE</span>
         </div>
           </div>
@@ -474,6 +478,7 @@
 </section>
 
 <script>
+  /* ===== PRODUCT CARD OBSERVER (이미 있던 코드) ===== */
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -482,11 +487,50 @@
         entry.target.classList.remove('show');
       }
     });
-  }, { threshold: 0.35 });
+  }, { threshold: 0.45 });
 
-  document
-    .querySelectorAll('.product-card, .fade-up')
-    .forEach(el => observer.observe(el));
+  document.querySelectorAll('.product-card').forEach(card => {
+    observer.observe(card);
+  });
+
+
+  /* ===== HERO PARALLAX (여기부터 추가) ===== */
+  const heroText = document.querySelector('.hero-inner');
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    heroText.style.transform = `translateY(${scrollY * 0.25}px)`;
+  });
+    /* ===== ABOUT COUNT UP ===== */
+  const counters = document.querySelectorAll('[data-count]');
+
+  const countObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      const el = entry.target;
+      const target = +el.dataset.count;
+      let current = 0;
+      const step = target / 40;
+
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          el.textContent = target;
+          clearInterval(timer);
+        } else {
+          el.textContent = Math.floor(current);
+        }
+      }, 30);
+
+      countObserver.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+
+  counters.forEach(counter => {
+    countObserver.observe(counter);
+  });
+
 </script>
 
 </body>
