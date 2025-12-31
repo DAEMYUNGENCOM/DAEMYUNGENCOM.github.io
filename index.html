@@ -107,6 +107,67 @@
       letter-spacing: 0.14em;
       margin-bottom: 60px;
     }
+    /* ===== FADE ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s var(--ease);
+    }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== ABOUT ===== */
+    .about-section {
+      background: var(--white);
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+      text-align: left;
+    }
+
+    .about-line {
+      width: 60px;
+      height: 2px;
+      background: var(--text-main);
+      margin: 24px 0;
+    }
+
+    .about-tagline {
+      font-size: 18px;
+      letter-spacing: 0.12em;
+    }
+
+    .about-desc {
+      font-size: 16px;
+      color: var(--text-sub);
+      margin-bottom: 40px;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 40px;
+    }
+
+    .about-stats strong {
+      font-size: 28px;
+      display: block;
+    }
+
+    .about-stats span {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
 
     /* ===== PRODUCT GRID ===== */
     .product-grid {
@@ -421,13 +482,11 @@
         entry.target.classList.remove('show');
       }
     });
-  }, {
-    threshold: 0.45
-  });
+  }, { threshold: 0.35 });
 
-  document.querySelectorAll('.product-card').forEach(card => {
-    observer.observe(card);
-  });
+  document
+    .querySelectorAll('.product-card, .fade-up')
+    .forEach(el => observer.observe(el));
 </script>
 
 </body>
