@@ -241,7 +241,81 @@
       .hero-inner {
         margin-left: 0;
         text-align: center;
-      }
+      /* ===== ABOUT US ===== */
+.about-section {
+  background: #fff;
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-left h2 {
+  font-size: 32px;
+  letter-spacing: 0.18em;
+  margin-bottom: 24px;
+}
+
+.about-line {
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: #111;
+  margin-bottom: 24px;
+}
+
+.about-tagline {
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  line-height: 1.6;
+}
+
+.about-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.about-stats {
+  display: flex;
+  gap: 40px;
+}
+
+.about-stats div strong {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.about-stats div span {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #666;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .about-inner {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    text-align: center;
+  }
+
+  .about-line {
+    margin: 0 auto 24px;
+  }
+
+  .about-stats {
+    justify-content: center;
+  }
+}
+
     }
   </style>
 </head>
@@ -266,13 +340,44 @@
   </div>
 </header>
   
-<section id="about">
-  <h2>ABOUT US</h2>
-  <p>
-    대명엔컴은 타일, 위생도기, 수전 등<br>
-    건축 마감 자재를 전문으로 공급합니다.
-  </p>
+<section id="about" class="about-section">
+  <div class="about-inner">
+
+    <div class="about-left fade-up">
+      <h2>ABOUT US</h2>
+      <span class="about-line"></span>
+      <p class="about-tagline">
+        ARCHITECTURAL<br>
+        FINISHING MATERIAL SOLUTION
+      </p>
+    </div>
+
+    <div class="about-right fade-up delay-2">
+      <p class="about-desc">
+        대명엔컴은 타일, 위생도기, 수전 등<br>
+        건축 공간의 완성도를 높이는<br>
+        프리미엄 마감 자재를 전문으로 공급합니다.
+      </p>
+
+      <div class="about-stats">
+        <div>
+          <strong>20+</strong>
+          <span>YEARS EXPERIENCE</span>
+        </div>
+        <div>
+          <strong>3</strong>
+          <span>PRODUCT CATEGORIES</span>
+        </div>
+        <div>
+          <strong>GLOBAL</strong>
+          <span>PARTNERS</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
+
 
 <section id="products">
   <h2>PRODUCT CATEGORY</h2>
