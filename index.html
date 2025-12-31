@@ -1,388 +1,248 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>DAE MYUNG ENCOM</title>
+<meta charset="UTF-8">
+<title>DAE MYUNG ENCOM</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    /* =========================
-       BRAND COLOR SYSTEM
-       ========================= */
-    :root {
-      --color-bg: #f9fafb;
-      --color-white: #ffffff;
+<style>
+:root {
+  --bg: #f9fafb;
+  --white: #ffffff;
+  --text-main: #111;
+  --text-sub: #555;
+  --text-muted: #888;
+  --line: #e5e7eb;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-      --color-text-main: #111111;
-      --color-text-sub: #555555;
-      --color-text-muted: #888888;
+/* BASE */
+body {
+  margin: 0;
+  padding-top: 70px;
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+}
 
-      --color-line: #e5e7eb;
-      --color-accent: #1f2937;
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  z-index: 1000;
+}
 
-      --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
-    }
+.nav-inner {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    /* ===== BASE ===== */
-    body {
-      font-family: 'Noto Sans KR', Arial, sans-serif;
-      font-size: 14px;
-      line-height: 1.7;
-      margin: 0;
-      padding-top: 70px;
-      background: var(--color-bg);
-      color: var(--color-text-main);
-    }
+.menu a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  letter-spacing: .08em;
+}
 
-    /* ===== NAV ===== */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 70px;
-      background: var(--color-white);
-      border-bottom: 1px solid var(--color-line);
-      z-index: 1000;
-    }
+/* HERO */
+.hero {
+  height: 90vh;
+  background: url('hero.jpg') center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
-    .nav-inner {
-      max-width: 1200px;
-      height: 100%;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+}
 
-    .menu a {
-      margin-left: 30px;
-      text-decoration: none;
-      color: var(--color-text-main);
-      font-weight: 500;
-      letter-spacing: 0.08em;
-    }
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  max-width: 600px;
+  margin-left: 120px;
+  will-change: transform;
+}
 
-    /* ===== HERO ===== */
-    .hero {
-      height: 90vh;
-      background: url('hero.jpg') center / cover no-repeat;
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
+.hero h1 {
+  font-size: 56px;
+  letter-spacing: .18em;
+  margin-bottom: 24px;
+}
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.35);
-    }
+/* SECTION */
+section {
+  padding: 120px 20px;
+}
 
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      color: #fff;
-      max-width: 600px;
-      margin-left: 120px;
-    }
+h2 {
+  text-align: center;
+  font-size: 32px;
+  letter-spacing: .14em;
+  margin-bottom: 60px;
+}
 
-    .hero h1 {
-      font-size: 56px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      margin-bottom: 28px;
-    }
+/* FADE */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s var(--ease);
+}
 
-    /* ===== SECTION ===== */
-    section {
-      padding: 120px 20px;
-      text-align: center;
-    }
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    h2 {
-      font-size: 32px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      margin-bottom: 60px;
-    }
-    /* ===== FADE ===== */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 1s ease, transform 1s var(--ease);
-    }
-
-    .fade-up.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ===== ABOUT ===== */
-    .about-section {
-      background: var(--white);
-    }
-
-    .about-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 120px 20px;
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 80px;
-      align-items: center;
-      text-align: left;
-    }
-
-    .about-line {
-      width: 60px;
-      height: 2px;
-      background: var(--text-main);
-      margin: 24px 0;
-    }
-
-    .about-tagline {
-      font-size: 18px;
-      letter-spacing: 0.12em;
-    }
-
-    .about-desc {
-      font-size: 16px;
-      color: var(--text-sub);
-      margin-bottom: 40px;
-    }
-
-    .about-stats {
-      display: flex;
-      gap: 40px;
-    }
-
-    .about-stats strong {
-      font-size: 28px;
-      display: block;
-    }
-
-    .about-stats span {
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-    }
-
-    /* ===== PRODUCT GRID ===== */
-    .product-grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 60px;
-    }
-
-    .product-card {
-      text-decoration: none;
-      color: inherit;
-      opacity: 0;
-      transition:
-        opacity 1.2s ease,
-        transform 1.2s var(--ease-brand);
-    }
-
-    .from-left   { transform: translateX(-120px); }
-    .from-bottom { transform: translateY(120px); }
-    .from-right  { transform: translateX(120px); }
-
-    .product-card.show {
-      opacity: 1;
-      transform: translate(0,0);
-    }
-
-    .delay-1 { transition-delay: 0s; }
-    .delay-2 { transition-delay: 0.2s; }
-    .delay-3 { transition-delay: 0.4s; }
-
-    .product-item {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-item img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      transition:
-        transform 1s var(--ease-brand),
-        filter 0.6s ease;
-    }
-
-    .product-card:hover img {
-      transform: scale(1.08);
-      filter: brightness(0.78);
-    }
-
-    .product-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.4);
-      opacity: 0;
-      transition: opacity 0.6s ease;
-      pointer-events: none;
-    }
-
-    .product-card:hover .product-overlay {
-      opacity: 1;
-    }
-
-    .product-overlay span {
-      color: #fff;
-      font-size: 26px;
-      font-weight: 500;
-      letter-spacing: 0.3em;
-      transform: translateY(8px);
-      transition: transform 0.6s var(--ease-brand);
-    }
-
-    .product-card:hover .product-overlay span {
-      transform: translateY(0);
-    }
-
-    .product-info {
-      padding-top: 22px;
-      text-align: left;
-      transition: transform 0.4s var(--ease-brand);
-    }
-
-    .product-card:hover .product-info {
-      transform: translateY(-4px);
-    }
-
-    .product-info h3 {
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      margin-bottom: 10px;
-    }
-
-    .product-info p {
-      font-size: 14px;
-      color: var(--color-text-sub);
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-
-    .product-btn {
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      position: relative;
-      display: inline-block;
-    }
-
-    .product-btn::after {
-      content: '';
-      display: block;
-      width: 0;
-      height: 1px;
-      background: var(--color-text-main);
-      margin-top: 6px;
-      transition: width 0.4s var(--ease-brand);
-    }
-
-    .product-card:hover .product-btn::after {
-      width: 100%;
-    }
-
-    /* ===== MOBILE ===== */
-    @media (max-width: 768px) {
-      .product-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-inner {
-        margin-left: 0;
-        text-align: center;
-      /* ===== ABOUT US ===== */
+/* ABOUT */
 .about-section {
-  background: #fff;
+  background: var(--white);
 }
 
 .about-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 120px 20px;
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: 80px;
   align-items: center;
 }
 
-.about-left h2 {
-  font-size: 32px;
-  letter-spacing: 0.18em;
-  margin-bottom: 24px;
-}
-
 .about-line {
-  display: block;
   width: 60px;
   height: 2px;
-  background: #111;
-  margin-bottom: 24px;
+  background: var(--text-main);
+  margin: 24px 0;
 }
 
 .about-tagline {
   font-size: 18px;
-  letter-spacing: 0.12em;
-  line-height: 1.6;
+  letter-spacing: .12em;
 }
 
 .about-desc {
   font-size: 16px;
-  line-height: 1.8;
+  color: var(--text-sub);
   margin-bottom: 40px;
 }
 
-.about-stats {
-  display: flex;
-  gap: 40px;
-}
-        
-.parallax-hero {
-  transition: transform 0.15s linear;
-}
-        
-.about-stats div strong {
+.about-stats strong {
+  font-size: 32px;
   display: block;
-  font-size: 28px;
-  margin-bottom: 6px;
 }
 
-.about-stats div span {
+.about-stats span {
+  font-size: 13px;
+  letter-spacing: .14em;
+  color: var(--text-muted);
+}
+
+/* PRODUCT */
+.product-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 60px;
+}
+
+.product-card {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0;
+  transform: translateY(80px);
+  transition: all 1.2s var(--ease);
+}
+
+.product-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-item img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  transition: transform .8s var(--ease), filter .5s;
+}
+
+.product-card:hover img {
+  transform: scale(1.08);
+  filter: brightness(.75);
+}
+
+.product-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.product-card:hover .product-overlay {
+  opacity: 1;
+}
+
+.product-overlay span {
+  color: #fff;
+  font-size: 26px;
+  letter-spacing: .3em;
+}
+
+.product-info {
+  padding-top: 22px;
+}
+
+.product-btn {
   font-size: 12px;
-  letter-spacing: 0.12em;
-  color: #666;
+  letter-spacing: .12em;
 }
 
-/* 모바일 */
-@media (max-width: 768px) {
+/* MOBILE */
+@media (max-width:768px) {
+  .hero-inner {
+    margin-left: 0;
+    text-align: center;
+  }
+
   .about-inner {
     grid-template-columns: 1fr;
-    gap: 60px;
     text-align: center;
   }
 
   .about-line {
-    margin: 0 auto 24px;
+    margin: 24px auto;
   }
 
-  .about-stats {
-    justify-content: center;
+  .product-grid {
+    grid-template-columns: 1fr;
   }
 }
-
-    }
-  </style>
+</style>
 </head>
 
 <body>
@@ -399,12 +259,12 @@
 </nav>
 
 <header class="hero">
-  <div class="hero-inner parallax-hero">
+  <div class="hero-inner">
     <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
     <p>건축 공간의 품질을 완성하는<br>토탈 세라믹 & 욕실 자재 솔루션</p>
   </div>
 </header>
-  
+
 <section id="about" class="about-section">
   <div class="about-inner">
 
@@ -417,7 +277,7 @@
       </p>
     </div>
 
-    <div class="about-right fade-up delay-2">
+    <div class="about-right fade-up">
       <p class="about-desc">
         대명엔컴은 타일, 위생도기, 수전 등<br>
         건축 공간의 완성도를 높이는<br>
@@ -425,20 +285,20 @@
       </p>
 
       <div class="about-stats">
-        <div>
-          <strong data-count="15">0</strong>
-          <span>YEARS EXPERIENCE</span>
-        </div>
-          </div>
-</section>
+        <strong data-count="15">0</strong>
+        <span>YEARS EXPERIENCE</span>
+      </div>
+    </div>
 
+  </div>
+</section>
 
 <section id="products">
   <h2>PRODUCT CATEGORY</h2>
 
   <div class="product-grid">
 
-    <a href="tile.html" class="product-card from-left delay-1">
+    <a href="tile.html" class="product-card">
       <div class="product-item">
         <img src="tile.jpg">
         <div class="product-overlay"><span>TILE</span></div>
@@ -450,7 +310,7 @@
       </div>
     </a>
 
-    <a href="sanitary.html" class="product-card from-bottom delay-2">
+    <a href="sanitary.html" class="product-card">
       <div class="product-item">
         <img src="product-sanitary.jpg">
         <div class="product-overlay"><span>SANITARY</span></div>
@@ -462,7 +322,7 @@
       </div>
     </a>
 
-    <a href="faucet.html" class="product-card from-right delay-3">
+    <a href="faucet.html" class="product-card">
       <div class="product-item">
         <img src="product-faucet.jpg">
         <div class="product-overlay"><span>FAUCET</span></div>
@@ -478,59 +338,51 @@
 </section>
 
 <script>
-  /* ===== PRODUCT CARD OBSERVER (이미 있던 코드) ===== */
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
+/* PRODUCT CARD FADE */
+const cards = document.querySelectorAll('.product-card');
+
+const cardObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.4 });
+
+cards.forEach(card => cardObserver.observe(card));
+
+/* HERO PARALLAX */
+const heroText = document.querySelector('.hero-inner');
+window.addEventListener('scroll', () => {
+  heroText.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+});
+
+/* ABOUT COUNT UP */
+const counter = document.querySelector('[data-count]');
+const countObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    const el = entry.target;
+    const target = +el.dataset.count;
+    let current = 0;
+    const step = target / 40;
+
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        el.textContent = target;
+        clearInterval(timer);
       } else {
-        entry.target.classList.remove('show');
+        el.textContent = Math.floor(current);
       }
-    });
-  }, { threshold: 0.45 });
+    }, 30);
 
-  document.querySelectorAll('.product-card').forEach(card => {
-    observer.observe(card);
+    countObserver.unobserve(el);
   });
+}, { threshold: 0.6 });
 
-
-  /* ===== HERO PARALLAX (여기부터 추가) ===== */
-  const heroText = document.querySelector('.hero-inner');
-
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    heroText.style.transform = `translateY(${scrollY * 0.25}px)`;
-  });
-    /* ===== ABOUT COUNT UP ===== */
-  const counters = document.querySelectorAll('[data-count]');
-
-  const countObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-
-      const el = entry.target;
-      const target = +el.dataset.count;
-      let current = 0;
-      const step = target / 40;
-
-      const timer = setInterval(() => {
-        current += step;
-        if (current >= target) {
-          el.textContent = target;
-          clearInterval(timer);
-        } else {
-          el.textContent = Math.floor(current);
-        }
-      }, 30);
-
-      countObserver.unobserve(el);
-    });
-  }, { threshold: 0.6 });
-
-  counters.forEach(counter => {
-    countObserver.observe(counter);
-  });
-
+countObserver.observe(counter);
 </script>
 
 </body>
