@@ -7,12 +7,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
     body {
       font-family: 'Noto Sans KR', Arial, sans-serif;
       margin: 0;
       padding-top: 70px;
       background: #f9fafb;
       color: #111;
+    }
+
+    /* ===== PAGE TRANSITION ===== */
+    .page-cover {
+      position: fixed;
+      inset: 0;
+      background: #111;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s var(--ease-brand);
+      z-index: 2000;
+    }
+
+    .page-cover.active {
+      opacity: 1;
     }
 
     /* ===== NAV ===== */
@@ -69,15 +88,12 @@
       margin-left: 120px;
       opacity: 0;
       transform: translateY(40px);
-      animation: heroFadeUp 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: heroIn 1.4s var(--ease-brand) forwards;
       animation-delay: 0.4s;
     }
 
-    @keyframes heroFadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes heroIn {
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .hero h1 {
@@ -111,8 +127,9 @@
       color: inherit;
       opacity: 0;
       transition:
-        opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 1.2s var(--ease-brand),
+        transform 1.2s var(--ease-brand);
+      cursor: pointer;
     }
 
     .from-left   { transform: translateX(-120px); }
@@ -138,7 +155,7 @@
       aspect-ratio: 1 / 1;
       object-fit: cover;
       transition:
-        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s var(--ease-brand),
         filter 0.6s ease;
     }
 
@@ -170,7 +187,7 @@
       transform: translateY(8px);
       opacity: 0;
       transition:
-        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s var(--ease-brand),
         opacity 0.6s ease;
     }
 
@@ -182,7 +199,7 @@
     .product-info {
       padding-top: 22px;
       text-align: left;
-      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.6s var(--ease-brand);
     }
 
     .product-card:hover .product-info {
@@ -215,7 +232,7 @@
       height: 1px;
       background: #111;
       margin-top: 6px;
-      transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: width 0.4s var(--ease-brand);
     }
 
     .product-card:hover .product-btn::after {
@@ -226,7 +243,6 @@
       .product-grid {
         grid-template-columns: 1fr;
       }
-
       .hero-inner {
         margin-left: 0;
         text-align: center;
@@ -236,6 +252,8 @@
 </head>
 
 <body>
+
+<div class="page-cover" id="pageCover"></div>
 
 <nav>
   <div class="nav-inner">
@@ -254,8 +272,7 @@
     <p>건축 공간의 품질을 완성하는<br>토탈 세라믹 & 욕실 자재 솔루션</p>
   </div>
 </header>
-
-<section id="about">
+  <section id="about">
   <h2>ABOUT US</h2>
   <p>대명엔컴은 타일, 위생도기, 수전 등<br>건축 마감 자재를 전문으로 공급합니다.</p>
 </section>
@@ -308,23 +325,24 @@
   /* ===== CARD APPEAR ===== */
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('show');
     });
   }, { threshold: 0.3 });
 
+  document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+
+  /* ===== PAGE TRANSITION ===== */
+  const cover = document.getElementById('pageCover');
+
   document.querySelectorAll('.product-card').forEach(card => {
-    observer.observe(card);
-  });
-
-  /* ===== HERO PARALLAX ===== */
-  const hero = document.getElementById('hero');
-
-  window.addEventListener('scroll', () => {
-    if (window.innerWidth < 768) return;
-    const offset = window.scrollY * 0.35;
-    hero.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+    card.addEventListener('click', e => {
+      e.preventDefault();
+      const url = card.getAttribute('href');
+      cover.classList.add('active');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 700);
+    });
   });
 </script>
 
