@@ -104,7 +104,6 @@ h2 {
   transform: translateY(40px);
   transition: all 1s var(--ease);
 }
-
 .fade-up.show {
   opacity: 1;
   transform: translateY(0);
@@ -268,7 +267,7 @@ h2 {
 <section id="about" class="about-section">
   <div class="about-inner">
 
-    <div class="about-left fade-up">
+    <div class="fade-up">
       <h2>ABOUT US</h2>
       <span class="about-line"></span>
       <p class="about-tagline">
@@ -277,7 +276,7 @@ h2 {
       </p>
     </div>
 
-    <div class="about-right fade-up">
+    <div class="fade-up">
       <p class="about-desc">
         대명엔컴은 타일, 위생도기, 수전 등<br>
         건축 공간의 완성도를 높이는<br>
@@ -338,17 +337,13 @@ h2 {
 </section>
 
 <script>
-/* PRODUCT CARD FADE */
+/* PRODUCT CARD */
 const cards = document.querySelectorAll('.product-card');
-
 const cardObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    }
+    if (entry.isIntersecting) entry.target.classList.add('show');
   });
 }, { threshold: 0.4 });
-
 cards.forEach(card => cardObserver.observe(card));
 
 /* HERO PARALLAX */
@@ -357,12 +352,11 @@ window.addEventListener('scroll', () => {
   heroText.style.transform = `translateY(${window.scrollY * 0.25}px)`;
 });
 
-/* ABOUT COUNT UP */
+/* ABOUT COUNT */
 const counter = document.querySelector('[data-count]');
 const countObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
-
     const el = entry.target;
     const target = +el.dataset.count;
     let current = 0;
@@ -377,28 +371,21 @@ const countObserver = new IntersectionObserver(entries => {
         el.textContent = Math.floor(current);
       }
     }, 30);
-
     countObserver.unobserve(el);
   });
 }, { threshold: 0.6 });
-
 countObserver.observe(counter);
-  <script>
-/* ABOUT FADE-UP */
-const fades = document.querySelectorAll('.fade-up');
 
+/* FADE UP */
+const fades = document.querySelectorAll('.fade-up');
 const fadeObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    }
+    if (entry.isIntersecting) entry.target.classList.add('show');
   });
 }, { threshold: 0.4 });
-
 fades.forEach(el => fadeObserver.observe(el));
-</script>
-
 </script>
 
 </body>
 </html>
+
