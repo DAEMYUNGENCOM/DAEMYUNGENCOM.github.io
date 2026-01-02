@@ -123,8 +123,17 @@ h2 {
   align-items: flex-start;
 }
 
+/* ✅ 여기서 ABOUT 정렬의 핵심: about-left/right에 text-align 적용 */
+.about-left,
+.about-right {
+  text-align: left;
+}
+
+/* ✅ ABOUT 안의 h2는 중앙정렬이 아니라 왼쪽정렬로 덮어쓰기 */
 .about-left h2 {
+  text-align: left;
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 .about-line {
@@ -134,25 +143,25 @@ h2 {
   margin: 16px 0 20px;
 }
 
-.about-right {
-  padding-top: 6px;
-}
-
 .about-tagline {
   font-size: 18px;
   letter-spacing: .14em;
   line-height: 1.6;
+  margin: 0;
 }
 
 .about-desc {
   font-size: 16px;
   color: var(--text-sub);
-  margin-bottom: 40px;
+  margin: 0 0 40px;
+  line-height: 1.8;
 }
 
 .about-stats strong {
   font-size: 32px;
   display: block;
+  line-height: 1;
+  margin-bottom: 10px;
 }
 
 .about-stats span {
@@ -170,28 +179,29 @@ h2 {
   gap: 60px;
 }
 
-/* ✅ 카드 기본 + 브랜드 easing */
+/* ✅ 카드 기본 */
 .product-card {
   text-decoration: none;
   color: inherit;
   opacity: 0;
-  transition: opacity 1.2s ease, transform 1.2s var(--ease);
+  transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
 }
 
-/* ✅ 등장 방향 (복구됨) */
-.from-left   { transform: translateX(-120px); }
-.from-bottom { transform: translateY(120px); }
-.from-right  { transform: translateX(120px); }
+/* ✅ 좌/하/우에서 들어오는 방향 애니메이션 복구 */
+.product-card.from-left   { transform: translateX(-120px); }
+.product-card.from-bottom { transform: translateY(120px); }
+.product-card.from-right  { transform: translateX(120px); }
 
+/* ✅ 보이면 제자리 */
 .product-card.show {
   opacity: 1;
   transform: translate(0,0);
 }
 
-/* ✅ 순차 딜레이 (복구됨) */
-.delay-1 { transition-delay: 0s; }
-.delay-2 { transition-delay: 0.2s; }
-.delay-3 { transition-delay: 0.4s; }
+/* ✅ 순차 딜레이 */
+.product-card.delay-1 { transition-delay: 0s; }
+.product-card.delay-2 { transition-delay: 0.2s; }
+.product-card.delay-3 { transition-delay: 0.4s; }
 
 .product-item {
   position: relative;
@@ -230,10 +240,21 @@ h2 {
   color: #fff;
   font-size: 26px;
   letter-spacing: .3em;
+  transform: translateY(8px);
+  transition: transform .6s var(--ease);
+}
+
+.product-card:hover .product-overlay span {
+  transform: translateY(0);
 }
 
 .product-info {
   padding-top: 22px;
+  transition: transform .4s var(--ease);
+}
+
+.product-card:hover .product-info {
+  transform: translateY(-4px);
 }
 
 .product-btn {
@@ -253,6 +274,15 @@ h2 {
     text-align: center;
   }
 
+  .about-left,
+  .about-right {
+    text-align: center;
+  }
+
+  .about-left h2 {
+    text-align: center;
+  }
+
   .about-line {
     margin: 24px auto;
   }
@@ -268,7 +298,7 @@ h2 {
 
 <nav>
   <div class="nav-inner">
-    <img src="대명엔컴-영문로고 (워터마크).png" height="29">
+    <img src="대명엔컴-영문로고 (워터마크).png" height="29" alt="DAE MYUNG ENCOM">
     <div class="menu">
       <a href="#about">회사소개</a>
       <a href="#products">제품</a>
@@ -287,6 +317,7 @@ h2 {
 <section id="about" class="about-section">
   <div class="about-inner">
 
+    <!-- ✅ 클래스 복구: about-left -->
     <div class="about-left fade-up">
       <h2>ABOUT US</h2>
       <span class="about-line"></span>
@@ -296,6 +327,7 @@ h2 {
       </p>
     </div>
 
+    <!-- ✅ 클래스 복구: about-right -->
     <div class="about-right fade-up">
       <p class="about-desc">
         대명엔컴은 타일, 위생도기, 수전 등<br>
@@ -320,7 +352,7 @@ h2 {
     <!-- ✅ 방향 + 딜레이 복구 -->
     <a href="tile.html" class="product-card from-left delay-1">
       <div class="product-item">
-        <img src="tile.jpg" alt="Tile">
+        <img src="tile.jpg" alt="TILE">
         <div class="product-overlay"><span>TILE</span></div>
       </div>
       <div class="product-info">
@@ -332,7 +364,7 @@ h2 {
 
     <a href="sanitary.html" class="product-card from-bottom delay-2">
       <div class="product-item">
-        <img src="product-sanitary.jpg" alt="Sanitary">
+        <img src="product-sanitary.jpg" alt="SANITARY">
         <div class="product-overlay"><span>SANITARY</span></div>
       </div>
       <div class="product-info">
@@ -344,7 +376,7 @@ h2 {
 
     <a href="faucet.html" class="product-card from-right delay-3">
       <div class="product-item">
-        <img src="product-faucet.jpg" alt="Faucet">
+        <img src="product-faucet.jpg" alt="FAUCET">
         <div class="product-overlay"><span>FAUCET</span></div>
       </div>
       <div class="product-info">
@@ -358,7 +390,7 @@ h2 {
 </section>
 
 <script>
-/* PRODUCT CARD (스크롤할 때마다 다시 애니메이션 되도록 토글) */
+/* PRODUCT CARD (좌/하/우 등장) */
 const cards = document.querySelectorAll('.product-card');
 const cardObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -369,6 +401,7 @@ const cardObserver = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.35 });
+
 cards.forEach(card => cardObserver.observe(card));
 
 /* HERO PARALLAX */
@@ -377,7 +410,7 @@ window.addEventListener('scroll', () => {
   heroText.style.transform = `translateY(${window.scrollY * 0.25}px)`;
 });
 
-/* ABOUT COUNT UP */
+/* ABOUT COUNT */
 const counter = document.querySelector('[data-count]');
 const countObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -401,9 +434,10 @@ const countObserver = new IntersectionObserver(entries => {
     countObserver.unobserve(el);
   });
 }, { threshold: 0.6 });
+
 countObserver.observe(counter);
 
-/* ABOUT FADE UP */
+/* FADE UP (ABOUT) */
 const fades = document.querySelectorAll('.fade-up');
 const fadeObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -411,6 +445,7 @@ const fadeObserver = new IntersectionObserver(entries => {
     else entry.target.classList.remove('show');
   });
 }, { threshold: 0.35 });
+
 fades.forEach(el => fadeObserver.observe(el));
 </script>
 
