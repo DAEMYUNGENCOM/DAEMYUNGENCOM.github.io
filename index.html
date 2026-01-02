@@ -122,18 +122,22 @@ h2 {
   gap: 80px;
   align-items: flex-start;
 }
+
 .about-left h2 {
   margin-top: 0;
 }
+
 .about-line {
   width: 60px;
   height: 2px;
   background: var(--text-main);
   margin: 16px 0 20px;
 }
-  .about-right {
+
+.about-right {
   padding-top: 6px;
 }
+
 .about-tagline {
   font-size: 18px;
   letter-spacing: .14em;
@@ -166,18 +170,28 @@ h2 {
   gap: 60px;
 }
 
+/* ✅ 카드 기본 + 브랜드 easing */
 .product-card {
   text-decoration: none;
   color: inherit;
   opacity: 0;
-  transform: translateY(80px);
-  transition: all 1.2s var(--ease);
+  transition: opacity 1.2s ease, transform 1.2s var(--ease);
 }
+
+/* ✅ 등장 방향 (복구됨) */
+.from-left   { transform: translateX(-120px); }
+.from-bottom { transform: translateY(120px); }
+.from-right  { transform: translateX(120px); }
 
 .product-card.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(0,0);
 }
+
+/* ✅ 순차 딜레이 (복구됨) */
+.delay-1 { transition-delay: 0s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.4s; }
 
 .product-item {
   position: relative;
@@ -205,6 +219,7 @@ h2 {
   justify-content: center;
   opacity: 0;
   transition: opacity .5s;
+  pointer-events: none;
 }
 
 .product-card:hover .product-overlay {
@@ -272,7 +287,7 @@ h2 {
 <section id="about" class="about-section">
   <div class="about-inner">
 
-    <div class="fade-up">
+    <div class="about-left fade-up">
       <h2>ABOUT US</h2>
       <span class="about-line"></span>
       <p class="about-tagline">
@@ -281,7 +296,7 @@ h2 {
       </p>
     </div>
 
-    <div class="fade-up">
+    <div class="about-right fade-up">
       <p class="about-desc">
         대명엔컴은 타일, 위생도기, 수전 등<br>
         건축 공간의 완성도를 높이는<br>
@@ -302,9 +317,10 @@ h2 {
 
   <div class="product-grid">
 
-    <a href="tile.html" class="product-card">
+    <!-- ✅ 방향 + 딜레이 복구 -->
+    <a href="tile.html" class="product-card from-left delay-1">
       <div class="product-item">
-        <img src="tile.jpg">
+        <img src="tile.jpg" alt="Tile">
         <div class="product-overlay"><span>TILE</span></div>
       </div>
       <div class="product-info">
@@ -314,9 +330,9 @@ h2 {
       </div>
     </a>
 
-    <a href="sanitary.html" class="product-card">
+    <a href="sanitary.html" class="product-card from-bottom delay-2">
       <div class="product-item">
-        <img src="product-sanitary.jpg">
+        <img src="product-sanitary.jpg" alt="Sanitary">
         <div class="product-overlay"><span>SANITARY</span></div>
       </div>
       <div class="product-info">
@@ -326,9 +342,9 @@ h2 {
       </div>
     </a>
 
-    <a href="faucet.html" class="product-card">
+    <a href="faucet.html" class="product-card from-right delay-3">
       <div class="product-item">
-        <img src="product-faucet.jpg">
+        <img src="product-faucet.jpg" alt="Faucet">
         <div class="product-overlay"><span>FAUCET</span></div>
       </div>
       <div class="product-info">
@@ -342,13 +358,17 @@ h2 {
 </section>
 
 <script>
-/* PRODUCT CARD */
+/* PRODUCT CARD (스크롤할 때마다 다시 애니메이션 되도록 토글) */
 const cards = document.querySelectorAll('.product-card');
 const cardObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('show');
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    } else {
+      entry.target.classList.remove('show');
+    }
   });
-}, { threshold: 0.4 });
+}, { threshold: 0.35 });
 cards.forEach(card => cardObserver.observe(card));
 
 /* HERO PARALLAX */
@@ -357,11 +377,12 @@ window.addEventListener('scroll', () => {
   heroText.style.transform = `translateY(${window.scrollY * 0.25}px)`;
 });
 
-/* ABOUT COUNT */
+/* ABOUT COUNT UP */
 const counter = document.querySelector('[data-count]');
 const countObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
+
     const el = entry.target;
     const target = +el.dataset.count;
     let current = 0;
@@ -376,21 +397,22 @@ const countObserver = new IntersectionObserver(entries => {
         el.textContent = Math.floor(current);
       }
     }, 30);
+
     countObserver.unobserve(el);
   });
 }, { threshold: 0.6 });
 countObserver.observe(counter);
 
-/* FADE UP */
+/* ABOUT FADE UP */
 const fades = document.querySelectorAll('.fade-up');
 const fadeObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('show');
+    else entry.target.classList.remove('show');
   });
-}, { threshold: 0.4 });
+}, { threshold: 0.35 });
 fades.forEach(el => fadeObserver.observe(el));
 </script>
 
 </body>
 </html>
-
