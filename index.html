@@ -7,388 +7,486 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg: #f9fafb;
-  --white: #ffffff;
-  --text-main: #111;
-  --text-sub: #555;
-  --text-muted: #888;
-  --line: #e5e7eb;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+:root{
+  /* Cold Luxury System */
+  --bg:#f6f7f9;
+  --white:#ffffff;
+  --ink:#0b0f14;          /* 더 차가운 블랙 */
+  --ink-2:#111827;
+  --sub:#4b5563;
+  --muted:#9aa3af;
+  --line:rgba(11,15,20,.10);
+  --line-strong:rgba(11,15,20,.16);
+
+  --shadow: 0 20px 60px rgba(11,15,20,.08);
+  --shadow-soft: 0 14px 40px rgba(11,15,20,.06);
+
+  --ease: cubic-bezier(.22,1,.36,1);
+  --ease-soft: cubic-bezier(.16,1,.3,1);
+
+  --radius-lg:18px;
+  --radius-md:14px;
 }
 
 /* BASE */
-body {
-  margin: 0;
-  padding-top: 70px;
-  font-family: 'Noto Sans KR', sans-serif;
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  padding-top:70px;
+  font-family:'Noto Sans KR', sans-serif;
   background: var(--bg);
-  color: var(--text-main);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+a{color:inherit;}
+::selection{background:rgba(11,15,20,.12);}
 
 /* NAV */
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 70px;
-  background: var(--white);
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  height:70px;
+  background: rgba(255,255,255,.86);
   border-bottom: 1px solid var(--line);
-  z-index: 1000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index:1000;
 }
-
-.nav-inner {
-  max-width: 1200px;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.nav-inner{
+  max-width:1200px;
+  height:100%;
+  margin:0 auto;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
-
-.menu a {
-  margin-left: 30px;
-  text-decoration: none;
-  color: var(--text-main);
-  font-weight: 500;
-  letter-spacing: .08em;
+.menu{
+  display:flex;
+  gap:26px;
 }
+.menu a{
+  position:relative;
+  text-decoration:none;
+  font-weight:500;
+  letter-spacing:.10em;
+  font-size:13px;
+  color: rgba(11,15,20,.9);
+  padding:8px 2px;
+}
+.menu a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:2px;
+  width:0;
+  height:1px;
+  background: rgba(11,15,20,.75);
+  transition: width .5s var(--ease);
+}
+.menu a:hover::after{width:100%;}
+.menu a:hover{color: var(--ink);}
 
 /* HERO */
-.hero {
-  height: 90vh;
+.hero{
+  height:92vh;
   background: url('hero.jpg') center/cover no-repeat;
-  position: relative;
-  display: flex;
-  align-items: center;
+  position:relative;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
 }
-
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,.35);
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(900px 520px at 70% 30%, rgba(0,0,0,.25), transparent 60%),
+    linear-gradient(to bottom, rgba(0,0,0,.62), rgba(0,0,0,.22));
 }
-
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  color: #fff;
-  max-width: 600px;
-  margin-left: 120px;
+.hero::after{
+  /* 차가운 라인 텍스처 */
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(255,255,255,.06) 0px,
+      rgba(255,255,255,.06) 1px,
+      transparent 1px,
+      transparent 140px
+    );
+  opacity:.25;
+  pointer-events:none;
+}
+.hero-inner{
+  position:relative;
+  z-index:1;
+  color:#fff;
+  max-width: 640px;
+  margin-left:120px;
   will-change: transform;
 }
+.hero h1{
+  font-size:56px;
+  font-weight:500;
+  letter-spacing:.18em;
+  margin:0 0 20px;
+}
+.hero p{
+  margin:0;
+  color: rgba(255,255,255,.82);
+  line-height:1.85;
+  letter-spacing:.04em;
+}
 
-.hero h1 {
-  font-size: 56px;
-  letter-spacing: .18em;
-  margin-bottom: 24px;
+/* 스크롤 유도(차가운 럭셔리 버전) */
+.scroll-cue{
+  position:absolute;
+  left:50%;
+  bottom:28px;
+  transform: translateX(-50%);
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  color: rgba(255,255,255,.78);
+  font-size:11px;
+  letter-spacing:.22em;
+  user-select:none;
+}
+.scroll-dot{
+  width:2px;
+  height:42px;
+  background: rgba(255,255,255,.35);
+  position:relative;
+  border-radius:2px;
+  overflow:hidden;
+}
+.scroll-dot::after{
+  content:"";
+  position:absolute;
+  top:-30%;
+  left:0;
+  width:100%;
+  height:30%;
+  background: rgba(255,255,255,.9);
+  animation: scrollLine 1.6s var(--ease) infinite;
+}
+@keyframes scrollLine{
+  0%{transform: translateY(0); opacity:0;}
+  20%{opacity:1;}
+  100%{transform: translateY(160%); opacity:0;}
 }
 
 /* SECTION */
-section {
-  padding: 120px 20px;
+section{
+  padding:120px 20px;
 }
-
-h2 {
-  text-align: center;
-  font-size: 32px;
-  letter-spacing: .14em;
-  margin-bottom: 60px;
+h2{
+  text-align:center;
+  font-size:32px;
+  font-weight:500;
+  letter-spacing:.18em;
+  margin:0 0 60px;
 }
 
 /* FADE */
-.fade-up {
-  opacity: 0;
+.fade-up{
+  opacity:0;
   transform: translateY(40px);
   transition: opacity 1s var(--ease), transform 1s var(--ease);
 }
-.fade-up.show {
-  opacity: 1;
+.fade-up.show{
+  opacity:1;
   transform: translateY(0);
 }
 
-/* =========================
-   ABOUT (PREMIUM)
-   ========================= */
+/* ABOUT (Cold Luxury Premium Card) */
 .about-section{
+  position:relative;
+  overflow:hidden;
   background: var(--white);
-  position: relative;
-  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
-
-/* 은은한 프리미엄 배경 */
 .about-section::before{
   content:"";
   position:absolute;
   inset:0;
   background:
-    radial-gradient(1200px 600px at 20% 20%, rgba(17,17,17,0.045), transparent 55%),
-    radial-gradient(1000px 500px at 85% 60%, rgba(17,17,17,0.035), transparent 60%),
-    linear-gradient(to bottom, rgba(0,0,0,0.02), transparent 40%),
-    repeating-linear-gradient(
-      to right,
-      rgba(0,0,0,0.03) 0px,
-      rgba(0,0,0,0.03) 1px,
-      transparent 1px,
-      transparent 120px
-    );
+    radial-gradient(900px 480px at 18% 35%, rgba(11,15,20,.06), transparent 60%),
+    radial-gradient(780px 420px at 85% 55%, rgba(11,15,20,.04), transparent 65%),
+    linear-gradient(to bottom, rgba(11,15,20,.02), transparent 40%);
   pointer-events:none;
 }
-
-/* 워터마크 */
 .about-section::after{
-  content:"DAE MYUNG ENCOM";
+  content:"ABOUT";
   position:absolute;
-  left:-40px;
-  bottom:18px;
-  font-size: clamp(48px, 6vw, 92px);
-  letter-spacing: .22em;
-  font-weight: 700;
-  color: rgba(0,0,0,0.04);
-  white-space: nowrap;
+  left:-10px;
+  bottom:-12px;
+  font-size: clamp(72px, 7vw, 120px);
+  letter-spacing:.28em;
+  font-weight:700;
+  color: rgba(11,15,20,.05);
   pointer-events:none;
   user-select:none;
+  white-space:nowrap;
 }
+.about-inner{
+  max-width:1200px;
+  margin:0 auto;
+  position:relative;
+  z-index:1;
 
-.about-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-
-  display: grid;
+  display:grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 80px;
-  align-items: flex-start;
+  gap:80px;
+  align-items:flex-start;
 
-  position: relative;
-  z-index: 1;
-
-  padding: 70px 70px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.85);
-  border: 1px solid rgba(0,0,0,0.06);
-  box-shadow:
-    0 18px 45px rgba(17,17,17,0.06),
-    0 1px 0 rgba(255,255,255,0.7) inset;
-  backdrop-filter: blur(6px);
+  padding:74px 74px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.82);
+  border: 1px solid rgba(11,15,20,.08);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
-
-.about-left,
-.about-right{
-  text-align: left;
-}
-
+.about-left, .about-right{ text-align:left; }
 .about-left h2{
-  text-align: left;
-  margin: 0;
-  font-size: 34px;
-  letter-spacing: .22em;
-  font-weight: 600;
+  text-align:left;
+  margin:0;
+  font-size:34px;
+  letter-spacing:.22em;
 }
-
-.about-line {
-  width: 72px;
-  height: 1px;
-  background: rgba(17,17,17,0.75);
-  margin: 18px 0 18px;
+.about-line{
+  width:72px;
+  height:1px;
+  background: rgba(11,15,20,.75);
+  margin:18px 0 18px;
 }
-
-.about-tagline {
-  margin: 0;
-  font-size: 15px;
-  letter-spacing: .22em;
-  line-height: 1.9;
-  color: rgba(17,17,17,0.82);
+.about-tagline{
+  margin:0;
+  font-size:15px;
+  letter-spacing:.24em;
+  line-height:1.95;
+  color: rgba(11,15,20,.82);
 }
-
-.about-desc {
-  margin: 0 0 34px;
-  font-size: 15px;
-  line-height: 1.9;
-  color: var(--text-sub);
-}
-
-/* 오른쪽 컬럼 세로 디바이더 */
 .about-right{
-  position: relative;
-  padding-left: 44px;
+  position:relative;
+  padding-left:44px;
 }
 .about-right::before{
   content:"";
   position:absolute;
-  left: 0;
-  top: 6px;
-  bottom: 6px;
-  width: 1px;
-  background: rgba(0,0,0,0.06);
+  left:0;
+  top:8px;
+  bottom:8px;
+  width:1px;
+  background: rgba(11,15,20,.08);
 }
-
-/* 15 배지 */
+.about-desc{
+  margin:0 0 34px;
+  font-size:15px;
+  line-height:1.95;
+  color: var(--sub);
+}
 .about-stats{
-  display: inline-flex;
-  align-items: baseline;
-  gap: 14px;
-  padding: 18px 22px;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: rgba(255,255,255,0.65);
-  box-shadow: 0 10px 24px rgba(17,17,17,0.06);
+  display:inline-flex;
+  align-items:baseline;
+  gap:14px;
+  padding:18px 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(11,15,20,.10);
+  background: rgba(255,255,255,.70);
+  box-shadow: var(--shadow-soft);
+}
+.about-stats strong{
+  font-size:46px;
+  line-height:1;
+  letter-spacing:.02em;
+  display:block;
+  color: var(--ink);
+}
+.about-stats span{
+  font-size:12px;
+  letter-spacing:.18em;
+  color: var(--muted);
 }
 
-.about-stats strong {
-  font-size: 44px;
-  line-height: 1;
-  display: block;
-  letter-spacing: .02em;
+/* PRODUCT (Luxury layout + frame) */
+#products{
+  position:relative;
 }
-
-.about-stats span {
-  font-size: 12px;
-  letter-spacing: .18em;
-  color: var(--text-muted);
+#products::before{
+  content:"PRODUCT";
+  position:absolute;
+  right:-10px;
+  top:30px;
+  font-size: clamp(58px, 6vw, 110px);
+  letter-spacing:.26em;
+  font-weight:700;
+  color: rgba(11,15,20,.04);
+  pointer-events:none;
+  user-select:none;
+  white-space:nowrap;
 }
-
-/* =========================
-   PRODUCT
-   ========================= */
-.product-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
+.product-grid{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
   grid-template-columns: repeat(3,1fr);
-  gap: 60px;
+  gap:60px;
 }
 
-.product-card {
-  text-decoration: none;
-  color: inherit;
-  opacity: 0;
-  transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
+/* 등장 애니메이션: 좌/하/우 */
+.product-card{
+  text-decoration:none;
+  color:inherit;
+
+  opacity:0;
+  transition:
+    opacity 1.2s var(--ease),
+    transform 1.2s var(--ease);
 }
+.from-left{ transform: translateX(-120px); }
+.from-bottom{ transform: translateY(120px); }
+.from-right{ transform: translateX(120px); }
+.delay-1{ transition-delay: 0s; }
+.delay-2{ transition-delay: .2s; }
+.delay-3{ transition-delay: .4s; }
 
-/* 좌/하/우에서 등장 */
-.from-left   { transform: translateX(-120px); }
-.from-bottom { transform: translateY(120px); }
-.from-right  { transform: translateX(120px); }
-
-/* 순차 딜레이 */
-.delay-1 { transition-delay: 0s; }
-.delay-2 { transition-delay: .2s; }
-.delay-3 { transition-delay: .4s; }
-
-.product-card.show {
-  opacity: 1;
+.product-card.show{
+  opacity:1;
   transform: translate(0,0);
 }
 
-.product-item {
-  position: relative;
-  overflow: hidden;
+/* 카드 프레임 */
+.product-item{
+  position:relative;
+  overflow:hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(11,15,20,.10);
+  box-shadow: 0 14px 36px rgba(11,15,20,.08);
+  background:#fff;
 }
-
-.product-item img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  transition: transform .8s var(--ease), filter .5s;
+.product-item::after{
+  /* 차가운 하이라이트 라인 */
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(135deg, rgba(255,255,255,.22), transparent 40%, rgba(255,255,255,.06));
+  opacity:.65;
+  pointer-events:none;
 }
-
-.product-card:hover img {
-  transform: scale(1.08);
-  filter: brightness(.75);
+.product-item img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  transition: transform .95s var(--ease), filter .6s ease;
+  transform: scale(1.001);
 }
-
-.product-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity .5s;
-  pointer-events: none;
+.product-card:hover img{
+  transform: scale(1.085);
+  filter: brightness(.78) contrast(1.02);
 }
-
-.product-card:hover .product-overlay {
-  opacity: 1;
+.product-overlay{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.42);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition: opacity .55s var(--ease);
+  pointer-events:none;
 }
-
-.product-overlay span {
-  color: #fff;
-  font-size: 26px;
-  letter-spacing: .3em;
+.product-card:hover .product-overlay{opacity:1;}
+.product-overlay span{
+  color:#fff;
+  font-size:26px;
+  letter-spacing:.32em;
+  transform: translateY(10px);
+  transition: transform .55s var(--ease);
 }
+.product-card:hover .product-overlay span{ transform: translateY(0); }
 
-.product-info {
-  padding-top: 22px;
+.product-info{
+  padding-top:22px;
+  transition: transform .45s var(--ease);
 }
-
+.product-card:hover .product-info{
+  transform: translateY(-4px);
+}
 .product-info h3{
-  margin: 0 0 10px;
-  font-size: 22px;
-  letter-spacing: .08em;
-  font-weight: 500;
+  margin:0 0 10px;
+  font-size:22px;
+  font-weight:500;
+  letter-spacing:.08em;
 }
-
 .product-info p{
-  margin: 0 0 12px;
-  color: var(--text-sub);
-  line-height: 1.6;
+  margin:0 0 12px;
+  font-size:14px;
+  color: var(--sub);
+  line-height:1.6;
 }
+.product-btn{
+  font-size:12px;
+  letter-spacing:.14em;
+  color: rgba(11,15,20,.88);
+  position:relative;
+  display:inline-block;
+}
+.product-btn::after{
+  content:"";
+  display:block;
+  width:0;
+  height:1px;
+  background: rgba(11,15,20,.75);
+  margin-top:6px;
+  transition: width .5s var(--ease);
+}
+.product-card:hover .product-btn::after{width:100%;}
 
-.product-btn {
-  font-size: 12px;
-  letter-spacing: .12em;
+/* CONTACT (simple, luxury) */
+#contact{
+  background: var(--white);
+  border-top:1px solid var(--line);
+}
+#contact p{
+  margin:0;
+  text-align:center;
+  color: var(--sub);
+  letter-spacing:.08em;
 }
 
 /* MOBILE */
-@media (max-width:768px) {
-  .hero-inner {
-    margin-left: 0;
-    text-align: center;
+@media (max-width:768px){
+  .hero-inner{
+    margin-left:0;
+    text-align:center;
+    padding:0 18px;
   }
+  .hero h1{font-size:40px;}
+  .scroll-cue{display:none;}
 
-  .about-inner {
-    grid-template-columns: 1fr;
-    gap: 44px;
-    padding: 56px 22px;
-    text-align: center;
+  .about-inner{
+    grid-template-columns:1fr;
+    gap:44px;
+    padding:56px 22px;
+    text-align:center;
   }
+  .about-left, .about-right{ text-align:center; }
+  .about-left h2{ text-align:center; }
+  .about-line{ margin:18px auto; }
+  .about-right{ padding-left:0; }
+  .about-right::before{ display:none; }
 
-  .about-left,
-  .about-right{
-    text-align: center;
-  }
-
-  .about-left h2{
-    text-align: center;
-  }
-
-  .about-line {
-    margin: 18px auto 18px;
-  }
-
-  .about-right{
-    padding-left: 0;
-  }
-
-  .about-right::before{
-    display:none;
-  }
-
-  .about-section::after{
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 10px;
-    font-size: 44px;
-    opacity: .06;
-  }
-
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
+  .product-grid{ grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -410,6 +508,11 @@ h2 {
   <div class="hero-inner">
     <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
     <p>건축 공간의 품질을 완성하는<br>토탈 세라믹 & 욕실 자재 솔루션</p>
+  </div>
+
+  <div class="scroll-cue">
+    <div class="scroll-dot"></div>
+    <div>SCROLL</div>
   </div>
 </header>
 
@@ -487,34 +590,27 @@ h2 {
 
 <section id="contact">
   <h2>CONTACT</h2>
-  <p style="text-align:center; color: var(--text-sub); letter-spacing:.08em;">
-    contact@daemyungencom.com
-  </p>
+  <p>contact@daemyungencom.com</p>
 </section>
 
 <script>
-/* ===== PRODUCT CARD (스크롤 할 때마다 재등장 가능) ===== */
+/* PRODUCT CARD (스크롤할 때마다 재등장) */
 const cards = document.querySelectorAll('.product-card');
-
 const cardObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    } else {
-      entry.target.classList.remove('show'); // 스크롤 밖으로 나가면 다시 숨김
-    }
+    if (entry.isIntersecting) entry.target.classList.add('show');
+    else entry.target.classList.remove('show');
   });
 }, { threshold: 0.45 });
-
 cards.forEach(card => cardObserver.observe(card));
 
-/* ===== HERO PARALLAX ===== */
+/* HERO PARALLAX */
 const heroText = document.querySelector('.hero-inner');
 window.addEventListener('scroll', () => {
-  heroText.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+  heroText.style.transform = `translateY(${window.scrollY * 0.22}px)`;
 });
 
-/* ===== ABOUT COUNT UP (15) ===== */
+/* ABOUT COUNT UP (15) */
 const counter = document.querySelector('[data-count]');
 const countObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -524,7 +620,7 @@ const countObserver = new IntersectionObserver(entries => {
     const target = +el.dataset.count;
 
     let current = 0;
-    const steps = 40;
+    const steps = 44;
     const step = target / steps;
 
     const timer = setInterval(() => {
@@ -535,26 +631,21 @@ const countObserver = new IntersectionObserver(entries => {
       } else {
         el.textContent = Math.floor(current);
       }
-    }, 30);
+    }, 28);
 
     countObserver.unobserve(el);
   });
 }, { threshold: 0.6 });
-
 countObserver.observe(counter);
 
-/* ===== FADE UP (ABOUT 좌/우) ===== */
+/* ABOUT FADE UP */
 const fades = document.querySelectorAll('.fade-up');
 const fadeObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    } else {
-      entry.target.classList.remove('show'); // 필요 없으면 지워도 됨
-    }
+    if (entry.isIntersecting) entry.target.classList.add('show');
+    else entry.target.classList.remove('show');
   });
 }, { threshold: 0.4 });
-
 fades.forEach(el => fadeObserver.observe(el));
 </script>
 
