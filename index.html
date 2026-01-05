@@ -357,10 +357,10 @@ h2{
   width:100%;
 }
 
-/* CONTACT (Cold Luxury) */
+/* CONTACT (Cold Luxury - Compact) */
 #contact{
   background: var(--white);
-  padding: 120px 20px 140px;
+  padding: 90px 20px 90px; /* ⬅️ 높이 줄임 */
   position: relative;
   overflow: hidden;
 }
@@ -368,12 +368,12 @@ h2{
 #contact::before{
   content:"CONTACT";
   position:absolute;
-  right:-40px;
-  top:-30px;
-  font-size:140px;
+  right:-50px;
+  top:-35px;
+  font-size:120px;         /* ⬅️ 조금 줄임 */
   letter-spacing:.22em;
   font-weight:700;
-  color:rgba(17,17,17,.035);
+  color:rgba(17,17,17,.03);
   pointer-events:none;
   user-select:none;
 }
@@ -387,13 +387,13 @@ h2{
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
-  gap:30px;
-  margin-bottom:60px;
+  gap:24px;
+  margin-bottom:40px; /* ⬅️ 줄임 */
 }
 
 .contact-title{
   margin:0;
-  font-size:32px;
+  font-size:30px; /* ⬅️ 살짝 컴팩트 */
   font-weight:500;
   letter-spacing:.14em;
 }
@@ -402,7 +402,7 @@ h2{
   margin:0;
   color:var(--text-muted);
   letter-spacing:.08em;
-  font-size:13px;
+  font-size:12px;
   line-height:1.7;
   text-align:right;
 }
@@ -410,36 +410,40 @@ h2{
 .contact-grid{
   display:grid;
   grid-template-columns: 1.15fr .85fr;
-  gap:70px;
+  gap:56px; /* ⬅️ 줄임 */
   align-items:start;
 }
 
+/* 공통 블록 */
 .contact-block{
   position:relative;
-  padding-top:10px;
+  padding-top:6px;
 }
 
+/* 가운데 구분 헤어라인 */
 .contact-block::before{
   content:"";
   position:absolute;
-  left:-35px;
-  top:10px;
+  left:-28px;
+  top:6px;
   width:1px;
-  height:220px;
-  background: var(--line-soft);
+  height:200px; /* ⬅️ 줄임 */
+  background: rgba(17,17,17,.10);
 }
 
+/* 라벨 */
 .contact-label{
   font-size:12px;
   letter-spacing:.22em;
   color:var(--text-muted);
   text-transform:uppercase;
-  margin-bottom:22px;
+  margin-bottom:16px; /* ⬅️ 줄임 */
 }
 
+/* COMPANY INFO */
 .info-list{
   display:grid;
-  gap:14px;
+  gap:10px; /* ⬅️ 줄임 */
   margin:0;
   padding:0;
   list-style:none;
@@ -448,7 +452,7 @@ h2{
 .info-row{
   display:grid;
   grid-template-columns: 120px 1fr;
-  gap:18px;
+  gap:14px;
   align-items:baseline;
 }
 
@@ -462,22 +466,62 @@ h2{
 .info-val{
   font-size:14px;
   color:var(--text-sub);
-  line-height:1.7;
+  line-height:1.65;
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* COPY 버튼 */
+.copy-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:26px;
+  padding:0 10px;
+  border:1px solid rgba(17,17,17,.16);
+  background: rgba(17,17,17,.02);
+  color:rgba(17,17,17,.78);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-decoration:none;
+  cursor:pointer;
+  transition: transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
+}
+
+.copy-btn:hover{
+  transform: translateY(-1px);
+  border-color: rgba(17,17,17,.30);
+  background: rgba(17,17,17,.04);
+}
+
+.copy-btn.copied{
+  border-color: rgba(17,17,17,.35);
+  background: rgba(17,17,17,.06);
+}
+
+/* CUSTOMER CENTER - 미세 그라데이션 + 헤어라인 박스 */
+.contact-block.center-box{
+  border: 1px solid rgba(17,17,17,.10);
+  background: linear-gradient(180deg, rgba(17,17,17,.02), rgba(17,17,17,0));
+  padding: 22px 22px 20px;  /* ⬅️ 박스 내부도 컴팩트 */
+  box-shadow: 0 10px 30px rgba(17,17,17,.04);
 }
 
 .center-phone{
-  font-size:34px;
+  font-size:32px;
   font-weight:700;
   letter-spacing:.02em;
   color:var(--text-main);
-  margin:0 0 18px 0;
+  margin:0 0 12px 0; /* ⬅️ 줄임 */
 }
 
 .center-hours{
   margin:0;
   color:var(--text-sub);
-  font-size:14px;
-  line-height:1.9;
+  font-size:13px; /* ⬅️ 줄임 */
+  line-height:1.85;
 }
 
 .center-hours b{
@@ -486,9 +530,9 @@ h2{
 }
 
 .contact-actions{
-  margin-top:26px;
+  margin-top:16px; /* ⬅️ 줄임 */
   display:flex;
-  gap:14px;
+  gap:10px;
   flex-wrap:wrap;
 }
 
@@ -496,8 +540,8 @@ h2{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  height:44px;
-  padding:0 18px;
+  height:42px; /* ⬅️ 줄임 */
+  padding:0 16px;
   border:1px solid rgba(17,17,17,.18);
   color:rgba(17,17,17,.85);
   background:transparent;
@@ -513,29 +557,68 @@ h2{
   background: rgba(17,17,17,.03);
 }
 
+/* CONTACT 하단 FOOTER 라인 + 카피라이트 */
+.site-footer{
+  max-width:1200px;
+  margin:60px auto 0;
+  padding-top:22px;
+  border-top:1px solid rgba(17,17,17,.10);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  color: rgba(17,17,17,.55);
+  font-size:12px;
+  letter-spacing:.10em;
+}
+
+.site-footer .left{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.site-footer a{
+  color: rgba(17,17,17,.60);
+  text-decoration:none;
+  border-bottom:1px solid rgba(17,17,17,.14);
+  padding-bottom:2px;
+}
+
+.site-footer a:hover{
+  border-bottom-color: rgba(17,17,17,.30);
+}
+
 /* MOBILE */
 @media (max-width:768px){
+  #contact{ padding: 80px 16px 90px; }
+
   .contact-head{
     flex-direction:column;
     align-items:flex-start;
+    margin-bottom:28px;
   }
-  .contact-sub{
-    text-align:left;
-  }
+
+  .contact-sub{ text-align:left; }
+
   .contact-grid{
     grid-template-columns:1fr;
-    gap:50px;
+    gap:26px;
   }
-  .contact-block::before{
-    display:none;
-  }
-  .info-row{
-    grid-template-columns: 110px 1fr;
-  }
-  .center-phone{
-    font-size:30px;
+
+  .contact-block::before{ display:none; }
+
+  .info-row{ grid-template-columns: 110px 1fr; }
+
+  .center-phone{ font-size:28px; }
+
+  .site-footer{
+    margin-top:44px;
+    flex-direction:column;
+    align-items:flex-start;
   }
 }
+
 
 
 /* MOBILE */
@@ -689,9 +772,13 @@ h2{
             <div class="info-val">송영식</div>
           </li>
           <li class="info-row">
-            <div class="info-key">사업장 주소</div>
-            <div class="info-val">(22218) 인천 미추홀구 한나루로 448</div>
-          </li>
+  <div class="info-key">사업장 주소</div>
+  <div class="info-val">
+    <span id="companyAddress">(22218) 인천 미추홀구 한나루로 448</span>
+    <button type="button" class="copy-btn" data-copy="#companyAddress">COPY</button>
+  </div>
+</li>
+
           <li class="info-row">
             <div class="info-key">대표 전화</div>
             <div class="info-val">032-866-0004</div>
@@ -708,24 +795,32 @@ h2{
       </div>
 
       <!-- CUSTOMER CENTER -->
-      <div class="contact-block">
-        <div class="contact-label">CUSTOMER CENTER</div>
+      <div class="contact-block center-box">
+  <div class="contact-label">CUSTOMER CENTER</div>
 
-        <p class="center-phone">032-866-0004</p>
-        <p class="center-hours">
-          <b>월 - 금</b> 09:00 ~ 18:00<br>
-          <b>토</b> 09:00 ~ 15:00<br>
-          <b>일</b> 정기휴무
-        </p>
+  <p class="center-phone">032-866-0004</p>
+  <p class="center-hours">
+    <b>월 - 금</b> 09:00 ~ 18:00<br>
+    <b>토</b> 09:00 ~ 15:00<br>
+    <b>일</b> 정기휴무
+  </p>
 
-        <div class="contact-actions">
-          <a class="contact-btn" href="tel:0328660004">전화하기</a>
-          <a class="contact-btn" href="https://maps.google.com/?q=인천%20미추홀구%20한나루로%20448" target="_blank" rel="noopener">지도 보기</a>
-        </div>
-      </div>
-
-    </div>
+  <div class="contact-actions">
+    <a class="contact-btn" href="tel:0328660004">전화하기</a>
+    <a class="contact-btn" href="https://maps.google.com/?q=인천%20미추홀구%20한나루로%20448" target="_blank" rel="noopener">지도 보기</a>
   </div>
+</div>
+<div class="site-footer">
+  <div class="left">
+    <span>DAE MYUNG ENCOM</span>
+    <a href="#about">ABOUT</a>
+    <a href="#products">PRODUCT</a>
+  </div>
+  <div class="right">
+    © <span id="yearNow"></span> DAE MYUNG ENCOM. ALL RIGHTS RESERVED.
+  </div>
+</div>
+
 </section>
 
 <script>
@@ -807,6 +902,47 @@ const countObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.6 });
 
 countObserver.observe(counterEl);
+  /* FOOTER YEAR */
+document.getElementById('yearNow').textContent = new Date().getFullYear();
+
+/* COPY BUTTON */
+document.querySelectorAll('[data-copy]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const sel = btn.getAttribute('data-copy');
+    const target = document.querySelector(sel);
+    if (!target) return;
+
+    const text = target.textContent.trim();
+
+    try {
+      await navigator.clipboard.writeText(text);
+      btn.classList.add('copied');
+      const prev = btn.textContent;
+      btn.textContent = 'COPIED';
+      setTimeout(() => {
+        btn.textContent = prev;
+        btn.classList.remove('copied');
+      }, 900);
+    } catch (e) {
+      // clipboard가 막힌 환경(일부 브라우저/보안설정) 대비
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+
+      btn.classList.add('copied');
+      const prev = btn.textContent;
+      btn.textContent = 'COPIED';
+      setTimeout(() => {
+        btn.textContent = prev;
+        btn.classList.remove('copied');
+      }, 900);
+    }
+  });
+});
+
 </script>
 
 </body>
