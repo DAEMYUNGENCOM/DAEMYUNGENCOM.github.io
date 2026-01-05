@@ -357,15 +357,186 @@ h2{
   width:100%;
 }
 
-/* CONTACT 자리 남겨둠(네 메뉴에 있어서) */
+/* CONTACT (Cold Luxury) */
 #contact{
-  padding:100px 20px 140px;
-  text-align:center;
+  background: var(--white);
+  padding: 120px 20px 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+#contact::before{
+  content:"CONTACT";
+  position:absolute;
+  right:-40px;
+  top:-30px;
+  font-size:140px;
+  letter-spacing:.22em;
+  font-weight:700;
+  color:rgba(17,17,17,.035);
+  pointer-events:none;
+  user-select:none;
+}
+
+.contact-inner{
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.contact-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:30px;
+  margin-bottom:60px;
+}
+
+.contact-title{
+  margin:0;
+  font-size:32px;
+  font-weight:500;
+  letter-spacing:.14em;
+}
+
+.contact-sub{
+  margin:0;
+  color:var(--text-muted);
+  letter-spacing:.08em;
+  font-size:13px;
+  line-height:1.7;
+  text-align:right;
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap:70px;
+  align-items:start;
+}
+
+.contact-block{
+  position:relative;
+  padding-top:10px;
+}
+
+.contact-block::before{
+  content:"";
+  position:absolute;
+  left:-35px;
+  top:10px;
+  width:1px;
+  height:220px;
+  background: var(--line-soft);
+}
+
+.contact-label{
+  font-size:12px;
+  letter-spacing:.22em;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  margin-bottom:22px;
+}
+
+.info-list{
+  display:grid;
+  gap:14px;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.info-row{
+  display:grid;
+  grid-template-columns: 120px 1fr;
+  gap:18px;
+  align-items:baseline;
+}
+
+.info-key{
+  font-size:12px;
+  letter-spacing:.14em;
+  color:rgba(17,17,17,.70);
+  text-transform:uppercase;
+}
+
+.info-val{
+  font-size:14px;
   color:var(--text-sub);
+  line-height:1.7;
 }
-#contact h2{
-  margin-bottom:18px;
+
+.center-phone{
+  font-size:34px;
+  font-weight:700;
+  letter-spacing:.02em;
+  color:var(--text-main);
+  margin:0 0 18px 0;
 }
+
+.center-hours{
+  margin:0;
+  color:var(--text-sub);
+  font-size:14px;
+  line-height:1.9;
+}
+
+.center-hours b{
+  color:rgba(17,17,17,.85);
+  font-weight:500;
+}
+
+.contact-actions{
+  margin-top:26px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.contact-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:44px;
+  padding:0 18px;
+  border:1px solid rgba(17,17,17,.18);
+  color:rgba(17,17,17,.85);
+  background:transparent;
+  text-decoration:none;
+  letter-spacing:.14em;
+  font-size:12px;
+  transition: transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease);
+}
+
+.contact-btn:hover{
+  transform: translateY(-2px);
+  border-color: rgba(17,17,17,.35);
+  background: rgba(17,17,17,.03);
+}
+
+/* MOBILE */
+@media (max-width:768px){
+  .contact-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .contact-sub{
+    text-align:left;
+  }
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:50px;
+  }
+  .contact-block::before{
+    display:none;
+  }
+  .info-row{
+    grid-template-columns: 110px 1fr;
+  }
+  .center-phone{
+    font-size:30px;
+  }
+}
+
 
 /* MOBILE */
 @media (max-width:768px){
@@ -493,11 +664,70 @@ h2{
 </section>
 
 <section id="contact">
-  <h2>CONTACT</h2>
-  <div>contact@daemyung.com</div>
+  <div class="contact-inner fade-up">
+
+    <div class="contact-head">
+      <h2 class="contact-title">CONTACT</h2>
+      <p class="contact-sub">
+        DAE MYUNG ENCOM · COMPANY INFORMATION & CUSTOMER CENTER
+      </p>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- COMPANY INFO -->
+      <div class="contact-block">
+        <div class="contact-label">COMPANY INFO</div>
+
+        <ul class="info-list">
+          <li class="info-row">
+            <div class="info-key">상호명</div>
+            <div class="info-val">(주)대명엔컴</div>
+          </li>
+          <li class="info-row">
+            <div class="info-key">대표자명</div>
+            <div class="info-val">송영식</div>
+          </li>
+          <li class="info-row">
+            <div class="info-key">사업장 주소</div>
+            <div class="info-val">(22218) 인천 미추홀구 한나루로 448</div>
+          </li>
+          <li class="info-row">
+            <div class="info-key">대표 전화</div>
+            <div class="info-val">032-866-0004</div>
+          </li>
+          <li class="info-row">
+            <div class="info-key">FAX</div>
+            <div class="info-val">032-875-1292</div>
+          </li>
+          <li class="info-row">
+            <div class="info-key">사업자등록번호</div>
+            <div class="info-val">121-81-88898</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- CUSTOMER CENTER -->
+      <div class="contact-block">
+        <div class="contact-label">CUSTOMER CENTER</div>
+
+        <p class="center-phone">032-866-0004</p>
+        <p class="center-hours">
+          <b>월 - 금</b> 09:00 ~ 18:00<br>
+          <b>토</b> 09:00 ~ 15:00<br>
+          <b>일</b> 정기휴무
+        </p>
+
+        <div class="contact-actions">
+          <a class="contact-btn" href="tel:0328660004">전화하기</a>
+          <a class="contact-btn" href="https://maps.google.com/?q=인천%20미추홀구%20한나루로%20448" target="_blank" rel="noopener">지도 보기</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<script>
 /* =========================================================
    1) PRODUCT CARD: 스크롤 들어올 때마다 재등장 (show 토글)
    ========================================================= */
