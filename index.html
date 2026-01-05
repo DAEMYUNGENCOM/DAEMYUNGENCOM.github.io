@@ -1,657 +1,501 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
 <title>DAE MYUNG ENCOM</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#f9fafb;
-  --white:#ffffff;
-
-  --text-main:#111;
-  --text-sub:#555;
-  --text-muted:#8a8f98;
-
-  --line:#e5e7eb;
-  --line-soft:rgba(17,17,17,.10);
-
-  --ease:cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-soft:cubic-bezier(0.16, 1, 0.3, 1);
+:root {
+  --bg: #f9fafb;
+  --white: #ffffff;
+  --text-main: #111;
+  --text-sub: #555;
+  --text-muted: #888;
+  --line: #e5e7eb;
+  --hairline: rgba(17,17,17,.10);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* BASE */
-*{ box-sizing:border-box; }
-html,body{ height:100%; }
-body{
-  margin:0;
-  padding-top:70px;
-  font-family:'Noto Sans KR', sans-serif;
-  background:var(--bg);
-  color:var(--text-main);
+body {
+  margin: 0;
+  padding-top: 70px;
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
 }
 
 /* NAV */
-nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  height:70px;
-  background:rgba(255,255,255,.92);
-  border-bottom:1px solid var(--line);
-  backdrop-filter:saturate(180%) blur(12px);
-  z-index:1000;
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  z-index: 1000;
 }
-.nav-inner{
-  max-width:1200px;
-  height:100%;
-  margin:0 auto;
-  padding:0 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+
+.nav-inner {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.menu a{
-  margin-left:30px;
-  text-decoration:none;
-  color:var(--text-main);
-  font-weight:500;
-  letter-spacing:.08em;
-  position:relative;
+
+.menu a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  letter-spacing: .08em;
 }
-.menu a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-8px;
-  width:0;
-  height:1px;
-  background:var(--text-main);
-  transition:width .35s var(--ease);
-  opacity:.55;
-}
-.menu a:hover::after{ width:100%; }
 
 /* HERO */
-.hero{
-  height:90vh;
-  background:url('hero.jpg') center/cover no-repeat;
-  position:relative;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
+.hero {
+  height: 90vh;
+  background: url('hero.jpg') center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.20) 100%);
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.35);
 }
-.hero::after{
-  /* 차가운 럭셔리: 아주 미세한 그레인 */
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image:radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
-  background-size: 3px 3px;
-  opacity:.16;
-  pointer-events:none;
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  max-width: 600px;
+  margin-left: 120px;
+  will-change: transform;
 }
-.hero-inner{
-  position:relative;
-  z-index:1;
-  color:#fff;
-  max-width:720px;
-  margin-left:120px;
-  will-change:transform;
-}
-.hero h1{
-  font-size:56px;
-  font-weight:500;
-  letter-spacing:.18em;
-  margin:0 0 22px 0;
-  line-height:1.15;
-}
-.hero p{
-  margin:0;
-  font-size:15px;
-  line-height:1.9;
-  color:rgba(255,255,255,.85);
-  letter-spacing:.02em;
+
+.hero h1 {
+  font-size: 56px;
+  letter-spacing: .18em;
+  margin-bottom: 24px;
 }
 
 /* SECTION */
-section{
-  padding:120px 20px;
-}
-h2{
-  text-align:center;
-  font-size:32px;
-  font-weight:500;
-  letter-spacing:.14em;
-  margin:0 0 60px 0;
+section {
+  padding: 120px 20px;
 }
 
-/* FADE-UP */
-.fade-up{
-  opacity:0;
-  transform:translateY(40px);
-  transition:opacity 1.1s var(--ease), transform 1.1s var(--ease);
-}
-.fade-up.show{
-  opacity:1;
-  transform:translateY(0);
+h2 {
+  text-align: center;
+  font-size: 32px;
+  letter-spacing: .14em;
+  margin-bottom: 60px;
 }
 
-/* ABOUT (박스 느낌 X / 고급 레이아웃) */
-.about-section{
-  background:var(--white);
-  position:relative;
-  overflow:hidden;
+/* FADE */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
 }
-.about-section::before{
-  /* 워터마크 타이포(차갑고 럭셔리) */
-  content:"ABOUT";
-  position:absolute;
-  top:-40px;
-  left:-20px;
-  font-size:160px;
-  letter-spacing:.22em;
-  font-weight:700;
-  color:rgba(17,17,17,.035);
-  pointer-events:none;
-  user-select:none;
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
 }
-.about-inner{
-  max-width:1200px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:1fr 1.2fr;
-  gap:90px;
-  align-items:flex-start;
+
+/* ABOUT */
+.about-section {
+  background: var(--white);
 }
-.about-left{
-  text-align:left;
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: flex-start;
 }
-.about-left h2{
-  text-align:left;
-  margin:0;
+
+.about-left h2 {
+  margin-top: 0;
+  margin-bottom: 18px;
 }
-.about-line{
-  width:64px;
-  height:1px;
-  background:rgba(17,17,17,.55);
-  margin:18px 0 22px;
+
+.about-line {
+  width: 60px;
+  height: 2px;
+  background: var(--text-main);
+  margin: 16px 0 18px;
+  opacity: .9;
 }
-.about-tagline{
-  margin:0;
-  font-size:14px;
-  letter-spacing:.26em;
-  line-height:2.0;
-  color:rgba(17,17,17,.82);
-  text-transform:uppercase;
+
+.about-tagline {
+  font-size: 14px;
+  letter-spacing: .18em;
+  line-height: 1.9;
+  color: var(--text-main);
 }
-.about-right{
-  text-align:left;
-  padding-top:6px;
-  position:relative;
+
+.about-right {
+  padding-top: 6px;
 }
-.about-right::before{
-  /* 오른쪽 세로 헤어라인 */
-  content:"";
-  position:absolute;
-  left:-45px;
-  top:6px;
-  width:1px;
-  height:190px;
-  background:var(--line-soft);
+
+.about-desc {
+  font-size: 15px;
+  color: var(--text-sub);
+  margin: 0 0 26px;
+  line-height: 1.9;
 }
-.about-desc{
-  margin:0 0 42px 0;
-  font-size:16px;
-  line-height:1.85;
-  color:var(--text-sub);
+
+.about-stats strong {
+  font-size: 40px;
+  display: block;
+  letter-spacing: .02em;
 }
-.about-stats{
-  display:flex;
-  align-items:flex-end;
-  gap:18px;
-}
-.about-stats strong{
-  font-size:48px;
-  line-height:1;
-  letter-spacing:.02em;
-}
-.about-stats strong::after{
-  content:"+";
-  font-size:.6em;
-  vertical-align:top;
-  margin-left:2px;
-  opacity:.9;
-}
-.about-stats span{
-  font-size:12px;
-  letter-spacing:.22em;
-  color:var(--text-muted);
-  padding-bottom:6px;
-  text-transform:uppercase;
+
+.about-stats span {
+  font-size: 12px;
+  letter-spacing: .18em;
+  color: var(--text-muted);
 }
 
 /* PRODUCT */
-#products{
-  background:var(--bg);
-}
-.product-grid{
-  max-width:1200px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:60px;
+.product-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 60px;
 }
 
-/* 카드 등장(좌/아래/우) */
-.product-card{
-  text-decoration:none;
-  color:inherit;
-  opacity:0;
-  transition:opacity 1.15s var(--ease), transform 1.15s var(--ease);
-  will-change:transform, opacity;
+.product-card {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
 }
-.product-card.from-left{ transform:translateX(-120px); }
-.product-card.from-bottom{ transform:translateY(120px); }
-.product-card.from-right{ transform:translateX(120px); }
-.product-card.show{
-  opacity:1;
-  transform:translate(0,0);
+
+/* 등장 방향(복구) */
+.from-left   { transform: translateX(-120px); }
+.from-bottom { transform: translateY(120px); }
+.from-right  { transform: translateX(120px); }
+
+.product-card.show {
+  opacity: 1;
+  transform: translate(0,0);
 }
 
 /* 순차 딜레이 */
-.product-card.delay-1{ transition-delay:0s; }
-.product-card.delay-2{ transition-delay:.18s; }
-.product-card.delay-3{ transition-delay:.36s; }
+.delay-1 { transition-delay: 0s; }
+.delay-2 { transition-delay: .18s; }
+.delay-3 { transition-delay: .36s; }
 
-.product-item{
-  position:relative;
-  overflow:hidden;
-  border-radius:0; /* 차가운 느낌 */
-}
-.product-item img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  transform:scale(1.001);
-  transition:transform .95s var(--ease), filter .55s var(--ease-soft);
-}
-.product-card:hover img{
-  transform:scale(1.08);
-  filter:brightness(.78);
-}
-
-/* 오버레이 + 텍스트 미세 이동 */
-.product-overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.42);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  transition:opacity .55s var(--ease);
-  pointer-events:none;
-}
-.product-overlay span{
-  color:#fff;
-  font-size:26px;
-  letter-spacing:.3em;
-  transform:translateY(10px);
-  transition:transform .7s var(--ease);
-}
-.product-card:hover .product-overlay{
-  opacity:1;
-}
-.product-card:hover .product-overlay span{
-  transform:translateY(0);
-}
-
-.product-info{
-  padding-top:22px;
-  text-align:left;
-  transition:transform .45s var(--ease);
-}
-.product-card:hover .product-info{
-  transform:translateY(-4px);
-}
-.product-info h3{
-  margin:0 0 10px 0;
-  font-size:22px;
-  font-weight:500;
-  letter-spacing:.08em;
-}
-.product-info p{
-  margin:0 0 12px 0;
-  font-size:14px;
-  line-height:1.6;
-  color:var(--text-sub);
-}
-.product-btn{
-  font-size:12px;
-  letter-spacing:.18em;
-  position:relative;
-  display:inline-block;
-  color:var(--text-main);
-}
-.product-btn::after{
-  content:"";
-  display:block;
-  width:0;
-  height:1px;
-  background:var(--text-main);
-  margin-top:7px;
-  transition:width .45s var(--ease);
-  opacity:.7;
-}
-.product-card:hover .product-btn::after{
-  width:100%;
-}
-
-/* CONTACT (Cold Luxury - Compact) */
-#contact{
-  background: var(--white);
-  padding: 90px 20px 90px; /* ⬅️ 높이 줄임 */
+.product-item {
   position: relative;
   overflow: hidden;
 }
 
-#contact::before{
-  content:"CONTACT";
-  position:absolute;
-  right:-50px;
-  top:-35px;
-  font-size:120px;         /* ⬅️ 조금 줄임 */
-  letter-spacing:.22em;
-  font-weight:700;
-  color:rgba(17,17,17,.03);
-  pointer-events:none;
-  user-select:none;
+.product-item img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  transition: transform .9s var(--ease), filter .55s var(--ease);
 }
 
-.contact-inner{
-  max-width:1200px;
-  margin:0 auto;
+.product-card:hover img {
+  transform: scale(1.08);
+  filter: brightness(.75);
 }
 
-.contact-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:24px;
-  margin-bottom:40px; /* ⬅️ 줄임 */
+.product-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .55s var(--ease);
+  pointer-events: none;
 }
 
-.contact-title{
-  margin:0;
-  font-size:30px; /* ⬅️ 살짝 컴팩트 */
-  font-weight:500;
-  letter-spacing:.14em;
+.product-card:hover .product-overlay {
+  opacity: 1;
 }
 
-.contact-sub{
-  margin:0;
-  color:var(--text-muted);
-  letter-spacing:.08em;
-  font-size:12px;
-  line-height:1.7;
-  text-align:right;
+.product-overlay span {
+  color: #fff;
+  font-size: 26px;
+  letter-spacing: .3em;
+  transform: translateY(8px);
+  transition: transform .6s var(--ease);
 }
 
-.contact-grid{
-  display:grid;
-  grid-template-columns: 1.15fr .85fr;
-  gap:56px; /* ⬅️ 줄임 */
-  align-items:start;
+.product-card:hover .product-overlay span {
+  transform: translateY(0);
 }
 
-/* 공통 블록 */
-.contact-block{
-  position:relative;
-  padding-top:6px;
+.product-info {
+  padding-top: 18px;
+  transition: transform .35s var(--ease);
 }
 
-/* 가운데 구분 헤어라인 */
-.contact-block::before{
-  content:"";
-  position:absolute;
-  left:-28px;
-  top:6px;
-  width:1px;
-  height:200px; /* ⬅️ 줄임 */
-  background: rgba(17,17,17,.10);
+.product-card:hover .product-info {
+  transform: translateY(-4px);
 }
 
-/* 라벨 */
-.contact-label{
-  font-size:12px;
-  letter-spacing:.22em;
-  color:var(--text-muted);
-  text-transform:uppercase;
-  margin-bottom:16px; /* ⬅️ 줄임 */
+.product-info h3 {
+  margin: 0 0 10px;
+  letter-spacing: .08em;
 }
 
-/* COMPANY INFO */
-.info-list{
-  display:grid;
-  gap:10px; /* ⬅️ 줄임 */
-  margin:0;
-  padding:0;
-  list-style:none;
+.product-info p {
+  margin: 0 0 12px;
+  color: var(--text-sub);
+  line-height: 1.7;
 }
 
-.info-row{
-  display:grid;
+.product-btn {
+  font-size: 12px;
+  letter-spacing: .12em;
+  position: relative;
+  display: inline-block;
+}
+
+.product-btn::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 1px;
+  background: var(--text-main);
+  margin-top: 7px;
+  transition: width .45s var(--ease);
+}
+.product-card:hover .product-btn::after {
+  width: 100%;
+}
+
+/* =========================
+   CONTACT (박스 제거 버전)
+   ========================= */
+.contact-section {
+  background: var(--white);
+  padding: 80px 20px;              /* ✅ 높이 줄임 */
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.contact-head h2 {
+  margin: 0;
+  text-align: left;
+}
+
+.contact-kicker {
+  font-size: 12px;
+  letter-spacing: .18em;
+  color: var(--text-muted);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 70px;
+  align-items: start;
+  position: relative;
+}
+
+/* 가운데 헤어라인(세로 라인) */
+.contact-grid::before {
+  content: '';
+  position: absolute;
+  left: calc(55% + 35px);
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--hairline);
+}
+
+/* 왼쪽 */
+.contact-block-title {
+  font-size: 12px;
+  letter-spacing: .22em;
+  color: var(--text-muted);
+  margin: 0 0 18px;
+}
+
+.info-list {
+  display: grid;
   grid-template-columns: 120px 1fr;
-  gap:14px;
-  align-items:baseline;
+  row-gap: 12px;                   /* ✅ 줄 간격 좁힘 */
+  column-gap: 18px;
+  font-size: 13px;
+  color: var(--text-sub);
 }
 
-.info-key{
-  font-size:12px;
-  letter-spacing:.14em;
-  color:rgba(17,17,17,.70);
-  text-transform:uppercase;
+.info-list .label {
+  color: var(--text-muted);
+  letter-spacing: .08em;
 }
 
-.info-val{
-  font-size:14px;
-  color:var(--text-sub);
-  line-height:1.65;
-  display:flex;
-  align-items:baseline;
-  gap:10px;
-  flex-wrap:wrap;
+.value-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-/* COPY 버튼 */
-.copy-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  height:26px;
-  padding:0 10px;
-  border:1px solid rgba(17,17,17,.16);
-  background: rgba(17,17,17,.02);
-  color:rgba(17,17,17,.78);
-  font-size:11px;
-  letter-spacing:.12em;
-  text-decoration:none;
-  cursor:pointer;
+.copy-btn {
+  font-size: 11px;
+  letter-spacing: .14em;
+  padding: 6px 10px;
+  border: 1px solid rgba(17,17,17,.18);
+  background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(245,246,248,.95)); /* ✅ 미세 그라데이션 */
+  color: var(--text-main);
+  cursor: pointer;
   transition: transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
 }
 
-.copy-btn:hover{
+.copy-btn:hover {
   transform: translateY(-1px);
-  border-color: rgba(17,17,17,.30);
-  background: rgba(17,17,17,.04);
+  border-color: rgba(17,17,17,.28);
+  background: linear-gradient(180deg, rgba(255,255,255,1), rgba(242,243,246,1));
 }
 
-.copy-btn.copied{
-  border-color: rgba(17,17,17,.35);
-  background: rgba(17,17,17,.06);
+/* 오른쪽(박스 없이, 타이포로 고급스럽게) */
+.center-phone {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  margin: 0 0 12px;
 }
 
-/* CUSTOMER CENTER - 미세 그라데이션 + 헤어라인 박스 */
-.contact-block.center-box{
-  border: 1px solid rgba(17,17,17,.10);
-  background: linear-gradient(180deg, rgba(17,17,17,.02), rgba(17,17,17,0));
-  padding: 22px 22px 20px;  /* ⬅️ 박스 내부도 컴팩트 */
-  box-shadow: 0 10px 30px rgba(17,17,17,.04);
+.center-hours {
+  margin: 0 0 22px;
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.8;                /* ✅ 촘촘하게 */
 }
 
-.center-phone{
-  font-size:32px;
-  font-weight:700;
-  letter-spacing:.02em;
-  color:var(--text-main);
-  margin:0 0 12px 0; /* ⬅️ 줄임 */
+.center-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
 }
 
-.center-hours{
-  margin:0;
-  color:var(--text-sub);
-  font-size:13px; /* ⬅️ 줄임 */
-  line-height:1.85;
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-decoration: none;
+  color: var(--text-main);
+  border: 1px solid rgba(17,17,17,.18);
+  background: transparent;
+  transition: transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
 }
 
-.center-hours b{
-  color:rgba(17,17,17,.85);
-  font-weight:500;
-}
-
-.contact-actions{
-  margin-top:16px; /* ⬅️ 줄임 */
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.contact-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  height:42px; /* ⬅️ 줄임 */
-  padding:0 16px;
-  border:1px solid rgba(17,17,17,.18);
-  color:rgba(17,17,17,.85);
-  background:transparent;
-  text-decoration:none;
-  letter-spacing:.14em;
-  font-size:12px;
-  transition: transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease);
-}
-
-.contact-btn:hover{
-  transform: translateY(-2px);
-  border-color: rgba(17,17,17,.35);
+.action-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(17,17,17,.28);
   background: rgba(17,17,17,.03);
 }
 
-/* CONTACT 하단 FOOTER 라인 + 카피라이트 */
-.site-footer{
-  max-width:1200px;
-  margin:60px auto 0;
-  padding-top:22px;
-  border-top:1px solid rgba(17,17,17,.10);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:18px;
-  color: rgba(17,17,17,.55);
-  font-size:12px;
-  letter-spacing:.10em;
+/* footer line + copyright */
+.site-footer {
+  padding: 16px 20px 26px;
+  background: var(--white);
+  border-top: 1px solid var(--line);
 }
 
-.site-footer .left{
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: .08em;
 }
 
-.site-footer a{
-  color: rgba(17,17,17,.60);
-  text-decoration:none;
-  border-bottom:1px solid rgba(17,17,17,.14);
-  padding-bottom:2px;
+/* toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: rgba(17,17,17,.86);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: .08em;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
 }
-
-.site-footer a:hover{
-  border-bottom-color: rgba(17,17,17,.30);
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
 }
 
 /* MOBILE */
-@media (max-width:768px){
-  #contact{ padding: 80px 16px 90px; }
+@media (max-width:768px) {
+  section { padding: 90px 20px; }
 
-  .contact-head{
-    flex-direction:column;
-    align-items:flex-start;
-    margin-bottom:28px;
+  .hero-inner {
+    margin-left: 0;
+    text-align: center;
+    padding: 0 16px;
   }
 
-  .contact-sub{ text-align:left; }
-
-  .contact-grid{
-    grid-template-columns:1fr;
-    gap:26px;
+  .about-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 36px;
   }
 
-  .contact-block::before{ display:none; }
+  .about-line { margin: 16px auto 16px; }
 
-  .info-row{ grid-template-columns: 110px 1fr; }
-
-  .center-phone{ font-size:28px; }
-
-  .site-footer{
-    margin-top:44px;
-    flex-direction:column;
-    align-items:flex-start;
-  }
-}
-
-
-
-/* MOBILE */
-@media (max-width:768px){
-  .hero-inner{
-    margin-left:0;
-    padding:0 20px;
-    text-align:center;
-  }
-  .hero h1{
-    font-size:38px;
-    letter-spacing:.12em;
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .about-inner{
-    grid-template-columns:1fr;
-    gap:50px;
-  }
-  .about-left h2{ text-align:center; }
-  .about-left{ text-align:center; }
-  .about-line{ margin:18px auto 22px; }
-  .about-tagline{ text-align:center; }
-  .about-right{
-    text-align:center;
-    padding-top:0;
-  }
-  .about-right::before{ display:none; }
-  .about-stats{ justify-content:center; }
+  .contact-section { padding: 70px 20px; }
+  .contact-head { flex-direction: column; gap: 8px; }
 
-  .product-grid{
-    grid-template-columns:1fr;
-    gap:40px;
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
   }
+  .contact-grid::before { display: none; }
+
+  .info-list {
+    grid-template-columns: 1fr;
+  }
+  .info-list .label { margin-top: 10px; }
 }
 </style>
 </head>
@@ -670,7 +514,7 @@ h2{
 </nav>
 
 <header class="hero">
-  <div class="hero-inner" id="heroText">
+  <div class="hero-inner">
     <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
     <p>건축 공간의 품질을 완성하는<br>토탈 세라믹 & 욕실 자재 솔루션</p>
   </div>
@@ -678,6 +522,7 @@ h2{
 
 <section id="about" class="about-section">
   <div class="about-inner">
+
     <div class="about-left fade-up">
       <h2>ABOUT US</h2>
       <span class="about-line"></span>
@@ -695,10 +540,11 @@ h2{
       </p>
 
       <div class="about-stats">
-        <strong id="expCounter" data-count="15">0</strong>
+        <strong data-count="15">0</strong>
         <span>YEARS EXPERIENCE</span>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -746,203 +592,152 @@ h2{
   </div>
 </section>
 
-<section id="contact">
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
   <div class="contact-inner fade-up">
 
     <div class="contact-head">
-      <h2 class="contact-title">CONTACT</h2>
-      <p class="contact-sub">
-        DAE MYUNG ENCOM · COMPANY INFORMATION & CUSTOMER CENTER
-      </p>
+      <h2>CONTACT</h2>
+      <div class="contact-kicker">DAE MYUNG ENCOM · COMPANY INFORMATION & CUSTOMER CENTER</div>
     </div>
 
     <div class="contact-grid">
 
-      <!-- COMPANY INFO -->
-      <div class="contact-block">
-        <div class="contact-label">COMPANY INFO</div>
+      <!-- LEFT: COMPANY INFO -->
+      <div>
+        <p class="contact-block-title">COMPANY INFO</p>
 
-        <ul class="info-list">
-          <li class="info-row">
-            <div class="info-key">상호명</div>
-            <div class="info-val">(주)대명엔컴</div>
-          </li>
-          <li class="info-row">
-            <div class="info-key">대표자명</div>
-            <div class="info-val">송영식</div>
-          </li>
-          <li class="info-row">
-  <div class="info-key">사업장 주소</div>
-  <div class="info-val">
-    <span id="companyAddress">(22218) 인천 미추홀구 한나루로 448</span>
-    <button type="button" class="copy-btn" data-copy="#companyAddress">COPY</button>
-  </div>
-</li>
+        <div class="info-list">
+          <div class="label">상호명</div><div>(주)대명엔컴</div>
+          <div class="label">대표자명</div><div>송영식</div>
 
-          <li class="info-row">
-            <div class="info-key">대표 전화</div>
-            <div class="info-val">032-866-0004</div>
-          </li>
-          <li class="info-row">
-            <div class="info-key">FAX</div>
-            <div class="info-val">032-875-1292</div>
-          </li>
-          <li class="info-row">
-            <div class="info-key">사업자등록번호</div>
-            <div class="info-val">121-81-88898</div>
-          </li>
-        </ul>
+          <div class="label">사업장 주소</div>
+          <div class="value-inline">
+            <span id="addrText">(22218) 인천 미추홀구 한나루로 448</span>
+            <button type="button" class="copy-btn" id="copyAddrBtn">COPY</button>
+          </div>
+
+          <div class="label">대표 전화</div><div>032-866-0004</div>
+          <div class="label">FAX</div><div>032-875-1292</div>
+          <div class="label">사업자 등록증</div><div>121-81-88898</div>
+        </div>
       </div>
 
-      <!-- CUSTOMER CENTER -->
-      <div class="contact-block center-box">
-  <div class="contact-label">CUSTOMER CENTER</div>
+      <!-- RIGHT: CUSTOMER CENTER (박스 없음) -->
+      <div>
+        <p class="contact-block-title">CUSTOMER CENTER</p>
 
-  <p class="center-phone">032-866-0004</p>
-  <p class="center-hours">
-    <b>월 - 금</b> 09:00 ~ 18:00<br>
-    <b>토</b> 09:00 ~ 15:00<br>
-    <b>일</b> 정기휴무
-  </p>
+        <p class="center-phone">032-866-0004</p>
+        <p class="center-hours">
+          월 - 금 09:00 ~ 18:00<br>
+          토 09:00 ~ 15:00<br>
+          일 정기휴무
+        </p>
 
-  <div class="contact-actions">
-    <a class="contact-btn" href="tel:0328660004">전화하기</a>
-    <a class="contact-btn" href="https://maps.google.com/?q=인천%20미추홀구%20한나루로%20448" target="_blank" rel="noopener">지도 보기</a>
-  </div>
-</div>
-<div class="site-footer">
-  <div class="left">
-    <span>DAE MYUNG ENCOM</span>
-    <a href="#about">ABOUT</a>
-    <a href="#products">PRODUCT</a>
-  </div>
-  <div class="right">
-    © <span id="yearNow"></span> DAE MYUNG ENCOM. ALL RIGHTS RESERVED.
-  </div>
-</div>
+        <div class="center-actions">
+          <a class="action-btn" href="tel:0328660004">전화 하기</a>
+          <!-- 지도 링크는 원하시는 주소로 바꿔도 됨 -->
+          <a class="action-btn" href="https://maps.google.com/?q=인천+미추홀구+한나루로+448" target="_blank" rel="noopener">지도 보기</a>
+        </div>
+      </div>
 
+    </div>
+  </div>
 </section>
 
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>© <span id="year"></span> DAE MYUNG ENCOM. All rights reserved.</div>
+    <div>INCHON · KOREA</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">주소가 복사되었습니다.</div>
+
 <script>
-/* =========================================================
-   1) PRODUCT CARD: 스크롤 들어올 때마다 재등장 (show 토글)
-   ========================================================= */
-const cardObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    } else {
-      entry.target.classList.remove('show'); // ← 스크롤 다시 올라가면 사라졌다가 내려오면 재등장
-    }
-  });
-}, { threshold: 0.45 });
-
-document.querySelectorAll('.product-card').forEach(card => cardObserver.observe(card));
-
-/* =========================================================
-   2) FADE-UP: ABOUT 두 칼럼 애니메이션
-   ========================================================= */
-const fadeObserver = new IntersectionObserver((entries) => {
+/* PRODUCT CARD: 스크롤 등장(좌/하/우) */
+const cards = document.querySelectorAll('.product-card');
+const cardObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('show');
-    else entry.target.classList.remove('show'); // 재등장 원하면 유지
+    else entry.target.classList.remove('show'); // 스크롤할 때마다 다시 보이게(원하면 제거 가능)
   });
 }, { threshold: 0.35 });
+cards.forEach(card => cardObserver.observe(card));
 
-document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
-
-/* =========================================================
-   3) HERO TEXT PARALLAX
-   ========================================================= */
-const heroText = document.getElementById('heroText');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY || 0;
-  heroText.style.transform = `translateY(${y * 0.22}px)`;
-}, { passive: true });
-
-/* =========================================================
-   4) ABOUT COUNT-UP (섹션 들어오면 0 -> 15, 다시 올라갔다 내려오면 다시)
-   ========================================================= */
-const counterEl = document.getElementById('expCounter');
-
-function runCountUp(el) {
-  const target = Number(el.dataset.count || 0);
-  const duration = 900;                 // ms
-  const start = 0;
-  const startTime = performance.now();
-
-  // 이미 0이 아니면(예: 이전 실행) 다시 0으로 리셋하고 시작
-  el.textContent = '0';
-
-  function tick(now) {
-    const t = Math.min(1, (now - startTime) / duration);
-    const eased = 1 - Math.pow(1 - t, 3); // 부드러운 easeOutCubic
-    const value = Math.floor(start + (target - start) * eased);
-    el.textContent = String(value);
-
-    if (t < 1) requestAnimationFrame(tick);
-    else el.textContent = String(target);
-  }
-  requestAnimationFrame(tick);
-}
-
-let countedOnce = false;
-
-const countObserver = new IntersectionObserver((entries) => {
+/* FADE-UP: ABOUT/CONTACT */
+const fades = document.querySelectorAll('.fade-up');
+const fadeObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      // 들어오면 실행
-      runCountUp(entry.target);
-      countedOnce = true;
-    } else {
-      // 화면 밖으로 나가면 다음에 다시 들어올 때 재실행 가능하게
-      if (countedOnce) entry.target.textContent = '0';
-    }
+    if (entry.isIntersecting) entry.target.classList.add('show');
+    else entry.target.classList.remove('show'); // 스크롤 시 반복(원하면 제거 가능)
   });
-}, { threshold: 0.6 });
+}, { threshold: 0.35 });
+fades.forEach(el => fadeObserver.observe(el));
 
-countObserver.observe(counterEl);
-  /* FOOTER YEAR */
-document.getElementById('yearNow').textContent = new Date().getFullYear();
-
-/* COPY BUTTON */
-document.querySelectorAll('[data-copy]').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    const sel = btn.getAttribute('data-copy');
-    const target = document.querySelector(sel);
-    if (!target) return;
-
-    const text = target.textContent.trim();
-
-    try {
-      await navigator.clipboard.writeText(text);
-      btn.classList.add('copied');
-      const prev = btn.textContent;
-      btn.textContent = 'COPIED';
-      setTimeout(() => {
-        btn.textContent = prev;
-        btn.classList.remove('copied');
-      }, 900);
-    } catch (e) {
-      // clipboard가 막힌 환경(일부 브라우저/보안설정) 대비
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-
-      btn.classList.add('copied');
-      const prev = btn.textContent;
-      btn.textContent = 'COPIED';
-      setTimeout(() => {
-        btn.textContent = prev;
-        btn.classList.remove('copied');
-      }, 900);
-    }
-  });
+/* HERO PARALLAX */
+const heroText = document.querySelector('.hero-inner');
+window.addEventListener('scroll', () => {
+  heroText.style.transform = `translateY(${window.scrollY * 0.25}px)`;
 });
 
+/* ABOUT COUNT UP */
+const counter = document.querySelector('[data-count]');
+const countObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    const el = entry.target;
+    const target = +el.dataset.count;
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 40));
+
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        el.textContent = target;
+        clearInterval(timer);
+      } else {
+        el.textContent = current;
+      }
+    }, 30);
+
+    countObserver.unobserve(el); // 1번만 실행
+  });
+}, { threshold: 0.6 });
+if (counter) countObserver.observe(counter);
+
+/* COPY ADDRESS + TOAST */
+const copyBtn = document.getElementById('copyAddrBtn');
+const addrText = document.getElementById('addrText');
+const toast = document.getElementById('toast');
+
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 1400);
+}
+
+if (copyBtn && addrText) {
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(addrText.textContent.trim());
+      showToast('주소가 복사되었습니다.');
+    } catch (e) {
+      // 구형 브라우저 fallback
+      const t = document.createElement('textarea');
+      t.value = addrText.textContent.trim();
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand('copy');
+      document.body.removeChild(t);
+      showToast('주소가 복사되었습니다.');
+    }
+  });
+}
+
+/* FOOTER YEAR */
+document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
 </body>
