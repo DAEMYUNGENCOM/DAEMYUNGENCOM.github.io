@@ -750,14 +750,19 @@
     }, { threshold: 0.35 });
     fades.forEach(el => fadeObserver.observe(el));
 
-    /* PRODUCT CARD: 등장(좌/하/우) */
-    const cards = document.querySelectorAll('.product-card');
-    const cardObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('show');
-      });
-    }, { threshold: 0.35 });
-    cards.forEach(card => cardObserver.observe(card));
+    /* PRODUCT CARD: 스크롤할 때마다 등장(반복) */
+const cards = document.querySelectorAll('.product-card');
+const cardObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    } else {
+      entry.target.classList.remove('show'); // ✅ 화면에서 벗어나면 리셋
+    }
+  });
+}, { threshold: 0.35 });
+
+cards.forEach(card => cardObserver.observe(card));
 
     /* ABOUT COUNT UP (진입 시 1회) */
     const counter = document.querySelector('[data-count]');
