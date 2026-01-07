@@ -86,6 +86,36 @@ nav {
   letter-spacing: .18em;
   margin-bottom: 24px;
 }
+  .hero-actions{
+  margin-top: 26px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.hero-btn{
+  height: 44px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.45);
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: .14em;
+  transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(6px);
+}
+.hero-btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.6);
+}
+.hero-btn--primary{
+  background: rgba(255,255,255,.18);
+}
+
 
 /* SECTION */
 section {
@@ -147,6 +177,7 @@ h2 {
 .about-right {
   padding-top: 6px;
 }
+  
 
 .about-desc {
   font-size: 15px;
@@ -165,6 +196,26 @@ h2 {
   font-size: 12px;
   letter-spacing: .18em;
   color: var(--text-muted);
+}
+  .about-points{
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.point{
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+.point-title{
+  font-size: 12px;
+  letter-spacing: .18em;
+  margin-bottom: 6px;
+}
+.point-desc{
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-sub);
 }
 
 /* PRODUCT */
@@ -497,6 +548,46 @@ h2 {
   }
   .info-list .label { margin-top: 10px; }
 }
+  .showroom-section{
+  background: var(--white);
+}
+.showroom-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: center;
+}
+.showroom-copy h2{
+  text-align: left;
+  margin: 0 0 18px;
+}
+.showroom-copy p{
+  margin: 0 0 18px;
+  color: var(--text-sub);
+  line-height: 1.9;
+  font-size: 15px;
+}
+.showroom-media img{
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+@media (max-width:768px){
+  .showroom-inner{
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .showroom-copy h2{
+    text-align: center;
+  }
+  .showroom-media img{
+    height: 320px;
+  }
+}
 </style>
 </head>
 
@@ -514,14 +605,14 @@ h2 {
 </nav>
 
 <header class="hero">
-  <div class="hero-inner">
+    <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
+    <p>건축 공간의 품질을 완성하는<br>토탈 세라믹 & 욕실 자재 솔루션</p>
+    <div class="hero-inner">
     <div class="hero-actions">
   <a class="hero-btn hero-btn--primary" href="#products">제품 카테고리</a>
   <a class="hero-btn" href="#contact">문의하기</a>
 </div>
 
-    <h1>ARCHITECTURAL<br>CERAMIC SOLUTIONS</h1>
-    <p>건축 공간의 품질을 완성하는<br>토탈 세라믹 & 욕실 자재 솔루션</p>
   </div>
 </header>
 
@@ -548,8 +639,21 @@ h2 {
       <div class="about-stats">
         <strong data-count="15">0</strong>
         <span>YEARS EXPERIENCE</span>
-      </div>
-    </div>
+      <div class="about-points">
+  <div class="point">
+    <div class="point-title">DIRECT SOURCING</div>
+    <div class="point-desc">직수입 및 공급 구조로 유통 단계를 최소화합니다.</div>
+  </div>
+  <div class="point">
+    <div class="point-title">STANDARD & QUALITY</div>
+    <div class="point-desc">규격과 품질 기준으로 현장에 적합한 자재를 제안합니다.</div>
+  </div>
+  <div class="point">
+    <div class="point-title">SHOWROOM EXPERIENCE</div>
+    <div class="point-desc">사진이 아닌 실제 공간에서 제품을 확인할 수 있습니다.</div>
+  </div>
+</div>
+
 
   </div>
 </section>
@@ -596,7 +700,23 @@ h2 {
     </a>
 
   </div>
+<section id="showroom" class="showroom-section">
+  <div class="showroom-inner fade-up">
+    <div class="showroom-copy">
+      <h2>SHOWROOM</h2>
+      <p>
+        제품을 사진이 아닌 실제 공간에서 확인할 수 있는<br>
+        대명엔컴 쇼룸을 운영합니다.
+      </p>
+      <a class="action-btn" href="#contact">쇼룸 문의</a>
+    </div>
+
+    <div class="showroom-media">
+      <img src="showroom.jpg" alt="DAE MYUNG ENCOM Showroom">
+    </div>
+  </div>
 </section>
+
 
 <!-- CONTACT -->
 <section id="contact" class="contact-section">
