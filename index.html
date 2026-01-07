@@ -352,7 +352,7 @@
    ========================= */
 .contact-section{
   background: var(--white);
-  padding: 90px 20px;
+  padding: 64px 20px;
 }
 .contact-inner{
   max-width: 1200px;
@@ -365,7 +365,7 @@
   align-items:flex-end;
   justify-content:space-between;
   gap: 24px;
-  margin-bottom: 34px;
+  margin-bottom: 18px;
   padding-bottom: 18px;
   border-bottom: 1px solid var(--line);
 }
@@ -385,7 +385,7 @@
 .contact-grid{
   display:grid;
   grid-template-columns: 1.1fr .9fr;
-  gap: 64px;
+  gap: 48px;
   align-items:start;
   position:relative;
 }
@@ -399,6 +399,7 @@
   bottom: 0;
   width: 1px;
   background: var(--hairline);
+  display: none !important;
 }
 
 /* 블록 타이틀 */
@@ -412,9 +413,9 @@
 /* COMPANY INFO 리스트 (더 타이트하게) */
 .info-list{
   display:grid;
-  grid-template-columns: 130px 1fr;
-  row-gap: 10px;
-  column-gap: 18px;
+  grid-template-columns: 100px 1fr;
+  row-gap: 8px;
+  column-gap: 14px;
   font-size: 13px;
   line-height: 1.7;
   color: var(--text-sub);
@@ -451,17 +452,17 @@
 
 /* CUSTOMER CENTER (타이포 중심) */
 .center-phone{
-  font-size: 40px;
+  font-size: 26px;
   font-weight: 700;
   letter-spacing: .02em;
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   color: var(--text-main);
 }
 .center-hours{
-  margin: 0 0 22px;
+  margin: 0 0 16px;
   font-size: 13px;
   color: var(--text-sub);
-  line-height: 1.9;
+  line-height: 1.7;
 }
 
 /* 버튼: 통일감 있게 */
@@ -469,6 +470,7 @@
   display:flex;
   gap: 10px;
   flex-wrap: wrap;
+  margin-top: 6px;
 }
 .action-btn{
   display:inline-flex;
@@ -559,7 +561,7 @@
 
 /* CONTACT v2 - MOBILE OVERRIDE (추가) */
 @media (max-width:768px){
-  .contact-section{ padding: 80px 20px; }
+  .contact-section{ padding: 56px 18px; }
 
   .contact-head{
     flex-direction: column;
@@ -576,14 +578,14 @@
 
   .info-list{
     grid-template-columns: 1fr;
-    row-gap: 8px;
+    row-gap: 7px;
   }
   .info-list .label{
     margin-top: 10px;
   }
 
   .center-phone{
-    font-size: 34px; /* 모바일에서는 너무 크지 않게 */
+    font-size: 26px; /* 모바일에서는 너무 크지 않게 */
   }
 }
 
