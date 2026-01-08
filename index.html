@@ -393,15 +393,25 @@
       display:block;
     }
     .slider-dots{
+      position:absolute;
+  left:50%;
+  bottom:16px;
+  transform:translateX(-50%);
       display:flex;
       gap:8px;
       margin-top:14px;
+      z-index:5;
+
+      padding:8px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(6px);
     }
     .dot{
       width:8px;
       height:8px;
       border-radius:50%;
-      background:#ccc;
+      background:rgba(17,17,17,.25);
       border:none;
       cursor:pointer;
       padding:0;
@@ -765,7 +775,6 @@
           <div class="slide">
             <img src="수전_전시.jpg" alt="Faucet Display Zone">
           </div>
-        </div>
 
         <div class="slider-dots">
           <button class="dot active" type="button" aria-label="slide 1"></button>
