@@ -344,8 +344,10 @@
 .showroom-title{
   font-size:30px;
   letter-spacing:.12em;
-  margin:0 0 18px;
+  margin:0 0 18px 0;
   line-height:1.25;   /* ✅ 핵심 */
+  padding: 0;            /* ← padding 제거 */
+  text-align: left;      /* ← 혹시 모를 center 상속 차단 */
 }
 
 .showroom-desc{
@@ -365,6 +367,10 @@
   position: relative;
   padding-left: 32px;   /* ✅ 기준선과 텍스트 간격 */
 }
+    .showroom-copy h2{
+  margin-left: 0 !important;
+}
+
 
 .showroom-copy::before{
   content:'';
