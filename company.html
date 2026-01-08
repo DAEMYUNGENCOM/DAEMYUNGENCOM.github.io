@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>COMPANY · DAE MYUNG ENCOM</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f9fafb;
+      --white:#fff;
+      --text-main:#111;
+      --text-sub:#555;
+      --text-muted:#888;
+      --line:#e5e7eb;
+      --hairline:rgba(17,17,17,.10);
+      --ease:cubic-bezier(0.22,1,0.36,1);
+    }
+
+    /* BASE */
+    body{
+      margin:0;
+      padding-top:70px;
+      font-family:'Noto Sans KR',sans-serif;
+      background:var(--bg);
+      color:var(--text-main);
+    }
+    a{ color:inherit; text-decoration:none; }
+
+    /* NAV (메인과 동일) */
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      height:70px;
+      background:var(--white);
+      border-bottom:1px solid var(--line);
+      z-index:1000;
+    }
+    .nav-inner{
+      max-width:1200px;
+      height:100%;
+      margin:0 auto;
+      padding:0 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .nav-inner img{ display:block; }
+    .menu a{
+      margin-left:30px;
+      font-weight:500;
+      letter-spacing:.08em;
+    }
+
+    /* LAYOUT */
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 20px;
+    }
+
+    /* PAGE HERO */
+    .page-hero{
+      background:var(--white);
+      border-bottom:1px solid var(--line);
+      padding:70px 0 46px;
+    }
+    .page-hero h1{
+      margin:0;
+      font-size:40px;
+      letter-spacing:.22em;
+    }
+    .page-hero p{
+      margin:18px 0 0;
+      color:var(--text-sub);
+      line-height:1.9;
+      max-width:760px;
+    }
+    .breadcrumb{
+      margin-top:14px;
+      font-size:12px;
+      letter-spacing:.18em;
+      color:var(--text-muted);
+    }
+
+    /* SECTION BASE */
+    section{
+      background:var(--white);
+      padding:90px 0;
+      border-bottom:1px solid var(--line);
+    }
+    .sec{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:70px;
+      align-items:start;
+    }
+    .sec-left{
+      position:sticky;
+      top:92px; /* nav(70) + 여유 */
+      align-self:start;
+    }
+    .sec-no{
+      font-size:12px;
+      color:var(--text-muted);
+      letter-spacing:.22em;
+      margin-bottom:10px;
+    }
+    .sec-title{
+      margin:0;
+      font-size:36px;
+      letter-spacing:.12em;
+      line-height:1.15;
+    }
+    .sec-right{}
+
+    /* CEO MESSAGE */
+    .ceo-lead{
+      font-size:16px;
+      color:var(--text-sub);
+      line-height:2;
+      margin:0 0 18px;
+    }
+    .ceo-body{
+      font-size:14px;
+      color:var(--text-sub);
+      line-height:2;
+      margin:0 0 18px;
+    }
+    .quote-box{
+      margin:26px 0;
+      padding:22px 24px;
+      border:1px solid var(--line);
+      background:#fafafa;
+      line-height:1.9;
+      color:var(--text-main);
+    }
+    .quote-box strong{
+      display:block;
+      margin-top:10px;
+      font-size:15px;
+    }
+    .ceo-sign{
+      margin-top:26px;
+      display:flex;
+      justify-content:flex-end;
+      align-items:flex-end;
+      gap:10px;
+    }
+    .ceo-sign small{
+      font-size:12px;
+      color:var(--text-muted);
+      letter-spacing:.18em;
+    }
+    .ceo-sign b{
+      font-size:16px;
+      letter-spacing:.04em;
+    }
+
+    /* ORGANIZATION */
+    .org-wrap{
+      margin-top:6px;
+    }
+    .org-top{
+      display:flex;
+      justify-content:center;
+      margin-bottom:26px;
+    }
+    .org-ceo{
+      border:1px solid var(--text-main);
+      padding:14px 18px;
+      min-width:220px;
+      text-align:center;
+      background:#fff;
+    }
+    .org-ceo small{
+      display:block;
+      font-size:12px;
+      letter-spacing:.18em;
+      color:var(--text-muted);
+      margin-bottom:6px;
+    }
+    .org-ceo b{
+      font-size:16px;
+      letter-spacing:.06em;
+    }
+    .org-line{
+      width:1px;
+      height:26px;
+      background:var(--hairline);
+      margin:0 auto 26px;
+    }
+    .org-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+    .org-card{
+      border:1px solid var(--line);
+      background:#fff;
+      padding:18px 18px 16px;
+      min-height:140px;
+    }
+    .org-card h3{
+      margin:0 0 10px;
+      font-size:14px;
+      letter-spacing:.14em;
+    }
+    .org-card p{
+      margin:0;
+      font-size:13px;
+      line-height:1.8;
+      color:var(--text-sub);
+    }
+
+    /* LOCATION */
+    .map{
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .map iframe{
+      width:100%;
+      height:360px;
+      border:0;
+      display:block;
+    }
+    .loc-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    .loc-card{
+      border:1px solid var(--line);
+      background:#fff;
+      padding:18px;
+    }
+    .loc-card h4{
+      margin:0 0 10px;
+      font-size:13px;
+      letter-spacing:.16em;
+    }
+    .loc-card .row{
+      display:grid;
+      grid-template-columns: 90px 1fr;
+      gap:10px;
+      font-size:13px;
+      line-height:1.9;
+      color:var(--text-sub);
+      margin:8px 0;
+    }
+    .loc-card .label{
+      color:var(--text-muted);
+      letter-spacing:.08em;
+    }
+
+    /* FOOTER */
+    .site-footer{
+      padding:18px 20px 26px;
+      background:var(--white);
+    }
+    .footer-inner{
+      max-width:1200px;
+      margin:0 auto;
+      font-size:12px;
+      color:var(--text-muted);
+      letter-spacing:.08em;
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px){
+      .sec{
+        grid-template-columns: 1fr;
+        gap:26px;
+      }
+      .sec-left{
+        position:static;
+        top:auto;
+      }
+      .org-grid{
+        grid-template-columns: 1fr;
+      }
+      .loc-grid{
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 768px){
+      .page-hero{ padding:56px 0 36px; }
+      .page-hero h1{ font-size:32px; }
+      section{ padding:70px 0; }
+      .sec-title{ font-size:30px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html">
+        <img src="대명엔컴-영문로고 (워터마크).png" height="28" alt="DAE MYUNG ENCOM">
+      </a>
+      <div class="menu">
+        <a href="company.html">COMPANY</a>
+        <a href="index.html#products">PRODUCT</a>
+        <a href="index.html#contact">CONTACT</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <h1>COMPANY</h1>
+      <p>
+        대명엔컴은 타일, 위생도기, 수전 등 건축 공간의 완성도를 결정하는 마감 자재를
+        정확한 기준과 합리적인 공급 구조로 제안합니다.
+      </p>
+      <div class="breadcrumb">HOME · COMPANY</div>
+    </div>
+  </header>
+
+  <!-- 01 CEO MESSAGE -->
+  <section id="ceo">
+    <div class="container sec">
+      <div class="sec-left">
+        <div class="sec-no">01</div>
+        <h2 class="sec-title">CEO<br>MESSAGE</h2>
+      </div>
+
+      <div class="sec-right">
+        <p class="ceo-lead"><b>안녕하십니까.</b></p>
+
+        <p class="ceo-body">
+          대명엔컴은 타일, 수전, 위생도기를 중심으로<br>
+          공간에 필요한 인테리어 자재를 보다 정확하고 합리적으로 제공하기 위해 설립된<br>
+          인테리어 자재 전문 기업입니다.
+        </p>
+
+        <p class="ceo-body">
+          급변하는 시장 환경 속에서 단순한 유통을 넘어,<br>
+          실제 공간에 오래 사용될 수 있는 규격과 품질을 기준으로 한 자재 선택이<br>
+          무엇보다 중요하다고 생각합니다.<br>
+          현장과 사용 환경에 적합한 검증된 자재를 제안하는 데 집중해 왔습니다.
+        </p>
+
+        <div class="quote-box">
+          직접 수입 및 공급 구조를 통해 불필요한 유통 단계를 최소화하고,<br>
+          합리적인 가격과 안정적인 품질을 동시에 제공함으로써<br>
+          고객과 현장으로부터 신뢰받는 파트너가 되고자 합니다.
+          <strong>
+            또한 쇼룸 운영을 통해 제품을 사진이 아닌 실제 공간에서 직접 확인할 수 있는 환경을 마련하고,
+            보다 정확한 선택을 돕고 있습니다.
+          </strong>
+        </div>
+
+        <p class="ceo-body">
+          대명엔컴은 단순히 제품을 판매하는 기업이 아닌,<br>
+          공간의 완성도를 함께 고민하는 자재 파트너로서<br>
+          고객 여러분의 선택에 책임을 다하겠습니다.
+        </p>
+
+        <p class="ceo-body">
+          앞으로도 정확한 기준과 성실한 자세로,<br>
+          오래 쓰이는 공간을 만드는 데 꾸준히 기여하는 기업이 되겠습니다.<br>
+          감사합니다.
+        </p>
+
+        <div class="ceo-sign">
+          <small>CEO</small>
+          <b>(주)대명엔컴 대표 송영식</b>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 ORGANIZATION -->
+  <section id="organization">
+    <div class="container sec">
+      <div class="sec-left">
+        <div class="sec-no">02</div>
+        <h2 class="sec-title">ORGANIZATION</h2>
+      </div>
+
+      <div class="sec-right org-wrap">
+        <div class="org-top">
+          <div class="org-ceo">
+            <small>CEO</small>
+            <b>대표이사</b>
+          </div>
+        </div>
+
+        <div class="org-line"></div>
+
+        <div class="org-grid">
+          <div class="org-card">
+            <h3>MANAGEMENT</h3>
+            <p>
+              운영 / 관리<br>
+              회계 / 인사<br>
+              구매 / 물류
+            </p>
+          </div>
+
+          <div class="org-card">
+            <h3>SALES</h3>
+            <p>
+              국내 영업<br>
+              프로젝트 제안<br>
+              파트너 커뮤니케이션
+            </p>
+          </div>
+
+          <div class="org-card">
+            <h3>SHOWROOM</h3>
+            <p>
+              쇼룸 운영 / 상담<br>
+              제품 전시 관리<br>
+              방문 응대 / 견적
+            </p>
+          </div>
+
+          <div class="org-card">
+            <h3>SOURCING</h3>
+            <p>
+              직수입 / 공급 관리<br>
+              품질 기준 관리<br>
+              제품 라인업 구성
+            </p>
+          </div>
+
+          <div class="org-card">
+            <h3>E-COMMERCE</h3>
+            <p>
+              온라인 운영<br>
+              콘텐츠 / 업데이트<br>
+              고객 응대
+            </p>
+          </div>
+
+          <div class="org-card">
+            <h3>PROJECT SUPPORT</h3>
+            <p>
+              현장 지원<br>
+              자재 조합 제안<br>
+              납품 일정 협의
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 LOCATION -->
+  <section id="location">
+    <div class="container sec">
+      <div class="sec-left">
+        <div class="sec-no">03</div>
+        <h2 class="sec-title">LOCATION</h2>
+      </div>
+
+      <div class="sec-right">
+        <div class="map">
+          <!-- Google 지도 임베드: 주소를 바꾸려면 iframe src만 교체하면 됨 -->
+          <iframe
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=%EC%9D%B8%EC%B2%9C%20%EB%AF%B8%EC%B6%94%ED%99%80%EA%B5%AC%20%ED%95%9C%EB%82%98%EB%A3%A8%EB%A1%9C%20448&output=embed">
+          </iframe>
+        </div>
+
+        <div class="loc-grid">
+          <div class="loc-card">
+            <h4>HEADQUARTERS / SHOWROOM</h4>
+            <div class="row">
+              <div class="label">주소</div>
+              <div>(22218) 인천광역시 미추홀구 한나루로 448</div>
+            </div>
+            <div class="row">
+              <div class="label">운영</div>
+              <div>월-금 09:00-18:00 / 토 09:00-15:00 / 일 정기휴무</div>
+            </div>
+          </div>
+
+          <div class="loc-card">
+            <h4>CONTACT INFO</h4>
+            <div class="row">
+              <div class="label">Tel</div>
+              <div>032-866-0004</div>
+            </div>
+            <div class="row">
+              <div class="label">Fax</div>
+              <div>032-875-1292</div>
+            </div>
+            <div class="row">
+              <div class="label">Email</div>
+              <div><a href="mailto:dmencom2@naver.com">dmencom2@naver.com</a></div>
+            </div>
+            <div class="row">
+              <div class="label">Map</div>
+              <div><a href="https://maps.google.com/?q=인천광역시+미추홀구+한나루로+448" target="_blank" rel="noopener">Google Maps 열기</a></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      © <span id="year"></span> DAE MYUNG ENCOM. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
