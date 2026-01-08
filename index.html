@@ -408,15 +408,21 @@
   backdrop-filter:blur(6px);
     }
     .dot{
-      width:8px;
-      height:8px;
+      width:7px;
+      height:7px;
       border-radius:50%;
-      background:rgba(17,17,17,.25);
+      background:rgba(255,255,255,.55);
       border:none;
       cursor:pointer;
       padding:0;
     }
-    .dot.active{ background:#111; }
+    .dot.active{ background:#fff;
+  transform:scale(1.25);
+    }
+    /* hover 시 살짝 강조 */
+.dot:hover{
+  background:#fff;
+}
 
     /* =========================
        CONTACT v2
