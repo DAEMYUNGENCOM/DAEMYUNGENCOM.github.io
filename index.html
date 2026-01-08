@@ -399,31 +399,35 @@
   transform:translateX(-50%);
       display:flex;
       gap:8px;
-      margin-top:14px;
       z-index:5;
 
-      padding:8px 10px;
-  border-radius:999px;
-  background:rgba(255,255,255,.65);
-  backdrop-filter:blur(6px);
+      /* 🔥 기존 캡슐 배경 완전 제거 */
+  background:none !important;
+  padding:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
     }
     .dot{
       width:7px;
       height:7px;
       border-radius:50%;
-      background:rgba(255,255,255,.55);
+      background:#111
       border:none;
       cursor:pointer;
       padding:0;
+      opacity:.35;
+      transition:opacity .25s ease, transform .25s ease;
     }
-    .dot.active{ background:#fff;
-  transform:scale(1.25);
-    }
-    /* hover 시 살짝 강조 */
-.dot:hover{
-  background:#fff;
+    /* 활성 점 */
+.dot.active{
+  opacity:1;
+  transform:scale(1.3);
 }
 
+/* hover */
+.dot:hover{
+  opacity:.7;
+}
     /* =========================
        CONTACT v2
        ========================= */
