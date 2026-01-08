@@ -383,6 +383,60 @@
   background:var(--text-main);
   opacity:.9;
 }
+    /* SHOWROOM SLIDER */
+.showroom-slider{
+  position:relative;
+  width:100%;
+  height:420px;
+  overflow:hidden;
+  border-radius:18px;
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity .8s var(--ease);
+}
+
+.slide.active{
+  opacity:1;
+  z-index:1;
+}
+
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* DOT */
+.slider-dots{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#ccc;
+  border:none;
+  cursor:pointer;
+  padding:0;
+}
+.dot.active{
+  background:#111;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .showroom-slider{
+    height:300px;
+  }
+}
+
 
 
    /* =========================
@@ -759,10 +813,25 @@
     </div>
 
     <div class="showroom-media">
+  <div class="showroom-slider">
+    <div class="slide active">
       <img src="대표 쇼룸 컷.jpg" alt="DAE MYUNG ENCOM Showroom">
     </div>
-
+    <div class="slide">
+      <img src="타일장.jpg" alt="Showroom Faucet Zone">
+    </div>
+    <div class="slide">
+      <img src="수전 전시.jpg" alt="Showroom Tile Selection">
+    </div>
   </div>
+
+  <div class="slider-dots">
+    <button class="dot active"></button>
+    <button class="dot"></button>
+    <button class="dot"></button>
+  </div>
+</div>
+
 </section>
 
 
@@ -914,7 +983,31 @@ cards.forEach(card => cardObserver.observe(card));
     /* FOOTER YEAR */
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
-  </script>
+  <script>
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+let current = 0;
+
+function showSlide(index){
+  slides.forEach((s,i)=>{
+    s.classList.toggle('active', i === index);
+    dots[i].classList.toggle('active', i === index);
+  });
+  current = index;
+}
+
+// DOT 클릭
+dots.forEach((dot,i)=>{
+  dot.addEventListener('click', ()=> showSlide(i));
+});
+
+// 자동 슬라이드
+setInterval(()=>{
+  let next = (current + 1) % slides.length;
+  showSlide(next);
+}, 4500);
+</script>
+
 
 </body>
 </html>
