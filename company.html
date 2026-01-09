@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>COMPANY · DAE MYUNG ENCOM</title>
+  <title>DAE MYUNG ENCOM | COMPANY</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 
@@ -27,9 +27,9 @@
       background:var(--bg);
       color:var(--text-main);
     }
-    a{ color:inherit; text-decoration:none; }
+    a{ color:inherit; }
 
-    /* NAV (메인과 동일) */
+    /* NAV (index.html과 통일) */
     nav{
       position:fixed;
       top:0;
@@ -51,255 +51,394 @@
     .nav-inner img{ display:block; }
     .menu a{
       margin-left:30px;
+      text-decoration:none;
+      color:var(--text-main);
       font-weight:500;
       letter-spacing:.08em;
     }
 
-    /* LAYOUT */
-    .container{
-      max-width:1200px;
-      margin:0 auto;
-      padding:0 20px;
-    }
-
-    /* PAGE HERO */
+    /* PAGE HERO (company page top) */
     .page-hero{
       background:var(--white);
       border-bottom:1px solid var(--line);
-      padding:70px 0 46px;
+      padding:54px 20px 44px;
     }
-    .page-hero h1{
-      margin:0;
-      font-size:40px;
-      letter-spacing:.22em;
-    }
-    .page-hero p{
-      margin:18px 0 0;
-      color:var(--text-sub);
-      line-height:1.9;
-      max-width:760px;
-    }
-    .breadcrumb{
-      margin-top:14px;
-      font-size:12px;
-      letter-spacing:.18em;
-      color:var(--text-muted);
-    }
-
-    /* SECTION BASE */
-    section{
-      background:var(--white);
-      padding:90px 0;
-      border-bottom:1px solid var(--line);
-    }
-    .sec{
-      display:grid;
-      grid-template-columns: 320px 1fr;
-      gap:70px;
-      align-items:start;
-    }
-    .sec-left{
-      position:sticky;
-      top:92px; /* nav(70) + 여유 */
-      align-self:start;
-    }
-    .sec-no{
-      font-size:12px;
-      color:var(--text-muted);
-      letter-spacing:.22em;
-      margin-bottom:10px;
-    }
-    .sec-title{
-      margin:0;
-      font-size:36px;
-      letter-spacing:.12em;
-      line-height:1.15;
-    }
-    .sec-right{}
-
-    /* CEO MESSAGE */
-    .ceo-lead{
-      font-size:16px;
-      color:var(--text-sub);
-      line-height:2;
-      margin:0 0 18px;
-    }
-    .ceo-body{
-      font-size:14px;
-      color:var(--text-sub);
-      line-height:2;
-      margin:0 0 18px;
-    }
-    .quote-box{
-      margin:26px 0;
-      padding:22px 24px;
-      border:1px solid var(--line);
-      background:#fafafa;
-      line-height:1.9;
-      color:var(--text-main);
-    }
-    .quote-box strong{
-      display:block;
-      margin-top:10px;
-      font-size:15px;
-    }
-    .ceo-sign{
-      margin-top:26px;
+    .page-hero .wrap{
+      max-width:1200px;
+      margin:0 auto;
       display:flex;
-      justify-content:flex-end;
       align-items:flex-end;
-      gap:10px;
+      justify-content:space-between;
+      gap:24px;
     }
-    .ceo-sign small{
-      font-size:12px;
-      color:var(--text-muted);
-      letter-spacing:.18em;
-    }
-    .ceo-sign b{
-      font-size:16px;
-      letter-spacing:.04em;
-    }
-
-    /* ORGANIZATION */
-    .org-wrap{
-      margin-top:6px;
-    }
-    .org-top{
-      display:flex;
-      justify-content:center;
-      margin-bottom:26px;
-    }
-    .org-ceo{
-      border:1px solid var(--text-main);
-      padding:14px 18px;
-      min-width:220px;
-      text-align:center;
-      background:#fff;
-    }
-    .org-ceo small{
-      display:block;
-      font-size:12px;
-      letter-spacing:.18em;
-      color:var(--text-muted);
-      margin-bottom:6px;
-    }
-    .org-ceo b{
-      font-size:16px;
-      letter-spacing:.06em;
-    }
-    .org-line{
-      width:1px;
-      height:26px;
-      background:var(--hairline);
-      margin:0 auto 26px;
-    }
-    .org-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:18px;
-    }
-    .org-card{
-      border:1px solid var(--line);
-      background:#fff;
-      padding:18px 18px 16px;
-      min-height:140px;
-    }
-    .org-card h3{
-      margin:0 0 10px;
-      font-size:14px;
+    .page-title{
+      margin:0;
+      font-size:34px;
       letter-spacing:.14em;
     }
-    .org-card p{
-      margin:0;
-      font-size:13px;
-      line-height:1.8;
-      color:var(--text-sub);
+    .page-kicker{
+      margin:8px 0 0;
+      font-size:12px;
+      letter-spacing:.22em;
+      color:var(--text-muted);
+    }
+    .page-meta{
+      font-size:12px;
+      letter-spacing:.18em;
+      color:var(--text-muted);
+      white-space:nowrap;
     }
 
-    /* LOCATION */
-    .map{
+    /* SECTION SHARED (A+B) */
+    .cp-section{
+      background:var(--white);
+      padding:96px 20px;
+    }
+    .cp-wrap{
+      max-width:1200px;
+      margin:0 auto;
+    }
+    .cp-head{
+      display:grid;
+      grid-template-columns:80px 1fr;
+      gap:14px 24px;
+      align-items:start;
+      margin-bottom:36px;
+    }
+    .cp-no{
+      font-size:12px;
+      letter-spacing:.22em;
+      color:var(--text-muted);
+      padding-top:6px;
+    }
+    .cp-title{
+      margin:0;
+      text-align:left;
+      font-size:34px;
+      letter-spacing:.10em;
+    }
+    .cp-sub{
+      grid-column:2 / -1;
+      margin:0;
+      color:var(--text-sub);
+      line-height:1.9;
+      font-size:15px;
+      max-width:760px;
+    }
+
+    /* FADE */
+    .fade-up{
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .9s var(--ease), transform .9s var(--ease);
+    }
+    .fade-up.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* =========================
+       01 CEO MESSAGE (매거진 + 카드)
+       ========================= */
+    .ceo-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:42px;
+      align-items:start;
+    }
+
+    .ceo-lede{
+      border-top:1px solid var(--line);
+      padding-top:18px;
+    }
+    .ceo-lede .headline{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:.08em;
+      line-height:1.4;
+    }
+    .ceo-lede .desc{
+      margin:0;
+      color:var(--text-sub);
+      line-height:1.9;
+      font-size:15px;
+    }
+
+    .ceo-body{
+      margin-top:18px;
+      display:grid;
+      gap:14px;
+    }
+    .ceo-body p{
+      margin:0;
+      color:var(--text-sub);
+      line-height:2;
+      font-size:15px;
+    }
+
+    /* 인용: 박스 대신 라인+캡션 (복제 느낌 제거) */
+    .ceo-quote{
+      margin-top:18px;
+      padding:16px 0 0;
+      border-top:1px solid var(--line);
+      position:relative;
+    }
+    .ceo-quote::before{
+      content:'';
+      position:absolute;
+      left:0;
+      top:16px;
+      width:2px;
+      height:64px;
+      background:var(--text-main);
+      opacity:.9;
+    }
+    .ceo-quote .q{
+      margin:0 0 6px;
+      padding-left:16px;
+      font-style:italic;
+      color:var(--text-main);
+      letter-spacing:.01em;
+      line-height:1.8;
+    }
+    .ceo-quote .cap{
+      margin:0;
+      padding-left:16px;
+      font-size:12px;
+      letter-spacing:.18em;
+      color:var(--text-muted);
+    }
+
+    /* 우측: 쇼룸 이미지 카드(선택) */
+    .ceo-media{
       border:1px solid var(--line);
-      border-radius:14px;
+      border-radius:18px;
       overflow:hidden;
       background:#fff;
     }
-    .map iframe{
+    .ceo-media img{
       width:100%;
-      height:360px;
+      height:520px;
+      object-fit:cover;
+      display:block;
+    }
+    .ceo-media .cap{
+      padding:14px 16px 16px;
+      border-top:1px solid var(--line);
+      font-size:12px;
+      letter-spacing:.18em;
+      color:var(--text-muted);
+    }
+
+    .ceo-sign{
+      margin-top:22px;
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      align-items:baseline;
+      border-top:1px solid var(--line);
+      padding-top:16px;
+    }
+    .ceo-sign .role{
+      font-size:12px;
+      letter-spacing:.22em;
+      color:var(--text-muted);
+    }
+    .ceo-sign .name{
+      font-size:14px;
+      letter-spacing:.06em;
+      font-weight:600;
+    }
+
+    /* =========================
+       02 ORGANIZATION (카드 그리드)
+       ========================= */
+    .org-ceo{
+      display:flex;
+      justify-content:center;
+      margin:10px 0 28px;
+    }
+    .org-ceo-card{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:16px;
+      padding:18px 26px;
+      min-width:240px;
+      text-align:center;
+    }
+    .org-ceo-label{
+      font-size:12px;
+      letter-spacing:.22em;
+      color:var(--text-muted);
+      margin-bottom:8px;
+    }
+    .org-ceo-name{
+      font-size:16px;
+      letter-spacing:.06em;
+      font-weight:600;
+    }
+
+    .org-grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:18px;
+    }
+    .org-card{
+      grid-column:span 4;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:18px;
+      padding:18px 18px 16px;
+      transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .org-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 30px rgba(17,17,17,.06);
+    }
+    .org-card-title{
+      margin:0 0 12px;
+      font-size:14px;
+      letter-spacing:.16em;
+    }
+    .org-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .org-tag{
+      display:inline-flex;
+      align-items:center;
+      height:28px;
+      padding:0 10px;
+      border:1px solid rgba(17,17,17,.12);
+      border-radius:999px;
+      font-size:12px;
+      color:var(--text-sub);
+      background:rgba(17,17,17,.02);
+    }
+
+    /* =========================
+       03 LOCATION (지도 + 카드)
+       ========================= */
+    .loc-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+      align-items:start;
+    }
+    .loc-map{
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      background:#fff;
+      min-height:420px;
+    }
+    .loc-map iframe{
+      width:100%;
+      height:420px;
       border:0;
       display:block;
     }
-    .loc-grid{
+
+    .loc-cards{
       display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:18px;
-      margin-top:18px;
+      gap:14px;
     }
     .loc-card{
       border:1px solid var(--line);
+      border-radius:18px;
       background:#fff;
-      padding:18px;
+      padding:16px 16px 14px;
     }
-    .loc-card h4{
+    .loc-card h3{
       margin:0 0 10px;
-      font-size:13px;
-      letter-spacing:.16em;
-    }
-    .loc-card .row{
-      display:grid;
-      grid-template-columns: 90px 1fr;
-      gap:10px;
-      font-size:13px;
-      line-height:1.9;
-      color:var(--text-sub);
-      margin:8px 0;
-    }
-    .loc-card .label{
+      font-size:12px;
+      letter-spacing:.22em;
       color:var(--text-muted);
-      letter-spacing:.08em;
+    }
+    .loc-item{
+      display:grid;
+      grid-template-columns:86px 1fr;
+      gap:8px 10px;
+      font-size:13px;
+      line-height:1.7;
+      color:var(--text-sub);
+    }
+    .loc-item .k{
+      color:var(--text-muted);
+      letter-spacing:.06em;
+    }
+
+    .loc-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .action-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:38px;
+      padding:0 14px;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-decoration:none;
+      color:var(--text-main);
+      border:1px solid rgba(17,17,17,.16);
+      background:transparent;
+      transition:transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+      border-radius:10px;
+    }
+    .action-btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(17,17,17,.28);
+      background:rgba(17,17,17,.03);
     }
 
     /* FOOTER */
     .site-footer{
-      padding:18px 20px 26px;
+      padding:16px 20px 26px;
       background:var(--white);
+      border-top:1px solid var(--line);
     }
     .footer-inner{
       max-width:1200px;
       margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
       font-size:12px;
       color:var(--text-muted);
       letter-spacing:.08em;
     }
 
-    /* MOBILE */
-    @media (max-width: 900px){
-      .sec{
-        grid-template-columns: 1fr;
-        gap:26px;
-      }
-      .sec-left{
-        position:static;
-        top:auto;
-      }
-      .org-grid{
-        grid-template-columns: 1fr;
-      }
-      .loc-grid{
-        grid-template-columns: 1fr;
-      }
+    /* RESPONSIVE */
+    @media(max-width:980px){
+      .page-hero .wrap{ flex-direction:column; align-items:flex-start; }
+      .cp-head{ grid-template-columns:1fr; }
+      .cp-sub{ grid-column:auto; }
+      .ceo-grid{ grid-template-columns:1fr; }
+      .ceo-media img{ height:420px; }
+
+      .org-card{ grid-column:span 6; }
+      .loc-grid{ grid-template-columns:1fr; }
+      .loc-map iframe{ height:360px; }
     }
-    @media (max-width: 768px){
-      .page-hero{ padding:56px 0 36px; }
-      .page-hero h1{ font-size:32px; }
-      section{ padding:70px 0; }
-      .sec-title{ font-size:30px; }
+    @media(max-width:640px){
+      .cp-section{ padding:76px 18px; }
+      .cp-title{ font-size:28px; }
+      .page-title{ font-size:28px; }
+      .org-card{ grid-column:span 12; }
+      .loc-item{ grid-template-columns:1fr; }
+      .loc-map iframe{ height:320px; }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="index.html">
@@ -313,159 +452,174 @@
     </div>
   </nav>
 
+  <!-- PAGE HERO -->
   <header class="page-hero">
-    <div class="container">
-      <h1>COMPANY</h1>
-      <p>
-        대명엔컴은 타일, 위생도기, 수전 등 건축 공간의 완성도를 결정하는 마감 자재를
-        정확한 기준과 합리적인 공급 구조로 제안합니다.
-      </p>
-      <div class="breadcrumb">HOME · COMPANY</div>
+    <div class="wrap">
+      <div>
+        <h1 class="page-title">COMPANY</h1>
+        <p class="page-kicker">DAE MYUNG ENCOM · BRAND & OPERATIONS</p>
+      </div>
+      <div class="page-meta">Updated · <span id="today"></span></div>
     </div>
   </header>
 
   <!-- 01 CEO MESSAGE -->
-  <section id="ceo">
-    <div class="container sec">
-      <div class="sec-left">
-        <div class="sec-no">01</div>
-        <h2 class="sec-title">CEO<br>MESSAGE</h2>
+  <section class="cp-section" id="ceo">
+    <div class="cp-wrap">
+      <div class="cp-head fade-up">
+        <div class="cp-no">01</div>
+        <div>
+          <h2 class="cp-title">CEO MESSAGE</h2>
+          <p class="cp-sub">정확한 기준과 검증된 자재로, 오래 쓰이는 공간을 만듭니다.</p>
+        </div>
       </div>
 
-      <div class="sec-right">
-        <p class="ceo-lead"><b>안녕하십니까.</b></p>
+      <div class="ceo-grid">
+        <!-- Left copy -->
+        <div class="fade-up">
+          <div class="ceo-lede">
+            <h3 class="headline">공간에 필요한 인테리어 자재를 보다 정확하고 합리적으로 제공합니다.</h3>
+            <p class="desc">
+              대명엔컴은 타일, 수전, 위생도기를 중심으로 현장에 적합한 자재를 제안하는 인테리어 자재 전문 기업입니다.
+            </p>
+          </div>
 
-        <p class="ceo-body">
-          대명엔컴은 타일, 수전, 위생도기를 중심으로<br>
-          공간에 필요한 인테리어 자재를 보다 정확하고 합리적으로 제공하기 위해 설립된<br>
-          인테리어 자재 전문 기업입니다.
-        </p>
+          <div class="ceo-body">
+            <p>안녕하십니까.</p>
 
-        <p class="ceo-body">
-          급변하는 시장 환경 속에서 단순한 유통을 넘어,<br>
-          실제 공간에 오래 사용될 수 있는 규격과 품질을 기준으로 한 자재 선택이<br>
-          무엇보다 중요하다고 생각합니다.<br>
-          현장과 사용 환경에 적합한 검증된 자재를 제안하는 데 집중해 왔습니다.
-        </p>
+            <p>
+              대명엔컴은 타일, 수전, 위생도기를 중심으로<br>
+              공간에 필요한 인테리어 자재를 보다 정확하고 합리적으로 제공하기 위해 설립된<br>
+              인테리어 자재 전문 기업입니다.
+            </p>
 
-        <div class="quote-box">
-          직접 수입 및 공급 구조를 통해 불필요한 유통 단계를 최소화하고,<br>
-          합리적인 가격과 안정적인 품질을 동시에 제공함으로써<br>
-          고객과 현장으로부터 신뢰받는 파트너가 되고자 합니다.
-          <strong>
-            또한 쇼룸 운영을 통해 제품을 사진이 아닌 실제 공간에서 직접 확인할 수 있는 환경을 마련하고,
-            보다 정확한 선택을 돕고 있습니다.
-          </strong>
+            <p>
+              급변하는 시장 환경 속에서 단순한 유통을 넘어,<br>
+              실제 공간에 오래 사용될 수 있는 규격과 품질을 기준으로 한 자재 선택이<br>
+              무엇보다 중요하다고 생각합니다.<br>
+              현장과 사용 환경에 적합한 검증된 자재를 제안하는 데 집중해 왔습니다.
+            </p>
+
+            <p>
+              직접 수입 및 공급 구조를 통해 불필요한 유통 단계를 최소화하고,<br>
+              합리적인 가격과 안정적인 품질을 동시에 제공함으로써<br>
+              고객과 현장으로부터 신뢰받는 파트너가 되고자 합니다.<br>
+              또한 쇼룸 운영을 통해 제품을 사진이 아닌 실제 공간에서 직접 확인할 수 있는 환경을 마련하고,<br>
+              보다 정확한 선택을 돕고 있습니다.
+            </p>
+
+            <p>
+              대명엔컴은 단순히 제품을 판매하는 기업이 아닌,<br>
+              공간의 완성도를 함께 고민하는 자재 파트너로서<br>
+              고객 여러분의 선택에 책임을 다하겠습니다.
+            </p>
+
+            <p>
+              앞으로도 정확한 기준과 성실한 자세로,<br>
+              오래 쓰이는 공간을 만드는 데 꾸준히 기여하는 기업이 되겠습니다.<br>
+              감사합니다.
+            </p>
+          </div>
+
+          <div class="ceo-quote">
+            <p class="q">“품질은 기준이고, 신뢰는 약속입니다.”</p>
+            <p class="cap">DAE MYUNG ENCOM · QUALITY STANDARD</p>
+          </div>
+
+          <div class="ceo-sign">
+            <span class="role">(주)대명엔컴 대표</span>
+            <span class="name">송영식</span>
+          </div>
         </div>
 
-        <p class="ceo-body">
-          대명엔컴은 단순히 제품을 판매하는 기업이 아닌,<br>
-          공간의 완성도를 함께 고민하는 자재 파트너로서<br>
-          고객 여러분의 선택에 책임을 다하겠습니다.
-        </p>
-
-        <p class="ceo-body">
-          앞으로도 정확한 기준과 성실한 자세로,<br>
-          오래 쓰이는 공간을 만드는 데 꾸준히 기여하는 기업이 되겠습니다.<br>
-          감사합니다.
-        </p>
-
-        <div class="ceo-sign">
-          <small>CEO</small>
-          <b>(주)대명엔컴 대표 송영식</b>
-        </div>
+        <!-- Right media (선택) -->
+        <aside class="ceo-media fade-up" aria-label="Showroom Image">
+          <!-- 아래 이미지는 너가 업로드한 파일명으로 변경하면 됨 -->
+          <img src="대표_쇼룸_컷.jpg" alt="DAE MYUNG ENCOM Showroom">
+          <div class="cap">SHOWROOM · EXPERIENCE THE MATERIAL</div>
+        </aside>
       </div>
     </div>
   </section>
 
   <!-- 02 ORGANIZATION -->
-  <section id="organization">
-    <div class="container sec">
-      <div class="sec-left">
-        <div class="sec-no">02</div>
-        <h2 class="sec-title">ORGANIZATION</h2>
+  <section class="cp-section" id="organization">
+    <div class="cp-wrap">
+      <div class="cp-head fade-up">
+        <div class="cp-no">02</div>
+        <div>
+          <h2 class="cp-title">ORGANIZATION</h2>
+          <p class="cp-sub">역할 중심의 운영 구조로 납기·품질·서비스의 기준을 안정적으로 유지합니다.</p>
+        </div>
       </div>
 
-      <div class="sec-right org-wrap">
-        <div class="org-top">
-          <div class="org-ceo">
-            <small>CEO</small>
-            <b>대표이사</b>
-          </div>
+      <div class="org-ceo fade-up">
+        <div class="org-ceo-card">
+          <div class="org-ceo-label">CEO</div>
+          <div class="org-ceo-name">대표이사</div>
         </div>
+      </div>
 
-        <div class="org-line"></div>
-
-        <div class="org-grid">
-          <div class="org-card">
-            <h3>MANAGEMENT</h3>
-            <p>
-              운영 / 관리<br>
-              회계 / 인사<br>
-              구매 / 물류
-            </p>
+      <div class="org-grid fade-up">
+        <article class="org-card">
+          <h3 class="org-card-title">관리부</h3>
+          <div class="org-tags">
+            <span class="org-tag">무역팀</span>
+            <span class="org-tag">회계팀</span>
           </div>
+        </article>
 
-          <div class="org-card">
-            <h3>SALES</h3>
-            <p>
-              국내 영업<br>
-              프로젝트 제안<br>
-              파트너 커뮤니케이션
-            </p>
+        <article class="org-card">
+          <h3 class="org-card-title">영업부</h3>
+          <div class="org-tags">
+            <span class="org-tag">영업팀</span>
+            <span class="org-tag">건설영업팀</span>
           </div>
+        </article>
 
-          <div class="org-card">
-            <h3>SHOWROOM</h3>
-            <p>
-              쇼룸 운영 / 상담<br>
-              제품 전시 관리<br>
-              방문 응대 / 견적
-            </p>
+        <article class="org-card">
+          <h3 class="org-card-title">물류팀</h3>
+          <div class="org-tags">
+            <span class="org-tag">입고팀</span>
+            <span class="org-tag">출고팀</span>
           </div>
+        </article>
 
-          <div class="org-card">
-            <h3>SOURCING</h3>
-            <p>
-              직수입 / 공급 관리<br>
-              품질 기준 관리<br>
-              제품 라인업 구성
-            </p>
+        <article class="org-card">
+          <h3 class="org-card-title">제조</h3>
+          <div class="org-tags">
+            <span class="org-tag">생산팀</span>
+            <span class="org-tag">조립팀</span>
+            <span class="org-tag">출고팀</span>
           </div>
+        </article>
 
-          <div class="org-card">
-            <h3>E-COMMERCE</h3>
-            <p>
-              온라인 운영<br>
-              콘텐츠 / 업데이트<br>
-              고객 응대
-            </p>
+        <article class="org-card">
+          <h3 class="org-card-title">디자인</h3>
+          <div class="org-tags">
+            <span class="org-tag">연구개발팀</span>
           </div>
-
-          <div class="org-card">
-            <h3>PROJECT SUPPORT</h3>
-            <p>
-              현장 지원<br>
-              자재 조합 제안<br>
-              납품 일정 협의
-            </p>
-          </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- 03 LOCATION -->
-  <section id="location">
-    <div class="container sec">
-      <div class="sec-left">
-        <div class="sec-no">03</div>
-        <h2 class="sec-title">LOCATION</h2>
+  <section class="cp-section" id="location">
+    <div class="cp-wrap">
+      <div class="cp-head fade-up">
+        <div class="cp-no">03</div>
+        <div>
+          <h2 class="cp-title">LOCATION</h2>
+          <p class="cp-sub">방문 전 연락 주시면 보다 정확한 안내와 상담을 도와드립니다.</p>
+        </div>
       </div>
 
-      <div class="sec-right">
-        <div class="map">
-          <!-- Google 지도 임베드: 주소를 바꾸려면 iframe src만 교체하면 됨 -->
+      <div class="loc-grid">
+        <!-- MAP -->
+        <div class="loc-map fade-up">
+          <!-- 구글 지도 임베드: 주소/좌표는 원하시는 것으로 교체하세요 -->
+          <!-- 현재는 '인천 미추홀구 한나루로 448' 기준 검색 임베드 (표시만) -->
           <iframe
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -473,52 +627,73 @@
           </iframe>
         </div>
 
-        <div class="loc-grid">
+        <!-- CARDS -->
+        <div class="loc-cards fade-up">
           <div class="loc-card">
-            <h4>HEADQUARTERS / SHOWROOM</h4>
-            <div class="row">
-              <div class="label">주소</div>
-              <div>(22218) 인천광역시 미추홀구 한나루로 448</div>
+            <h3>HEADQUARTERS</h3>
+            <div class="loc-item">
+              <div class="k">주소</div><div>(22218) 인천광역 미추홀구 한나루로 448</div>
+              <div class="k">전화</div><div>032-866-0004</div>
+              <div class="k">FAX</div><div>032-875-1292</div>
             </div>
-            <div class="row">
-              <div class="label">운영</div>
-              <div>월-금 09:00-18:00 / 토 09:00-15:00 / 일 정기휴무</div>
+            <div class="loc-actions">
+              <a class="action-btn" href="tel:0328660004">전화 하기</a>
+              <a class="action-btn" target="_blank" rel="noopener"
+                 href="https://maps.google.com/?q=%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C+%EB%AF%B8%EC%B6%94%ED%99%80%EA%B5%AC+%ED%95%9C%EB%82%98%EB%A3%A8%EB%A1%9C+448">
+                지도 보기
+              </a>
             </div>
           </div>
 
           <div class="loc-card">
-            <h4>CONTACT INFO</h4>
-            <div class="row">
-              <div class="label">Tel</div>
-              <div>032-866-0004</div>
+            <h3>SHOWROOM</h3>
+            <div class="loc-item">
+              <div class="k">안내</div><div>제품을 실제 공간에서 확인 가능한 쇼룸 운영</div>
+              <div class="k">상담</div><div>방문/프로젝트 상담은 사전 예약 권장</div>
+              <div class="k">운영</div><div>월–금 09:00–18:00 · 토 09:00–15:00 · 일 정기휴무</div>
             </div>
-            <div class="row">
-              <div class="label">Fax</div>
-              <div>032-875-1292</div>
-            </div>
-            <div class="row">
-              <div class="label">Email</div>
-              <div><a href="mailto:dmencom2@naver.com">dmencom2@naver.com</a></div>
-            </div>
-            <div class="row">
-              <div class="label">Map</div>
-              <div><a href="https://maps.google.com/?q=인천광역시+미추홀구+한나루로+448" target="_blank" rel="noopener">Google Maps 열기</a></div>
+          </div>
+
+          <div class="loc-card">
+            <h3>CONTACT</h3>
+            <div class="loc-item">
+              <div class="k">Email</div><div>문의용 이메일을 여기에 입력하세요</div>
+              <div class="k">Biz</div><div>사업자등록번호 121-81-88898</div>
+              <div class="k">Note</div><div>견적/납기/샘플 문의는 제품명과 수량을 함께 전달해 주세요.</div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-inner">
-      © <span id="year"></span> DAE MYUNG ENCOM. All rights reserved.
+      <div>© <span id="year"></span> DAE MYUNG ENCOM. All rights reserved.</div>
+      <div></div>
     </div>
   </footer>
 
   <script>
+    // footer year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // updated date
+    const d = new Date();
+    const mm = String(d.getMonth()+1).padStart(2,'0');
+    const dd = String(d.getDate()).padStart(2,'0');
+    document.getElementById('today').textContent = `${d.getFullYear()}-${mm}-${dd}`;
+
+    // fade-up
+    const fades = document.querySelectorAll('.fade-up');
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('show');
+      });
+    },{threshold:0.18});
+    fades.forEach(el=>io.observe(el));
   </script>
+
 </body>
 </html>
