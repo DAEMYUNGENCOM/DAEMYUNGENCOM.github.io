@@ -443,34 +443,49 @@
       color:var(--text-muted);
       letter-spacing:.08em;
     }
-    /* ===== Scroll Snap (한 장면씩) ===== */
+   /* ===== Scroll Snap (4장면: PAGE HERO + 3섹션) ===== */
 html{
   scroll-behavior: smooth;
 }
 
 body{
-  scroll-snap-type: y mandatory;    /* 세로 스냅 */
+  scroll-snap-type: y mandatory;
   overflow-y: auto;
 }
 
-/* 각 섹션을 한 장면으로 */
+/* page-hero도 한 장면 */
+.page-hero{
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: calc(100vh - 70px);  /* nav 높이 고려 */
+  display: flex;
+}
+
+.page-hero .wrap{
+  width: 100%;
+  margin: auto;                    /* 세로 중앙에 자연스럽게 */
+}
+
+/* 기존 cp-section도 한 장면 */
 .cp-section{
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  min-height: calc(100vh - 70px);   /* 상단 nav(70px) 고려 */
-  padding: 96px 20px;              /* 기존 유지 */
+  min-height: calc(100vh - 70px);
   display: flex;
 }
 
 .cp-section > .cp-wrap{
   width: 100%;
-  margin: auto;                     /* 섹션 내용 수직 중앙에 가깝게 */
+  margin: auto;
+}
+@media (max-width: 768px){
+  body{ scroll-snap-type: none; }
+  .page-hero, .cp-section{
+    min-height: auto;
+    display: block;
+  }
 }
 
-/* 상단 page-hero는 스냅 제외(원하면 포함 가능) */
-.page-hero{
-  scroll-snap-align: none;
-}
 
 
     /* 모션 최소화 옵션 */
