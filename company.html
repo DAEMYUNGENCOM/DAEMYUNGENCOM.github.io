@@ -414,6 +414,100 @@
       color:var(--text-muted);
       letter-spacing:.08em;
     }
+	  /* =========================
+   Premium Motion (Company)
+   ========================= */
+
+/* 1) 섹션 헤더 얇은 라인 리빌 */
+.cp-head{
+  position: relative;
+  padding-bottom: 18px;
+}
+.cp-head::after{
+  content:'';
+  position:absolute;
+  left: 80px;             /* cp-no 컬럼 폭과 맞춤 */
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--hairline);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .9s var(--ease);
+}
+.cp-head.show::after{
+  transform: scaleX(1);
+}
+
+/* 2) 제목 하이라이트(아주 얇은 언더라인) */
+.cp-title{
+  display:inline-block;
+  position:relative;
+}
+.cp-title::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-10px;
+  width:100%;
+  height:1px;
+  background: rgba(17,17,17,.22);
+  transform: scaleX(0);
+  transform-origin:left;
+  transition: transform .9s var(--ease);
+}
+.cp-head.show .cp-title::after{
+  transform: scaleX(1);
+}
+
+/* 3) 카드 호버: 더 섬세한 반응(조금만) */
+.org-card, .loc-card, .ceo-media{
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+}
+.org-card:hover, .loc-card:hover, .ceo-media:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 38px rgba(17,17,17,.08);
+  border-color: rgba(17,17,17,.14);
+}
+
+/* 4) 태그: hover 시 미세 강조 */
+.org-tag{
+  transition: background .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+}
+.org-tag:hover{
+  background: rgba(17,17,17,.04);
+  border-color: rgba(17,17,17,.18);
+  transform: translateY(-1px);
+}
+
+/* 5) 이미지: 아주 미세한 줌(고급스러운 느낌) */
+.ceo-media img{
+  transition: transform 1.2s var(--ease);
+}
+.ceo-media:hover img{
+  transform: scale(1.03);
+}
+
+/* 6) 지도 카드도 동일 톤(있으면) */
+.loc-map{
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+}
+.loc-map:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 38px rgba(17,17,17,.08);
+  border-color: rgba(17,17,17,.14);
+}
+
+/* 7) 모션 최소화 옵션(접근성) */
+@media (prefers-reduced-motion: reduce){
+  .fade-up, .cp-head::after, .cp-title::after,
+  .org-card, .loc-card, .ceo-media, .ceo-media img, .org-tag, .loc-map{
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 
     /* RESPONSIVE */
     @media(max-width:980px){
@@ -697,15 +791,43 @@
     const dd = String(d.getDate()).padStart(2,'0');
     document.getElementById('today').textContent = `${d.getFullYear()}-${mm}-${dd}`;
 
-    // fade-up
-    const fades = document.querySelectorAll('.fade-up');
-    const io = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting) e.target.classList.add('show');
-      });
-    },{threshold:0.18});
-    fades.forEach(el=>io.observe(el));
-  </script>
+    <script>
+  // footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // updated date
+  const d = new Date();
+  const mm = String(d.getMonth()+1).padStart(2,'0');
+  const dd = String(d.getDate()).padStart(2,'0');
+  const todayEl = document.getElementById('today');
+  if (todayEl) todayEl.textContent = `${d.getFullYear()}-${mm}-${dd}`;
+
+  // fade-up + stagger
+  const fades = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+
+      // 순차 등장: 같은 섹션 안에서 천천히 딜레이
+      const parentSection = entry.target.closest('.cp-section') || document;
+      const siblings = Array.from(parentSection.querySelectorAll('.fade-up'));
+      const idx = siblings.indexOf(entry.target);
+
+      entry.target.style.transitionDelay = `${Math.min(idx * 0.08, 0.32)}s`;
+      entry.target.classList.add('show');
+
+      // cp-head 라인 애니메이션 트리거
+      if (entry.target.classList.contains('cp-head')) {
+        entry.target.classList.add('show');
+      }
+
+      io.unobserve(entry.target); // 1회만 (고급스러운 웹은 반복보다 1회가 많음)
+    });
+  }, {threshold:0.18});
+
+  fades.forEach(el=>io.observe(el));
+</script>
+
 
 </body>
 </html>
