@@ -27,9 +27,9 @@
       background:var(--bg);
       color:var(--text-main);
     }
-    a{ color:inherit; }
+    a{ color:inherit; text-decoration:none; }
 
-    /* NAV (index.html과 통일) */
+    /* NAV */
     nav{
       position:fixed;
       top:0;
@@ -51,13 +51,12 @@
     .nav-inner img{ display:block; }
     .menu a{
       margin-left:30px;
-      text-decoration:none;
       color:var(--text-main);
       font-weight:500;
       letter-spacing:.08em;
     }
 
-    /* PAGE HERO (company page top) */
+    /* PAGE HERO */
     .page-hero{
       background:var(--white);
       border-bottom:1px solid var(--line);
@@ -104,6 +103,10 @@
       gap:14px 24px;
       align-items:start;
       margin-bottom:36px;
+
+      /* Premium motion line reveal */
+      position: relative;
+      padding-bottom: 18px;
     }
     .cp-no{
       font-size:12px;
@@ -116,6 +119,10 @@
       text-align:left;
       font-size:34px;
       letter-spacing:.10em;
+
+      /* underline reveal */
+      display:inline-block;
+      position:relative;
     }
     .cp-sub{
       grid-column:2 / -1;
@@ -137,8 +144,37 @@
       transform:translateY(0);
     }
 
+    /* ===== Premium Motion (Company) ===== */
+    .cp-head::after{
+      content:'';
+      position:absolute;
+      left: 80px;         /* cp-no 컬럼 폭과 맞춤 */
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: var(--hairline);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .9s var(--ease);
+    }
+    .cp-head.show::after{ transform: scaleX(1); }
+
+    .cp-title::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-10px;
+      width:100%;
+      height:1px;
+      background: rgba(17,17,17,.22);
+      transform: scaleX(0);
+      transform-origin:left;
+      transition: transform .9s var(--ease);
+    }
+    .cp-head.show .cp-title::after{ transform: scaleX(1); }
+
     /* =========================
-       01 CEO MESSAGE (매거진 + 카드)
+       01 CEO MESSAGE
        ========================= */
     .ceo-grid{
       display:grid;
@@ -176,7 +212,6 @@
       font-size:15px;
     }
 
-    /* 인용: 박스 대신 라인+캡션 (복제 느낌 제거) */
     .ceo-quote{
       margin-top:18px;
       padding:16px 0 0;
@@ -209,7 +244,6 @@
       color:var(--text-muted);
     }
 
-    /* 우측: 쇼룸 이미지 카드(선택) */
     .ceo-media{
       border:1px solid var(--line);
       border-radius:18px;
@@ -221,6 +255,7 @@
       height:520px;
       object-fit:cover;
       display:block;
+      transition: transform 1.2s var(--ease);
     }
     .ceo-media .cap{
       padding:14px 16px 16px;
@@ -251,7 +286,7 @@
     }
 
     /* =========================
-       02 ORGANIZATION (카드 그리드)
+       02 ORGANIZATION
        ========================= */
     .org-ceo{
       display:flex;
@@ -289,12 +324,8 @@
       background:#fff;
       border-radius:18px;
       padding:18px 18px 16px;
-      transition:transform .25s var(--ease), box-shadow .25s var(--ease);
-      text-align: center;
-    }
-    .org-card:hover{
-      transform:translateY(-2px);
-      box-shadow:0 10px 30px rgba(17,17,17,.06);
+      text-align:center;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
     }
     .org-card-title{
       margin:0 0 12px;
@@ -305,7 +336,7 @@
       display:flex;
       flex-wrap:wrap;
       gap:8px;
-      justify-content: center;
+      justify-content:center;
     }
     .org-tag{
       display:inline-flex;
@@ -317,10 +348,16 @@
       font-size:12px;
       color:var(--text-sub);
       background:rgba(17,17,17,.02);
+      transition: background .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
     }
- 
+    .org-tag:hover{
+      background: rgba(17,17,17,.04);
+      border-color: rgba(17,17,17,.18);
+      transform: translateY(-1px);
+    }
+
     /* =========================
-       03 LOCATION (지도 + 카드)
+       03 LOCATION
        ========================= */
     .loc-grid{
       display:grid;
@@ -334,12 +371,18 @@
       overflow:hidden;
       background:#fff;
       min-height:420px;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
     }
-    .loc-map iframe{
-      width:100%;
-      height:420px;
-      border:0;
-      display:block;
+    .loc-map:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 38px rgba(17,17,17,.08);
+      border-color: rgba(17,17,17,.14);
+    }
+
+    /* 카카오맵 퍼가기 컨테이너가 width/height를 가지고 렌더링되므로
+       여기는 내부 요소가 꽉 차도록만 처리 */
+    .loc-map .root_daum_roughmap{
+      width:100% !important;
     }
 
     .loc-cards{
@@ -351,6 +394,12 @@
       border-radius:18px;
       background:#fff;
       padding:16px 16px 14px;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+    }
+    .loc-card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 38px rgba(17,17,17,.08);
+      border-color: rgba(17,17,17,.14);
     }
     .loc-card h3{
       margin:0 0 10px;
@@ -414,100 +463,24 @@
       color:var(--text-muted);
       letter-spacing:.08em;
     }
-	  /* =========================
-   Premium Motion (Company)
-   ========================= */
 
-/* 1) 섹션 헤더 얇은 라인 리빌 */
-.cp-head{
-  position: relative;
-  padding-bottom: 18px;
-}
-.cp-head::after{
-  content:'';
-  position:absolute;
-  left: 80px;             /* cp-no 컬럼 폭과 맞춤 */
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: var(--hairline);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .9s var(--ease);
-}
-.cp-head.show::after{
-  transform: scaleX(1);
-}
+    /* hover refine */
+    .org-card:hover, .ceo-media:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 38px rgba(17,17,17,.08);
+      border-color: rgba(17,17,17,.14);
+    }
+    .ceo-media:hover img{ transform: scale(1.03); }
 
-/* 2) 제목 하이라이트(아주 얇은 언더라인) */
-.cp-title{
-  display:inline-block;
-  position:relative;
-}
-.cp-title::after{
-  content:'';
-  position:absolute;
-  left:0;
-  bottom:-10px;
-  width:100%;
-  height:1px;
-  background: rgba(17,17,17,.22);
-  transform: scaleX(0);
-  transform-origin:left;
-  transition: transform .9s var(--ease);
-}
-.cp-head.show .cp-title::after{
-  transform: scaleX(1);
-}
-
-/* 3) 카드 호버: 더 섬세한 반응(조금만) */
-.org-card, .loc-card, .ceo-media{
-  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
-}
-.org-card:hover, .loc-card:hover, .ceo-media:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 14px 38px rgba(17,17,17,.08);
-  border-color: rgba(17,17,17,.14);
-}
-
-/* 4) 태그: hover 시 미세 강조 */
-.org-tag{
-  transition: background .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
-}
-.org-tag:hover{
-  background: rgba(17,17,17,.04);
-  border-color: rgba(17,17,17,.18);
-  transform: translateY(-1px);
-}
-
-/* 5) 이미지: 아주 미세한 줌(고급스러운 느낌) */
-.ceo-media img{
-  transition: transform 1.2s var(--ease);
-}
-.ceo-media:hover img{
-  transform: scale(1.03);
-}
-
-/* 6) 지도 카드도 동일 톤(있으면) */
-.loc-map{
-  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
-}
-.loc-map:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 14px 38px rgba(17,17,17,.08);
-  border-color: rgba(17,17,17,.14);
-}
-
-/* 7) 모션 최소화 옵션(접근성) */
-@media (prefers-reduced-motion: reduce){
-  .fade-up, .cp-head::after, .cp-title::after,
-  .org-card, .loc-card, .ceo-media, .ceo-media img, .org-tag, .loc-map{
-    transition: none !important;
-    animation: none !important;
-    transform: none !important;
-  }
-}
-
+    /* reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .fade-up, .cp-head::after, .cp-title::after,
+      .org-card, .loc-card, .ceo-media, .ceo-media img, .org-tag, .loc-map{
+        transition:none !important;
+        animation:none !important;
+        transform:none !important;
+      }
+    }
 
     /* RESPONSIVE */
     @media(max-width:980px){
@@ -519,7 +492,10 @@
 
       .org-card{ grid-column:span 6; }
       .loc-grid{ grid-template-columns:1fr; }
-      .loc-map iframe{ height:360px; }
+      .loc-map{ min-height:360px; }
+
+      /* line reveal alignment on mobile */
+      .cp-head::after{ left:0; }
     }
     @media(max-width:640px){
       .cp-section{ padding:76px 18px; }
@@ -527,7 +503,7 @@
       .page-title{ font-size:28px; }
       .org-card{ grid-column:span 12; }
       .loc-item{ grid-template-columns:1fr; }
-      .loc-map iframe{ height:320px; }
+      .loc-map{ min-height:320px; }
     }
   </style>
 </head>
@@ -571,7 +547,6 @@
       </div>
 
       <div class="ceo-grid">
-        <!-- Left copy -->
         <div class="fade-up">
           <div class="ceo-lede">
             <h3 class="headline">공간에 필요한 인테리어 자재를 보다 정확하고 합리적으로 제공합니다.</h3>
@@ -628,9 +603,7 @@
           </div>
         </div>
 
-        <!-- Right media (선택) -->
         <aside class="ceo-media fade-up" aria-label="Showroom Image">
-          <!-- 아래 이미지는 너가 업로드한 파일명으로 변경하면 됨 -->
           <img src="대표_쇼룸_컷.jpg" alt="DAE MYUNG ENCOM Showroom">
           <div class="cap">SHOWROOM · EXPERIENCE THE MATERIAL</div>
         </aside>
@@ -712,26 +685,10 @@
       </div>
 
       <div class="loc-grid">
-        <!-- MAP -->
-        <!-- * 카카오맵 - 지도퍼가기 -->
-<!-- 1. 지도 노드 -->
-<div id="daumRoughmapContainer1767934295361" class="root_daum_roughmap root_daum_roughmap_landing"></div>
-
-<!--
-	2. 설치 스크립트
-	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
--->
-<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
-
-<!-- 3. 실행 스크립트 -->
-<script charset="UTF-8">
-	new daum.roughmap.Lander({
-		"timestamp" : "1767934295361",
-		"key" : "fpihxqujzif",
-		"mapWidth" : "640",
-		"mapHeight" : "360"
-	}).render();
-</script>
+        <!-- MAP (카카오 지도 퍼가기 컨테이너는 loc-map 안에) -->
+        <div class="loc-map fade-up">
+          <div id="daumRoughmapContainer1767934295361" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+        </div>
 
         <!-- CARDS -->
         <div class="loc-cards fade-up">
@@ -744,10 +701,7 @@
             </div>
             <div class="loc-actions">
               <a class="action-btn" href="tel:0328660004">전화 하기</a>
-              <a class="action-btn" target="_blank" rel="noopener"
-                 href="https://kko.to/4ZlwI8l8rq">
-                지도 보기
-              </a>
+              <a class="action-btn" target="_blank" rel="noopener" href="https://kko.to/4ZlwI8l8rq">지도 보기</a>
             </div>
           </div>
 
@@ -781,53 +735,56 @@
     </div>
   </footer>
 
+  <!-- 카카오 지도 퍼가기: 로더 스크립트는 1회만 -->
+  <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
   <script>
     // footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     // updated date
     const d = new Date();
     const mm = String(d.getMonth()+1).padStart(2,'0');
     const dd = String(d.getDate()).padStart(2,'0');
-    document.getElementById('today').textContent = `${d.getFullYear()}-${mm}-${dd}`;
+    const todayEl = document.getElementById('today');
+    if (todayEl) todayEl.textContent = `${d.getFullYear()}-${mm}-${dd}`;
 
-    <script>
-  // footer year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // updated date
-  const d = new Date();
-  const mm = String(d.getMonth()+1).padStart(2,'0');
-  const dd = String(d.getDate()).padStart(2,'0');
-  const todayEl = document.getElementById('today');
-  if (todayEl) todayEl.textContent = `${d.getFullYear()}-${mm}-${dd}`;
-
-  // fade-up + stagger
-  const fades = document.querySelectorAll('.fade-up');
-  const io = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(!entry.isIntersecting) return;
-
-      // 순차 등장: 같은 섹션 안에서 천천히 딜레이
-      const parentSection = entry.target.closest('.cp-section') || document;
-      const siblings = Array.from(parentSection.querySelectorAll('.fade-up'));
-      const idx = siblings.indexOf(entry.target);
-
-      entry.target.style.transitionDelay = `${Math.min(idx * 0.08, 0.32)}s`;
-      entry.target.classList.add('show');
-
-      // cp-head 라인 애니메이션 트리거
-      if (entry.target.classList.contains('cp-head')) {
-        entry.target.classList.add('show');
+    // 카카오 지도 렌더 (퍼가기 키/타임스탬프는 너가 복사한 값 유지)
+    try {
+      if (window.daum && window.daum.roughmap && window.daum.roughmap.Lander) {
+        new daum.roughmap.Lander({
+          "timestamp" : "1767934295361",
+          "key" : "fpihxqujzif",
+          "mapWidth" : "640",
+          "mapHeight" : "360"
+        }).render();
       }
+    } catch (e) {}
 
-      io.unobserve(entry.target); // 1회만 (고급스러운 웹은 반복보다 1회가 많음)
-    });
-  }, {threshold:0.18});
+    // fade-up + stagger + cp-head line reveal
+    const fades = document.querySelectorAll('.fade-up');
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
 
-  fades.forEach(el=>io.observe(el));
-</script>
+        const parentSection = entry.target.closest('.cp-section') || document;
+        const siblings = Array.from(parentSection.querySelectorAll('.fade-up'));
+        const idx = siblings.indexOf(entry.target);
 
+        entry.target.style.transitionDelay = `${Math.min(idx * 0.08, 0.32)}s`;
+        entry.target.classList.add('show');
+
+        if (entry.target.classList.contains('cp-head')) {
+          entry.target.classList.add('show');
+        }
+
+        io.unobserve(entry.target);
+      });
+    },{threshold:0.18});
+
+    fades.forEach(el=>io.observe(el));
+  </script>
 
 </body>
 </html>
