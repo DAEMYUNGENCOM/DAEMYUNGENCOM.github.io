@@ -501,7 +501,6 @@
         <h1 class="page-title">COMPANY</h1>
         <p class="page-kicker">DAE MYUNG ENCOM · BRAND & OPERATIONS</p>
       </div>
-      <div class="page-meta">Updated · <span id="today"></span></div>
     </div>
   </header>
 
@@ -714,12 +713,7 @@
     // footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // updated date
-    const d = new Date();
-    const mm = String(d.getMonth()+1).padStart(2,'0');
-    const dd = String(d.getDate()).padStart(2,'0');
-    const todayEl = document.getElementById('today');
-    if (todayEl) todayEl.textContent = `${d.getFullYear()}-${mm}-${dd}`;
+  
 
     // 카카오맵 렌더
     if (window.daum && daum.roughmap && daum.roughmap.Lander) {
