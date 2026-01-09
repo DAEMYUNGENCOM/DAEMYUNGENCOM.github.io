@@ -27,9 +27,9 @@
       background:var(--bg);
       color:var(--text-main);
     }
-    a{ color:inherit; text-decoration:none; }
+    a{ color:inherit; }
 
-    /* NAV */
+    /* NAV (index.html과 통일) */
     nav{
       position:fixed;
       top:0;
@@ -51,6 +51,7 @@
     .nav-inner img{ display:block; }
     .menu a{
       margin-left:30px;
+      text-decoration:none;
       color:var(--text-main);
       font-weight:500;
       letter-spacing:.08em;
@@ -88,7 +89,7 @@
       white-space:nowrap;
     }
 
-    /* SECTION SHARED (A+B) */
+    /* SECTION SHARED */
     .cp-section{
       background:var(--white);
       padding:96px 20px;
@@ -103,10 +104,6 @@
       gap:14px 24px;
       align-items:start;
       margin-bottom:36px;
-
-      /* Premium motion line reveal */
-      position: relative;
-      padding-bottom: 18px;
     }
     .cp-no{
       font-size:12px;
@@ -119,10 +116,6 @@
       text-align:left;
       font-size:34px;
       letter-spacing:.10em;
-
-      /* underline reveal */
-      display:inline-block;
-      position:relative;
     }
     .cp-sub{
       grid-column:2 / -1;
@@ -133,7 +126,7 @@
       max-width:760px;
     }
 
-    /* FADE */
+    /* FADE + STAGGER */
     .fade-up{
       opacity:0;
       transform:translateY(18px);
@@ -143,35 +136,6 @@
       opacity:1;
       transform:translateY(0);
     }
-
-    /* ===== Premium Motion (Company) ===== */
-    .cp-head::after{
-      content:'';
-      position:absolute;
-      left: 80px;         /* cp-no 컬럼 폭과 맞춤 */
-      right: 0;
-      bottom: 0;
-      height: 1px;
-      background: var(--hairline);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform .9s var(--ease);
-    }
-    .cp-head.show::after{ transform: scaleX(1); }
-
-    .cp-title::after{
-      content:'';
-      position:absolute;
-      left:0;
-      bottom:-10px;
-      width:100%;
-      height:1px;
-      background: rgba(17,17,17,.22);
-      transform: scaleX(0);
-      transform-origin:left;
-      transition: transform .9s var(--ease);
-    }
-    .cp-head.show .cp-title::after{ transform: scaleX(1); }
 
     /* =========================
        01 CEO MESSAGE
@@ -249,6 +213,12 @@
       border-radius:18px;
       overflow:hidden;
       background:#fff;
+      transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+    }
+    .ceo-media:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 38px rgba(17,17,17,.08);
+      border-color: rgba(17,17,17,.14);
     }
     .ceo-media img{
       width:100%;
@@ -257,6 +227,8 @@
       display:block;
       transition: transform 1.2s var(--ease);
     }
+    .ceo-media:hover img{ transform: scale(1.03); }
+
     .ceo-media .cap{
       padding:14px 16px 16px;
       border-top:1px solid var(--line);
@@ -300,6 +272,12 @@
       padding:18px 26px;
       min-width:240px;
       text-align:center;
+      transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+    }
+    .org-ceo-card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 38px rgba(17,17,17,.08);
+      border-color: rgba(17,17,17,.14);
     }
     .org-ceo-label{
       font-size:12px;
@@ -325,7 +303,12 @@
       border-radius:18px;
       padding:18px 18px 16px;
       text-align:center;
-      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+      transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+    }
+    .org-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 38px rgba(17,17,17,.08);
+      border-color: rgba(17,17,17,.14);
     }
     .org-card-title{
       margin:0 0 12px;
@@ -371,7 +354,8 @@
       overflow:hidden;
       background:#fff;
       min-height:420px;
-      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+      padding: 0;
+      transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
     }
     .loc-map:hover{
       transform: translateY(-2px);
@@ -379,9 +363,13 @@
       border-color: rgba(17,17,17,.14);
     }
 
-    /* 카카오맵 퍼가기 컨테이너가 width/height를 가지고 렌더링되므로
-       여기는 내부 요소가 꽉 차도록만 처리 */
-    .loc-map .root_daum_roughmap{
+    /* 카카오맵 퍼가기 반응형 강제 */
+    .loc-map .root_daum_roughmap,
+    .loc-map .root_daum_roughmap_landing{
+      width:100% !important;
+      max-width:100% !important;
+    }
+    .loc-map .wrap_map{
       width:100% !important;
     }
 
@@ -394,7 +382,7 @@
       border-radius:18px;
       background:#fff;
       padding:16px 16px 14px;
-      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+      transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
     }
     .loc-card:hover{
       transform: translateY(-2px);
@@ -464,21 +452,12 @@
       letter-spacing:.08em;
     }
 
-    /* hover refine */
-    .org-card:hover, .ceo-media:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 14px 38px rgba(17,17,17,.08);
-      border-color: rgba(17,17,17,.14);
-    }
-    .ceo-media:hover img{ transform: scale(1.03); }
-
-    /* reduced motion */
+    /* 모션 최소화 옵션 */
     @media (prefers-reduced-motion: reduce){
-      .fade-up, .cp-head::after, .cp-title::after,
-      .org-card, .loc-card, .ceo-media, .ceo-media img, .org-tag, .loc-map{
-        transition:none !important;
-        animation:none !important;
-        transform:none !important;
+      .fade-up, .org-card, .loc-card, .ceo-media, .ceo-media img, .org-tag, .loc-map, .org-ceo-card{
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
       }
     }
 
@@ -492,10 +471,6 @@
 
       .org-card{ grid-column:span 6; }
       .loc-grid{ grid-template-columns:1fr; }
-      .loc-map{ min-height:360px; }
-
-      /* line reveal alignment on mobile */
-      .cp-head::after{ left:0; }
     }
     @media(max-width:640px){
       .cp-section{ padding:76px 18px; }
@@ -503,7 +478,6 @@
       .page-title{ font-size:28px; }
       .org-card{ grid-column:span 12; }
       .loc-item{ grid-template-columns:1fr; }
-      .loc-map{ min-height:320px; }
     }
   </style>
 </head>
@@ -604,7 +578,8 @@
         </div>
 
         <aside class="ceo-media fade-up" aria-label="Showroom Image">
-          <img src="대표_쇼룸_컷.jpg" alt="DAE MYUNG ENCOM Showroom">
+          <!-- 파일명에 공백이 있으면 %20으로 적는 게 안전합니다 -->
+          <img src="대표_쇼룸_컷컷.jpg" alt="DAE MYUNG ENCOM Showroom">
           <div class="cap">SHOWROOM · EXPERIENCE THE MATERIAL</div>
         </aside>
       </div>
@@ -685,9 +660,10 @@
       </div>
 
       <div class="loc-grid">
-        <!-- MAP (카카오 지도 퍼가기 컨테이너는 loc-map 안에) -->
+        <!-- MAP: 카카오맵 퍼가기 코드를 '지도 영역'으로 감쌈 -->
         <div class="loc-map fade-up">
-          <div id="daumRoughmapContainer1767934295361" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+          <div id="daumRoughmapContainer1767934295361"
+               class="root_daum_roughmap root_daum_roughmap_landing"></div>
         </div>
 
         <!-- CARDS -->
@@ -735,13 +711,13 @@
     </div>
   </footer>
 
-  <!-- 카카오 지도 퍼가기: 로더 스크립트는 1회만 -->
-  <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+  <!-- 카카오맵 로더: 페이지에 1번만 -->
+  <script charset="UTF-8" class="daum_roughmap_loader_script"
+          src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
   <script>
     // footer year
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
 
     // updated date
     const d = new Date();
@@ -750,19 +726,17 @@
     const todayEl = document.getElementById('today');
     if (todayEl) todayEl.textContent = `${d.getFullYear()}-${mm}-${dd}`;
 
-    // 카카오 지도 렌더 (퍼가기 키/타임스탬프는 너가 복사한 값 유지)
-    try {
-      if (window.daum && window.daum.roughmap && window.daum.roughmap.Lander) {
-        new daum.roughmap.Lander({
-          "timestamp" : "1767934295361",
-          "key" : "fpihxqujzif",
-          "mapWidth" : "640",
-          "mapHeight" : "360"
-        }).render();
-      }
-    } catch (e) {}
+    // 카카오맵 렌더
+    if (window.daum && daum.roughmap && daum.roughmap.Lander) {
+      new daum.roughmap.Lander({
+        "timestamp" : "1767934295361",
+        "key" : "fpihxqujzif",
+        "mapWidth" : "640",
+        "mapHeight" : "420"
+      }).render();
+    }
 
-    // fade-up + stagger + cp-head line reveal
+    // fade-up + stagger (섹션별 순차 등장)
     const fades = document.querySelectorAll('.fade-up');
     const io = new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
@@ -775,13 +749,9 @@
         entry.target.style.transitionDelay = `${Math.min(idx * 0.08, 0.32)}s`;
         entry.target.classList.add('show');
 
-        if (entry.target.classList.contains('cp-head')) {
-          entry.target.classList.add('show');
-        }
-
-        io.unobserve(entry.target);
+        io.unobserve(entry.target); // 1회만
       });
-    },{threshold:0.18});
+    }, {threshold:0.18});
 
     fades.forEach(el=>io.observe(el));
   </script>
