@@ -29,7 +29,7 @@
     }
     a{ color:inherit; }
 
-    /* NAV (index.html과 통일) */
+    /* NAV */
     nav{
       position:fixed;
       top:0;
@@ -82,12 +82,6 @@
       letter-spacing:.22em;
       color:var(--text-muted);
     }
-    .page-meta{
-      font-size:12px;
-      letter-spacing:.18em;
-      color:var(--text-muted);
-      white-space:nowrap;
-    }
 
     /* SECTION SHARED */
     .cp-section{
@@ -126,11 +120,12 @@
       max-width:760px;
     }
 
-    /* FADE + STAGGER */
+    /* FADE */
     .fade-up{
       opacity:0;
       transform:translateY(18px);
       transition:opacity .9s var(--ease), transform .9s var(--ease);
+      will-change: opacity, transform;
     }
     .fade-up.show{
       opacity:1;
@@ -214,7 +209,7 @@
       overflow:hidden;
       background:#fff;
       transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
-      margin-top: 120px; /* ← 여기 */
+      margin-top:120px; /* 이미지 위치(중간쯤 내려오기) */
     }
     .ceo-media:hover{
       transform: translateY(-2px);
@@ -229,6 +224,7 @@
       transition: transform 1.2s var(--ease);
     }
     .ceo-media:hover img{ transform: scale(1.03); }
+
     .ceo-sign{
       margin-top:22px;
       display:flex;
@@ -443,50 +439,29 @@
       color:var(--text-muted);
       letter-spacing:.08em;
     }
-   /* ===== Scroll Snap (4장면: PAGE HERO + 3섹션) ===== */
-html{
-  scroll-behavior: smooth;
-}
 
-body{
-  scroll-snap-type: y mandatory;
-  overflow-y: auto;
-}
+    /* ===== Fullpage 느낌: Snap + nav 보정 ===== */
+    html{ scroll-behavior:smooth; }
+    body{
+      scroll-snap-type: y mandatory;
+      scroll-padding-top: 70px;
+    }
+    .page-hero, .cp-section{
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      min-height: calc(100vh - 70px);
+      scroll-margin-top: 70px;
+    }
 
-/* page-hero도 한 장면 */
-.page-hero{
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  min-height: calc(100vh - 70px);  /* nav 높이 고려 */
-  display: flex;
-}
-
-.page-hero .wrap{
-  width: 100%;
-  margin: auto;                    /* 세로 중앙에 자연스럽게 */
-}
-
-/* 기존 cp-section도 한 장면 */
-.cp-section{
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  min-height: calc(100vh - 70px);
-  display: flex;
-}
-
-.cp-section > .cp-wrap{
-  width: 100%;
-  margin: auto;
-}
-@media (max-width: 768px){
-  body{ scroll-snap-type: none; }
-  .page-hero, .cp-section{
-    min-height: auto;
-    display: block;
-  }
-}
-
-
+    /* 모바일/태블릿에서는 강제 전환 OFF */
+    @media (max-width: 768px){
+      body{ scroll-snap-type: none; }
+      .page-hero, .cp-section{ min-height: auto; }
+      .ceo-media{ margin-top: 26px; }
+      .ceo-media img{ height: 380px; }
+      .loc-grid{ grid-template-columns: 1fr; }
+      .org-card{ grid-column: span 12; }
+    }
 
     /* 모션 최소화 옵션 */
     @media (prefers-reduced-motion: reduce){
@@ -613,8 +588,7 @@ body{
         </div>
 
         <aside class="ceo-media fade-up" aria-label="Showroom Image">
-          <!-- 파일명에 공백이 있으면 %20으로 적는 게 안전합니다 -->
-          <img src="대명전경.png" alt="DAE MYUNG ENCOM Showroom">
+          <img src="대명전경.png" alt="DAE MYUNG ENCOM">
         </aside>
       </div>
     </div>
@@ -694,13 +668,11 @@ body{
       </div>
 
       <div class="loc-grid">
-        <!-- MAP: 카카오맵 퍼가기 코드를 '지도 영역'으로 감쌈 -->
         <div class="loc-map fade-up">
           <div id="daumRoughmapContainer1767934295361"
                class="root_daum_roughmap root_daum_roughmap_landing"></div>
         </div>
 
-        <!-- CARDS -->
         <div class="loc-cards fade-up">
           <div class="loc-card">
             <h3>HEADQUARTERS</h3>
@@ -750,71 +722,91 @@ body{
           src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
   <script>
-  // footer year
-  document.getElementById('year').textContent = new Date().getFullYear();
+    /* footer year */
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // 카카오맵 렌더
-  if (window.daum && daum.roughmap && daum.roughmap.Lander) {
-    new daum.roughmap.Lander({
-      "timestamp": "1767934295361",
-      "key": "fpihxqujzif",
-      "mapWidth": "640",
-      "mapHeight": "420"
-    }).render();
-  }
+    /* 카카오맵 렌더 */
+    function renderKakaoMap(){
+      if (window.daum && daum.roughmap && daum.roughmap.Lander) {
+        new daum.roughmap.Lander({
+          "timestamp": "1767934295361",
+          "key": "fpihxqujzif",
+          "mapWidth": "640",
+          "mapHeight": "420"
+        }).render();
+        return true;
+      }
+      return false;
+    }
 
-  // fade-up + stagger
-  const fades = document.querySelectorAll('.fade-up');
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
+    // 로더가 늦게 올 수 있어서 재시도(최대 2초)
+    (function retryMap(){
+      let t = 0;
+      const timer = setInterval(() => {
+        if (renderKakaoMap() || t > 20) clearInterval(timer);
+        t++;
+      }, 100);
+    })();
 
-      const section = entry.target.closest('.cp-section') || document;
-      const items = Array.from(section.querySelectorAll('.fade-up'));
-      const idx = items.indexOf(entry.target);
+    /* fade-up + stagger */
+    const fades = document.querySelectorAll('.fade-up');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
 
-      entry.target.style.transitionDelay =
-        `${Math.min(idx * 0.08, 0.32)}s`;
+        const section = entry.target.closest('.cp-section') || entry.target.closest('.page-hero') || document;
+        const items = Array.from(section.querySelectorAll('.fade-up'));
+        const idx = items.indexOf(entry.target);
 
-      entry.target.classList.add('show');
-      io.unobserve(entry.target);
-    });
-  }, { threshold: 0.18 });
+        entry.target.style.transitionDelay = `${Math.min(idx * 0.08, 0.32)}s`;
+        entry.target.classList.add('show');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.18 });
+    fades.forEach(el => io.observe(el));
 
-  fades.forEach(el => io.observe(el));
-</script>
+    /* ===== One wheel = one panel (PC에서만) ===== */
+    (function fullpageWheel(){
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+      if (isMobile || isTouch) return; // 모바일/터치에서는 끔
 
-  // 섹션 스냅 + 휠 한 번에 다음 섹션으로 이동(PC 위주)
-  const sections = Array.from(document.querySelectorAll('.cp-section'));
-  let isScrolling = false;
+      const panels = [
+        document.querySelector('.page-hero'),
+        ...document.querySelectorAll('.cp-section')
+      ].filter(Boolean);
 
-  function scrollToSection(idx){
-    if(idx < 0 || idx >= sections.length) return;
-    isScrolling = true;
-    sections[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(()=>{ isScrolling = false; }, 800);
-  }
+      let lock = false;
+      let last = 0;
 
-  function currentSectionIndex(){
-    const y = window.scrollY + 90; // nav 높이 + 여유
-    let current = 0;
-    sections.forEach((sec, i)=>{
-      if(sec.offsetTop <= y) current = i;
-    });
-    return current;
-  }
+      function goto(i){
+        if(i < 0 || i >= panels.length) return;
+        lock = true;
+        panels[i].scrollIntoView({ behavior:'smooth', block:'start' });
+        setTimeout(()=> lock = false, 850);
+      }
 
-  window.addEventListener('wheel', (e)=>{
-    // 트랙패드/모바일은 예외 처리(너무 민감할 수 있어서)
-    if(Math.abs(e.deltaY) < 30) return;
-    if(isScrolling) return;
+      function currentIndex(){
+        const y = window.scrollY + 90; // nav 보정
+        let idx = 0;
+        panels.forEach((p, i)=>{ if(p.offsetTop <= y) idx = i; });
+        return idx;
+      }
 
-    const idx = currentSectionIndex();
-    if(e.deltaY > 0) scrollToSection(idx + 1);
-    else scrollToSection(idx - 1);
-  }, { passive: true });
-</script>
+      window.addEventListener('wheel', (e) => {
+        const now = Date.now();
+        if (now - last < 700) return;
+        if (lock) return;
+        if (Math.abs(e.deltaY) < 35) return; // 트랙패드 미세값 무시
 
+        last = now;
+        const idx = currentIndex();
+        if (e.deltaY > 0) goto(idx + 1);
+        else goto(idx - 1);
+      }, { passive:true });
+    })();
+  </script>
 
 </body>
 </html>
