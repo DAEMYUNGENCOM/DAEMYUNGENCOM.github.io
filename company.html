@@ -57,32 +57,6 @@
       letter-spacing:.08em;
     }
 
-    /* PAGE HERO */
-    .page-hero{
-      background:var(--white);
-      border-bottom:1px solid var(--line);
-      padding:54px 20px 44px;
-    }
-    .page-hero .wrap{
-      max-width:1200px;
-      margin:0 auto;
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:24px;
-    }
-    .page-title{
-      margin:0;
-      font-size:34px;
-      letter-spacing:.14em;
-    }
-    .page-kicker{
-      margin:8px 0 0;
-      font-size:12px;
-      letter-spacing:.22em;
-      color:var(--text-muted);
-    }
-
     /* SECTION SHARED */
     .cp-section{
       background:var(--white);
@@ -440,13 +414,13 @@
       letter-spacing:.08em;
     }
 
-    /* ===== Fullpage 느낌: Snap + nav 보정 ===== */
+    /* ===== Fullpage 느낌: Snap + nav 보정 (헤더 제거 버전) ===== */
     html{ scroll-behavior:smooth; }
     body{
       scroll-snap-type: y mandatory;
       scroll-padding-top: 70px;
     }
-    .page-hero, .cp-section{
+    .cp-section{
       scroll-snap-align: start;
       scroll-snap-stop: always;
       min-height: calc(100vh - 70px);
@@ -456,7 +430,7 @@
     /* 모바일/태블릿에서는 강제 전환 OFF */
     @media (max-width: 768px){
       body{ scroll-snap-type: none; }
-      .page-hero, .cp-section{ min-height: auto; }
+      .cp-section{ min-height: auto; }
       .ceo-media{ margin-top: 26px; }
       .ceo-media img{ height: 380px; }
       .loc-grid{ grid-template-columns: 1fr; }
@@ -474,7 +448,6 @@
 
     /* RESPONSIVE */
     @media(max-width:980px){
-      .page-hero .wrap{ flex-direction:column; align-items:flex-start; }
       .cp-head{ grid-template-columns:1fr; }
       .cp-sub{ grid-column:auto; }
       .ceo-grid{ grid-template-columns:1fr; }
@@ -486,7 +459,6 @@
     @media(max-width:640px){
       .cp-section{ padding:76px 18px; }
       .cp-title{ font-size:28px; }
-      .page-title{ font-size:28px; }
       .org-card{ grid-column:span 12; }
       .loc-item{ grid-template-columns:1fr; }
     }
@@ -509,15 +481,7 @@
     </div>
   </nav>
 
-  <!-- PAGE HERO -->
-  <header class="page-hero">
-    <div class="wrap">
-      <div>
-        <h1 class="page-title">COMPANY</h1>
-        <p class="page-kicker">DAE MYUNG ENCOM · BRAND & OPERATIONS</p>
-      </div>
-    </div>
-  </header>
+  <!-- ✅ COMPANY PAGE HEADER 완전 제거됨: page-hero 없음 -->
 
   <!-- 01 CEO MESSAGE -->
   <section class="cp-section" id="ceo">
@@ -587,7 +551,7 @@
           </div>
         </div>
 
-        <aside class="ceo-media fade-up" aria-label="Showroom Image">
+        <aside class="ceo-media fade-up" aria-label="Company Image">
           <img src="대명전경.png" alt="DAE MYUNG ENCOM">
         </aside>
       </div>
@@ -755,7 +719,7 @@
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
 
-        const section = entry.target.closest('.cp-section') || entry.target.closest('.page-hero') || document;
+        const section = entry.target.closest('.cp-section') || document;
         const items = Array.from(section.querySelectorAll('.fade-up'));
         const idx = items.indexOf(entry.target);
 
@@ -772,10 +736,7 @@
       const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
       if (isMobile || isTouch) return; // 모바일/터치에서는 끔
 
-      const panels = [
-        document.querySelector('.page-hero'),
-        ...document.querySelectorAll('.cp-section')
-      ].filter(Boolean);
+      const panels = Array.from(document.querySelectorAll('.cp-section')).filter(Boolean);
 
       let lock = false;
       let last = 0;
@@ -798,7 +759,7 @@
         const now = Date.now();
         if (now - last < 700) return;
         if (lock) return;
-        if (Math.abs(e.deltaY) < 35) return; // 트랙패드 미세값 무시
+        if (Math.abs(e.deltaY) < 35) return;
 
         last = now;
         const idx = currentIndex();
