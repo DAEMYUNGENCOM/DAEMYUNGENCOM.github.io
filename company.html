@@ -229,10 +229,6 @@
       transition: transform 1.2s var(--ease);
     }
     .ceo-media:hover img{ transform: scale(1.03); }
-
-    
-    }
-
     .ceo-sign{
       margin-top:22px;
       display:flex;
@@ -739,40 +735,40 @@ body{
           src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
   <script>
-    // footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+  // footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-  
+  // 카카오맵 렌더
+  if (window.daum && daum.roughmap && daum.roughmap.Lander) {
+    new daum.roughmap.Lander({
+      "timestamp": "1767934295361",
+      "key": "fpihxqujzif",
+      "mapWidth": "640",
+      "mapHeight": "420"
+    }).render();
+  }
 
-    // 카카오맵 렌더
-    if (window.daum && daum.roughmap && daum.roughmap.Lander) {
-      new daum.roughmap.Lander({
-        "timestamp" : "1767934295361",
-        "key" : "fpihxqujzif",
-        "mapWidth" : "640",
-        "mapHeight" : "420"
-      }).render();
-    }
+  // fade-up + stagger
+  const fades = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
 
-    // fade-up + stagger (섹션별 순차 등장)
-    const fades = document.querySelectorAll('.fade-up');
-    const io = new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(!entry.isIntersecting) return;
+      const section = entry.target.closest('.cp-section') || document;
+      const items = Array.from(section.querySelectorAll('.fade-up'));
+      const idx = items.indexOf(entry.target);
 
-        const parentSection = entry.target.closest('.cp-section') || document;
-        const siblings = Array.from(parentSection.querySelectorAll('.fade-up'));
-        const idx = siblings.indexOf(entry.target);
+      entry.target.style.transitionDelay =
+        `${Math.min(idx * 0.08, 0.32)}s`;
 
-        entry.target.style.transitionDelay = `${Math.min(idx * 0.08, 0.32)}s`;
-        entry.target.classList.add('show');
+      entry.target.classList.add('show');
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.18 });
 
-        io.unobserve(entry.target); // 1회만
-      });
-    }, {threshold:0.18});
+  fades.forEach(el => io.observe(el));
+</script>
 
-    fades.forEach(el=>io.observe(el));
-  <script>
   // 섹션 스냅 + 휠 한 번에 다음 섹션으로 이동(PC 위주)
   const sections = Array.from(document.querySelectorAll('.cp-section'));
   let isScrolling = false;
