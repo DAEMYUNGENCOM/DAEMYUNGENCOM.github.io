@@ -214,6 +214,7 @@
       overflow:hidden;
       background:#fff;
       transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+      margin-top: 120px; /* ← 여기 */
     }
     .ceo-media:hover{
       transform: translateY(-2px);
@@ -229,12 +230,7 @@
     }
     .ceo-media:hover img{ transform: scale(1.03); }
 
-    .ceo-media .cap{
-      padding:14px 16px 16px;
-      border-top:1px solid var(--line);
-      font-size:12px;
-      letter-spacing:.18em;
-      color:var(--text-muted);
+    
     }
 
     .ceo-sign{
@@ -580,7 +576,6 @@
         <aside class="ceo-media fade-up" aria-label="Showroom Image">
           <!-- 파일명에 공백이 있으면 %20으로 적는 게 안전합니다 -->
           <img src="대명전경.png" alt="DAE MYUNG ENCOM Showroom">
-          <div class="cap">SHOWROOM · EXPERIENCE THE MATERIAL</div>
         </aside>
       </div>
     </div>
