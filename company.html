@@ -183,7 +183,7 @@
       overflow:hidden;
       background:#fff;
       transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
-      margin-top:120px; /* 이미지 위치(중간쯤 내려오기) */
+      margin-top:120px; /* 이미지 위치 */
     }
     .ceo-media:hover{
       transform: translateY(-2px);
@@ -225,9 +225,8 @@
     .org-ceo{
       display:flex;
       justify-content:center;
-      margin:34px 0 28px;
-      margin-top: 60px; /* 0~20 정도로 조절 */
-      align-items: flex-start;
+      margin:10px 0 28px;
+      align-items:flex-start;
     }
     .org-ceo-card{
       border:1px solid var(--line);
@@ -259,7 +258,6 @@
       display:grid;
       grid-template-columns:repeat(12,1fr);
       gap:18px;
-      margin-top: 10px; /* 0~20 정도로 조절 */
     }
     .org-card{
       grid-column:span 4;
@@ -303,14 +301,10 @@
       border-color: rgba(17,17,17,.18);
       transform: translateY(-1px);
     }
-    /* ✅ ORGANIZATION 카드 묶음 전체를 아래로 내리기 (강제) */
-#organization .org-ceo{
-  margin-top: 140px !important;   /* 원하는 만큼 조절 */
-}
-#organization .org-grid{
-  margin-top: 18px !important;   /* CEO 카드와 아래 카드 간격 */
-}
 
+    /* ✅ ORGANIZATION 카드 묶음 전체를 아래로 내리기 (강제) */
+    #organization .org-ceo{ margin-top: 140px !important; }
+    #organization .org-grid{ margin-top: 18px !important; }
 
     /* =========================
        03 LOCATION
@@ -327,7 +321,7 @@
       overflow:hidden;
       background:#fff;
       min-height:420px;
-      padding: 0;
+      padding:0;
       transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
     }
     .loc-map:hover{
@@ -463,7 +457,6 @@
       .cp-sub{ grid-column:auto; }
       .ceo-grid{ grid-template-columns:1fr; }
       .ceo-media img{ height:420px; }
-
       .org-card{ grid-column:span 6; }
       .loc-grid{ grid-template-columns:1fr; }
     }
@@ -741,57 +734,54 @@
     }, { threshold: 0.18 });
     fades.forEach(el => io.observe(el));
 
-    <script>
-/* ===== One wheel = one panel (PC에서만) - 긴 섹션(CEO)에서는 점프 금지 ===== */
-(function fullpageWheel(){
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-  const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-  if (isMobile || isTouch) return;
+    /* ===== One wheel = one panel (PC에서만) - 긴 섹션(CEO)에서는 점프 금지 ===== */
+    (function fullpageWheel(){
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+      if (isMobile || isTouch) return;
 
-  // ✅ 페이지 헤더 제거했다면 cp-section만 사용
-  const panels = Array.from(document.querySelectorAll('.cp-section')).filter(Boolean);
+      const panels = Array.from(document.querySelectorAll('.cp-section')).filter(Boolean);
 
-  let lock = false;
-  let last = 0;
+      let lock = false;
+      let last = 0;
 
-  function goto(i){
-    if(i < 0 || i >= panels.length) return;
-    lock = true;
-    panels[i].scrollIntoView({ behavior:'smooth', block:'start' });
-    setTimeout(()=> lock = false, 850);
-  }
+      function goto(i){
+        if(i < 0 || i >= panels.length) return;
+        lock = true;
+        panels[i].scrollIntoView({ behavior:'smooth', block:'start' });
+        setTimeout(()=> lock = false, 850);
+      }
 
-  function currentIndex(){
-    const y = window.scrollY + 90; // nav 보정
-    let idx = 0;
-    panels.forEach((p, i)=>{ if(p.offsetTop <= y) idx = i; });
-    return idx;
-  }
+      function currentIndex(){
+        const y = window.scrollY + 90; // nav 보정
+        let idx = 0;
+        panels.forEach((p, i)=>{ if(p.offsetTop <= y) idx = i; });
+        return idx;
+      }
 
-  function isLongPanel(panel){
-    // ✅ 섹션 내용이 화면보다 길면(=읽어야 할 내용이 많으면) 점프 금지
-    const viewport = window.innerHeight - 70; // nav 고려
-    return panel.scrollHeight > viewport + 40;
-  }
+      function isLongPanel(panel){
+        const viewport = window.innerHeight - 70; // nav 고려
+        return panel.scrollHeight > viewport + 40;
+      }
 
-  window.addEventListener('wheel', (e) => {
-    const now = Date.now();
-    if (now - last < 650) return;
-    if (lock) return;
-    if (Math.abs(e.deltaY) < 35) return;
+      window.addEventListener('wheel', (e) => {
+        const now = Date.now();
+        if (now - last < 650) return;
+        if (lock) return;
+        if (Math.abs(e.deltaY) < 35) return;
 
-    const idx = currentIndex();
-    const panel = panels[idx];
+        const idx = currentIndex();
+        const panel = panels[idx];
 
-    // ✅ CEO처럼 긴 섹션이면 기본 스크롤을 방해하지 않음
-    if (isLongPanel(panel)) return;
+        // ✅ CEO처럼 긴 섹션이면 기본 스크롤을 방해하지 않음
+        if (isLongPanel(panel)) return;
 
-    last = now;
-    if (e.deltaY > 0) goto(idx + 1);
-    else goto(idx - 1);
-  }, { passive:true });
-})();
-</script>
-  
+        last = now;
+        if (e.deltaY > 0) goto(idx + 1);
+        else goto(idx - 1);
+      }, { passive:true });
+    })();
+  </script>
+
 </body>
 </html>
