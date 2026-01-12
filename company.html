@@ -61,6 +61,7 @@
     .cp-section{
       background:var(--white);
       padding:96px 20px;
+      position:relative; /* ✅ indicator 하단 배치용 */
     }
     .cp-wrap{
       max-width:1200px;
@@ -302,7 +303,7 @@
       transform: translateY(-1px);
     }
 
-    /* ✅ ORGANIZATION 카드 묶음 전체를 아래로 내리기 (강제) */
+    /* ✅ ORGANIZATION 카드 묶음 전체를 아래로 */
     #organization .org-ceo{ margin-top: 160px !important; }
     #organization .org-grid{ margin-top: 18px !important; }
 
@@ -401,72 +402,57 @@
       border-color:rgba(17,17,17,.28);
       background:rgba(17,17,17,.03);
     }
-    /* ===== Next Indicator (CEO → ORGANIZATION) ===== */
-#ceo{ position: relative; }
 
-.next-indicator-wrap{
-  display:flex;
-  justify-content:center;
-  margin-top: 26px;
-  position: absolute;
-  left: 50%;
-  bottom: 26px;              /* ✅ 섹션 아래쪽 위치 */
-  transform: translateX(-50%);
-  pointer-events: none;       /* 아래 컨텐츠 클릭 방해 X */
-}
-
-.next-indicator{
-  appearance:none;
-  border:0;
-  background:transparent;
-  cursor:pointer;
-  padding: 12px 12px 6px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-  color: var(--text-muted);
-  letter-spacing:.22em;
-  font-size:11px;
-  transition: transform .25s var(--ease), color .25s var(--ease);
-  pointer-events: auto;       /* 버튼만 클릭되게 */
-}
-
-.next-indicator:hover{
-  transform: translateY(-2px);
-  color: var(--text-main);
-}
-
-.next-indicator__line{
-  width:1px;
-  height:34px;
-  background: var(--hairline);
-  display:block;
-}
-
-.next-indicator__text{
-  font-size:10px;
-  letter-spacing:.26em;
-}
-
-.next-indicator__arrow{
-  font-size:16px;
-  line-height:1;
-  opacity:.9;
-  animation: bounceDown 1.25s var(--ease) infinite;
-}
-
-@keyframes bounceDown{
-  0%, 100% { transform: translateY(0); opacity:.85; }
-  50%      { transform: translateY(6px); opacity:1; }
-}
-
-/* 모바일에서는 과한 모션 줄이기 */
-@media (max-width:768px){
-  .next-indicator__arrow{ animation: none; }
-  .next-indicator-wrap{ display:none; } /* 모바일은 깔끔하게 숨김 */
-}
-
+    /* ===== Next Indicator (Section Bottom Center) ===== */
+    .next-indicator-wrap{
+      position:absolute;
+      left:50%;
+      bottom:26px;
+      transform:translateX(-50%);
+      display:flex;
+      justify-content:center;
+      pointer-events:none;
+    }
+    .next-indicator{
+      pointer-events:auto;
+      appearance:none;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      padding:10px 12px 6px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      color:var(--text-muted);
+      letter-spacing:.22em;
+      font-size:11px;
+      transition:transform .25s var(--ease), color .25s var(--ease);
+    }
+    .next-indicator:hover{
+      transform:translateY(-2px);
+      color:var(--text-main);
+    }
+    .next-indicator__line{
+      width:1px;
+      height:34px;
+      background:var(--hairline);
+      display:block;
+    }
+    .next-indicator__text{
+      font-size:10px;
+      letter-spacing:.26em;
+    }
+    .next-indicator__arrow{
+      font-size:16px;
+      line-height:1;
+      opacity:.9;
+      animation:bounceDown 1.25s var(--ease) infinite;
+    }
+    @keyframes bounceDown{
+      0%,100%{ transform:translateY(0); opacity:.85; }
+      50%{ transform:translateY(6px); opacity:1; }
+    }
 
     /* FOOTER */
     .site-footer{
@@ -485,47 +471,47 @@
       letter-spacing:.08em;
     }
 
-    /* ===== Fullpage 느낌: ORGANIZATION/LOCATION만 스냅 ===== */
-html{ scroll-behavior:smooth; }
-body{
-  scroll-snap-type: y mandatory;
-  scroll-padding-top: 70px;
-}
+    /* ===== Fullpage 느낌: ORG/LOCATION만 스냅, CEO는 자연 스크롤 ===== */
+    html{ scroll-behavior:smooth; }
+    body{
+      scroll-snap-type:y mandatory;
+      scroll-padding-top:70px;
+    }
+    .cp-section{
+      scroll-snap-align:start;
+      scroll-snap-stop:always;
+      min-height:calc(100vh - 70px);
+      scroll-margin-top:70px;
+    }
+    /* ✅ CEO는 스냅 해제 + 높이 자동 */
+    #ceo{
+      scroll-snap-align:none !important;
+      scroll-snap-stop:normal !important;
+      min-height:auto !important;
+      padding-bottom:140px; /* ✅ 하단 인디케이터 자리 확보 */
+    }
 
-/* 기본: 섹션은 스냅 대상 */
-.cp-section{
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  min-height: calc(100vh - 70px);
-  scroll-margin-top: 70px;
-}
+    /* 모바일/태블릿에서는 강제 전환 OFF */
+    @media (max-width:768px){
+      body{ scroll-snap-type:none; }
+      .cp-section{ min-height:auto; }
+      #ceo{ min-height:auto !important; padding-bottom:96px; }
 
-/* ✅ CEO는 스냅 해제 + 높이 자동(자연 스크롤) */
-#ceo{
-  scroll-snap-align: none !important;
-  scroll-snap-stop: normal !important;
-  min-height: auto !important;
-}
+      .ceo-media{ margin-top:26px; }
+      .ceo-media img{ height:380px; }
+      .loc-grid{ grid-template-columns:1fr; }
+      .org-card{ grid-column:span 12; }
 
-/* 모바일/태블릿에서는 강제 전환 OFF */
-@media (max-width: 768px){
-  body{ scroll-snap-type: none; }
-  .cp-section{ min-height: auto; }
-  #ceo{ min-height: auto !important; }
-
-  .ceo-media{ margin-top: 26px; }
-  .ceo-media img{ height: 380px; }
-  .loc-grid{ grid-template-columns: 1fr; }
-  .org-card{ grid-column: span 12; }
-}
-
+      .next-indicator-wrap{ display:none; }
+      .next-indicator__arrow{ animation:none; }
+    }
 
     /* 모션 최소화 옵션 */
     @media (prefers-reduced-motion: reduce){
       .fade-up, .org-card, .loc-card, .ceo-media, .ceo-media img, .org-tag, .loc-map, .org-ceo-card{
-        transition: none !important;
-        animation: none !important;
-        transform: none !important;
+        transition:none !important;
+        animation:none !important;
+        transform:none !important;
       }
     }
 
@@ -561,26 +547,7 @@ body{
         <a href="index.html#contact">CONTACT</a>
       </div>
     </div>
-    <!-- NEXT SECTION INDICATOR -->
-<div class="next-indicator-wrap">
-  <button type="button" class="next-indicator" id="goOrg" aria-label="다음 섹션으로 이동">
-    <span class="next-indicator__line"></span>
-    <span class="next-indicator__text">SCROLL</span>
-    <span class="next-indicator__arrow">↓</span>
-  </button>
-</div>
-    <div class="next-indicator-wrap">
-  <button type="button" class="next-indicator" id="goTop" aria-label="맨 위로 이동">
-    <span class="next-indicator__line"></span>
-    <span class="next-indicator__text">TOP</span>
-    <span class="next-indicator__arrow">↑</span>
-  </button>
-</div>
-
-
   </nav>
-
-  <!-- ✅ COMPANY PAGE HEADER 완전 제거됨: page-hero 없음 -->
 
   <!-- 01 CEO MESSAGE -->
   <section class="cp-section" id="ceo">
@@ -655,6 +622,15 @@ body{
         </aside>
       </div>
     </div>
+
+    <!-- ✅ CEO 섹션 하단: 다음 섹션(ORG) -->
+    <div class="next-indicator-wrap">
+      <button type="button" class="next-indicator" id="goOrg" aria-label="ORGANIZATION으로 이동">
+        <span class="next-indicator__line"></span>
+        <span class="next-indicator__text">SCROLL</span>
+        <span class="next-indicator__arrow">↓</span>
+      </button>
+    </div>
   </section>
 
   <!-- 02 ORGANIZATION -->
@@ -717,6 +693,15 @@ body{
         </article>
       </div>
     </div>
+
+    <!-- ✅ ORG 섹션 하단: 다음 섹션(LOCATION) -->
+    <div class="next-indicator-wrap">
+      <button type="button" class="next-indicator" id="goLoc" aria-label="LOCATION으로 이동">
+        <span class="next-indicator__line"></span>
+        <span class="next-indicator__text">SCROLL</span>
+        <span class="next-indicator__arrow">↓</span>
+      </button>
+    </div>
   </section>
 
   <!-- 03 LOCATION -->
@@ -770,6 +755,15 @@ body{
         </div>
       </div>
     </div>
+
+    <!-- ✅ LOCATION 섹션 하단: TOP -->
+    <div class="next-indicator-wrap">
+      <button type="button" class="next-indicator" id="goTop" aria-label="맨 위로 이동">
+        <span class="next-indicator__line"></span>
+        <span class="next-indicator__text">TOP</span>
+        <span class="next-indicator__arrow">↑</span>
+      </button>
+    </div>
   </section>
 
   <!-- FOOTER -->
@@ -789,7 +783,7 @@ body{
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    /* 카카오맵 렌더 */
+    /* 카카오맵 렌더 (로더 지연 대비 재시도) */
     function renderKakaoMap(){
       if (window.daum && daum.roughmap && daum.roughmap.Lander) {
         new daum.roughmap.Lander({
@@ -803,7 +797,6 @@ body{
       return false;
     }
 
-    // 로더가 늦게 올 수 있어서 재시도(최대 2초)
     (function retryMap(){
       let t = 0;
       const timer = setInterval(() => {
@@ -829,96 +822,84 @@ body{
     }, { threshold: 0.18 });
     fades.forEach(el => io.observe(el));
 
-  
-/* ===== One wheel = one panel (PC에서만)
-   ✅ CEO는 자연 스크롤
-   ✅ ORG/LOCATION만 한 번 휠 = 다음 섹션
-===== */
-(function fullpageWheel(){
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-  const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-  if (isMobile || isTouch) return;
+    /* ===== One wheel = one panel (PC에서만)
+       ✅ CEO는 자연 스크롤
+       ✅ ORG/LOCATION만 한 번 휠 = 다음 섹션
+    ===== */
+    (function fullpageWheel(){
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+      if (isMobile || isTouch) return;
 
-  const ceo = document.getElementById('ceo');
-  const panels = [
-    document.getElementById('organization'),
-    document.getElementById('location')
-  ].filter(Boolean);
+      const ceo = document.getElementById('ceo');
+      const panels = [
+        document.getElementById('organization'),
+        document.getElementById('location')
+      ].filter(Boolean);
 
-  let lock = false;
-  let last = 0;
+      let lock = false;
+      let last = 0;
 
-  function goto(i){
-    if(i < 0 || i >= panels.length) return;
-    lock = true;
-    panels[i].scrollIntoView({ behavior:'smooth', block:'start' });
-    setTimeout(()=> lock = false, 850);
-  }
+      function goto(i){
+        if(i < 0 || i >= panels.length) return;
+        lock = true;
+        panels[i].scrollIntoView({ behavior:'smooth', block:'start' });
+        setTimeout(()=> lock = false, 850);
+      }
 
-  function isInCeo(){
-    if(!ceo) return false;
-    const y = window.scrollY + 80;
-    return y >= ceo.offsetTop && y < (ceo.offsetTop + ceo.offsetHeight);
-  }
+      function isInCeo(){
+        if(!ceo) return false;
+        const y = window.scrollY + 80;
+        return y >= ceo.offsetTop && y < (ceo.offsetTop + ceo.offsetHeight);
+      }
 
-  function currentPanelIndex(){
-    const y = window.scrollY + 90; // nav 보정
-    let idx = 0;
-    panels.forEach((p, i)=>{ if(p.offsetTop <= y) idx = i; });
-    return idx;
-  }
+      function currentPanelIndex(){
+        const y = window.scrollY + 90;
+        let idx = 0;
+        panels.forEach((p, i)=>{ if(p.offsetTop <= y) idx = i; });
+        return idx;
+      }
 
-  window.addEventListener('wheel', (e) => {
-    // ✅ CEO 구간에서는 휠 제어하지 않음(자연 스크롤)
-    if (isInCeo()) return;
+      window.addEventListener('wheel', (e) => {
+        if (isInCeo()) return; // ✅ CEO는 자연 스크롤
 
-    const now = Date.now();
-    if (now - last < 650) return;
-    if (lock) return;
-    if (Math.abs(e.deltaY) < 35) return;
+        const now = Date.now();
+        if (now - last < 650) return;
+        if (lock) return;
+        if (Math.abs(e.deltaY) < 35) return;
 
-    last = now;
+        last = now;
+        const idx = currentPanelIndex();
+        if (e.deltaY > 0) goto(idx + 1);
+        else goto(idx - 1);
+      }, { passive:true });
+    })();
 
-    const idx = currentPanelIndex();
-    if (e.deltaY > 0) goto(idx + 1);
-    else goto(idx - 1);
-  }, { passive:true });
-})();
-    /* CEO → ORGANIZATION jump */
-const goOrgBtn = document.getElementById('goOrg');
-const orgSection = document.getElementById('organization');
-if (goOrgBtn && orgSection) {
-  goOrgBtn.addEventListener('click', () => {
-    orgSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  const goOrgBtn = document.getElementById('goOrg');
-const goLocBtn = document.getElementById('goLoc');
-const goTopBtn = document.getElementById('goTop');
+    /* Indicator Buttons */
+    const goOrgBtn = document.getElementById('goOrg');
+    const goLocBtn = document.getElementById('goLoc');
+    const goTopBtn = document.getElementById('goTop');
 
-const orgSection = document.getElementById('organization');
-const locSection = document.getElementById('location');
-const ceoSection = document.getElementById('ceo');
+    const orgSection = document.getElementById('organization');
+    const locSection = document.getElementById('location');
+    const ceoSection = document.getElementById('ceo');
 
-if (goOrgBtn && orgSection) {
-  goOrgBtn.addEventListener('click', () => {
-    orgSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-}
-
-if (goLocBtn && locSection) {
-  goLocBtn.addEventListener('click', () => {
-    locSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-}
-
-if (goTopBtn && ceoSection) {
-  goTopBtn.addEventListener('click', () => {
-    ceoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-}
-
-
-</script>
-
+    if (goOrgBtn && orgSection) {
+      goOrgBtn.addEventListener('click', () => {
+        orgSection.scrollIntoView({ behavior:'smooth', block:'start' });
+      });
+    }
+    if (goLocBtn && locSection) {
+      goLocBtn.addEventListener('click', () => {
+        locSection.scrollIntoView({ behavior:'smooth', block:'start' });
+      });
+    }
+    if (goTopBtn && ceoSection) {
+      goTopBtn.addEventListener('click', () => {
+        ceoSection.scrollIntoView({ behavior:'smooth', block:'start' });
+      });
+    }
+  </script>
 
 </body>
 </html>
