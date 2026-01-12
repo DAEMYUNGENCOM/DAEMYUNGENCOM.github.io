@@ -401,6 +401,65 @@
       border-color:rgba(17,17,17,.28);
       background:rgba(17,17,17,.03);
     }
+    /* ===== Next Indicator (CEO → ORGANIZATION) ===== */
+#ceo{ position: relative; }
+
+.next-indicator-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top: 26px;
+}
+
+.next-indicator{
+  appearance:none;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  padding: 12px 12px 6px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  color: var(--text-muted);
+  letter-spacing:.22em;
+  font-size:11px;
+  transition: transform .25s var(--ease), color .25s var(--ease);
+}
+
+.next-indicator:hover{
+  transform: translateY(-2px);
+  color: var(--text-main);
+}
+
+.next-indicator__line{
+  width:1px;
+  height:36px;
+  background: var(--hairline);
+  display:block;
+}
+
+.next-indicator__text{
+  font-size:10px;
+  letter-spacing:.26em;
+}
+
+.next-indicator__arrow{
+  font-size:16px;
+  line-height:1;
+  opacity:.9;
+  animation: bounceDown 1.25s var(--ease) infinite;
+}
+
+@keyframes bounceDown{
+  0%, 100% { transform: translateY(0); opacity:.85; }
+  50%      { transform: translateY(6px); opacity:1; }
+}
+
+/* 모바일에서는 과한 모션 줄이기 */
+@media (max-width:768px){
+  .next-indicator__arrow{ animation: none; }
+}
+
 
     /* FOOTER */
     .site-footer{
@@ -495,6 +554,15 @@ body{
         <a href="index.html#contact">CONTACT</a>
       </div>
     </div>
+    <!-- NEXT SECTION INDICATOR -->
+<div class="next-indicator-wrap">
+  <button type="button" class="next-indicator" id="goOrg" aria-label="다음 섹션으로 이동">
+    <span class="next-indicator__line"></span>
+    <span class="next-indicator__text">SCROLL</span>
+    <span class="next-indicator__arrow">↓</span>
+  </button>
+</div>
+
   </nav>
 
   <!-- ✅ COMPANY PAGE HEADER 완전 제거됨: page-hero 없음 -->
@@ -801,6 +869,15 @@ body{
     else goto(idx - 1);
   }, { passive:true });
 })();
+    /* CEO → ORGANIZATION jump */
+const goOrgBtn = document.getElementById('goOrg');
+const orgSection = document.getElementById('organization');
+if (goOrgBtn && orgSection) {
+  goOrgBtn.addEventListener('click', () => {
+    orgSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
 </script>
 
 
