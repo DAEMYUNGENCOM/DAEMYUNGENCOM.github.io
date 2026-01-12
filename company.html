@@ -741,44 +741,57 @@
     }, { threshold: 0.18 });
     fades.forEach(el => io.observe(el));
 
-    /* ===== One wheel = one panel (PC에서만) ===== */
-    (function fullpageWheel(){
-      const isMobile = window.matchMedia('(max-width: 768px)').matches;
-      const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-      if (isMobile || isTouch) return; // 모바일/터치에서는 끔
+    <script>
+/* ===== One wheel = one panel (PC에서만) - 긴 섹션(CEO)에서는 점프 금지 ===== */
+(function fullpageWheel(){
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if (isMobile || isTouch) return;
 
-      const panels = Array.from(document.querySelectorAll('.cp-section')).filter(Boolean);
+  // ✅ 페이지 헤더 제거했다면 cp-section만 사용
+  const panels = Array.from(document.querySelectorAll('.cp-section')).filter(Boolean);
 
-      let lock = false;
-      let last = 0;
+  let lock = false;
+  let last = 0;
 
-      function goto(i){
-        if(i < 0 || i >= panels.length) return;
-        lock = true;
-        panels[i].scrollIntoView({ behavior:'smooth', block:'start' });
-        setTimeout(()=> lock = false, 850);
-      }
+  function goto(i){
+    if(i < 0 || i >= panels.length) return;
+    lock = true;
+    panels[i].scrollIntoView({ behavior:'smooth', block:'start' });
+    setTimeout(()=> lock = false, 850);
+  }
 
-      function currentIndex(){
-        const y = window.scrollY + 90; // nav 보정
-        let idx = 0;
-        panels.forEach((p, i)=>{ if(p.offsetTop <= y) idx = i; });
-        return idx;
-      }
+  function currentIndex(){
+    const y = window.scrollY + 90; // nav 보정
+    let idx = 0;
+    panels.forEach((p, i)=>{ if(p.offsetTop <= y) idx = i; });
+    return idx;
+  }
 
-      window.addEventListener('wheel', (e) => {
-        const now = Date.now();
-        if (now - last < 700) return;
-        if (lock) return;
-        if (Math.abs(e.deltaY) < 35) return;
+  function isLongPanel(panel){
+    // ✅ 섹션 내용이 화면보다 길면(=읽어야 할 내용이 많으면) 점프 금지
+    const viewport = window.innerHeight - 70; // nav 고려
+    return panel.scrollHeight > viewport + 40;
+  }
 
-        last = now;
-        const idx = currentIndex();
-        if (e.deltaY > 0) goto(idx + 1);
-        else goto(idx - 1);
-      }, { passive:true });
-    })();
-  </script>
+  window.addEventListener('wheel', (e) => {
+    const now = Date.now();
+    if (now - last < 650) return;
+    if (lock) return;
+    if (Math.abs(e.deltaY) < 35) return;
 
+    const idx = currentIndex();
+    const panel = panels[idx];
+
+    // ✅ CEO처럼 긴 섹션이면 기본 스크롤을 방해하지 않음
+    if (isLongPanel(panel)) return;
+
+    last = now;
+    if (e.deltaY > 0) goto(idx + 1);
+    else goto(idx - 1);
+  }, { passive:true });
+})();
+</script>
+  
 </body>
 </html>
