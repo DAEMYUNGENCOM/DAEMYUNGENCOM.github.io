@@ -408,6 +408,11 @@
   display:flex;
   justify-content:center;
   margin-top: 26px;
+  position: absolute;
+  left: 50%;
+  bottom: 26px;              /* ✅ 섹션 아래쪽 위치 */
+  transform: translateX(-50%);
+  pointer-events: none;       /* 아래 컨텐츠 클릭 방해 X */
 }
 
 .next-indicator{
@@ -424,6 +429,7 @@
   letter-spacing:.22em;
   font-size:11px;
   transition: transform .25s var(--ease), color .25s var(--ease);
+  pointer-events: auto;       /* 버튼만 클릭되게 */
 }
 
 .next-indicator:hover{
@@ -433,7 +439,7 @@
 
 .next-indicator__line{
   width:1px;
-  height:36px;
+  height:34px;
   background: var(--hairline);
   display:block;
 }
@@ -458,6 +464,7 @@
 /* 모바일에서는 과한 모션 줄이기 */
 @media (max-width:768px){
   .next-indicator__arrow{ animation: none; }
+  .next-indicator-wrap{ display:none; } /* 모바일은 깔끔하게 숨김 */
 }
 
 
@@ -562,6 +569,14 @@ body{
     <span class="next-indicator__arrow">↓</span>
   </button>
 </div>
+    <div class="next-indicator-wrap">
+  <button type="button" class="next-indicator" id="goTop" aria-label="맨 위로 이동">
+    <span class="next-indicator__line"></span>
+    <span class="next-indicator__text">TOP</span>
+    <span class="next-indicator__arrow">↑</span>
+  </button>
+</div>
+
 
   </nav>
 
@@ -875,8 +890,32 @@ const orgSection = document.getElementById('organization');
 if (goOrgBtn && orgSection) {
   goOrgBtn.addEventListener('click', () => {
     orgSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const goOrgBtn = document.getElementById('goOrg');
+const goLocBtn = document.getElementById('goLoc');
+const goTopBtn = document.getElementById('goTop');
+
+const orgSection = document.getElementById('organization');
+const locSection = document.getElementById('location');
+const ceoSection = document.getElementById('ceo');
+
+if (goOrgBtn && orgSection) {
+  goOrgBtn.addEventListener('click', () => {
+    orgSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 }
+
+if (goLocBtn && locSection) {
+  goLocBtn.addEventListener('click', () => {
+    locSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+if (goTopBtn && ceoSection) {
+  goTopBtn.addEventListener('click', () => {
+    ceoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
 
 </script>
 
