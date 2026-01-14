@@ -1,245 +1,327 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>FAUCET | DAE MYUNG ENCOM</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DAE MYUNG ENCOM | TILE</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@latest/dist/web/static/pretendard.css">
 
   <style>
-    body {
-      font-family: 'Noto Sans KR', Arial, sans-serif;
-      margin: 0;
-      background: #f9fafb;
-      color: #111;
+    :root{
+      --bg:#f9fafb;
+      --white:#fff;
+      --text-main:#111;
+      --text-sub:#555;
+      --text-muted:#888;
+      --line:#e5e7eb;
+      --hairline:rgba(17,17,17,.10);
+      --ease:cubic-bezier(0.22,1,0.36,1);
     }
 
-    /* ===== HERO ===== */
-    .sub-hero {
-      padding: 120px 20px 80px;
-      text-align: center;
+    body{
+      margin:0;
+      padding-top:70px;
+      font-family:'Pretendard', -apple-system, BlinkMacSystemFont,
+               'Apple SD Gothic Neo', 'Noto Sans KR', Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text-main);
+    }
+    a{ color:inherit; }
+
+    /* NAV (index와 통일) */
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      height:70px;
+      background:var(--white);
+      border-bottom:1px solid var(--line);
+      z-index:1000;
+    }
+    .nav-inner{
+      max-width:1200px;
+      height:100%;
+      margin:0 auto;
+      padding:0 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .nav-inner img{ display:block; }
+    .menu a{
+      margin-left:30px;
+      text-decoration:none;
+      color:var(--text-main);
+      font-weight:500;
+      letter-spacing:.08em;
     }
 
-    .sub-hero h1 {
-      font-size: 56px;
-      letter-spacing: 0.25em;
-      margin-bottom: 16px;
+    /* PAGE HEADER */
+    .page-hero{
+      background:var(--white);
+      border-bottom:1px solid var(--line);
+      padding:56px 20px 48px;
+    }
+    .page-hero .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:24px;
+    }
+    .page-title{
+      margin:0;
+      font-size:34px;
+      letter-spacing:.14em;
+    }
+    .page-kicker{
+      margin:10px 0 0;
+      font-size:12px;
+      letter-spacing:.22em;
+      color:var(--text-muted);
+    }
+    .page-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:38px;
+      padding:0 14px;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-decoration:none;
+      color:var(--text-main);
+      border:1px solid rgba(17,17,17,.16);
+      background:transparent;
+      transition:transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+    }
+    .btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(17,17,17,.28);
+      background:rgba(17,17,17,.03);
     }
 
-    .sub-hero p {
-      font-size: 14px;
-      letter-spacing: 0.18em;
-      color: #666;
+    /* SECTION */
+    .section{
+      padding:70px 20px 110px;
+    }
+    .wrap{
+      max-width:1200px;
+      margin:0 auto;
     }
 
-    .category-intro {
-      padding: 60px 20px;
-      text-align: center;
-      font-size: 15px;
-      line-height: 1.8;
-      color: #555;
+    /* GRID */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:28px;
     }
 
-    section {
-      max-width: 1200px;
-      margin: 0 auto 120px;
-      padding: 0 20px;
+    /* CARD */
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+      overflow:hidden;
+    }
+    .card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 38px rgba(17,17,17,.08);
+      border-color:rgba(17,17,17,.14);
     }
 
-    /* ===== GRID ===== */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 60px;
-      margin-top: 80px;
+    .media{
+      position:relative;
+      aspect-ratio:1/1;
+      background:#f3f4f6;
+    }
+    .media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .badge{
+      position:absolute;
+      left:12px;
+      top:12px;
+      padding:6px 10px;
+      font-size:11px;
+      letter-spacing:.18em;
+      background:rgba(17,17,17,.70);
+      color:#fff;
     }
 
-    /* ===== CARD ===== */
-    .product-card {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease;
+    /* thumb switch */
+    .thumbs{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      display:flex;
+      gap:8px;
+      z-index:2;
+    }
+    .thumb-btn{
+      width:34px;
+      height:34px;
+      border:1px solid rgba(255,255,255,.55);
+      background:rgba(0,0,0,.18);
+      backdrop-filter:blur(6px);
+      cursor:pointer;
+      padding:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+    }
+    .thumb-btn:hover{ transform:translateY(-1px); }
+    .thumb-btn.active{
+      background:rgba(0,0,0,.32);
+      border-color:rgba(255,255,255,.75);
+    }
+    .thumb-btn span{
+      font-size:11px;
+      letter-spacing:.14em;
+      color:#fff;
+      opacity:.95;
     }
 
-    .product-card.show {
-      opacity: 1;
-      transform: translateY(0);
+    .info{
+      padding:16px 16px 18px;
+    }
+    .name{
+      margin:0 0 10px;
+      font-size:14px;
+      letter-spacing:.10em;
+    }
+    .spec{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:7px;
+      font-size:13px;
+      line-height:1.6;
+      color:var(--text-sub);
+    }
+    .spec span{
+      display:inline-block;
+      width:74px;
+      color:var(--text-muted);
+      letter-spacing:.06em;
     }
 
-    .product-item {
-      position: relative;
-      overflow: hidden;
+    .note{
+      margin:14px 0 0;
+      font-size:12px;
+      color:var(--text-muted);
+      line-height:1.7;
     }
 
-    .product-item img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      transition: transform 0.8s ease, filter 0.6s ease;
+    /* responsive */
+    @media(max-width:980px){
+      .grid{ grid-template-columns:repeat(2, 1fr); }
+      .page-hero .wrap{ flex-direction:column; align-items:flex-start; }
     }
-
-    .product-card:hover img {
-      transform: scale(1.06);
-      filter: brightness(0.65);
-    }
-
-    /* ===== OVERLAY ===== */
-    .product-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-
-    .product-card:hover .product-overlay {
-      opacity: 1;
-    }
-
-    .overlay-text {
-      text-align: center;
-      color: #fff;
-    }
-
-    .overlay-text h3 {
-      font-size: 22px;
-      letter-spacing: 0.2em;
-      margin-bottom: 12px;
-    }
-
-    .overlay-text p {
-      font-size: 14px;
-      color: #ddd;
-      margin-bottom: 16px;
-      line-height: 1.6;
-    }
-
-    .product-btn {
-      font-size: 13px;
-      letter-spacing: 0.12em;
-      position: relative;
-      display: inline-block;
-    }
-
-    .product-btn::after {
-      content: '';
-      display: block;
-      width: 0;
-      height: 1px;
-      background: #fff;
-      margin: 6px auto 0;
-      transition: width 0.4s ease;
-    }
-
-    .product-card:hover .product-btn::after {
-      width: 100%;
-    }
-
-    /* ===== BACK ===== */
-    .back {
-      margin-top: 120px;
-      text-align: center;
-    }
-
-    .back a {
-      font-size: 14px;
-      letter-spacing: 0.1em;
-      border-bottom: 1px solid #111;
-      text-decoration: none;
-      color: #111;
-    }
-
-    /* ===== MOBILE ===== */
-    @media (max-width: 768px) {
-      .product-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .sub-hero h1 {
-        font-size: 36px;
-      }
-
-      .product-item img {
-        height: 220px;
-      }
+    @media(max-width:640px){
+      .grid{ grid-template-columns:1fr; }
     }
   </style>
 </head>
 
 <body>
-
-<header class="sub-hero">
-  <h1>TILE</h1>
-  <p>ARCHITECTURAL CERAMIC SOLUTIONS</p>
-</header>
-
-<section>
-  <div class="product-grid">
-
-    <a href="tile-porcelain.html" class="product-card">
-      <div class="product-item">
-        <img src="tile.jpg" alt="Porcelain Tile">
-        <div class="product-overlay">
-          <div class="overlay-text">
-            <h3>PORCELAIN TILE</h3>
-            <p>내구성과 디자인을 갖춘 포세린 타일</p>
-            <span class="product-btn">DETAIL VIEW</span>
-          </div>
-        </div>
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html">
+        <img src="대명엔컴-영문로고 (워터마크).png" height="28" alt="DAE MYUNG ENCOM">
+      </a>
+      <div class="menu">
+        <a href="company.html">COMPANY</a>
+        <a href="index.html#products">PRODUCT</a>
+        <a href="index.html#contact">CONTACT</a>
       </div>
-    </a>
+    </div>
+  </nav>
 
-    <a href="tile-large.html" class="product-card">
-      <div class="product-item">
-        <img src="tile.jpg" alt="Large Format Tile">
-        <div class="product-overlay">
-          <div class="overlay-text">
-            <h3>LARGE FORMAT TILE</h3>
-            <p>넓은 공간에 최적화된 대형 포맷 타일</p>
-            <span class="product-btn">DETAIL VIEW</span>
-          </div>
-        </div>
+  <header class="page-hero">
+    <div class="wrap">
+      <div>
+        <h1 class="page-title">TILE</h1>
+        <p class="page-kicker">DAE MYUNG ENCOM · TILE COLLECTION</p>
       </div>
-    </a>
-
-    <a href="tile-wallfloor.html" class="product-card">
-      <div class="product-item">
-        <img src="tile.jpg" alt="Wall Floor Tile">
-        <div class="product-overlay">
-          <div class="overlay-text">
-            <h3>WALL & FLOOR TILE</h3>
-            <p>벽과 바닥에 모두 적용 가능한 타일</p>
-            <span class="product-btn">DETAIL VIEW</span>
-          </div>
-        </div>
+      <div class="page-actions">
+        <a class="btn" href="index.html#products">메인으로</a>
+        <a class="btn" href="index.html#contact">문의하기</a>
       </div>
-    </a>
+    </div>
+  </header>
 
-  </div>
+  <main class="section">
+    <div class="wrap">
+      <div class="grid">
 
-  <div class="back">
-    <a href="index.html">← BACK TO MAIN</a>
-  </div>
-</section>
+        <!-- ✅ PRODUCT CARD 1개 (SABIA LIGHT GREY) -->
+        <article class="card" data-product="sabia-300">
+          <div class="media">
+            <span class="badge">TILE</span>
 
-<script>
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      }
+            <!-- 기본 표시 이미지: 썸네일(쇼룸컷) -->
+            <img class="main-img"
+                 src="product/tile/300_SABIALIGHTGREY.jpg"
+                 alt="SABIA LIGHT GREY">
+
+            <!-- 썸/제품/패턴 전환 버튼 -->
+            <div class="thumbs" role="tablist" aria-label="Image switch">
+              <button type="button" class="thumb-btn active" data-src="product/tile/300_SABIALIGHTGREY.jpg" aria-label="썸네일">
+                <span>TH</span>
+              </button>
+              <button type="button" class="thumb-btn" data-src="product/tile/300한장_SABIALIGHTGREY.jpg" aria-label="제품 이미지">
+                <span>PR</span>
+              </button>
+              <button type="button" class="thumb-btn" data-src="product/tile/300패턴도_SABIALIGHTGREY.jpg" aria-label="패턴도">
+                <span>PT</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="info">
+            <h3 class="name">SABIA LIGHT GREY</h3>
+            <ul class="spec">
+              <li><span>규격</span> 300×300</li>
+              <li><span>표면</span> 무광</li>
+              <li><span>Pcs/Box</span> 9pcs</li>
+            </ul>
+            <p class="note">※ 썸네일(TH) / 제품(PR) / 패턴(PT) 버튼으로 이미지를 전환해 확인할 수 있습니다.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // 카드 내부 이미지 전환 (상세페이지 없이)
+    document.querySelectorAll('.card').forEach(card=>{
+      const img = card.querySelector('.main-img');
+      const buttons = card.querySelectorAll('.thumb-btn');
+      if(!img || !buttons.length) return;
+
+      buttons.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          buttons.forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const src = btn.dataset.src;
+          if(src) img.src = src;
+        });
+      });
     });
-  }, { threshold: 0.2 });
-
-  document.querySelectorAll('.product-card').forEach(el => observer.observe(el));
-</script>
-
+  </script>
 </body>
 </html>
