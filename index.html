@@ -725,79 +725,85 @@
   </section>
 
   <section id="products">
-    <h2>PRODUCT CATEGORY</h2>
+  <h2>PRODUCT CATEGORY</h2>
 
-    <div class="product-grid">
-      <a href="tile.html" class="product-card from-left">
-        <div class="product-item">
-          <img src="product/tile/SABIALIGHTGREY_타일전시.jpg" alt="Tile Display">
-          <div class="product-overlay"><span>TILE</span></div>
-        </div>
-        <div class="product-info">
-          <h3>TILE</h3>
-          <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
-          <span class="product-btn">자세히 보기</span>
-        </div>
-      </a>
+  <div class="product-grid">
+    <!-- TILE -->
+    <a href="tile.html" class="product-card from-left">
+      <div class="product-item">
+        <img src="product/tile/SABIALIGHTGREY_타일전시.jpg" alt="TILE">
+        <div class="product-overlay"><span>TILE</span></div>
+      </div>
+      <div class="product-info">
+        <h3>TILE</h3>
+        <p>바닥 · 벽 · 대형 포맷까지 아우르는 세라믹 타일</p>
+        <span class="product-btn">목록 보기</span>
+      </div>
+    </a>
 
-      <a href="sanitary.html" class="product-card from-bottom">
-        <div class="product-item">
-          <img src="product/sanitary/product-sanitary.jpg" alt="SANITARY">
-          <div class="product-overlay"><span>SANITARY</span></div>
-        </div>
-        <div class="product-info">
-          <h3>SANITARY WARE</h3>
-          <p>욕실 공간을 위한 위생도기 제품</p>
-          <span class="product-btn">자세히 보기</span>
-        </div>
-      </a>
+    <!-- SANITARY -->
+    <a href="sanitary.html" class="product-card from-bottom">
+      <div class="product-item">
+        <img src="product/sanitary/product-sanitary.jpg" alt="SANITARY WARE">
+        <div class="product-overlay"><span>SANITARY</span></div>
+      </div>
+      <div class="product-info">
+        <h3>SANITARY WARE</h3>
+        <p>욕실 공간을 위한 위생도기 제품</p>
+        <span class="product-btn">목록 보기</span>
+      </div>
+    </a>
 
-      <a href="faucet.html" class="product-card from-right">
-        <div class="product-item">
-          <img src="product/faucet/product-faucet.jpg" alt="FAUCET">
-          <div class="product-overlay"><span>FAUCET</span></div>
-        </div>
-        <div class="product-info">
-          <h3>FAUCET</h3>
-          <p>디자인과 내구성을 겸비한 수전</p>
-          <span class="product-btn">자세히 보기</span>
-        </div>
-      </a>
-    </div>
-  </section>
+    <!-- FAUCET -->
+    <a href="faucet.html" class="product-card from-right">
+      <div class="product-item">
+        <img src="product/faucet/product-faucet.jpg" alt="FAUCET">
+        <div class="product-overlay"><span>FAUCET</span></div>
+      </div>
+      <div class="product-info">
+        <h3>FAUCET</h3>
+        <p>디자인과 내구성을 겸비한 수전</p>
+        <span class="product-btn">목록 보기</span>
+      </div>
+    </a>
+  </div>
+</section>
+
 
   <section id="showroom" class="showroom-section">
-    <div class="showroom-inner fade-up">
-      <div class="showroom-copy">
-        <span class="showroom-kicker">SHOWROOM</span>
-        <h2 class="showroom-title">Experience the Material</h2>
-        <p class="showroom-desc">
-          제품을 사진이 아닌 실제 공간에서 확인하고,<br>
-          자재의 질감과 완성도를 직접 경험할 수 있습니다.
-        </p>
-        <a class="action-btn" href="#contact">쇼룸 문의</a>
-      </div>
+  <div class="showroom-inner fade-up">
+    <div class="showroom-copy">
+      <span class="showroom-kicker">SHOWROOM</span>
+      <h2 class="showroom-title">Experience the Material</h2>
+      <p class="showroom-desc">
+        제품을 사진이 아닌 실제 공간에서 확인하고,<br>
+        자재의 질감과 완성도를 직접 경험할 수 있습니다.
+      </p>
+      <a class="action-btn" href="#contact">쇼룸 문의</a>
+    </div>
 
-      <div class="showroom-media">
-        <div class="showroom-slider">
-          <div class="slide active">
-            <img src="product/showroom/대표_쇼룸_컷.jpg" alt="DAE MYUNG ENCOM Showroom">
-          </div>
-          <div class="slide">
-            <img src="product/showroom/타일장.jpg" alt="Tile Selection Zone">
-          </div>
-          <div class="slide">
-            <img src="product/showroom/수전_전시.jpg" alt="Faucet Display Zone">
-          </div>
-
-        <div class="slider-dots">
-          <button class="dot active" type="button" aria-label="slide 1"></button>
-          <button class="dot" type="button" aria-label="slide 2"></button>
-          <button class="dot" type="button" aria-label="slide 3"></button>
+    <div class="showroom-media">
+      <div class="showroom-slider" id="showroomSlider">
+        <div class="slide active">
+          <img src="product/showroom/대표_쇼룸_컷.jpg" alt="DAE MYUNG ENCOM Showroom">
+        </div>
+        <div class="slide">
+          <img src="product/showroom/타일장.jpg" alt="Tile Selection Zone">
+        </div>
+        <div class="slide">
+          <img src="product/showroom/수전_전시.jpg" alt="Faucet Display Zone">
         </div>
       </div>
+
+      <div class="slider-dots" id="showroomDots">
+        <button class="dot active" type="button" aria-label="slide 1"></button>
+        <button class="dot" type="button" aria-label="slide 2"></button>
+        <button class="dot" type="button" aria-label="slide 3"></button>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <section id="contact" class="contact-section">
     <div class="contact-inner fade-up">
