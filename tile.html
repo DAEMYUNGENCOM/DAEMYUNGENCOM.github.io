@@ -108,13 +108,8 @@
     }
 
     /* SECTION */
-    .section{
-      padding:70px 20px 110px;
-    }
-    .wrap{
-      max-width:1200px;
-      margin:0 auto;
-    }
+    .section{ padding:70px 20px 110px; }
+    .wrap{ max-width:1200px; margin:0 auto; }
 
     /* GRID */
     .grid{
@@ -147,6 +142,13 @@
       object-fit:cover;
       display:block;
     }
+    /* 크게보기 UX */
+    .media img.zoomable{
+      cursor: zoom-in;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+
     .badge{
       position:absolute;
       left:12px;
@@ -192,9 +194,7 @@
       opacity:.95;
     }
 
-    .info{
-      padding:16px 16px 18px;
-    }
+    .info{ padding:16px 16px 18px; }
     .name{
       margin:0 0 10px;
       font-size:14px;
@@ -223,54 +223,49 @@
       color:var(--text-muted);
       line-height:1.7;
     }
+
     /* ===== Image Lightbox ===== */
-.lightbox{
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.78);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  z-index: 9999;
-}
-
-.lightbox.show{ display:flex; }
-
-.lightbox-inner{
-  position: relative;
-  max-width: min(1200px, 96vw);
-  max-height: 92vh;
-}
-
-.lightbox-img{
-  display:block;
-  max-width: 100%;
-  max-height: 92vh;
-  width: auto;
-  height: auto;
-  border-radius: 12px;
-}
-
-/* 닫기 버튼 */
-.lightbox-close{
-  position:absolute;
-  top:-12px;
-  right:-12px;
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.35);
-  background: rgba(0,0,0,.35);
-  color:#fff;
-  cursor:pointer;
-  font-size:18px;
-  line-height: 1;
-}
-.lightbox-close:hover{
-  background: rgba(0,0,0,.55);
-}
-
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 9999;
+    }
+    .lightbox.show{ display:flex; }
+    .lightbox-inner{
+      position: relative;
+      max-width: min(1200px, 96vw);
+      max-height: 92vh;
+    }
+    .lightbox-img{
+      display:block;
+      max-width: 100%;
+      max-height: 92vh;
+      width: auto;
+      height: auto;
+      border-radius: 12px;
+    }
+    .lightbox-close{
+      position:absolute;
+      top:-12px;
+      right:-12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(0,0,0,.35);
+      color:#fff;
+      cursor:pointer;
+      font-size:18px;
+      line-height: 1;
+    }
+    .lightbox-close:hover{
+      background: rgba(0,0,0,.55);
+    }
 
     /* responsive */
     @media(max-width:980px){
@@ -319,11 +314,10 @@
           <div class="media">
             <span class="badge">TILE</span>
 
-            <!-- 기본 표시 이미지: 썸네일(쇼룸컷) -->
-            <img class="main-img"
+            <!-- ✅ class 속성 1개로 합침: main-img + zoomable -->
+            <img class="main-img zoomable"
                  src="product/tile/300_SABIALIGHTGREY.jpg"
-                 alt="SABIA LIGHT GREY"
-                 class="zoomable">
+                 alt="SABIA LIGHT GREY">
 
             <!-- 썸/제품/패턴 전환 버튼 -->
             <div class="thumbs" role="tablist" aria-label="Image switch">
@@ -354,6 +348,14 @@
     </div>
   </main>
 
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner" role="dialog" aria-modal="true">
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="닫기">×</button>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    </div>
+  </div>
+
   <script>
     // 카드 내부 이미지 전환 (상세페이지 없이)
     document.querySelectorAll('.card').forEach(card=>{
@@ -371,60 +373,46 @@
         });
       });
     });
-  </script>
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-  <div class="lightbox-inner" role="dialog" aria-modal="true">
-    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="닫기">×</button>
-    <img class="lightbox-img" id="lightboxImg" src="" alt="">
-  </div>
-</div>
-  <script>
-  (function(){
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxClose = document.getElementById('lightboxClose');
 
-    if(!lightbox || !lightboxImg || !lightboxClose) return;
+    // Lightbox
+    (function(){
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxClose = document.getElementById('lightboxClose');
+      if(!lightbox || !lightboxImg || !lightboxClose) return;
 
-    function openLightbox(src, alt){
-      lightboxImg.src = src;
-      lightboxImg.alt = alt || '';
-      lightbox.classList.add('show');
-      lightbox.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
-    }
-
-    function closeLightbox(){
-      lightbox.classList.remove('show');
-      lightbox.setAttribute('aria-hidden','true');
-      lightboxImg.src = '';
-      document.body.style.overflow = '';
-    }
-
-    // 이미지(또는 카드) 클릭 시 열기
-    document.addEventListener('click', (e)=>{
-      const img = e.target.closest('img.zoomable');
-      if(!img) return;
-      openLightbox(img.currentSrc || img.src, img.alt);
-    });
-
-    // 닫기
-    lightboxClose.addEventListener('click', closeLightbox);
-
-    // 배경 클릭 시 닫기
-    lightbox.addEventListener('click', (e)=>{
-      if(e.target === lightbox) closeLightbox();
-    });
-
-    // ESC 닫기
-    window.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape' && lightbox.classList.contains('show')){
-        closeLightbox();
+      function openLightbox(src, alt){
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        lightbox.classList.add('show');
+        lightbox.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
       }
-    });
-  })();
-</script>
+      function closeLightbox(){
+        lightbox.classList.remove('show');
+        lightbox.setAttribute('aria-hidden','true');
+        lightboxImg.src = '';
+        document.body.style.overflow = '';
+      }
 
+      document.addEventListener('click', (e)=>{
+        const img = e.target.closest('img.zoomable');
+        if(!img) return;
+        openLightbox(img.currentSrc || img.src, img.alt);
+      });
 
+      lightboxClose.addEventListener('click', closeLightbox);
+
+      lightbox.addEventListener('click', (e)=>{
+        if(e.target === lightbox) closeLightbox();
+      });
+
+      window.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape' && lightbox.classList.contains('show')){
+          closeLightbox();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
