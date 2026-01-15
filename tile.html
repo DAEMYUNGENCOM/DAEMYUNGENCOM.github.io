@@ -111,7 +111,7 @@
     .section{ padding:70px 20px 110px; }
     .wrap{ max-width:1200px; margin:0 auto; }
 
-    /* ✅ SIZE FILTER */
+    /* SIZE FILTER */
     .size-filter{
       display:flex;
       gap:10px;
@@ -145,7 +145,7 @@
       gap:28px;
     }
 
-    /* LIST CARD (요청: 제품명/규격만) */
+    /* LIST CARD */
     .card{
       background:#fff;
       border:1px solid var(--line);
@@ -203,7 +203,7 @@
       letter-spacing:.06em;
     }
 
-    /* ✅ 리스트 하단 면책 */
+    /* LIST DISCLAIMER */
     .page-disclaimer{
       margin: 22px 2px 0;
       font-size:12px;
@@ -253,7 +253,7 @@
       position:relative;
     }
 
-    /* ✅ PT 포함 모든 이미지: 모달 영역 안에서 contain으로 정상 표시 */
+    /* ✅ 모달 안에서는 항상 "맞춰보기" (PT 포함) */
     .modal-img{
       width:100%;
       height:100%;
@@ -262,7 +262,7 @@
       user-select:none;
       -webkit-user-drag:none;
       background:#111;
-      cursor: zoom-in; /* 클릭하면 원본 뷰어 */
+      cursor: zoom-in; /* 클릭 → 원본 뷰어 */
     }
 
     /* nav arrows */
@@ -292,73 +292,80 @@
     .nav-prev{ left:16px; }
     .nav-next{ right:16px; }
 
-    /* TH/PR/PT tabs */
+    /* TH/PR/PT tabs (icon) */
     .modal-tabs{
       position:absolute;
       left:16px;
       bottom:16px;
       display:flex;
-      gap:8px;
+      gap:10px;
       z-index:7;
-    }
-    .tab{
-      height:34px;
-      padding:0 12px;
-      border:1px solid rgba(255,255,255,.35);
-      background:rgba(0,0,0,.28);
-      color:#fff;
-      cursor:pointer;
-      font-size:11px;
-      letter-spacing:.14em;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      transition:background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
-    }
-    .tab:hover{ transform:translateY(-1px); }
-    .tab.active{
-      background:rgba(255,255,255,.18);
-      border-color:rgba(255,255,255,.55);
     }
 
-    /* ✅ 원본보기 버튼(선택) - 같은 창에서 뷰어 열림 */
-    .raw-btn{
-      position:absolute;
-      left:16px;
-      bottom:60px;
-      z-index:7;
-      height:34px;
-      padding:0 12px;
-      border:1px solid rgba(255,255,255,.35);
+    .ico{ width:18px; height:18px; display:block; }
+
+    .modal-tabs .tab{
+      width:42px;
+      height:42px;
+      padding:0;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.26);
       background:rgba(0,0,0,.28);
-      color:#fff;
+      color:rgba(255,255,255,.92);
       cursor:pointer;
-      font-size:11px;
-      letter-spacing:.14em;
-      display:inline-flex;
+      display:flex;
       align-items:center;
       justify-content:center;
-      transition:background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+      transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
     }
-    .raw-btn:hover{
+    .modal-tabs .tab:hover{
       transform:translateY(-1px);
-      background:rgba(0,0,0,.45);
-      border-color:rgba(255,255,255,.5);
+      border-color:rgba(255,255,255,.40);
+      background:rgba(0,0,0,.38);
+    }
+    .modal-tabs .tab.active{
+      background:rgba(255,255,255,.16);
+      border-color:rgba(255,255,255,.58);
+      color:#fff;
     }
 
-    /* ✅ right spec: 가운데로 내리기 */
+    /* right spec */
     .modal-right{
       padding:22px 22px 18px;
       border-left:1px solid var(--line);
       overflow:auto;
       max-height:92vh;
-
       display:flex;
       flex-direction:column;
       justify-content:center;
     }
     .modal-right-inner{
       transform: translateY(10px);
+    }
+
+    /* 오른쪽 상단 원본보기 버튼(아이콘) */
+    .spec-actions{
+      display:flex;
+      justify-content:flex-end;
+      margin-bottom:10px;
+    }
+    .icon-btn{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      border:1px solid rgba(17,17,17,.12);
+      background:rgba(17,17,17,.02);
+      color:var(--text-main);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+    }
+    .icon-btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(17,17,17,.22);
+      background:rgba(17,17,17,.05);
     }
 
     .modal-close{
@@ -381,66 +388,6 @@
       border-color:rgba(0,0,0,.22);
       background:rgba(0,0,0,.02);
     }
-    /* ===== Icon style (TH/PR/PT + Original) ===== */
-.ico{
-  width:18px;
-  height:18px;
-  display:block;
-}
-
-/* 기존 .tab 디자인을 "아이콘 버튼" 느낌으로 정리 */
-.modal-tabs .tab{
-  width:42px;
-  height:42px;
-  padding:0;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.26);
-  background:rgba(0,0,0,.28);
-  color:rgba(255,255,255,.92);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.modal-tabs .tab:hover{
-  transform:translateY(-1px);
-  border-color:rgba(255,255,255,.40);
-  background:rgba(0,0,0,.38);
-}
-
-.modal-tabs .tab.active{
-  background:rgba(255,255,255,.16);
-  border-color:rgba(255,255,255,.58);
-  color:#fff;
-}
-
-/* 오른쪽 상단 원본보기 버튼 자리 */
-.spec-actions{
-  display:flex;
-  justify-content:flex-end;
-  margin-bottom:10px;
-}
-
-.icon-btn{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  border:1px solid rgba(17,17,17,.12);
-  background:rgba(17,17,17,.02);
-  color:var(--text-main);
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
-}
-
-.icon-btn:hover{
-  transform:translateY(-1px);
-  border-color:rgba(17,17,17,.22);
-  background:rgba(17,17,17,.05);
-}
-
 
     .spec-title{
       margin:0 0 10px;
@@ -470,12 +417,6 @@
       letter-spacing:.06em;
     }
 
-    .hint{
-      margin:14px 0 0;
-      font-size:12px;
-      color:var(--text-muted);
-      line-height:1.7;
-    }
     .modal-disclaimer{
       margin:16px 0 0;
       font-size:12px;
@@ -492,7 +433,7 @@
       align-items:center;
       justify-content:center;
       padding:18px;
-      z-index:10050; /* modal보다 위 */
+      z-index:10050;
     }
     .viewer.show{ display:flex; }
 
@@ -505,7 +446,7 @@
       justify-content:center;
     }
 
-    /* ✅ 처음에는 화면에 '맞춰' 보이게(스크롤 없이) */
+    /* ✅ 기본은 "맞춰보기" + 휠로 확대/축소 + 드래그 이동 */
     .viewer-img{
       max-width:100%;
       max-height:100%;
@@ -569,7 +510,7 @@
     @media(max-width:640px){
       .grid{ grid-template-columns:1fr; }
       .slide-stage{ min-height:360px; }
-      .raw-btn{ display:none; }
+      .viewer-tip{ display:none; }
     }
   </style>
 </head>
@@ -604,7 +545,6 @@
   <main class="section">
     <div class="wrap">
 
-      <!-- ✅ 사이즈 필터(카테고리) -->
       <div class="size-filter" role="tablist" aria-label="Tile size filter">
         <button type="button" class="size-btn active" data-size="all">ALL</button>
         <button type="button" class="size-btn" data-size="300x300">300×300</button>
@@ -615,7 +555,7 @@
 
       <div class="grid">
 
-        <!-- ✅ TILE CARD : SABIALIGHTGREY (300x300) -->
+        <!-- SABIA LIGHT GREY (300x300) -->
         <article class="card"
           data-sizekey="300x300"
           data-name="SABIA LIGHT GREY"
@@ -639,7 +579,7 @@
           </div>
         </article>
 
-        <!-- ✅ TILE CARD : 36M804 (300x600) -->
+        <!-- 36M804 (300x600) -->
         <article class="card"
           data-sizekey="300x600"
           data-name="36M804"
@@ -672,58 +612,56 @@
     </div>
   </main>
 
-  <!-- ✅ MODAL -->
+  <!-- MODAL -->
   <div class="modal" id="modal" aria-hidden="true">
     <div class="modal-panel" role="dialog" aria-modal="true" aria-label="제품 상세">
       <button class="modal-close" id="modalClose" type="button" aria-label="닫기">×</button>
 
-      <!-- LEFT: 슬라이드 -->
       <div class="modal-left">
         <div class="slide-stage">
           <button class="nav-arrow nav-prev" id="prevBtn" type="button" aria-label="이전 이미지">‹</button>
           <img class="modal-img" id="modalImg" src="" alt="">
           <button class="nav-arrow nav-next" id="nextBtn" type="button" aria-label="다음 이미지">›</button>
 
-          <button class="raw-btn" id="openViewerBtn" type="button" aria-label="원본 보기">원본 보기</button>
-
+          <!-- TH/PR/PT icon tabs -->
           <div class="modal-tabs" id="modalTabs" aria-label="이미지 타입 선택">
-  <button class="tab active" type="button" data-kind="th" aria-label="쇼룸(TH)">
-    <!-- showroom / camera icon -->
-    <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
-      <path d="M9 7l1.2-2h3.6L15 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-      <path d="M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" fill="none" stroke="currentColor" stroke-width="1.6"/>
-    </svg>
-  </button>
+            <button class="tab active" type="button" data-kind="th" aria-label="쇼룸(TH)">
+              <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
+                <path d="M9 7l1.2-2h3.6L15 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              </svg>
+            </button>
 
-  <button class="tab" type="button" data-kind="pr" aria-label="제품(PR)">
-    <!-- photo icon -->
-    <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
-      <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.6" />
-      <path d="M7 14l3-3 3 3 2-2 2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M9 9.2h.01" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-    </svg>
-  </button>
+            <button class="tab" type="button" data-kind="pr" aria-label="제품(PR)">
+              <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
+                <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M7 14l3-3 3 3 2-2 2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 9.2h.01" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </button>
 
-  <button class="tab" type="button" data-kind="pt" aria-label="패턴(PT)">
-    <!-- grid icon -->
-    <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
-      <path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.6"/>
-    </svg>
-  </button>
-</div>
+            <button class="tab" type="button" data-kind="pt" aria-label="패턴(PT)">
+              <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
+                <path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
 
-
-      <!-- RIGHT: 스펙 -->
       <aside class="modal-right">
         <div class="modal-right-inner">
+
           <div class="spec-actions">
-    <button type="button" class="icon-btn" id="openOriginalBtn" aria-label="원본 보기">
-      <!-- expand icon -->
-      <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
-        <path d="M9 5H5v4M15 5h4v4M9 19H5v-4M15 19h4v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-  </div>
+            <button type="button" class="icon-btn" id="openOriginalBtn" aria-label="원본 보기">
+              <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
+                <path d="M9 5H5v4M15 5h4v4M9 19H5v-4M15 19h4v-4"
+                  fill="none" stroke="currentColor" stroke-width="1.6"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
           <h3 class="spec-title" id="specTitle">-</h3>
 
           <ul class="spec-table">
@@ -741,7 +679,7 @@
     </div>
   </div>
 
-  <!-- ✅ ORIGINAL VIEWER (same window) -->
+  <!-- ORIGINAL VIEWER (same window) -->
   <div class="viewer" id="viewer" aria-hidden="true">
     <div class="viewer-inner" role="dialog" aria-modal="true" aria-label="원본 이미지 보기">
       <button class="viewer-close" id="viewerClose" type="button" aria-label="닫기">×</button>
@@ -752,10 +690,17 @@
 
   <script>
     (function(){
+      /* =====================
+         우클릭 / 드래그 저장 방지
+         ===================== */
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.addEventListener('dragstart', (e) => {
+        if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+      });
+
       const modal = document.getElementById('modal');
       const modalClose = document.getElementById('modalClose');
       const modalImg = document.getElementById('modalImg');
-      const openViewerBtn = document.getElementById('openViewerBtn');
 
       const specTitle = document.getElementById('specTitle');
       const specSize = document.getElementById('specSize');
@@ -773,12 +718,15 @@
       const viewer = document.getElementById('viewer');
       const viewerImg = document.getElementById('viewerImg');
       const viewerClose = document.getElementById('viewerClose');
+      const openOriginalBtn = document.getElementById('openOriginalBtn');
 
       let sources = { th:'', pr:'', pt:'' };
       const order = ['th','pr','pt'];
       let currentKind = 'th';
 
-      // ===== modal image switch =====
+      /* =====================
+         Modal image switch
+         ===================== */
       function setActiveTab(kind){
         tabs.forEach(t => t.classList.toggle('active', t.dataset.kind === kind));
       }
@@ -821,8 +769,9 @@
       function closeModal(){
         modal.classList.remove('show');
         modal.setAttribute('aria-hidden','true');
-        document.body.style.overflow = '';
         modalImg.src = '';
+        // viewer가 열려있으면 overflow 유지
+        if(!viewer.classList.contains('show')) document.body.style.overflow = '';
       }
 
       // 카드 클릭 → 모달
@@ -845,7 +794,9 @@
         if(e.target === modal) closeModal();
       });
 
-      // ===== size filter =====
+      /* =====================
+         Size filter
+         ===================== */
       (function(){
         const buttons = document.querySelectorAll('.size-btn');
         const cards = document.querySelectorAll('.card');
@@ -854,8 +805,8 @@
         function applyFilter(size){
           cards.forEach(card=>{
             const key = card.getAttribute('data-sizekey');
-            const show = (size === 'all') || (key === size);
-            card.style.display = show ? '' : 'none';
+            const showCard = (size === 'all') || (key === size);
+            card.style.display = showCard ? '' : 'none';
           });
         }
 
@@ -870,7 +821,12 @@
         applyFilter('all');
       })();
 
-      // ===== Original Viewer (same window, fit + wheel zoom + drag) =====
+      /* =====================
+         Original Viewer (same window)
+         - 기본: fit
+         - wheel: zoom
+         - drag: pan
+         ===================== */
       let vScale = 1;
       let vX = 0, vY = 0;
       let dragging = false;
@@ -895,6 +851,7 @@
 
         viewer.classList.add('show');
         viewer.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
       }
 
       function closeViewer(){
@@ -902,15 +859,17 @@
         viewer.setAttribute('aria-hidden','true');
         viewerImg.src = '';
         resetViewer();
+        // 모달이 열려있으면 overflow 유지
+        if(!modal.classList.contains('show')) document.body.style.overflow = '';
       }
 
-      // ✅ 모달 이미지 클릭 → 원본 뷰어
+      // 모달 이미지 클릭 → 원본 뷰어
       modalImg.addEventListener('click', ()=>{
         openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
       });
 
-      // ✅ 원본 보기 버튼도 동일 동작
-      openViewerBtn.addEventListener('click', ()=>{
+      // 오른쪽 "원본 보기" 버튼
+      openOriginalBtn.addEventListener('click', ()=>{
         openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
       });
 
@@ -920,15 +879,14 @@
         if(e.target === viewer) closeViewer();
       });
 
-      // wheel zoom
+      // wheel zoom (viewer에서만)
       viewer.addEventListener('wheel', (e)=>{
         if(!viewer.classList.contains('show')) return;
         e.preventDefault();
 
         const delta = -e.deltaY;
         const step = delta > 0 ? 0.12 : -0.12;
-
-        const nextScale = Math.min(5, Math.max(1, vScale + step));
+        const nextScale = Math.min(6, Math.max(1, vScale + step));
         if(nextScale === vScale) return;
 
         vScale = nextScale;
@@ -946,18 +904,14 @@
 
       viewerImg.addEventListener('pointermove', (e)=>{
         if(!dragging) return;
-        if(vScale <= 1) return; // 확대 안 했으면 이동 필요 없음
+        if(vScale <= 1) return; // 확대 안 했으면 이동 불필요
         vX = e.clientX - startX;
         vY = e.clientY - startY;
         applyViewerTransform();
       });
 
-      viewerImg.addEventListener('pointerup', ()=>{
-        dragging = false;
-      });
-      viewerImg.addEventListener('pointercancel', ()=>{
-        dragging = false;
-      });
+      viewerImg.addEventListener('pointerup', ()=>{ dragging = false; });
+      viewerImg.addEventListener('pointercancel', ()=>{ dragging = false; });
 
       // keyboard
       window.addEventListener('keydown', (e)=>{
@@ -966,96 +920,17 @@
           closeViewer();
           return;
         }
-        // ===== 원본 뷰어: 없으면 생성해서 "같은 화면"에서 열기 =====
-function ensureViewer(){
-  let viewer = document.getElementById('imgViewer');
-  if(viewer) return viewer;
-
-  viewer = document.createElement('div');
-  viewer.id = 'imgViewer';
-  viewer.style.cssText = `
-    position:fixed; inset:0; z-index:10000;
-    background:rgba(0,0,0,.82);
-    display:none; align-items:center; justify-content:center;
-    padding:24px;
-  `;
-
-  viewer.innerHTML = `
-    <button type="button" id="imgViewerClose" aria-label="닫기"
-      style="position:absolute; top:18px; right:18px;
-      width:44px; height:44px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.35);
-      background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:20px;">
-      ×
-    </button>
-
-    <div id="imgViewerStage"
-      style="max-width:96vw; max-height:92vh; overflow:auto; background:transparent;">
-      <img id="imgViewerImg" alt=""
-        style="display:block; width:auto; height:auto; max-width:none; max-height:none;" />
-    </div>
-  `;
-
-  document.body.appendChild(viewer);
-
-  const closeBtn = viewer.querySelector('#imgViewerClose');
-  closeBtn.addEventListener('click', ()=> closeViewer());
-
-  viewer.addEventListener('click', (e)=>{
-    if(e.target === viewer) closeViewer();
-  });
-
-  window.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape' && viewer.style.display === 'flex') closeViewer();
-  });
-
-  return viewer;
-}
-
-function openViewer(src, alt){
-  const viewer = ensureViewer();
-  const img = viewer.querySelector('#imgViewerImg');
-  viewer.style.display = 'flex';
-  img.src = src;
-  img.alt = alt || '';
-  // 모달이 열려있어도 배경 스크롤 방지 유지
-  document.body.style.overflow = 'hidden';
-}
-
-function closeViewer(){
-  const viewer = document.getElementById('imgViewer');
-  if(!viewer) return;
-  const img = viewer.querySelector('#imgViewerImg');
-  viewer.style.display = 'none';
-  img.src = '';
-  // 모달이 열려있으면 overflow 유지해야 해서 조건 처리
-  if (!modal.classList.contains('show')) document.body.style.overflow = '';
-}
-
-// 우측 "원본 보기" 버튼
-const openOriginalBtn = document.getElementById('openOriginalBtn');
-if(openOriginalBtn){
-  openOriginalBtn.addEventListener('click', ()=>{
-    if(!modalImg || !modalImg.src) return;
-    openViewer(modalImg.src, modalImg.alt || specTitle.textContent);
-  });
-}
-
-// 이미지 클릭해도 원본 뷰어 열리게(원하면 유지)
-modalImg.addEventListener('click', ()=>{
-  if(!modalImg.src) return;
-  openViewer(modalImg.src, modalImg.alt || specTitle.textContent);
-});
-
 
         // modal
         if(e.key === 'Escape' && modal.classList.contains('show')){
           closeModal();
           return;
         }
-        if(!modal.classList.contains('show')) return;
-        if(e.key === 'ArrowLeft') next(-1);
-        if(e.key === 'ArrowRight') next(+1);
+
+        if(modal.classList.contains('show')){
+          if(e.key === 'ArrowLeft') next(-1);
+          if(e.key === 'ArrowRight') next(+1);
+        }
       });
 
     })();
