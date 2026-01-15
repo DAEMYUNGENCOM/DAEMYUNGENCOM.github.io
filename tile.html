@@ -111,6 +111,33 @@
     .section{ padding:70px 20px 110px; }
     .wrap{ max-width:1200px; margin:0 auto; }
 
+    /* ✅ SIZE FILTER */
+    .size-filter{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:0 0 22px;
+    }
+    .size-btn{
+      height:36px;
+      padding:0 14px;
+      border:1px solid rgba(17,17,17,.16);
+      background:#fff;
+      cursor:pointer;
+      font-size:12px;
+      letter-spacing:.12em;
+      transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+    }
+    .size-btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(17,17,17,.28);
+      background:rgba(17,17,17,.03);
+    }
+    .size-btn.active{
+      border-color:rgba(17,17,17,.38);
+      background:rgba(17,17,17,.06);
+    }
+
     /* GRID */
     .grid{
       display:grid;
@@ -283,13 +310,21 @@
       border-color:rgba(255,255,255,.55);
     }
 
-    /* right spec */
+    /* ✅ right spec: 가운데로 내리기 */
     .modal-right{
       padding:22px 22px 18px;
       border-left:1px solid var(--line);
       overflow:auto;
       max-height:92vh;
+
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
     }
+    .modal-right-inner{
+      transform: translateY(10px); /* 0~30px로 조절 가능 */
+    }
+
     .modal-close{
       position:absolute;
       top:14px;
@@ -346,12 +381,33 @@
       line-height:1.7;
     }
 
+    /* ✅ 면책 문구 */
+    .modal-disclaimer{
+      margin:16px 0 0;
+      font-size:12px;
+      line-height:1.7;
+      color:var(--text-muted);
+    }
+
+    /* ✅ 리스트 하단 면책(선택) */
+    .page-disclaimer{
+      margin: 22px 2px 0;
+      font-size:12px;
+      line-height:1.7;
+      color:var(--text-muted);
+    }
+
     /* responsive */
     @media(max-width:980px){
       .grid{ grid-template-columns:repeat(2, 1fr); }
       .page-hero .wrap{ flex-direction:column; align-items:flex-start; }
       .modal-panel{ grid-template-columns:1fr; }
-      .modal-right{ border-left:0; border-top:1px solid var(--line); }
+      .modal-right{
+        border-left:0;
+        border-top:1px solid var(--line);
+        justify-content:flex-start; /* 모바일에서는 자연스럽게 위부터 */
+      }
+      .modal-right-inner{ transform:none; }
       .slide-stage{ min-height:420px; }
     }
     @media(max-width:640px){
@@ -390,10 +446,21 @@
 
   <main class="section">
     <div class="wrap">
+
+      <!-- ✅ 사이즈 필터(카테고리) -->
+      <div class="size-filter" role="tablist" aria-label="Tile size filter">
+        <button type="button" class="size-btn active" data-size="all">ALL</button>
+        <button type="button" class="size-btn" data-size="300x300">300×300</button>
+        <button type="button" class="size-btn" data-size="300x600">300×600</button>
+        <button type="button" class="size-btn" data-size="600x600">600×600</button>
+        <button type="button" class="size-btn" data-size="600x1200">600×1200</button>
+      </div>
+
       <div class="grid">
 
         <!-- ✅ 카드: 썸네일 + 제품명 + 규격만 -->
         <article class="card"
+          data-sizekey="300x300"
           data-name="SABIA LIGHT GREY"
           data-size="300×300"
           data-surface="MATT"
@@ -416,6 +483,12 @@
         </article>
 
       </div>
+
+      <!-- (선택) 페이지 하단 면책 문구 -->
+      <p class="page-disclaimer">
+        * 상품 이미지는 실제 제품과 차이가 있을 수 있으며, 제조사 사정에 따라 디자인 모양이나 색상이 다를 수 있습니다.
+      </p>
+
     </div>
   </main>
 
@@ -441,16 +514,22 @@
 
       <!-- RIGHT: 스펙 -->
       <aside class="modal-right">
-        <h3 class="spec-title" id="specTitle">-</h3>
+        <div class="modal-right-inner">
+          <h3 class="spec-title" id="specTitle">-</h3>
 
-        <ul class="spec-table">
-          <li class="spec-row"><div class="k">규격</div><div id="specSize">-</div></li>
-          <li class="spec-row"><div class="k">표면</div><div id="specSurface">-</div></li>
-          <li class="spec-row"><div class="k">Pcs/Box</div><div id="specPcs">-</div></li>
-          <li class="spec-row"><div class="k">㎡/Box</div><div id="specM2">-</div></li>
-        </ul>
+          <ul class="spec-table">
+            <li class="spec-row"><div class="k">규격</div><div id="specSize">-</div></li>
+            <li class="spec-row"><div class="k">표면</div><div id="specSurface">-</div></li>
+            <li class="spec-row"><div class="k">Pcs/Box</div><div id="specPcs">-</div></li>
+            <li class="spec-row"><div class="k">㎡/Box</div><div id="specM2">-</div></li>
+          </ul>
 
-        <p class="hint">좌측 TH/PR/PT 버튼 또는 좌·우 화살표로 이미지를 확인할 수 있습니다.</p>
+          <p class="hint">좌측 TH/PR/PT 버튼 또는 좌·우 화살표로 이미지를 확인할 수 있습니다.</p>
+
+          <p class="modal-disclaimer">
+            * 상품 이미지는 실제 제품과 차이가 있을 수 있으며, 제조사 사정에 따라 디자인 모양이나 색상이 다를 수 있습니다.
+          </p>
+        </div>
       </aside>
     </div>
   </div>
@@ -497,7 +576,6 @@
       }
 
       function openFromCard(card){
-        // data set
         specTitle.textContent = card.dataset.name || '-';
         specSize.textContent = card.dataset.size || '-';
         specSurface.textContent = card.dataset.surface || '-';
@@ -510,10 +588,8 @@
           pt: card.dataset.pt || ''
         };
 
-        // 기본 TH
         show('th');
 
-        // open
         modal.classList.add('show');
         modal.setAttribute('aria-hidden','false');
         document.body.style.overflow = 'hidden';
@@ -526,31 +602,54 @@
         modalImg.src = '';
       }
 
-      // 카드 클릭 → 모달 오픈
       document.querySelectorAll('.card').forEach(card=>{
         card.addEventListener('click', ()=> openFromCard(card));
       });
 
-      // 탭
       tabs.forEach(tab=>{
         tab.addEventListener('click', ()=> show(tab.dataset.kind));
       });
 
-      // arrows
       prevBtn.addEventListener('click', ()=> next(-1));
       nextBtn.addEventListener('click', ()=> next(+1));
 
-      // close interactions
       modalClose.addEventListener('click', close);
       modal.addEventListener('click', (e)=>{
         if(e.target === modal) close();
       });
+
       window.addEventListener('keydown', (e)=>{
         if(e.key === 'Escape' && modal.classList.contains('show')) close();
         if(!modal.classList.contains('show')) return;
         if(e.key === 'ArrowLeft') next(-1);
         if(e.key === 'ArrowRight') next(+1);
       });
+
+      /* ✅ 사이즈 필터 */
+      (function(){
+        const buttons = document.querySelectorAll('.size-btn');
+        const cards = document.querySelectorAll('.card');
+        if(!buttons.length || !cards.length) return;
+
+        function applyFilter(size){
+          cards.forEach(card=>{
+            const key = card.getAttribute('data-sizekey');
+            const show = (size === 'all') || (key === size);
+            card.style.display = show ? '' : 'none';
+          });
+        }
+
+        buttons.forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            buttons.forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            applyFilter(btn.dataset.size);
+          });
+        });
+
+        applyFilter('all');
+      })();
+
     })();
   </script>
 </body>
