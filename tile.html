@@ -432,6 +432,86 @@
       color:var(--text-muted);
       line-height:1.7;
     }
+    /* ===== PT 표시 방식 개선: 기본은 '전체가 예쁘게' 보이게 ===== */
+.slide-stage.pt-mode{
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;          /* 기본 PT는 스크롤 없이 깔끔하게 */
+  padding:0;
+}
+.slide-stage.pt-mode .modal-img{
+  width:100%;
+  height:100%;
+  max-width:100%;
+  max-height:92vh;
+  object-fit:contain;       /* ✅ PT는 contain으로 전체 보기 */
+  background:#0b0b0b;
+  cursor: zoom-in;
+  transform:none !important; /* 기존 zoomed transform 영향 제거 */
+}
+
+/* ===== 모달 안 "원본 뷰어" (새탭 대신 현재 창에서) ===== */
+.rawview{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.86);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  z-index:10050; /* modal(9999)보다 위 */
+}
+.rawview.show{ display:flex; }
+
+.rawview-inner{
+  position:relative;
+  max-width: min(1400px, 96vw);
+  max-height: 92vh;
+  overflow:auto;                 /* ✅ 원본 크기 스크롤 */
+  background:transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rawview-img{
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:none;                /* ✅ 원본 크기 유지 */
+  max-height:none;
+  border-radius:12px;
+}
+
+.rawview-close{
+  position:absolute;
+  top:-12px;
+  right:-12px;
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(0,0,0,.35);
+  color:#fff;
+  cursor:pointer;
+  font-size:18px;
+  line-height:1;
+}
+.rawview-close:hover{ background:rgba(0,0,0,.55); }
+
+/* 원본 뷰어 안내(옵션) */
+.rawview-hint{
+  position:absolute;
+  left:0;
+  top:-34px;
+  font-size:12px;
+  color:rgba(255,255,255,.8);
+  letter-spacing:.08em;
+}
+
+/* 모바일에서는 너무 커질 수 있어서 폭 제한(선택) */
+@media(max-width:640px){
+  .rawview-inner{ max-width: 94vw; }
+}
+
 
     /* ✅ 면책 문구 */
     .modal-disclaimer{
@@ -588,8 +668,15 @@
             <button class="tab" type="button" data-kind="pt">PT</button>
           </div>
 
-          <!-- ✅ 새탭 원본 보기 -->
-          <a class="open-original" id="openOriginal" href="#" target="_blank" rel="noopener">원본 보기</a>
+         <!-- ✅ MODAL 안에서 원본(업로드한 사이즈) 보기 -->
+<div class="rawview" id="rawview" aria-hidden="true">
+  <div class="rawview-inner" role="dialog" aria-modal="true" aria-label="원본 이미지 보기">
+    <div class="rawview-hint">원본 크기(스크롤로 이동) · ESC로 닫기</div>
+    <button class="rawview-close" id="rawviewClose" type="button" aria-label="닫기">×</button>
+    <img class="rawview-img" id="rawviewImg" src="" alt="">
+  </div>
+</div>
+
         </div>
       </div>
 
@@ -642,6 +729,25 @@
       function setActiveTab(kind){
         tabs.forEach(t => t.classList.toggle('active', t.dataset.kind === kind));
       }
+      const rawview = document.getElementById('rawview');
+const rawviewImg = document.getElementById('rawviewImg');
+const rawviewClose = document.getElementById('rawviewClose');
+
+function openRawView(src, alt){
+  if(!rawview || !rawviewImg) return;
+  rawviewImg.src = src;
+  rawviewImg.alt = alt || '';
+  rawview.classList.add('show');
+  rawview.setAttribute('aria-hidden','false');
+}
+
+function closeRawView(){
+  if(!rawview || !rawviewImg) return;
+  rawview.classList.remove('show');
+  rawview.setAttribute('aria-hidden','true');
+  rawviewImg.src = '';
+}
+
 
       function setPTMode(isPT){
         if(!slideStage) return;
@@ -661,20 +767,18 @@
       }
 
       function show(kind){
-        const src = sources[kind];
-        if(!src) return;
+  const src = sources[kind];
+  if(!src) return;
 
-        currentKind = kind;
-        modalImg.src = src;
-        modalImg.alt = `${specTitle.textContent} ${kind.toUpperCase()} 이미지`;
-        setActiveTab(kind);
+  currentKind = kind;
+  modalImg.src = src;
+  modalImg.alt = `${specTitle.textContent} ${kind.toUpperCase()} 이미지`;
+  setActiveTab(kind);
 
-        // ✅ PT만 전용 모드 적용
-        setPTMode(kind === 'pt');
+  // ✅ PT만 전용 표시 모드
+  setPTMode(kind === 'pt');
+}
 
-        // ✅ 새탭 원본보기는 항상 "현재 이미지" 기준
-        updateOpenOriginal(src);
-      }
 
       function next(delta){
         const idx = order.indexOf(currentKind);
@@ -710,6 +814,7 @@
         // 상태 초기화
         setPTMode(false);
         updateOpenOriginal('');
+        closeRawView(); // ✅ 추가
       }
 
       // 카드 클릭 → 모달 오픈
@@ -726,11 +831,13 @@
       prevBtn.addEventListener('click', ()=> next(-1));
       nextBtn.addEventListener('click', ()=> next(+1));
 
-      // PT 확대(클릭 토글)
-      modalImg.addEventListener('click', ()=>{
-        if(currentKind !== 'pt') return;
-        slideStage.classList.toggle('zoomed');
-      });
+      // ✅ 모달 이미지 클릭 → 현재 창(overlay)에서 원본 보기
+modalImg.addEventListener('click', ()=>{
+  if(!modal.classList.contains('show')) return;
+  const src = modalImg.currentSrc || modalImg.src;
+  openRawView(src, modalImg.alt);
+});
+
 
       // PT 확대(휠: 확대/축소 토글 느낌)
       slideStage.addEventListener('wheel', (e)=>{
@@ -755,6 +862,20 @@
         if(e.key === 'ArrowLeft') next(-1);
         if(e.key === 'ArrowRight') next(+1);
       });
+      if(rawviewClose){
+  rawviewClose.addEventListener('click', closeRawView);
+}
+if(rawview){
+  rawview.addEventListener('click', (e)=>{
+    if(e.target === rawview) closeRawView();
+  });
+}
+window.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape' && rawview && rawview.classList.contains('show')){
+    closeRawView();
+  }
+});
+
 
       /* ✅ 사이즈 필터 */
       (function(){
