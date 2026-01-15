@@ -381,6 +381,66 @@
       border-color:rgba(0,0,0,.22);
       background:rgba(0,0,0,.02);
     }
+    /* ===== Icon style (TH/PR/PT + Original) ===== */
+.ico{
+  width:18px;
+  height:18px;
+  display:block;
+}
+
+/* 기존 .tab 디자인을 "아이콘 버튼" 느낌으로 정리 */
+.modal-tabs .tab{
+  width:42px;
+  height:42px;
+  padding:0;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.26);
+  background:rgba(0,0,0,.28);
+  color:rgba(255,255,255,.92);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-tabs .tab:hover{
+  transform:translateY(-1px);
+  border-color:rgba(255,255,255,.40);
+  background:rgba(0,0,0,.38);
+}
+
+.modal-tabs .tab.active{
+  background:rgba(255,255,255,.16);
+  border-color:rgba(255,255,255,.58);
+  color:#fff;
+}
+
+/* 오른쪽 상단 원본보기 버튼 자리 */
+.spec-actions{
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:10px;
+}
+
+.icon-btn{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  border:1px solid rgba(17,17,17,.12);
+  background:rgba(17,17,17,.02);
+  color:var(--text-main);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+}
+
+.icon-btn:hover{
+  transform:translateY(-1px);
+  border-color:rgba(17,17,17,.22);
+  background:rgba(17,17,17,.05);
+}
+
 
     .spec-title{
       margin:0 0 10px;
@@ -626,17 +686,44 @@
 
           <button class="raw-btn" id="openViewerBtn" type="button" aria-label="원본 보기">원본 보기</button>
 
-          <div class="modal-tabs" id="modalTabs">
-            <button class="tab active" type="button" data-kind="th">TH</button>
-            <button class="tab" type="button" data-kind="pr">PR</button>
-            <button class="tab" type="button" data-kind="pt">PT</button>
-          </div>
-        </div>
-      </div>
+          <div class="modal-tabs" id="modalTabs" aria-label="이미지 타입 선택">
+  <button class="tab active" type="button" data-kind="th" aria-label="쇼룸(TH)">
+    <!-- showroom / camera icon -->
+    <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
+      <path d="M9 7l1.2-2h3.6L15 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    </svg>
+  </button>
+
+  <button class="tab" type="button" data-kind="pr" aria-label="제품(PR)">
+    <!-- photo icon -->
+    <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
+      <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.6" />
+      <path d="M7 14l3-3 3 3 2-2 2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 9.2h.01" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <button class="tab" type="button" data-kind="pt" aria-label="패턴(PT)">
+    <!-- grid icon -->
+    <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
+      <path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    </svg>
+  </button>
+</div>
+
 
       <!-- RIGHT: 스펙 -->
       <aside class="modal-right">
         <div class="modal-right-inner">
+          <div class="spec-actions">
+    <button type="button" class="icon-btn" id="openOriginalBtn" aria-label="원본 보기">
+      <!-- expand icon -->
+      <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
+        <path d="M9 5H5v4M15 5h4v4M9 19H5v-4M15 19h4v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
           <h3 class="spec-title" id="specTitle">-</h3>
 
           <ul class="spec-table">
@@ -879,6 +966,87 @@
           closeViewer();
           return;
         }
+        // ===== 원본 뷰어: 없으면 생성해서 "같은 화면"에서 열기 =====
+function ensureViewer(){
+  let viewer = document.getElementById('imgViewer');
+  if(viewer) return viewer;
+
+  viewer = document.createElement('div');
+  viewer.id = 'imgViewer';
+  viewer.style.cssText = `
+    position:fixed; inset:0; z-index:10000;
+    background:rgba(0,0,0,.82);
+    display:none; align-items:center; justify-content:center;
+    padding:24px;
+  `;
+
+  viewer.innerHTML = `
+    <button type="button" id="imgViewerClose" aria-label="닫기"
+      style="position:absolute; top:18px; right:18px;
+      width:44px; height:44px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.35);
+      background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:20px;">
+      ×
+    </button>
+
+    <div id="imgViewerStage"
+      style="max-width:96vw; max-height:92vh; overflow:auto; background:transparent;">
+      <img id="imgViewerImg" alt=""
+        style="display:block; width:auto; height:auto; max-width:none; max-height:none;" />
+    </div>
+  `;
+
+  document.body.appendChild(viewer);
+
+  const closeBtn = viewer.querySelector('#imgViewerClose');
+  closeBtn.addEventListener('click', ()=> closeViewer());
+
+  viewer.addEventListener('click', (e)=>{
+    if(e.target === viewer) closeViewer();
+  });
+
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && viewer.style.display === 'flex') closeViewer();
+  });
+
+  return viewer;
+}
+
+function openViewer(src, alt){
+  const viewer = ensureViewer();
+  const img = viewer.querySelector('#imgViewerImg');
+  viewer.style.display = 'flex';
+  img.src = src;
+  img.alt = alt || '';
+  // 모달이 열려있어도 배경 스크롤 방지 유지
+  document.body.style.overflow = 'hidden';
+}
+
+function closeViewer(){
+  const viewer = document.getElementById('imgViewer');
+  if(!viewer) return;
+  const img = viewer.querySelector('#imgViewerImg');
+  viewer.style.display = 'none';
+  img.src = '';
+  // 모달이 열려있으면 overflow 유지해야 해서 조건 처리
+  if (!modal.classList.contains('show')) document.body.style.overflow = '';
+}
+
+// 우측 "원본 보기" 버튼
+const openOriginalBtn = document.getElementById('openOriginalBtn');
+if(openOriginalBtn){
+  openOriginalBtn.addEventListener('click', ()=>{
+    if(!modalImg || !modalImg.src) return;
+    openViewer(modalImg.src, modalImg.alt || specTitle.textContent);
+  });
+}
+
+// 이미지 클릭해도 원본 뷰어 열리게(원하면 유지)
+modalImg.addEventListener('click', ()=>{
+  if(!modalImg.src) return;
+  openViewer(modalImg.src, modalImg.alt || specTitle.textContent);
+});
+
 
         // modal
         if(e.key === 'Escape' && modal.classList.contains('show')){
