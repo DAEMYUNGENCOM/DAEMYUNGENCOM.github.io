@@ -203,6 +203,14 @@
       letter-spacing:.06em;
     }
 
+    /* ✅ 리스트 하단 면책 */
+    .page-disclaimer{
+      margin: 22px 2px 0;
+      font-size:12px;
+      line-height:1.7;
+      color:var(--text-muted);
+    }
+
     /* ===== Modal ===== */
     .modal{
       position:fixed;
@@ -224,6 +232,7 @@
       overflow:hidden;
       display:grid;
       grid-template-columns: 1.2fr .8fr;
+      position:relative;
     }
 
     .modal-left{
@@ -242,42 +251,18 @@
       align-items:center;
       justify-content:center;
       position:relative;
-      overflow:hidden; /* ✅ PT 확대 시 화면 안에서만 */
     }
 
-    /* ✅ 이미지 표시용: 기본은 cover 느낌, PT에서는 contain+스크롤/확대 */
+    /* ✅ PT 포함 모든 이미지: 모달 영역 안에서 contain으로 정상 표시 */
     .modal-img{
-      max-width:100%;
-      max-height:92vh;
-      width:auto;
-      height:auto;
+      width:100%;
+      height:100%;
+      object-fit:contain;
       display:block;
       user-select:none;
       -webkit-user-drag:none;
       background:#111;
-      cursor: zoom-in; /* ✅ 클릭 확대 */
-      transition: transform .18s var(--ease);
-      transform-origin:center center;
-    }
-
-    /* ✅ PT 모드(가로 맞춤 + 스크롤 확대) */
-    .slide-stage.pt-mode{
-      align-items:flex-start;
-      justify-content:flex-start;
-      overflow:auto;              /* ✅ 스크롤 */
-      padding:16px;               /* ✅ 여백 */
-      -webkit-overflow-scrolling: touch;
-    }
-    .slide-stage.pt-mode .modal-img{
-      width:100%;                 /* ✅ 가로 꽉 */
-      height:auto;
-      max-width:none;             /* ✅ 가로 100% 우선 */
-      max-height:none;            /* ✅ 스크롤 가능하게 제한 해제 */
-      cursor: zoom-in;
-    }
-    .slide-stage.pt-mode.zoomed .modal-img{
-      transform: scale(1.8);      /* ✅ 확대 배율 */
-      cursor: zoom-out;
+      cursor: zoom-in; /* 클릭하면 원본 뷰어 */
     }
 
     /* nav arrows */
@@ -336,11 +321,12 @@
       border-color:rgba(255,255,255,.55);
     }
 
-    /* ✅ 새탭 원본 보기 버튼 */
-    .open-original{
+    /* ✅ 원본보기 버튼(선택) - 같은 창에서 뷰어 열림 */
+    .raw-btn{
       position:absolute;
-      right:16px;
-      bottom:16px;
+      left:16px;
+      bottom:60px;
+      z-index:7;
       height:34px;
       padding:0 12px;
       border:1px solid rgba(255,255,255,.35);
@@ -353,13 +339,11 @@
       align-items:center;
       justify-content:center;
       transition:background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
-      z-index:7;
-      text-decoration:none;
     }
-    .open-original:hover{
+    .raw-btn:hover{
       transform:translateY(-1px);
-      background:rgba(0,0,0,.40);
-      border-color:rgba(255,255,255,.55);
+      background:rgba(0,0,0,.45);
+      border-color:rgba(255,255,255,.5);
     }
 
     /* ✅ right spec: 가운데로 내리기 */
@@ -374,7 +358,7 @@
       justify-content:center;
     }
     .modal-right-inner{
-      transform: translateY(10px); /* 0~30px로 조절 가능 */
+      transform: translateY(10px);
     }
 
     .modal-close{
@@ -432,88 +416,6 @@
       color:var(--text-muted);
       line-height:1.7;
     }
-    /* ===== PT 표시 방식 개선: 기본은 '전체가 예쁘게' 보이게 ===== */
-.slide-stage.pt-mode{
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;          /* 기본 PT는 스크롤 없이 깔끔하게 */
-  padding:0;
-}
-.slide-stage.pt-mode .modal-img{
-  width:100%;
-  height:100%;
-  max-width:100%;
-  max-height:92vh;
-  object-fit:contain;       /* ✅ PT는 contain으로 전체 보기 */
-  background:#0b0b0b;
-  cursor: zoom-in;
-  transform:none !important; /* 기존 zoomed transform 영향 제거 */
-}
-
-/* ===== 모달 안 "원본 뷰어" (새탭 대신 현재 창에서) ===== */
-.rawview{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.86);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-  z-index:10050; /* modal(9999)보다 위 */
-}
-.rawview.show{ display:flex; }
-
-.rawview-inner{
-  position:relative;
-  max-width: min(1400px, 96vw);
-  max-height: 92vh;
-  overflow:auto;                 /* ✅ 원본 크기 스크롤 */
-  background:transparent;
-  -webkit-overflow-scrolling: touch;
-}
-
-.rawview-img{
-  display:block;
-  width:auto;
-  height:auto;
-  max-width:none;                /* ✅ 원본 크기 유지 */
-  max-height:none;
-  border-radius:12px;
-}
-
-.rawview-close{
-  position:absolute;
-  top:-12px;
-  right:-12px;
-  width:36px;
-  height:36px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.35);
-  background:rgba(0,0,0,.35);
-  color:#fff;
-  cursor:pointer;
-  font-size:18px;
-  line-height:1;
-}
-.rawview-close:hover{ background:rgba(0,0,0,.55); }
-
-/* 원본 뷰어 안내(옵션) */
-.rawview-hint{
-  position:absolute;
-  left:0;
-  top:-34px;
-  font-size:12px;
-  color:rgba(255,255,255,.8);
-  letter-spacing:.08em;
-}
-
-/* 모바일에서는 너무 커질 수 있어서 폭 제한(선택) */
-@media(max-width:640px){
-  .rawview-inner{ max-width: 94vw; }
-}
-
-
-    /* ✅ 면책 문구 */
     .modal-disclaimer{
       margin:16px 0 0;
       font-size:12px;
@@ -521,12 +423,74 @@
       color:var(--text-muted);
     }
 
-    /* ✅ 리스트 하단 면책(선택) */
-    .page-disclaimer{
-      margin: 22px 2px 0;
+    /* ===== Original Viewer (same window) ===== */
+    .viewer{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.86);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:10050; /* modal보다 위 */
+    }
+    .viewer.show{ display:flex; }
+
+    .viewer-inner{
+      position:relative;
+      width:min(1400px, 96vw);
+      height:min(92vh, 900px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    /* ✅ 처음에는 화면에 '맞춰' 보이게(스크롤 없이) */
+    .viewer-img{
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      display:block;
+      user-select:none;
+      -webkit-user-drag:none;
+      cursor:grab;
+      transform-origin:center center;
+    }
+    .viewer-img:active{ cursor:grabbing; }
+
+    .viewer-close{
+      position:absolute;
+      top:-10px;
+      right:-10px;
+      width:40px;
+      height:40px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      cursor:pointer;
+      font-size:20px;
+      line-height:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .viewer-close:hover{
+      background:rgba(0,0,0,.55);
+      border-color:rgba(255,255,255,.4);
+    }
+
+    .viewer-tip{
+      position:absolute;
+      left:50%;
+      bottom:-8px;
+      transform:translate(-50%, 100%);
       font-size:12px;
-      line-height:1.7;
-      color:var(--text-muted);
+      color:rgba(255,255,255,.72);
+      letter-spacing:.08em;
+      white-space:nowrap;
     }
 
     /* responsive */
@@ -537,16 +501,15 @@
       .modal-right{
         border-left:0;
         border-top:1px solid var(--line);
-        justify-content:flex-start; /* 모바일에서는 자연스럽게 위부터 */
+        justify-content:flex-start;
       }
       .modal-right-inner{ transform:none; }
       .slide-stage{ min-height:420px; }
-      .slide-stage.pt-mode{ padding:12px; }
-      .slide-stage.pt-mode.zoomed .modal-img{ transform: scale(1.5); }
     }
     @media(max-width:640px){
       .grid{ grid-template-columns:1fr; }
       .slide-stage{ min-height:360px; }
+      .raw-btn{ display:none; }
     }
   </style>
 </head>
@@ -642,7 +605,6 @@
 
       </div>
 
-      <!-- (선택) 페이지 하단 면책 문구 -->
       <p class="page-disclaimer">
         * 상품 이미지는 실제 제품과 차이가 있을 수 있으며, 제조사 사정에 따라 디자인 모양이나 색상이 다를 수 있습니다.
       </p>
@@ -657,26 +619,18 @@
 
       <!-- LEFT: 슬라이드 -->
       <div class="modal-left">
-        <div class="slide-stage" id="slideStage">
+        <div class="slide-stage">
           <button class="nav-arrow nav-prev" id="prevBtn" type="button" aria-label="이전 이미지">‹</button>
           <img class="modal-img" id="modalImg" src="" alt="">
           <button class="nav-arrow nav-next" id="nextBtn" type="button" aria-label="다음 이미지">›</button>
+
+          <button class="raw-btn" id="openViewerBtn" type="button" aria-label="원본 보기">원본 보기</button>
 
           <div class="modal-tabs" id="modalTabs">
             <button class="tab active" type="button" data-kind="th">TH</button>
             <button class="tab" type="button" data-kind="pr">PR</button>
             <button class="tab" type="button" data-kind="pt">PT</button>
           </div>
-
-         <!-- ✅ MODAL 안에서 원본(업로드한 사이즈) 보기 -->
-<div class="rawview" id="rawview" aria-hidden="true">
-  <div class="rawview-inner" role="dialog" aria-modal="true" aria-label="원본 이미지 보기">
-    <div class="rawview-hint">원본 크기(스크롤로 이동) · ESC로 닫기</div>
-    <button class="rawview-close" id="rawviewClose" type="button" aria-label="닫기">×</button>
-    <img class="rawview-img" id="rawviewImg" src="" alt="">
-  </div>
-</div>
-
         </div>
       </div>
 
@@ -692,7 +646,7 @@
             <li class="spec-row"><div class="k">㎡/Box</div><div id="specM2">-</div></li>
           </ul>
 
-          <p class="hint">좌측 TH/PR/PT 버튼 또는 좌·우 화살표로 이미지를 확인할 수 있습니다. (PT는 클릭/휠로 확대 가능)</p>
+          <p class="hint">좌측 TH/PR/PT 버튼 또는 좌·우 화살표로 이미지를 확인할 수 있습니다. (이미지 클릭 시 원본 뷰어)</p>
 
           <p class="modal-disclaimer">
             * 상품 이미지는 실제 제품과 차이가 있을 수 있으며, 제조사 사정에 따라 디자인 모양이나 색상이 다를 수 있습니다.
@@ -702,13 +656,21 @@
     </div>
   </div>
 
+  <!-- ✅ ORIGINAL VIEWER (same window) -->
+  <div class="viewer" id="viewer" aria-hidden="true">
+    <div class="viewer-inner" role="dialog" aria-modal="true" aria-label="원본 이미지 보기">
+      <button class="viewer-close" id="viewerClose" type="button" aria-label="닫기">×</button>
+      <img class="viewer-img" id="viewerImg" src="" alt="">
+      <div class="viewer-tip">휠: 확대/축소 · 드래그: 이동 · ESC: 닫기</div>
+    </div>
+  </div>
+
   <script>
     (function(){
       const modal = document.getElementById('modal');
       const modalClose = document.getElementById('modalClose');
       const modalImg = document.getElementById('modalImg');
-      const slideStage = document.getElementById('slideStage');
-      const openOriginal = document.getElementById('openOriginal');
+      const openViewerBtn = document.getElementById('openViewerBtn');
 
       const specTitle = document.getElementById('specTitle');
       const specSize = document.getElementById('specSize');
@@ -722,63 +684,28 @@
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
 
+      // viewer
+      const viewer = document.getElementById('viewer');
+      const viewerImg = document.getElementById('viewerImg');
+      const viewerClose = document.getElementById('viewerClose');
+
       let sources = { th:'', pr:'', pt:'' };
       const order = ['th','pr','pt'];
       let currentKind = 'th';
 
+      // ===== modal image switch =====
       function setActiveTab(kind){
         tabs.forEach(t => t.classList.toggle('active', t.dataset.kind === kind));
       }
-      const rawview = document.getElementById('rawview');
-const rawviewImg = document.getElementById('rawviewImg');
-const rawviewClose = document.getElementById('rawviewClose');
-
-function openRawView(src, alt){
-  if(!rawview || !rawviewImg) return;
-  rawviewImg.src = src;
-  rawviewImg.alt = alt || '';
-  rawview.classList.add('show');
-  rawview.setAttribute('aria-hidden','false');
-}
-
-function closeRawView(){
-  if(!rawview || !rawviewImg) return;
-  rawview.classList.remove('show');
-  rawview.setAttribute('aria-hidden','true');
-  rawviewImg.src = '';
-}
-
-
-      function setPTMode(isPT){
-        if(!slideStage) return;
-        slideStage.classList.toggle('pt-mode', isPT);
-        // 탭 전환 시 확대 상태 초기화
-        slideStage.classList.remove('zoomed');
-        // 스크롤 위치도 초기화
-        slideStage.scrollTop = 0;
-        slideStage.scrollLeft = 0;
-      }
-
-      function updateOpenOriginal(src){
-        if(!openOriginal) return;
-        openOriginal.href = src || '#';
-        openOriginal.style.pointerEvents = src ? 'auto' : 'none';
-        openOriginal.style.opacity = src ? '1' : '.5';
-      }
 
       function show(kind){
-  const src = sources[kind];
-  if(!src) return;
-
-  currentKind = kind;
-  modalImg.src = src;
-  modalImg.alt = `${specTitle.textContent} ${kind.toUpperCase()} 이미지`;
-  setActiveTab(kind);
-
-  // ✅ PT만 전용 표시 모드
-  setPTMode(kind === 'pt');
-}
-
+        const src = sources[kind];
+        if(!src) return;
+        currentKind = kind;
+        modalImg.src = src;
+        modalImg.alt = `${specTitle.textContent} ${kind.toUpperCase()} 이미지`;
+        setActiveTab(kind);
+      }
 
       function next(delta){
         const idx = order.indexOf(currentKind);
@@ -806,18 +733,14 @@ function closeRawView(){
         document.body.style.overflow = 'hidden';
       }
 
-      function close(){
+      function closeModal(){
         modal.classList.remove('show');
         modal.setAttribute('aria-hidden','true');
         document.body.style.overflow = '';
         modalImg.src = '';
-        // 상태 초기화
-        setPTMode(false);
-        updateOpenOriginal('');
-        closeRawView(); // ✅ 추가
       }
 
-      // 카드 클릭 → 모달 오픈
+      // 카드 클릭 → 모달
       document.querySelectorAll('.card').forEach(card=>{
         card.addEventListener('click', ()=> openFromCard(card));
       });
@@ -831,53 +754,13 @@ function closeRawView(){
       prevBtn.addEventListener('click', ()=> next(-1));
       nextBtn.addEventListener('click', ()=> next(+1));
 
-      // ✅ 모달 이미지 클릭 → 현재 창(overlay)에서 원본 보기
-modalImg.addEventListener('click', ()=>{
-  if(!modal.classList.contains('show')) return;
-  const src = modalImg.currentSrc || modalImg.src;
-  openRawView(src, modalImg.alt);
-});
-
-
-      // PT 확대(휠: 확대/축소 토글 느낌)
-      slideStage.addEventListener('wheel', (e)=>{
-        if(currentKind !== 'pt') return;
-        // trackpad 미세값 무시
-        if(Math.abs(e.deltaY) < 10) return;
-
-        // 아래로(+) = 축소, 위로(-) = 확대
-        if(e.deltaY < 0) slideStage.classList.add('zoomed');
-        else slideStage.classList.remove('zoomed');
-      }, { passive:true });
-
-      // close interactions
-      modalClose.addEventListener('click', close);
+      // 닫기
+      modalClose.addEventListener('click', closeModal);
       modal.addEventListener('click', (e)=>{
-        if(e.target === modal) close();
+        if(e.target === modal) closeModal();
       });
 
-      window.addEventListener('keydown', (e)=>{
-        if(e.key === 'Escape' && modal.classList.contains('show')) close();
-        if(!modal.classList.contains('show')) return;
-        if(e.key === 'ArrowLeft') next(-1);
-        if(e.key === 'ArrowRight') next(+1);
-      });
-      if(rawviewClose){
-  rawviewClose.addEventListener('click', closeRawView);
-}
-if(rawview){
-  rawview.addEventListener('click', (e)=>{
-    if(e.target === rawview) closeRawView();
-  });
-}
-window.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape' && rawview && rawview.classList.contains('show')){
-    closeRawView();
-  }
-});
-
-
-      /* ✅ 사이즈 필터 */
+      // ===== size filter =====
       (function(){
         const buttons = document.querySelectorAll('.size-btn');
         const cards = document.querySelectorAll('.card');
@@ -901,6 +784,113 @@ window.addEventListener('keydown', (e)=>{
 
         applyFilter('all');
       })();
+
+      // ===== Original Viewer (same window, fit + wheel zoom + drag) =====
+      let vScale = 1;
+      let vX = 0, vY = 0;
+      let dragging = false;
+      let startX = 0, startY = 0;
+
+      function applyViewerTransform(){
+        viewerImg.style.transform = `translate(${vX}px, ${vY}px) scale(${vScale})`;
+      }
+
+      function resetViewer(){
+        vScale = 1;
+        vX = 0;
+        vY = 0;
+        applyViewerTransform();
+      }
+
+      function openViewer(src, alt){
+        if(!src) return;
+        viewerImg.src = src;
+        viewerImg.alt = alt || '';
+        resetViewer();
+
+        viewer.classList.add('show');
+        viewer.setAttribute('aria-hidden','false');
+      }
+
+      function closeViewer(){
+        viewer.classList.remove('show');
+        viewer.setAttribute('aria-hidden','true');
+        viewerImg.src = '';
+        resetViewer();
+      }
+
+      // ✅ 모달 이미지 클릭 → 원본 뷰어
+      modalImg.addEventListener('click', ()=>{
+        openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
+      });
+
+      // ✅ 원본 보기 버튼도 동일 동작
+      openViewerBtn.addEventListener('click', ()=>{
+        openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
+      });
+
+      // viewer 닫기
+      viewerClose.addEventListener('click', closeViewer);
+      viewer.addEventListener('click', (e)=>{
+        if(e.target === viewer) closeViewer();
+      });
+
+      // wheel zoom
+      viewer.addEventListener('wheel', (e)=>{
+        if(!viewer.classList.contains('show')) return;
+        e.preventDefault();
+
+        const delta = -e.deltaY;
+        const step = delta > 0 ? 0.12 : -0.12;
+
+        const nextScale = Math.min(5, Math.max(1, vScale + step));
+        if(nextScale === vScale) return;
+
+        vScale = nextScale;
+        applyViewerTransform();
+      }, { passive:false });
+
+      // drag pan
+      viewerImg.addEventListener('pointerdown', (e)=>{
+        if(!viewer.classList.contains('show')) return;
+        dragging = true;
+        startX = e.clientX - vX;
+        startY = e.clientY - vY;
+        viewerImg.setPointerCapture(e.pointerId);
+      });
+
+      viewerImg.addEventListener('pointermove', (e)=>{
+        if(!dragging) return;
+        if(vScale <= 1) return; // 확대 안 했으면 이동 필요 없음
+        vX = e.clientX - startX;
+        vY = e.clientY - startY;
+        applyViewerTransform();
+      });
+
+      viewerImg.addEventListener('pointerup', ()=>{
+        dragging = false;
+      });
+      viewerImg.addEventListener('pointercancel', ()=>{
+        dragging = false;
+      });
+
+      // keyboard
+      window.addEventListener('keydown', (e)=>{
+        // viewer 우선
+        if(e.key === 'Escape' && viewer.classList.contains('show')){
+          closeViewer();
+          return;
+        }
+
+        // modal
+        if(e.key === 'Escape' && modal.classList.contains('show')){
+          closeModal();
+          return;
+        }
+        if(!modal.classList.contains('show')) return;
+        if(e.key === 'ArrowLeft') next(-1);
+        if(e.key === 'ArrowRight') next(+1);
+      });
 
     })();
   </script>
