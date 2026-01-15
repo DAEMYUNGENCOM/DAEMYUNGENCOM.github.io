@@ -301,6 +301,29 @@
       gap:10px;
       z-index:7;
     }
+    /* ✅ 원본보기 아이콘: 이미지 우하단 */
+.modal-original{
+  position:absolute;
+  right:16px;
+  bottom:16px;
+  z-index:8;
+}
+
+.modal-original .icon-btn{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.26);
+  background:rgba(0,0,0,.28);
+  color:rgba(255,255,255,.92);
+}
+
+.modal-original .icon-btn:hover{
+  transform:translateY(-1px);
+  border-color:rgba(255,255,255,.40);
+  background:rgba(0,0,0,.38);
+}
+
 
     .ico{ width:18px; height:18px; display:block; }
 
@@ -343,12 +366,6 @@
       transform: translateY(10px);
     }
 
-    /* 오른쪽 상단 원본보기 버튼(아이콘) */
-    .spec-actions{
-      display:flex;
-      justify-content:flex-end;
-      margin-bottom:10px;
-    }
     .icon-btn{
       width:42px;
       height:42px;
@@ -631,6 +648,16 @@
                 <path d="M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" fill="none" stroke="currentColor" stroke-width="1.6"/>
               </svg>
             </button>
+            <div class="modal-original">
+  <button type="button" class="icon-btn" id="openOriginalBtn" aria-label="원본 보기">
+    <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
+      <path d="M9 5H5v4M15 5h4v4M9 19H5v-4M15 19h4v-4"
+        fill="none" stroke="currentColor" stroke-width="1.6"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+</div>
+
 
             <button class="tab" type="button" data-kind="pr" aria-label="제품(PR)">
               <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
@@ -651,16 +678,6 @@
 
       <aside class="modal-right">
         <div class="modal-right-inner">
-
-          <div class="spec-actions">
-            <button type="button" class="icon-btn" id="openOriginalBtn" aria-label="원본 보기">
-              <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
-                <path d="M9 5H5v4M15 5h4v4M9 19H5v-4M15 19h4v-4"
-                  fill="none" stroke="currentColor" stroke-width="1.6"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
 
           <h3 class="spec-title" id="specTitle">-</h3>
 
@@ -719,6 +736,9 @@
       const viewerImg = document.getElementById('viewerImg');
       const viewerClose = document.getElementById('viewerClose');
       const openOriginalBtn = document.getElementById('openOriginalBtn');
+      openOriginalBtn.addEventListener('click', ()=>{
+  openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
+});
 
       let sources = { th:'', pr:'', pt:'' };
       const order = ['th','pr','pt'];
