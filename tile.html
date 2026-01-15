@@ -301,29 +301,6 @@
       gap:10px;
       z-index:7;
     }
-    /* ✅ 원본보기 아이콘: 이미지 우하단 */
-.modal-original{
-  position:absolute;
-  right:16px;
-  bottom:16px;
-  z-index:8;
-}
-
-.modal-original .icon-btn{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.26);
-  background:rgba(0,0,0,.28);
-  color:rgba(255,255,255,.92);
-}
-
-.modal-original .icon-btn:hover{
-  transform:translateY(-1px);
-  border-color:rgba(255,255,255,.40);
-  background:rgba(0,0,0,.38);
-}
-
 
     .ico{ width:18px; height:18px; display:block; }
 
@@ -352,6 +329,32 @@
       color:#fff;
     }
 
+    /* ✅ 원본보기 아이콘: "이미지 우하단" 단독 */
+    .modal-original{
+      position:absolute;
+      right:16px;
+      bottom:16px;
+      z-index:8;
+    }
+    .modal-original .icon-btn{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.26);
+      background:rgba(0,0,0,.28);
+      color:rgba(255,255,255,.92);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+    }
+    .modal-original .icon-btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,255,255,.40);
+      background:rgba(0,0,0,.38);
+    }
+
     /* right spec */
     .modal-right{
       padding:22px 22px 18px;
@@ -364,25 +367,6 @@
     }
     .modal-right-inner{
       transform: translateY(10px);
-    }
-
-    .icon-btn{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      border:1px solid rgba(17,17,17,.12);
-      background:rgba(17,17,17,.02);
-      color:var(--text-main);
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition:transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
-    }
-    .icon-btn:hover{
-      transform:translateY(-1px);
-      border-color:rgba(17,17,17,.22);
-      background:rgba(17,17,17,.05);
     }
 
     .modal-close{
@@ -640,7 +624,7 @@
           <img class="modal-img" id="modalImg" src="" alt="">
           <button class="nav-arrow nav-next" id="nextBtn" type="button" aria-label="다음 이미지">›</button>
 
-          <!-- TH/PR/PT icon tabs -->
+          <!-- ✅ TH/PR/PT : 좌하단 그룹 -->
           <div class="modal-tabs" id="modalTabs" aria-label="이미지 타입 선택">
             <button class="tab active" type="button" data-kind="th" aria-label="쇼룸(TH)">
               <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
@@ -648,16 +632,6 @@
                 <path d="M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" fill="none" stroke="currentColor" stroke-width="1.6"/>
               </svg>
             </button>
-            <div class="modal-original">
-  <button type="button" class="icon-btn" id="openOriginalBtn" aria-label="원본 보기">
-    <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
-      <path d="M9 5H5v4M15 5h4v4M9 19H5v-4M15 19h4v-4"
-        fill="none" stroke="currentColor" stroke-width="1.6"
-        stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-</div>
-
 
             <button class="tab" type="button" data-kind="pr" aria-label="제품(PR)">
               <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
@@ -673,12 +647,23 @@
               </svg>
             </button>
           </div>
+
+          <!-- ✅ 원본보기 : 이미지 우하단 단독 -->
+          <div class="modal-original">
+            <button type="button" class="icon-btn" id="openOriginalBtn" aria-label="원본 보기">
+              <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
+                <path d="M9 5H5v4M15 5h4v4M9 19H5v-4M15 19h4v-4"
+                  fill="none" stroke="currentColor" stroke-width="1.6"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
         </div>
       </div>
 
       <aside class="modal-right">
         <div class="modal-right-inner">
-
           <h3 class="spec-title" id="specTitle">-</h3>
 
           <ul class="spec-table">
@@ -736,9 +721,6 @@
       const viewerImg = document.getElementById('viewerImg');
       const viewerClose = document.getElementById('viewerClose');
       const openOriginalBtn = document.getElementById('openOriginalBtn');
-      openOriginalBtn.addEventListener('click', ()=>{
-  openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
-});
 
       let sources = { th:'', pr:'', pt:'' };
       const order = ['th','pr','pt'];
@@ -888,7 +870,7 @@
         openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
       });
 
-      // 오른쪽 "원본 보기" 버튼
+      // 원본보기 아이콘 클릭 → 원본 뷰어
       openOriginalBtn.addEventListener('click', ()=>{
         openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
       });
