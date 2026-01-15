@@ -29,7 +29,7 @@
     }
     a{ color:inherit; }
 
-    /* NAV (index와 통일) */
+    /* NAV */
     nav{
       position:fixed;
       top:0;
@@ -118,12 +118,13 @@
       gap:28px;
     }
 
-    /* CARD */
+    /* LIST CARD (요청: 제품명/규격만) */
     .card{
       background:#fff;
       border:1px solid var(--line);
-      transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
       overflow:hidden;
+      cursor:pointer;
+      transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
     }
     .card:hover{
       transform:translateY(-2px);
@@ -131,24 +132,19 @@
       border-color:rgba(17,17,17,.14);
     }
 
-    .media{
+    .thumb{
       position:relative;
       aspect-ratio:1/1;
       background:#f3f4f6;
     }
-    .media img{
+    .thumb img{
       width:100%;
       height:100%;
       object-fit:cover;
       display:block;
-    }
-    /* 크게보기 UX */
-    .media img.zoomable{
-      cursor: zoom-in;
       user-select:none;
       -webkit-user-drag:none;
     }
-
     .badge{
       position:absolute;
       left:12px;
@@ -160,120 +156,207 @@
       color:#fff;
     }
 
-    /* thumb switch */
-    .thumbs{
-      position:absolute;
-      left:12px;
-      bottom:12px;
-      display:flex;
-      gap:8px;
-      z-index:2;
+    .mini{
+      padding:14px 16px 16px;
     }
-    .thumb-btn{
-      width:34px;
-      height:34px;
-      border:1px solid rgba(255,255,255,.55);
-      background:rgba(0,0,0,.18);
-      backdrop-filter:blur(6px);
-      cursor:pointer;
-      padding:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
-    }
-    .thumb-btn:hover{ transform:translateY(-1px); }
-    .thumb-btn.active{
-      background:rgba(0,0,0,.32);
-      border-color:rgba(255,255,255,.75);
-    }
-    .thumb-btn span{
-      font-size:11px;
-      letter-spacing:.14em;
-      color:#fff;
-      opacity:.95;
-    }
-
-    .info{ padding:16px 16px 18px; }
-    .name{
-      margin:0 0 10px;
+    .mini .name{
+      margin:0 0 8px;
       font-size:14px;
       letter-spacing:.10em;
     }
-    .spec{
-      list-style:none;
-      padding:0;
+    .mini .size{
       margin:0;
-      display:grid;
-      gap:7px;
       font-size:13px;
-      line-height:1.6;
+      color:var(--text-sub);
+      letter-spacing:.02em;
+    }
+    .mini .size span{
+      color:var(--text-muted);
+      margin-right:10px;
+      letter-spacing:.06em;
+    }
+
+    /* ===== Modal ===== */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.74);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:22px;
+      z-index:9999;
+    }
+    .modal.show{ display:flex; }
+
+    .modal-panel{
+      width:min(1100px, 96vw);
+      max-height:92vh;
+      background:#fff;
+      border-radius:18px;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+    }
+
+    .modal-left{
+      background:#0b0b0b;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .slide-stage{
+      width:100%;
+      height:100%;
+      min-height:520px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    .modal-img{
+      max-width:100%;
+      max-height:92vh;
+      width:auto;
+      height:auto;
+      display:block;
+      user-select:none;
+      -webkit-user-drag:none;
+      background:#111;
+    }
+
+    /* nav arrows */
+    .nav-arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.28);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:18px;
+      transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+    }
+    .nav-arrow:hover{
+      background:rgba(0,0,0,.55);
+      border-color:rgba(255,255,255,.45);
+      transform:translateY(-50%) translateY(-1px);
+    }
+    .nav-prev{ left:16px; }
+    .nav-next{ right:16px; }
+
+    /* TH/PR/PT tabs */
+    .modal-tabs{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      display:flex;
+      gap:8px;
+      z-index:5;
+    }
+    .tab{
+      height:34px;
+      padding:0 12px;
+      border:1px solid rgba(255,255,255,.35);
+      background:rgba(0,0,0,.28);
+      color:#fff;
+      cursor:pointer;
+      font-size:11px;
+      letter-spacing:.14em;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      transition:background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .tab:hover{ transform:translateY(-1px); }
+    .tab.active{
+      background:rgba(255,255,255,.18);
+      border-color:rgba(255,255,255,.55);
+    }
+
+    /* right spec */
+    .modal-right{
+      padding:22px 22px 18px;
+      border-left:1px solid var(--line);
+      overflow:auto;
+      max-height:92vh;
+    }
+    .modal-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:38px;
+      height:38px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,.12);
+      background:#fff;
+      cursor:pointer;
+      font-size:18px;
+      line-height:1;
+      z-index:10;
+      transition:transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+    }
+    .modal-close:hover{
+      transform:translateY(-1px);
+      border-color:rgba(0,0,0,.22);
+      background:rgba(0,0,0,.02);
+    }
+
+    .spec-title{
+      margin:0 0 10px;
+      font-size:18px;
+      letter-spacing:.10em;
+    }
+    .spec-table{
+      margin:14px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+      font-size:13px;
+      line-height:1.7;
       color:var(--text-sub);
     }
-    .spec span{
-      display:inline-block;
-      width:74px;
+    .spec-row{
+      display:grid;
+      grid-template-columns: 86px 1fr;
+      gap:10px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line);
+    }
+    .spec-row:last-child{ border-bottom:0; padding-bottom:0; }
+    .k{
       color:var(--text-muted);
       letter-spacing:.06em;
     }
 
-    .note{
+    .hint{
       margin:14px 0 0;
       font-size:12px;
       color:var(--text-muted);
       line-height:1.7;
     }
 
-    /* ===== Image Lightbox ===== */
-    .lightbox{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.78);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      z-index: 9999;
-    }
-    .lightbox.show{ display:flex; }
-    .lightbox-inner{
-      position: relative;
-      max-width: min(1200px, 96vw);
-      max-height: 92vh;
-    }
-    .lightbox-img{
-      display:block;
-      max-width: 100%;
-      max-height: 92vh;
-      width: auto;
-      height: auto;
-      border-radius: 12px;
-    }
-    .lightbox-close{
-      position:absolute;
-      top:-12px;
-      right:-12px;
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.35);
-      background: rgba(0,0,0,.35);
-      color:#fff;
-      cursor:pointer;
-      font-size:18px;
-      line-height: 1;
-    }
-    .lightbox-close:hover{
-      background: rgba(0,0,0,.55);
-    }
-
     /* responsive */
     @media(max-width:980px){
       .grid{ grid-template-columns:repeat(2, 1fr); }
       .page-hero .wrap{ flex-direction:column; align-items:flex-start; }
+      .modal-panel{ grid-template-columns:1fr; }
+      .modal-right{ border-left:0; border-top:1px solid var(--line); }
+      .slide-stage{ min-height:420px; }
     }
     @media(max-width:640px){
       .grid{ grid-template-columns:1fr; }
+      .slide-stage{ min-height:360px; }
     }
   </style>
 </head>
@@ -309,38 +392,26 @@
     <div class="wrap">
       <div class="grid">
 
-        <!-- ✅ PRODUCT CARD 1개 (SABIA LIGHT GREY) -->
-        <article class="card" data-product="sabia-300">
-          <div class="media">
+        <!-- ✅ 카드: 썸네일 + 제품명 + 규격만 -->
+        <article class="card"
+          data-name="SABIA LIGHT GREY"
+          data-size="300×300"
+          data-surface="MATT"
+          data-pcs="16pcs"
+          data-m2="1.44㎡"
+          data-th="product/tile/300_SABIALIGHTGREY.jpg"
+          data-pr="product/tile/300한장_SABIALIGHTGREY.jpg"
+          data-pt="product/tile/300패턴도_SABIALIGHTGREY.jpg"
+          aria-label="SABIA LIGHT GREY 상세 보기">
+
+          <div class="thumb">
             <span class="badge">TILE</span>
-
-            <!-- ✅ class 속성 1개로 합침: main-img + zoomable -->
-            <img class="main-img zoomable"
-                 src="product/tile/300_SABIALIGHTGREY.jpg"
-                 alt="SABIA LIGHT GREY">
-
-            <!-- 썸/제품/패턴 전환 버튼 -->
-            <div class="thumbs" role="tablist" aria-label="Image switch">
-              <button type="button" class="thumb-btn active" data-src="product/tile/300_SABIALIGHTGREY.jpg" aria-label="썸네일">
-                <span>TH</span>
-              </button>
-              <button type="button" class="thumb-btn" data-src="product/tile/300한장_SABIALIGHTGREY.jpg" aria-label="제품 이미지">
-                <span>PR</span>
-              </button>
-              <button type="button" class="thumb-btn" data-src="product/tile/300패턴도_SABIALIGHTGREY.jpg" aria-label="패턴도">
-                <span>PT</span>
-              </button>
-            </div>
+            <img src="product/tile/300_SABIALIGHTGREY.jpg" alt="SABIA LIGHT GREY 썸네일">
           </div>
 
-          <div class="info">
+          <div class="mini">
             <h3 class="name">SABIA LIGHT GREY</h3>
-            <ul class="spec">
-              <li><span>규격</span> 300×300</li>
-              <li><span>표면</span> 무광</li>
-              <li><span>Pcs/Box</span> 16pcs</li>
-            </ul>
-            <p class="note">※ 썸네일(TH) / 제품(PR) / 패턴(PT) 버튼으로 이미지를 전환해 확인할 수 있습니다.</p>
+            <p class="size"><span>규격</span>300×300</p>
           </div>
         </article>
 
@@ -348,69 +419,137 @@
     </div>
   </main>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lightbox-inner" role="dialog" aria-modal="true">
-      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="닫기">×</button>
-      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <!-- ✅ MODAL -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-label="제품 상세">
+      <button class="modal-close" id="modalClose" type="button" aria-label="닫기">×</button>
+
+      <!-- LEFT: 슬라이드 -->
+      <div class="modal-left">
+        <div class="slide-stage">
+          <button class="nav-arrow nav-prev" id="prevBtn" type="button" aria-label="이전 이미지">‹</button>
+          <img class="modal-img" id="modalImg" src="" alt="">
+          <button class="nav-arrow nav-next" id="nextBtn" type="button" aria-label="다음 이미지">›</button>
+
+          <div class="modal-tabs" id="modalTabs">
+            <button class="tab active" type="button" data-kind="th">TH</button>
+            <button class="tab" type="button" data-kind="pr">PR</button>
+            <button class="tab" type="button" data-kind="pt">PT</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: 스펙 -->
+      <aside class="modal-right">
+        <h3 class="spec-title" id="specTitle">-</h3>
+
+        <ul class="spec-table">
+          <li class="spec-row"><div class="k">규격</div><div id="specSize">-</div></li>
+          <li class="spec-row"><div class="k">표면</div><div id="specSurface">-</div></li>
+          <li class="spec-row"><div class="k">Pcs/Box</div><div id="specPcs">-</div></li>
+          <li class="spec-row"><div class="k">㎡/Box</div><div id="specM2">-</div></li>
+        </ul>
+
+        <p class="hint">좌측 TH/PR/PT 버튼 또는 좌·우 화살표로 이미지를 확인할 수 있습니다.</p>
+      </aside>
     </div>
   </div>
 
   <script>
-    // 카드 내부 이미지 전환 (상세페이지 없이)
-    document.querySelectorAll('.card').forEach(card=>{
-      const img = card.querySelector('.main-img');
-      const buttons = card.querySelectorAll('.thumb-btn');
-      if(!img || !buttons.length) return;
-
-      buttons.forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          buttons.forEach(b=>b.classList.remove('active'));
-          btn.classList.add('active');
-
-          const src = btn.dataset.src;
-          if(src) img.src = src;
-        });
-      });
-    });
-
-    // Lightbox
     (function(){
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightboxImg');
-      const lightboxClose = document.getElementById('lightboxClose');
-      if(!lightbox || !lightboxImg || !lightboxClose) return;
+      const modal = document.getElementById('modal');
+      const modalClose = document.getElementById('modalClose');
+      const modalImg = document.getElementById('modalImg');
 
-      function openLightbox(src, alt){
-        lightboxImg.src = src;
-        lightboxImg.alt = alt || '';
-        lightbox.classList.add('show');
-        lightbox.setAttribute('aria-hidden','false');
+      const specTitle = document.getElementById('specTitle');
+      const specSize = document.getElementById('specSize');
+      const specSurface = document.getElementById('specSurface');
+      const specPcs = document.getElementById('specPcs');
+      const specM2 = document.getElementById('specM2');
+
+      const tabsWrap = document.getElementById('modalTabs');
+      const tabs = Array.from(tabsWrap.querySelectorAll('.tab'));
+
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      let sources = { th:'', pr:'', pt:'' };
+      const order = ['th','pr','pt'];
+      let currentKind = 'th';
+
+      function setActiveTab(kind){
+        tabs.forEach(t => t.classList.toggle('active', t.dataset.kind === kind));
+      }
+
+      function show(kind){
+        const src = sources[kind];
+        if(!src) return;
+        currentKind = kind;
+        modalImg.src = src;
+        modalImg.alt = `${specTitle.textContent} ${kind.toUpperCase()} 이미지`;
+        setActiveTab(kind);
+      }
+
+      function next(delta){
+        const idx = order.indexOf(currentKind);
+        const nextIdx = (idx + delta + order.length) % order.length;
+        show(order[nextIdx]);
+      }
+
+      function openFromCard(card){
+        // data set
+        specTitle.textContent = card.dataset.name || '-';
+        specSize.textContent = card.dataset.size || '-';
+        specSurface.textContent = card.dataset.surface || '-';
+        specPcs.textContent = card.dataset.pcs || '-';
+        specM2.textContent = card.dataset.m2 || '—';
+
+        sources = {
+          th: card.dataset.th || '',
+          pr: card.dataset.pr || '',
+          pt: card.dataset.pt || ''
+        };
+
+        // 기본 TH
+        show('th');
+
+        // open
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden','false');
         document.body.style.overflow = 'hidden';
       }
-      function closeLightbox(){
-        lightbox.classList.remove('show');
-        lightbox.setAttribute('aria-hidden','true');
-        lightboxImg.src = '';
+
+      function close(){
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden','true');
         document.body.style.overflow = '';
+        modalImg.src = '';
       }
 
-      document.addEventListener('click', (e)=>{
-        const img = e.target.closest('img.zoomable');
-        if(!img) return;
-        openLightbox(img.currentSrc || img.src, img.alt);
+      // 카드 클릭 → 모달 오픈
+      document.querySelectorAll('.card').forEach(card=>{
+        card.addEventListener('click', ()=> openFromCard(card));
       });
 
-      lightboxClose.addEventListener('click', closeLightbox);
-
-      lightbox.addEventListener('click', (e)=>{
-        if(e.target === lightbox) closeLightbox();
+      // 탭
+      tabs.forEach(tab=>{
+        tab.addEventListener('click', ()=> show(tab.dataset.kind));
       });
 
+      // arrows
+      prevBtn.addEventListener('click', ()=> next(-1));
+      nextBtn.addEventListener('click', ()=> next(+1));
+
+      // close interactions
+      modalClose.addEventListener('click', close);
+      modal.addEventListener('click', (e)=>{
+        if(e.target === modal) close();
+      });
       window.addEventListener('keydown', (e)=>{
-        if(e.key === 'Escape' && lightbox.classList.contains('show')){
-          closeLightbox();
-        }
+        if(e.key === 'Escape' && modal.classList.contains('show')) close();
+        if(!modal.classList.contains('show')) return;
+        if(e.key === 'ArrowLeft') next(-1);
+        if(e.key === 'ArrowRight') next(+1);
       });
     })();
   </script>
