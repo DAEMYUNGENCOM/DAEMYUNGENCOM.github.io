@@ -254,6 +254,33 @@
       -webkit-user-drag:none;
       cursor: zoom-in; /* ✅ 클릭하면 원본 뷰어 */
     }
+    /* nav arrows (타일과 동일 컨셉) */
+.s-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(0,0,0,.35);
+  color:#fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+  z-index:6;
+}
+.s-nav:hover{
+  background:rgba(0,0,0,.55);
+  border-color:rgba(255,255,255,.45);
+  transform:translateY(-50%) translateY(-1px);
+}
+.s-nav-prev{ left:16px; }
+.s-nav-next{ right:16px; }
+
 
     .s-tabs{
       position:absolute;
@@ -582,6 +609,9 @@
       <div class="s-left">
         <div class="s-stage">
           <img class="s-modal-img" id="sModalImg" src="" alt="">
+          <button class="s-nav s-nav-prev" id="sPrevBtn" type="button" aria-label="이전 이미지">‹</button>
+<button class="s-nav s-nav-next" id="sNextBtn" type="button" aria-label="다음 이미지">›</button>
+
 
           <!-- tabs -->
           <div class="s-tabs" role="tablist" aria-label="이미지 전환">
@@ -728,6 +758,9 @@
     const closeBtn = document.getElementById('sModalClose');
     const modalImg = document.getElementById('sModalImg');
     const openOriginalBtn = document.getElementById('openOriginalBtn');
+    const prevBtn = document.getElementById('sPrevBtn');
+const nextBtn = document.getElementById('sNextBtn');
+
 
     const titleEl = document.getElementById('sTitle');
     const subEl = document.getElementById('sSubtitle');
@@ -737,6 +770,7 @@
     const tabs = Array.from(document.querySelectorAll('.s-tab'));
 
     let current = { img:'', dwg:'' };
+    const order = ['img','dwg']; // ✅ 2장 순환
     let currentKind = 'img';
 
     function setActiveTab(kind){
@@ -751,6 +785,12 @@
       modalImg.alt = `${titleEl.textContent} ${kind === 'img' ? '제품 이미지' : '도면'}`;
       setActiveTab(kind);
     }
+    function step(delta){
+  const idx = order.indexOf(currentKind);
+  const nextIdx = (idx + delta + order.length) % order.length;
+  show(order[nextIdx]);
+}
+
 
     function openModalFromCard(card){
       titleEl.textContent = card.dataset.name || '-';
@@ -804,6 +844,9 @@
       // viewer가 열려있으면 overflow 유지
       if(!viewer.classList.contains('show')) document.body.style.overflow = '';
     }
+    prevBtn.addEventListener('click', ()=> step(-1));
+nextBtn.addEventListener('click', ()=> step(+1));
+
 
     // 카드 클릭 → 모달
     document.querySelectorAll('.s-card').forEach(card=>{
@@ -913,6 +956,12 @@
       if(e.key === 'Escape' && viewer.classList.contains('show')){
         closeViewer(); return;
       }
+      // modal 좌/우 전환 (viewer가 열려있으면 modal 조작 안 함)
+if(modal.classList.contains('show') && !viewer.classList.contains('show')){
+  if(e.key === 'ArrowLeft') step(-1);
+  if(e.key === 'ArrowRight') step(+1);
+}
+
       // modal
       if(e.key === 'Escape' && modal.classList.contains('show')){
         closeModal(); return;
