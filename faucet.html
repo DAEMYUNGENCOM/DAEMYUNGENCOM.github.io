@@ -18,6 +18,7 @@
       --hairline:rgba(17,17,17,.10);
       --ease:cubic-bezier(0.22,1,0.36,1);
     }
+
     body{
       margin:0;
       padding-top:70px;
@@ -28,37 +29,76 @@
     }
     a{ color:inherit; }
 
+    /* NAV */
     nav{
-      position:fixed; top:0; width:100%; height:70px;
-      background:var(--white); border-bottom:1px solid var(--line);
+      position:fixed;
+      top:0;
+      width:100%;
+      height:70px;
+      background:var(--white);
+      border-bottom:1px solid var(--line);
       z-index:1000;
     }
     .nav-inner{
-      max-width:1200px; height:100%; margin:0 auto; padding:0 20px;
-      display:flex; align-items:center; justify-content:space-between;
+      max-width:1200px;
+      height:100%;
+      margin:0 auto;
+      padding:0 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
     }
     .nav-inner img{ display:block; }
     .menu a{
-      margin-left:30px; text-decoration:none; color:var(--text-main);
-      font-weight:500; letter-spacing:.08em;
+      margin-left:30px;
+      text-decoration:none;
+      color:var(--text-main);
+      font-weight:500;
+      letter-spacing:.08em;
     }
 
+    /* PAGE HEADER */
     .page-hero{
-      background:var(--white); border-bottom:1px solid var(--line);
+      background:var(--white);
+      border-bottom:1px solid var(--line);
       padding:56px 20px 48px;
     }
     .page-hero .wrap{
-      max-width:1200px; margin:0 auto;
-      display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:24px;
     }
-    .page-title{ margin:0; font-size:34px; letter-spacing:.14em; }
-    .page-kicker{ margin:10px 0 0; font-size:12px; letter-spacing:.22em; color:var(--text-muted); }
-    .page-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+    .page-title{
+      margin:0;
+      font-size:34px;
+      letter-spacing:.14em;
+    }
+    .page-kicker{
+      margin:10px 0 0;
+      font-size:12px;
+      letter-spacing:.22em;
+      color:var(--text-muted);
+    }
+    .page-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      height:38px; padding:0 14px; font-size:12px; letter-spacing:.14em;
-      text-decoration:none; color:var(--text-main);
-      border:1px solid rgba(17,17,17,.16); background:transparent;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:38px;
+      padding:0 14px;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-decoration:none;
+      color:var(--text-main);
+      border:1px solid rgba(17,17,17,.16);
+      background:transparent;
       transition:transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
     }
     .btn:hover{
@@ -67,17 +107,40 @@
       background:rgba(17,17,17,.03);
     }
 
-    .section{ padding:50px 20px 110px; }
+    /* SECTION */
+    .section{ padding:70px 20px 110px; }
     .wrap{ max-width:1200px; margin:0 auto; }
 
-    .filters{ display:grid; gap:10px; margin:0 0 18px; }
-    .filter-row{ display:flex; gap:10px; flex-wrap:wrap; }
+    /* ===== FILTER (대분류/소분류) ===== */
+    .filter{
+      display:grid;
+      gap:14px;
+      margin:0 0 22px;
+    }
+
+    .filter-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .filter-label{
+      font-size:12px;
+      letter-spacing:.18em;
+      color:var(--text-muted);
+      min-width:84px;
+    }
+
     .filter-btn{
-      height:36px; padding:0 14px;
+      height:36px;
+      padding:0 14px;
       border:1px solid rgba(17,17,17,.16);
-      background:#fff; cursor:pointer;
-      font-size:12px; letter-spacing:.12em;
+      background:#fff;
+      cursor:pointer;
+      font-size:12px;
+      letter-spacing:.12em;
       transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+      white-space:nowrap;
     }
     .filter-btn:hover{
       transform:translateY(-1px);
@@ -89,11 +152,19 @@
       background:rgba(17,17,17,.06);
     }
 
-    .grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; }
+    /* GRID */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:28px;
+    }
 
+    /* CARD */
     .card{
-      background:#fff; border:1px solid var(--line);
-      overflow:hidden; cursor:pointer;
+      background:#fff;
+      border:1px solid var(--line);
+      overflow:hidden;
+      cursor:pointer;
       transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
     }
     .card:hover{
@@ -101,106 +172,376 @@
       box-shadow:0 14px 38px rgba(17,17,17,.08);
       border-color:rgba(17,17,17,.14);
     }
-    .thumb{ position:relative; aspect-ratio:1/1; background:#f3f4f6; }
-    .thumb img{ width:100%; height:100%; object-fit:cover; display:block; user-select:none; -webkit-user-drag:none; }
-    .badge{ position:absolute; left:12px; top:12px; padding:6px 10px; font-size:11px; letter-spacing:.18em; background:rgba(17,17,17,.70); color:#fff; }
-    .mini{ padding:14px 16px 16px; }
-    .mini .name{ margin:0 0 8px; font-size:14px; letter-spacing:.10em; }
-    .mini .meta{ margin:0; font-size:13px; color:var(--text-sub); line-height:1.55; }
-    .mini .meta span{ color:var(--text-muted); margin-right:10px; letter-spacing:.06em; }
 
-    .page-disclaimer{ margin:22px 2px 0; font-size:12px; line-height:1.7; color:var(--text-muted); }
+    .thumb{
+      position:relative;
+      aspect-ratio:1/1;
+      background:#f3f4f6;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+    .badge{
+      position:absolute;
+      left:12px;
+      top:12px;
+      padding:6px 10px;
+      font-size:11px;
+      letter-spacing:.18em;
+      background:rgba(17,17,17,.70);
+      color:#fff;
+    }
 
-    /* ===== Modal + Viewer는 sanitary와 동일 (축약 없이 그대로) */
-    .modal{ position:fixed; inset:0; background:rgba(0,0,0,.74); display:none; align-items:center; justify-content:center; padding:22px; z-index:9999; }
+    .mini{
+      padding:14px 16px 16px;
+    }
+    .mini .name{
+      margin:0 0 8px;
+      font-size:14px;
+      letter-spacing:.10em;
+    }
+    .mini .meta{
+      margin:0;
+      font-size:13px;
+      color:var(--text-sub);
+      letter-spacing:.02em;
+    }
+    .mini .meta span{
+      color:var(--text-muted);
+      margin-right:10px;
+      letter-spacing:.06em;
+    }
+
+    /* DISCLAIMER */
+    .page-disclaimer{
+      margin: 22px 2px 0;
+      font-size:12px;
+      line-height:1.7;
+      color:var(--text-muted);
+    }
+
+    /* ===== MODAL ===== */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.74);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:22px;
+      z-index:9999;
+    }
     .modal.show{ display:flex; }
-    .modal-panel{ width:min(1100px, 96vw); max-height:92vh; background:#fff; border-radius:18px; overflow:hidden; display:grid; grid-template-columns:1.2fr .8fr; position:relative; }
-    .modal-left{ background:#0b0b0b; position:relative; display:flex; align-items:center; justify-content:center; }
-    .slide-stage{ width:100%; height:100%; min-height:520px; display:flex; align-items:center; justify-content:center; position:relative; }
-    .modal-img{ width:100%; height:100%; object-fit:contain; display:block; user-select:none; -webkit-user-drag:none; background:#111; cursor:zoom-in; }
 
+    .modal-panel{
+      width:min(1100px, 96vw);
+      max-height:92vh;
+      background:#fff;
+      border-radius:18px;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      position:relative;
+    }
+
+    .modal-left{
+      background:#0b0b0b;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .slide-stage{
+      width:100%;
+      height:100%;
+      min-height:520px; /* ✅ 높이 고정(이미지별 흔들림 방지) */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    /* ✅ 모달 이미지: 항상 contain */
+    .modal-img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      user-select:none;
+      -webkit-user-drag:none;
+      background:#111;
+      cursor:zoom-in; /* 클릭 → 원본 뷰어 */
+    }
+
+    /* arrows */
     .nav-arrow{
-      position:absolute; top:50%; transform:translateY(-50%);
-      width:44px; height:44px; border-radius:999px;
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:44px;
+      height:44px;
+      border-radius:999px;
       border:1px solid rgba(255,255,255,.28);
-      background:rgba(0,0,0,.35); color:#fff; cursor:pointer;
-      display:flex; align-items:center; justify-content:center; font-size:18px;
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:18px;
       transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
       z-index:6;
     }
-    .nav-arrow:hover{ background:rgba(0,0,0,.55); border-color:rgba(255,255,255,.45); transform:translateY(-50%) translateY(-1px); }
-    .nav-prev{ left:16px; } .nav-next{ right:16px; }
+    .nav-arrow:hover{
+      background:rgba(0,0,0,.55);
+      border-color:rgba(255,255,255,.45);
+      transform:translateY(-50%) translateY(-1px);
+    }
+    .nav-prev{ left:16px; }
+    .nav-next{ right:16px; }
 
+    /* icon tabs */
+    .modal-tabs{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      display:flex;
+      gap:10px;
+      z-index:7;
+    }
     .ico{ width:18px; height:18px; display:block; }
 
-    .modal-tabs{ position:absolute; left:16px; bottom:16px; display:flex; gap:10px; z-index:7; }
-    .tab{
-      width:42px; height:42px; padding:0; border-radius:12px;
+    .modal-tabs .tab{
+      width:42px;
+      height:42px;
+      padding:0;
+      border-radius:12px;
       border:1px solid rgba(255,255,255,.26);
-      background:rgba(0,0,0,.28); color:rgba(255,255,255,.92);
-      cursor:pointer; display:flex; align-items:center; justify-content:center;
+      background:rgba(0,0,0,.28);
+      color:rgba(255,255,255,.92);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
     }
-    .tab:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.40); background:rgba(0,0,0,.38); }
-    .tab.active{ background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.58); color:#fff; }
+    .modal-tabs .tab:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,255,255,.40);
+      background:rgba(0,0,0,.38);
+    }
+    .modal-tabs .tab.active{
+      background:rgba(255,255,255,.16);
+      border-color:rgba(255,255,255,.58);
+      color:#fff;
+    }
 
-    .modal-original{ position:absolute; right:16px; bottom:16px; z-index:8; }
+    /* ✅ 원본보기 아이콘: 이미지 우하단 (다른 아이콘들과 분리) */
+    .modal-original{
+      position:absolute;
+      right:16px;
+      bottom:16px;
+      z-index:8;
+    }
     .modal-original .icon-btn{
-      width:42px; height:42px; border-radius:12px;
+      width:42px;
+      height:42px;
+      border-radius:12px;
       border:1px solid rgba(255,255,255,.26);
-      background:rgba(0,0,0,.28); color:rgba(255,255,255,.92);
-      cursor:pointer; display:flex; align-items:center; justify-content:center;
-      transition:transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+      background:rgba(0,0,0,.28);
+      color:rgba(255,255,255,.92);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
     }
-    .modal-original .icon-btn:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.40); background:rgba(0,0,0,.38); }
+    .modal-original .icon-btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,255,255,.40);
+      background:rgba(0,0,0,.38);
+    }
 
+    /* right spec */
     .modal-right{
-      padding:22px 22px 18px; border-left:1px solid var(--line);
-      overflow:auto; max-height:92vh;
-      display:flex; flex-direction:column; justify-content:center;
+      padding:22px 22px 18px;
+      border-left:1px solid var(--line);
+      overflow:auto;
+      max-height:92vh;
+
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
     }
-    .modal-right-inner{ transform:translateY(10px); }
+    .modal-right-inner{
+      transform: translateY(10px);
+    }
 
     .modal-close{
-      position:absolute; top:14px; right:14px; width:38px; height:38px;
-      border-radius:999px; border:1px solid rgba(0,0,0,.12); background:#fff;
-      cursor:pointer; font-size:18px; line-height:1; z-index:10;
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:38px;
+      height:38px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,.12);
+      background:#fff;
+      cursor:pointer;
+      font-size:18px;
+      line-height:1;
+      z-index:10;
       transition:transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
     }
-    .modal-close:hover{ transform:translateY(-1px); border-color:rgba(0,0,0,.22); background:rgba(0,0,0,.02); }
-
-    .spec-title{ margin:0 0 10px; font-size:18px; letter-spacing:.10em; }
-    .spec-sub{ margin:0 0 14px; font-size:12px; letter-spacing:.18em; color:var(--text-muted); }
-    .spec-table{ margin:0; padding:0; list-style:none; display:grid; gap:10px; font-size:13px; line-height:1.7; color:var(--text-sub); }
-    .spec-row{ display:grid; grid-template-columns:92px 1fr; gap:10px; padding-bottom:10px; border-bottom:1px solid var(--line); }
-    .spec-row:last-child{ border-bottom:0; padding-bottom:0; }
-    .k{ color:var(--text-muted); letter-spacing:.06em; }
-    .modal-disclaimer{ margin:16px 0 0; font-size:12px; line-height:1.7; color:var(--text-muted); }
-
-    .viewer{ position:fixed; inset:0; background:rgba(0,0,0,.86); display:none; align-items:center; justify-content:center; padding:18px; z-index:10050; }
-    .viewer.show{ display:flex; }
-    .viewer-inner{ position:relative; width:min(1400px,96vw); height:min(92vh,900px); display:flex; align-items:center; justify-content:center; }
-    .viewer-img{ max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block; user-select:none; -webkit-user-drag:none; cursor:grab; transform-origin:center center; }
-    .viewer-img:active{ cursor:grabbing; }
-    .viewer-close{
-      position:absolute; top:-10px; right:-10px; width:40px; height:40px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.25); background:rgba(0,0,0,.35);
-      color:#fff; cursor:pointer; font-size:20px; line-height:1;
-      display:flex; align-items:center; justify-content:center;
+    .modal-close:hover{
+      transform:translateY(-1px);
+      border-color:rgba(0,0,0,.22);
+      background:rgba(0,0,0,.02);
     }
-    .viewer-close:hover{ background:rgba(0,0,0,.55); border-color:rgba(255,255,255,.4); }
 
+    .spec-title{
+      margin:0 0 6px;
+      font-size:18px;
+      letter-spacing:.10em;
+    }
+    .spec-subtitle{
+      margin:0 0 12px;
+      font-size:13px;
+      color:var(--text-muted);
+      letter-spacing:.04em;
+    }
+
+    .bullet-list{
+      margin:0 0 14px;
+      padding-left:16px;
+      color:var(--text-sub);
+      font-size:13px;
+      line-height:1.75;
+    }
+    .bullet-list li{ margin:4px 0; }
+
+    .spec-table{
+      margin:10px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+      font-size:13px;
+      line-height:1.7;
+      color:var(--text-sub);
+    }
+    .spec-row{
+      display:grid;
+      grid-template-columns: 86px 1fr;
+      gap:10px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line);
+    }
+    .spec-row:last-child{ border-bottom:0; padding-bottom:0; }
+    .k{
+      color:var(--text-muted);
+      letter-spacing:.06em;
+    }
+
+    .modal-disclaimer{
+      margin:16px 0 0;
+      font-size:12px;
+      line-height:1.7;
+      color:var(--text-muted);
+    }
+
+    /* ===== ORIGINAL VIEWER (same window) ===== */
+    .viewer{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.86);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:10050;
+    }
+    .viewer.show{ display:flex; }
+
+    .viewer-inner{
+      position:relative;
+      width:min(1400px, 96vw);
+      height:min(92vh, 900px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .viewer-img{
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      display:block;
+      user-select:none;
+      -webkit-user-drag:none;
+      cursor:grab;
+      transform-origin:center center;
+    }
+    .viewer-img:active{ cursor:grabbing; }
+
+    .viewer-close{
+      position:absolute;
+      top:-10px;
+      right:-10px;
+      width:40px;
+      height:40px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      cursor:pointer;
+      font-size:20px;
+      line-height:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .viewer-close:hover{
+      background:rgba(0,0,0,.55);
+      border-color:rgba(255,255,255,.4);
+    }
+
+    .viewer-tip{
+      position:absolute;
+      left:50%;
+      bottom:-8px;
+      transform:translate(-50%, 100%);
+      font-size:12px;
+      color:rgba(255,255,255,.72);
+      letter-spacing:.08em;
+      white-space:nowrap;
+    }
+
+    /* responsive */
     @media(max-width:980px){
       .grid{ grid-template-columns:repeat(2, 1fr); }
       .page-hero .wrap{ flex-direction:column; align-items:flex-start; }
       .modal-panel{ grid-template-columns:1fr; }
-      .modal-right{ border-left:0; border-top:1px solid var(--line); justify-content:flex-start; }
+      .modal-right{
+        border-left:0;
+        border-top:1px solid var(--line);
+        justify-content:flex-start;
+      }
       .modal-right-inner{ transform:none; }
       .slide-stage{ min-height:420px; }
     }
     @media(max-width:640px){
       .grid{ grid-template-columns:1fr; }
       .slide-stage{ min-height:360px; }
+      .viewer-tip{ display:none; }
+      .filter-label{ min-width:64px; }
     }
   </style>
 </head>
@@ -235,65 +576,50 @@
   <main class="section">
     <div class="wrap">
 
-      <div class="filters">
-        <div class="filter-row" id="cat1Row"></div>
-        <div class="filter-row" id="cat2Row"></div>
+      <!-- ✅ 대분류/소분류 필터 -->
+      <div class="filter" aria-label="Faucet category filter">
+        <div class="filter-row">
+          <div class="filter-label">대분류</div>
+          <button type="button" class="filter-btn active" data-major="all">ALL</button>
+          <button type="button" class="filter-btn" data-major="세면기">세면기</button>
+          <button type="button" class="filter-btn" data-major="수전금구">수전금구</button>
+        </div>
+
+        <div class="filter-row" id="subFilterRow">
+          <div class="filter-label">소분류</div>
+          <!-- JS가 대분류에 맞게 소분류 버튼을 생성 -->
+        </div>
       </div>
 
-      <div class="grid">
+      <!-- ✅ GRID -->
+      <div class="grid" id="productGrid">
 
-        <!-- ✅ 샘플 1: 수전금구 > 세면수전 -->
+        <!-- =========================
+             ✅ 샘플 1개: PL-L6012K
+             경로:
+             product/faucet/세면수전/PL-L6012K.png
+             product/faucet/세면수전/PL-L6012K_do.jpg
+             ========================= -->
         <article class="card"
-          data-cat1="수전금구"
-          data-cat2="세면수전"
-          data-name="F-3021"
-          data-img1="product/faucet/F-3021/F-3021.jpg"
-          data-img2="product/faucet/F-3021/F-3021_도면.jpg">
+          data-major="수전금구"
+          data-sub="세면수전"
+          data-name="PL-L6012K"
+          data-subtitle="BK 전용"
+          data-bullets="세면수전"
+          data-code="PL-L6012K"
+          data-img="product/faucet/세면수전/PL-L6012K.png"
+          data-dwg="product/faucet/세면수전/PL-L6012K_do.jpg"
+          aria-label="PL-L6012K 상세 보기">
 
           <div class="thumb">
             <span class="badge">FAUCET</span>
-            <img src="product/faucet/F-3021/F-3021.jpg" alt="F-3021">
+            <img src="product/faucet/세면수전/PL-L6012K.png" alt="PL-L6012K 제품 이미지">
           </div>
 
           <div class="mini">
-            <h3 class="name">F-3021</h3>
-            <p class="meta"><span>구분</span>수전금구 · 세면수전</p>
-            <p class="meta"><span>마감</span>CHROME</p>
+            <h3 class="name">PL-L6012K</h3>
+            <p class="meta"><span>카테고리</span>세면수전</p>
           </div>
-
-          <ul class="spec-data" hidden>
-            <li data-k="구분">수전금구</li>
-            <li data-k="타입">세면수전</li>
-            <li data-k="마감">CHROME</li>
-            <li data-k="비고">도면 기준 설치 홀/센터 확인</li>
-          </ul>
-        </article>
-
-        <!-- ✅ 샘플 2: 수전금구 > 주방수전 -->
-        <article class="card"
-          data-cat1="수전금구"
-          data-cat2="주방수전"
-          data-name="K-1100"
-          data-img1="product/faucet/K-1100/K-1100.jpg"
-          data-img2="product/faucet/K-1100/K-1100_도면.jpg">
-
-          <div class="thumb">
-            <span class="badge">FAUCET</span>
-            <img src="product/faucet/K-1100/K-1100.jpg" alt="K-1100">
-          </div>
-
-          <div class="mini">
-            <h3 class="name">K-1100</h3>
-            <p class="meta"><span>구분</span>수전금구 · 주방수전</p>
-            <p class="meta"><span>마감</span>STAINLESS</p>
-          </div>
-
-          <ul class="spec-data" hidden>
-            <li data-k="구분">수전금구</li>
-            <li data-k="타입">주방수전</li>
-            <li data-k="마감">STAINLESS</li>
-            <li data-k="비고">헤드 타입/토출 높이 도면 확인</li>
-          </ul>
         </article>
 
       </div>
@@ -301,37 +627,44 @@
       <p class="page-disclaimer">
         * 상품 이미지는 실제 제품과 차이가 있을 수 있으며, 제조사 사정에 따라 디자인 모양이나 색상이 다를 수 있습니다.
       </p>
+
     </div>
   </main>
 
-  <!-- MODAL -->
+  <!-- ✅ MODAL -->
   <div class="modal" id="modal" aria-hidden="true">
     <div class="modal-panel" role="dialog" aria-modal="true" aria-label="제품 상세">
       <button class="modal-close" id="modalClose" type="button" aria-label="닫기">×</button>
 
+      <!-- LEFT -->
       <div class="modal-left">
         <div class="slide-stage">
           <button class="nav-arrow nav-prev" id="prevBtn" type="button" aria-label="이전 이미지">‹</button>
           <img class="modal-img" id="modalImg" src="" alt="">
           <button class="nav-arrow nav-next" id="nextBtn" type="button" aria-label="다음 이미지">›</button>
 
-          <div class="modal-tabs" id="modalTabs">
-            <button class="tab active" type="button" data-kind="img1" aria-label="제품 사진">
+          <!-- tabs: IMG / DWG -->
+          <div class="modal-tabs" id="modalTabs" aria-label="이미지 타입 선택">
+            <!-- 제품 이미지 -->
+            <button class="tab active" type="button" data-kind="img" aria-label="제품 이미지">
               <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
                 <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.6"/>
                 <path d="M7 14l3-3 3 3 2-2 2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M9 9.2h.01" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
               </svg>
             </button>
-            <button class="tab" type="button" data-kind="img2" aria-label="도면">
+
+            <!-- 도면 -->
+            <button class="tab" type="button" data-kind="dwg" aria-label="도면 이미지">
               <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
-                <path d="M6 3h9l3 3v15H6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M7 3h8l2 2v16H7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
                 <path d="M15 3v3h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-                <path d="M8 10h8M8 13h8M8 16h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M9 11h6M9 14h6M9 17h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
               </svg>
             </button>
           </div>
 
+          <!-- 원본 보기 -->
           <div class="modal-original">
             <button type="button" class="icon-btn" id="openOriginalBtn" aria-label="원본 보기">
               <svg viewBox="0 0 24 24" class="ico" aria-hidden="true">
@@ -345,11 +678,19 @@
         </div>
       </div>
 
+      <!-- RIGHT -->
       <aside class="modal-right">
         <div class="modal-right-inner">
           <h3 class="spec-title" id="specTitle">-</h3>
-          <p class="spec-sub" id="specSub">-</p>
-          <ul class="spec-table" id="specTable"></ul>
+          <p class="spec-subtitle" id="specSubtitle" style="display:none;">-</p>
+
+          <ul class="bullet-list" id="bulletList" style="display:none;"></ul>
+
+          <ul class="spec-table">
+            <li class="spec-row"><div class="k">품번</div><div id="specCode">-</div></li>
+            <li class="spec-row"><div class="k">분류</div><div id="specCat">-</div></li>
+          </ul>
+
           <p class="modal-disclaimer">
             * 상품 이미지는 실제 제품과 차이가 있을 수 있으며, 제조사 사정에 따라 디자인 모양이나 색상이 다를 수 있습니다.
           </p>
@@ -358,131 +699,139 @@
     </div>
   </div>
 
-  <!-- VIEWER -->
+  <!-- ✅ ORIGINAL VIEWER -->
   <div class="viewer" id="viewer" aria-hidden="true">
     <div class="viewer-inner" role="dialog" aria-modal="true" aria-label="원본 이미지 보기">
       <button class="viewer-close" id="viewerClose" type="button" aria-label="닫기">×</button>
       <img class="viewer-img" id="viewerImg" src="" alt="">
+      <div class="viewer-tip">휠: 확대/축소 · 드래그: 이동 · ESC: 닫기</div>
     </div>
   </div>
 
   <script>
     (function(){
-      /* 우클릭 / 이미지 드래그 방지 */
+      /* =====================
+         우클릭 / 드래그 저장 방지
+         ===================== */
       document.addEventListener('contextmenu', (e) => e.preventDefault());
       document.addEventListener('dragstart', (e) => {
         if (e.target && e.target.tagName === 'IMG') e.preventDefault();
       });
 
-      /* 카테고리 정의 (FAUCET) */
-      const CATS = {
+      /* =====================
+         카테고리 정의 (대분류/소분류)
+         ===================== */
+      const SUBCATS = {
         "세면기": ["하부장형","카운터형","평면붙임형"],
         "수전금구": ["세면수전","샤워수전","레인샤워","주방수전","센서수전","다용도수전","샤워·주방헤드","슬라이드바","수전부속류"]
       };
 
-      const cat1Row = document.getElementById('cat1Row');
-      const cat2Row = document.getElementById('cat2Row');
+      const majorButtons = Array.from(document.querySelectorAll('.filter-btn[data-major]'));
+      const subRow = document.getElementById('subFilterRow');
       const cards = Array.from(document.querySelectorAll('.card'));
 
-      let selectedCat1 = 'ALL';
-      let selectedCat2 = 'ALL';
+      let activeMajor = 'all';
+      let activeSub = 'all';
 
-      function makeBtn(text, value, group){
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'filter-btn';
-        b.textContent = text;
-        b.dataset.value = value;
-        b.dataset.group = group;
-        return b;
-      }
+      function renderSubButtons(){
+        // 기존 소분류 버튼 제거(라벨은 유지)
+        const keep = subRow.querySelector('.filter-label');
+        subRow.innerHTML = '';
+        subRow.appendChild(keep);
 
-      function renderCat1(){
-        cat1Row.innerHTML = '';
-        const all = makeBtn('ALL','ALL','cat1');
-        all.classList.add('active');
-        cat1Row.appendChild(all);
+        // ALL 소분류 버튼
+        const allBtn = document.createElement('button');
+        allBtn.type = 'button';
+        allBtn.className = 'filter-btn active';
+        allBtn.dataset.sub = 'all';
+        allBtn.textContent = 'ALL';
+        subRow.appendChild(allBtn);
 
-        Object.keys(CATS).forEach(k=>{
-          cat1Row.appendChild(makeBtn(k,k,'cat1'));
-        });
-      }
+        if(activeMajor === 'all'){
+          // all이면 소분류는 의미 없으니 ALL만
+          return;
+        }
 
-      function renderCat2(cat1){
-        cat2Row.innerHTML = '';
-        const all = makeBtn('ALL','ALL','cat2');
-        all.classList.add('active');
-        cat2Row.appendChild(all);
-
-        if(cat1 === 'ALL') return;
-        (CATS[cat1] || []).forEach(v=>{
-          cat2Row.appendChild(makeBtn(v,v,'cat2'));
+        (SUBCATS[activeMajor] || []).forEach(name=>{
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'filter-btn';
+          btn.dataset.sub = name;
+          btn.textContent = name;
+          subRow.appendChild(btn);
         });
       }
 
       function applyFilter(){
         cards.forEach(card=>{
-          const c1 = card.dataset.cat1 || '';
-          const c2 = card.dataset.cat2 || '';
-          const ok1 = (selectedCat1 === 'ALL') || (c1 === selectedCat1);
-          const ok2 = (selectedCat2 === 'ALL') || (c2 === selectedCat2);
-          card.style.display = (ok1 && ok2) ? '' : 'none';
+          const m = card.dataset.major || '';
+          const s = card.dataset.sub || '';
+          const showMajor = (activeMajor === 'all') || (m === activeMajor);
+          const showSub = (activeSub === 'all') || (s === activeSub);
+          card.style.display = (showMajor && showSub) ? '' : 'none';
         });
       }
 
-      function setActive(rowEl, value){
-        rowEl.querySelectorAll('.filter-btn').forEach(b=>{
-          b.classList.toggle('active', b.dataset.value === value);
+      // 대분류 클릭
+      majorButtons.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          majorButtons.forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+
+          activeMajor = btn.dataset.major;
+          activeSub = 'all';
+
+          renderSubButtons();
+          hookSubButtons();
+          applyFilter();
+        });
+      });
+
+      function hookSubButtons(){
+        const subs = Array.from(subRow.querySelectorAll('.filter-btn[data-sub]'));
+        subs.forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            subs.forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            activeSub = btn.dataset.sub;
+            applyFilter();
+          });
         });
       }
 
-      renderCat1();
-      renderCat2('ALL');
+      // 초기
+      renderSubButtons();
+      hookSubButtons();
       applyFilter();
 
-      cat1Row.addEventListener('click', (e)=>{
-        const btn = e.target.closest('.filter-btn');
-        if(!btn) return;
-
-        selectedCat1 = btn.dataset.value;
-        selectedCat2 = 'ALL';
-
-        setActive(cat1Row, selectedCat1);
-        renderCat2(selectedCat1);
-        applyFilter();
-      });
-
-      cat2Row.addEventListener('click', (e)=>{
-        const btn = e.target.closest('.filter-btn');
-        if(!btn) return;
-
-        selectedCat2 = btn.dataset.value;
-        setActive(cat2Row, selectedCat2);
-        applyFilter();
-      });
-
-      /* ===== MODAL ===== */
+      /* =====================
+         MODAL / VIEWER
+         ===================== */
       const modal = document.getElementById('modal');
       const modalClose = document.getElementById('modalClose');
       const modalImg = document.getElementById('modalImg');
-      const openOriginalBtn = document.getElementById('openOriginalBtn');
 
       const specTitle = document.getElementById('specTitle');
-      const specSub = document.getElementById('specSub');
-      const specTable = document.getElementById('specTable');
+      const specSubtitle = document.getElementById('specSubtitle');
+      const specCode = document.getElementById('specCode');
+      const specCat = document.getElementById('specCat');
+      const bulletList = document.getElementById('bulletList');
 
-      const tabs = Array.from(document.querySelectorAll('#modalTabs .tab'));
+      const tabsWrap = document.getElementById('modalTabs');
+      const tabs = Array.from(tabsWrap.querySelectorAll('.tab'));
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
+      const openOriginalBtn = document.getElementById('openOriginalBtn');
 
       // viewer
       const viewer = document.getElementById('viewer');
       const viewerImg = document.getElementById('viewerImg');
       const viewerClose = document.getElementById('viewerClose');
 
-      let sources = { img1:'', img2:'' };
-      const order = ['img1','img2'];
-      let currentKind = 'img1';
+      // sources
+      let sources = { img:'', dwg:'' };
+      const order = ['img','dwg'];
+      let currentKind = 'img';
 
       function setActiveTab(kind){
         tabs.forEach(t => t.classList.toggle('active', t.dataset.kind === kind));
@@ -493,7 +842,7 @@
         if(!src) return;
         currentKind = kind;
         modalImg.src = src;
-        modalImg.alt = `${specTitle.textContent} ${kind === 'img1' ? '제품사진' : '도면'}`;
+        modalImg.alt = `${specTitle.textContent} ${kind === 'img' ? '이미지' : '도면'}`;
         setActiveTab(kind);
       }
 
@@ -503,31 +852,40 @@
         show(order[nextIdx]);
       }
 
-      function fillSpecFromCard(card){
-        specTitle.textContent = card.dataset.name || '-';
-        specSub.textContent = `${card.dataset.cat1 || '-'} · ${card.dataset.cat2 || '-'}`;
-
-        specTable.innerHTML = '';
-        const list = card.querySelector('.spec-data');
-        if(!list) return;
-
-        list.querySelectorAll('li').forEach(li=>{
-          const k = li.dataset.k || '';
-          const v = li.textContent || '';
-          const row = document.createElement('li');
-          row.className = 'spec-row';
-          row.innerHTML = `<div class="k">${k}</div><div>${v}</div>`;
-          specTable.appendChild(row);
-        });
-      }
-
       function openFromCard(card){
+        // 제목/서브
+        specTitle.textContent = card.dataset.name || '-';
+        const subtitle = (card.dataset.subtitle || '').trim();
+        if(subtitle){
+          specSubtitle.style.display = '';
+          specSubtitle.textContent = subtitle;
+        } else {
+          specSubtitle.style.display = 'none';
+          specSubtitle.textContent = '';
+        }
+
+        // 불릿
+        const bullets = (card.dataset.bullets || '').split(',').map(s=>s.trim()).filter(Boolean);
+        if(bullets.length){
+          bulletList.style.display = '';
+          bulletList.innerHTML = bullets.map(t=>`<li>${t}</li>`).join('');
+        } else {
+          bulletList.style.display = 'none';
+          bulletList.innerHTML = '';
+        }
+
+        // 추가정보
+        specCode.textContent = card.dataset.code || '-';
+        specCat.textContent = `${card.dataset.major || '-'} · ${card.dataset.sub || '-'}`;
+
+        // 이미지 소스
         sources = {
-          img1: card.dataset.img1 || '',
-          img2: card.dataset.img2 || ''
+          img: card.dataset.img || '',
+          dwg: card.dataset.dwg || ''
         };
-        fillSpecFromCard(card);
-        show('img1');
+
+        // 기본은 img
+        show('img');
 
         modal.classList.add('show');
         modal.setAttribute('aria-hidden','false');
@@ -541,29 +899,39 @@
         if(!viewer.classList.contains('show')) document.body.style.overflow = '';
       }
 
+      // 카드 클릭 → 모달
       document.querySelectorAll('.card').forEach(card=>{
         card.addEventListener('click', ()=> openFromCard(card));
       });
 
+      // 탭
       tabs.forEach(tab=>{
         tab.addEventListener('click', ()=> show(tab.dataset.kind));
       });
 
+      // arrows
       prevBtn.addEventListener('click', ()=> next(-1));
       nextBtn.addEventListener('click', ()=> next(+1));
 
+      // 닫기
       modalClose.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+      modal.addEventListener('click', (e)=>{
+        if(e.target === modal) closeModal();
+      });
 
-      /* ===== VIEWER ===== */
-      let vScale = 1, vX = 0, vY = 0;
-      let dragging = false, startX = 0, startY = 0;
+      /* ===== Original Viewer (fit + wheel zoom + drag pan) ===== */
+      let vScale = 1;
+      let vX = 0, vY = 0;
+      let dragging = false;
+      let startX = 0, startY = 0;
 
       function applyViewerTransform(){
         viewerImg.style.transform = `translate(${vX}px, ${vY}px) scale(${vScale})`;
       }
       function resetViewer(){
-        vScale = 1; vX = 0; vY = 0;
+        vScale = 1;
+        vX = 0;
+        vY = 0;
         applyViewerTransform();
       }
       function openViewer(src, alt){
@@ -571,6 +939,7 @@
         viewerImg.src = src;
         viewerImg.alt = alt || '';
         resetViewer();
+
         viewer.classList.add('show');
         viewer.setAttribute('aria-hidden','false');
         document.body.style.overflow = 'hidden';
@@ -583,22 +952,37 @@
         if(!modal.classList.contains('show')) document.body.style.overflow = '';
       }
 
-      modalImg.addEventListener('click', ()=> openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt));
-      openOriginalBtn.addEventListener('click', ()=> openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt));
+      // 모달 이미지 클릭 → 원본 뷰어
+      modalImg.addEventListener('click', ()=>{
+        openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
+      });
 
+      // 원본 보기 버튼
+      openOriginalBtn.addEventListener('click', ()=>{
+        openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
+      });
+
+      // viewer 닫기
       viewerClose.addEventListener('click', closeViewer);
-      viewer.addEventListener('click', (e)=>{ if(e.target === viewer) closeViewer(); });
+      viewer.addEventListener('click', (e)=>{
+        if(e.target === viewer) closeViewer();
+      });
 
+      // wheel zoom
       viewer.addEventListener('wheel', (e)=>{
         if(!viewer.classList.contains('show')) return;
         e.preventDefault();
-        const step = (-e.deltaY) > 0 ? 0.12 : -0.12;
+
+        const delta = -e.deltaY;
+        const step = delta > 0 ? 0.12 : -0.12;
         const nextScale = Math.min(6, Math.max(1, vScale + step));
         if(nextScale === vScale) return;
+
         vScale = nextScale;
         applyViewerTransform();
       }, { passive:false });
 
+      // drag pan
       viewerImg.addEventListener('pointerdown', (e)=>{
         if(!viewer.classList.contains('show')) return;
         dragging = true;
@@ -613,15 +997,23 @@
         vY = e.clientY - startY;
         applyViewerTransform();
       });
-      viewerImg.addEventListener('pointerup', ()=> dragging = false);
-      viewerImg.addEventListener('pointercancel', ()=> dragging = false);
+      viewerImg.addEventListener('pointerup', ()=>{ dragging = false; });
+      viewerImg.addEventListener('pointercancel', ()=>{ dragging = false; });
 
+      // keyboard
       window.addEventListener('keydown', (e)=>{
-        if(e.key === 'Escape' && viewer.classList.contains('show')) return closeViewer();
-        if(e.key === 'Escape' && modal.classList.contains('show')) return closeModal();
-        if(!modal.classList.contains('show')) return;
-        if(e.key === 'ArrowLeft') next(-1);
-        if(e.key === 'ArrowRight') next(+1);
+        if(e.key === 'Escape' && viewer.classList.contains('show')){
+          closeViewer();
+          return;
+        }
+        if(e.key === 'Escape' && modal.classList.contains('show')){
+          closeModal();
+          return;
+        }
+        if(modal.classList.contains('show')){
+          if(e.key === 'ArrowLeft') next(-1);
+          if(e.key === 'ArrowRight') next(+1);
+        }
       });
     })();
   </script>
