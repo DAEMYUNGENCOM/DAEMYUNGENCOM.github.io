@@ -108,34 +108,53 @@
     }
 
     /* SECTION */
-    .section{ padding:70px 20px 110px; }
+    .section{ padding:60px 20px 110px; }
     .wrap{ max-width:1200px; margin:0 auto; }
 
-    /* (선택) 카테고리 필터 자리 - 다음 단계에서 JS로 필터링 가능 */
-    .category-bar{
+    /* ===== 2단 카테고리 ===== */
+    .filter{
+      background:#fff;
+      border:1px solid rgba(17,17,17,.10);
+      padding:16px 16px 14px;
+      margin:0 0 22px;
+    }
+    .filter-row{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin:0 0 22px;
+      align-items:center;
     }
-    .cat-btn{
+    .filter-label{
+      font-size:12px;
+      letter-spacing:.18em;
+      color:var(--text-muted);
+      margin-right:6px;
+      white-space:nowrap;
+    }
+    .pill{
       height:36px;
       padding:0 14px;
+      border-radius:999px;
       border:1px solid rgba(17,17,17,.16);
       background:#fff;
       cursor:pointer;
       font-size:12px;
-      letter-spacing:.12em;
+      letter-spacing:.10em;
       transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
     }
-    .cat-btn:hover{
+    .pill:hover{
       transform:translateY(-1px);
       border-color:rgba(17,17,17,.28);
       background:rgba(17,17,17,.03);
     }
-    .cat-btn.active{
-      border-color:rgba(17,17,17,.38);
+    .pill.active{
+      border-color:rgba(17,17,17,.40);
       background:rgba(17,17,17,.06);
+    }
+    .filter-divider{
+      height:1px;
+      background:rgba(17,17,17,.08);
+      margin:12px 0;
     }
 
     /* GRID */
@@ -145,7 +164,7 @@
       gap:28px;
     }
 
-    /* ============ SANITARY CARD ============ */
+    /* CARD */
     .s-card{
       background:#fff;
       border:1px solid rgba(17,17,17,.10);
@@ -182,7 +201,7 @@
       color:var(--text-muted);
     }
 
-    /* ============ MODAL ============ */
+    /* ===== MODAL ===== */
     .s-modal{
       position:fixed; inset:0;
       background:rgba(0,0,0,.72);
@@ -196,7 +215,7 @@
 
     .s-modal-panel{
       width:min(1100px, 96vw);
-      height:min(680px, 92vh); /* ✅ 높이 고정: 이미지 종류 바뀌어도 레이아웃 흔들림 최소 */
+      height:min(680px, 92vh);
       background:#fff;
       border-radius:18px;
       overflow:hidden;
@@ -233,9 +252,9 @@
       display:block;
       user-select:none;
       -webkit-user-drag:none;
+      cursor: zoom-in; /* ✅ 클릭하면 원본 뷰어 */
     }
 
-    /* Icon tabs */
     .s-tabs{
       position:absolute;
       left:16px;
@@ -244,6 +263,7 @@
       gap:10px;
       z-index:5;
     }
+
     .s-ico{ width:18px; height:18px; display:block; }
 
     .s-tab{
@@ -269,13 +289,38 @@
       color:#fff;
     }
 
+    /* ✅ 원본보기 아이콘: 이미지 우하단 */
+    .s-original{
+      position:absolute;
+      right:16px;
+      bottom:16px;
+      z-index:6;
+    }
+    .s-icon-btn{
+      width:42px; height:42px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.26);
+      background:rgba(0,0,0,.28);
+      color:rgba(255,255,255,.92);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .2s var(--ease), background .2s, border-color .2s;
+    }
+    .s-icon-btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,255,255,.40);
+      background:rgba(0,0,0,.38);
+    }
+
     /* RIGHT */
     .s-right{
       padding:26px 26px 20px;
       overflow:auto;
       display:flex;
       flex-direction:column;
-      justify-content:center; /* ✅ 가운데 정렬 느낌 */
+      justify-content:center;
     }
     .s-title{
       margin:0 0 8px;
@@ -289,7 +334,6 @@
       letter-spacing:.04em;
     }
 
-    /* Features bullet UI */
     .s-features{
       list-style:none;
       padding:0;
@@ -321,7 +365,6 @@
       margin:18px 0 14px;
     }
 
-    /* Spec list (dl) */
     .s-spec{
       display:grid;
       grid-template-columns: 86px 1fr;
@@ -347,6 +390,74 @@
       color:#888;
     }
 
+    /* ===== ORIGINAL VIEWER (same window) ===== */
+    .viewer{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.86);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:10050; /* modal보다 위 */
+    }
+    .viewer.show{ display:flex; }
+
+    .viewer-inner{
+      position:relative;
+      width:min(1400px, 96vw);
+      height:min(92vh, 900px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .viewer-img{
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      display:block;
+      user-select:none;
+      -webkit-user-drag:none;
+      cursor:grab;
+      transform-origin:center center;
+    }
+    .viewer-img:active{ cursor:grabbing; }
+
+    .viewer-close{
+      position:absolute;
+      top:-10px;
+      right:-10px;
+      width:40px;
+      height:40px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      cursor:pointer;
+      font-size:20px;
+      line-height:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .viewer-close:hover{
+      background:rgba(0,0,0,.55);
+      border-color:rgba(255,255,255,.4);
+    }
+
+    .viewer-tip{
+      position:absolute;
+      left:50%;
+      bottom:-8px;
+      transform:translate(-50%, 100%);
+      font-size:12px;
+      color:rgba(255,255,255,.72);
+      letter-spacing:.08em;
+      white-space:nowrap;
+    }
+
     /* responsive */
     @media(max-width:980px){
       .grid{ grid-template-columns:repeat(2, 1fr); }
@@ -357,12 +468,12 @@
     }
     @media(max-width:640px){
       .grid{ grid-template-columns:1fr; }
+      .viewer-tip{ display:none; }
     }
   </style>
 </head>
 
 <body>
-  <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="index.html">
@@ -376,7 +487,6 @@
     </div>
   </nav>
 
-  <!-- PAGE HERO -->
   <header class="page-hero">
     <div class="wrap">
       <div>
@@ -393,25 +503,39 @@
   <main class="section">
     <div class="wrap">
 
-      <!-- (선택) 카테고리 버튼: 지금은 UI만, 다음 단계에서 필터 기능 붙이면 됨 -->
-      <div class="category-bar" aria-label="Sanitary category filter">
-        <button type="button" class="cat-btn active" data-cat="all">ALL</button>
-        <button type="button" class="cat-btn" data-cat="양변기벽배수형">양변기 · 벽배수형</button>
-        <button type="button" class="cat-btn" data-cat="양변기원피스형">양변기 · 원피스형</button>
-        <button type="button" class="cat-btn" data-cat="양변기투피스형">양변기 · 투피스형</button>
-        <button type="button" class="cat-btn" data-cat="양변기플러쉬밸브형">양변기 · 플러쉬밸브형</button>
-        <!-- 필요하면 더 추가 -->
+      <!-- =========================
+           ✅ 대분류 / 소분류 (2단)
+           ========================= -->
+      <div class="filter" aria-label="Sanitary filter">
+        <div class="filter-row" id="majorRow">
+          <span class="filter-label">MAJOR</span>
+          <button type="button" class="pill active" data-major="all">ALL</button>
+          <button type="button" class="pill" data-major="양변기">양변기</button>
+          <button type="button" class="pill" data-major="소변기">소변기</button>
+          <button type="button" class="pill" data-major="일체형비데">일체형비데</button>
+          <button type="button" class="pill" data-major="비데/시트">비데/시트</button>
+        </div>
+
+        <div class="filter-divider"></div>
+
+        <div class="filter-row" id="minorRow">
+          <span class="filter-label">MINOR</span>
+          <!-- JS가 자동으로 채움 -->
+        </div>
       </div>
 
-      <!-- GRID -->
-      <div class="grid">
+      <!-- =========================
+           ✅ 제품 GRID
+           제품 추가는 s-card만 복붙
+           data-major / data-minor 필수
+           ========================= -->
+      <div class="grid" id="cardGrid">
 
-        <!-- =========================
-             [샘플 제품] DST-830P/831P
-             ✅ 앞으로 제품 추가는 이 블록을 "복사/붙여넣기" 하면서 data-*만 바꾸면 됨
-             ========================= -->
+        <!-- [샘플] DST-830P/831P (양변기 > 벽배수형) -->
         <article class="s-card"
-          data-category="양변기벽배수형"
+          data-major="양변기"
+          data-minor="벽배수형"
+
           data-name="DST-830P / 831P"
           data-sub="벽배수형, 바닥안착형"
 
@@ -432,7 +556,7 @@
 
           <div class="s-mini">
             <h3 class="s-name">DST-830P / 831P</h3>
-            <p class="s-sub">벽배수형, 바닥안착형</p>
+            <p class="s-sub">양변기 · 벽배수형</p>
           </div>
         </article>
 
@@ -448,17 +572,18 @@
   </main>
 
   <!-- =========================
-       MODAL (페이지에 1번만)
+       MODAL
        ========================= -->
   <div class="s-modal" id="sModal" aria-hidden="true">
     <div class="s-modal-panel" role="dialog" aria-modal="true" aria-label="SANITARY 제품 상세">
       <button class="s-close" id="sModalClose" type="button" aria-label="닫기">×</button>
 
-      <!-- LEFT: 이미지 -->
+      <!-- LEFT -->
       <div class="s-left">
         <div class="s-stage">
           <img class="s-modal-img" id="sModalImg" src="" alt="">
 
+          <!-- tabs -->
           <div class="s-tabs" role="tablist" aria-label="이미지 전환">
             <button class="s-tab active" type="button" data-kind="img" aria-label="제품 사진">
               <svg viewBox="0 0 24 24" class="s-ico" aria-hidden="true">
@@ -474,10 +599,21 @@
               </svg>
             </button>
           </div>
+
+          <!-- original -->
+          <div class="s-original">
+            <button type="button" class="s-icon-btn" id="openOriginalBtn" aria-label="원본 보기">
+              <svg viewBox="0 0 24 24" class="s-ico" aria-hidden="true">
+                <path d="M9 5H5v4M15 5h4v4M9 19H5v-4M15 19h4v-4"
+                  fill="none" stroke="currentColor" stroke-width="1.6"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- RIGHT: 텍스트/스펙 -->
+      <!-- RIGHT -->
       <aside class="s-right">
         <h3 class="s-title" id="sTitle">-</h3>
         <p class="s-subtitle" id="sSubtitle">-</p>
@@ -495,19 +631,103 @@
     </div>
   </div>
 
+  <!-- =========================
+       ORIGINAL VIEWER (same window)
+       ========================= -->
+  <div class="viewer" id="viewer" aria-hidden="true">
+    <div class="viewer-inner" role="dialog" aria-modal="true" aria-label="원본 이미지 보기">
+      <button class="viewer-close" id="viewerClose" type="button" aria-label="닫기">×</button>
+      <img class="viewer-img" id="viewerImg" src="" alt="">
+      <div class="viewer-tip">휠: 확대/축소 · 드래그: 이동 · ESC: 닫기</div>
+    </div>
+  </div>
+
   <script>
   (function(){
     /* =====================
-       우클릭 / 이미지 드래그 방지
+       우클릭 / 드래그 저장 방지
        ===================== */
     document.addEventListener('contextmenu', (e) => e.preventDefault());
     document.addEventListener('dragstart', (e) => {
       if (e.target && e.target.tagName === 'IMG') e.preventDefault();
     });
 
+    /* =====================
+       2단 카테고리 데이터
+       ===================== */
+    const minorsMap = {
+      "all": ["all"],
+      "양변기": ["all","벽배수형","원피스형","투피스형","플러쉬밸브형"],
+      "소변기": ["all","벽걸이형","바닥형","수채"],
+      "일체형비데": ["all","일체형"],
+      "비데/시트": ["all","비데","시트"]
+    };
+
+    const majorButtons = Array.from(document.querySelectorAll('#majorRow .pill'));
+    const minorRow = document.getElementById('minorRow');
+    const cards = Array.from(document.querySelectorAll('.s-card'));
+
+    let currentMajor = 'all';
+    let currentMinor = 'all';
+
+    function renderMinorButtons(major){
+      // 기존 minor 버튼 제거
+      minorRow.querySelectorAll('button.pill').forEach(b => b.remove());
+
+      const minors = minorsMap[major] || ["all"];
+      minors.forEach((m, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'pill' + (idx===0 ? ' active' : '');
+        btn.dataset.minor = m;
+        btn.textContent = (m === 'all') ? 'ALL' : m;
+        btn.addEventListener('click', () => {
+          minorRow.querySelectorAll('button.pill').forEach(x=>x.classList.remove('active'));
+          btn.classList.add('active');
+          currentMinor = m;
+          applyFilter();
+        });
+        minorRow.appendChild(btn);
+      });
+
+      currentMinor = 'all';
+    }
+
+    function applyFilter(){
+      cards.forEach(card=>{
+        const m = card.dataset.major || '';
+        const s = card.dataset.minor || '';
+
+        const majorOk = (currentMajor === 'all') || (m === currentMajor);
+        const minorOk = (currentMinor === 'all') || (s === currentMinor);
+
+        card.style.display = (majorOk && minorOk) ? '' : 'none';
+      });
+    }
+
+    // major 클릭
+    majorButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        majorButtons.forEach(x=>x.classList.remove('active'));
+        btn.classList.add('active');
+
+        currentMajor = btn.dataset.major;
+        renderMinorButtons(currentMajor);
+        applyFilter();
+      });
+    });
+
+    // 초기 minor 렌더
+    renderMinorButtons('all');
+    applyFilter();
+
+    /* =====================
+       MODAL
+       ===================== */
     const modal = document.getElementById('sModal');
     const closeBtn = document.getElementById('sModalClose');
     const modalImg = document.getElementById('sModalImg');
+    const openOriginalBtn = document.getElementById('openOriginalBtn');
 
     const titleEl = document.getElementById('sTitle');
     const subEl = document.getElementById('sSubtitle');
@@ -533,17 +753,15 @@
     }
 
     function openModalFromCard(card){
-      // 제목/부제
       titleEl.textContent = card.dataset.name || '-';
-      subEl.textContent = card.dataset.sub || '';
+      subEl.textContent = `${card.dataset.major || ''} · ${card.dataset.minor || ''}`;
 
-      // 이미지
       current = {
         img: card.dataset.img || '',
         dwg: card.dataset.dwg || ''
       };
 
-      // 특징 불릿: "A|B|C"
+      // features (A|B|C)
       featuresEl.innerHTML = '';
       const feats = (card.dataset.features || '')
         .split('|')
@@ -556,7 +774,7 @@
         featuresEl.appendChild(li);
       });
 
-      // 추가정보: dt/dd 자동 생성 (빈 값은 자동 제외)
+      // spec (빈 값 제외)
       const items = [
         ['품번', card.dataset.model],
         ['사이즈', card.dataset.size],
@@ -572,10 +790,8 @@
         specEl.appendChild(dd);
       });
 
-      // 기본은 제품 이미지
       show('img');
 
-      // 오픈
       modal.classList.add('show');
       modal.setAttribute('aria-hidden','false');
       document.body.style.overflow = 'hidden';
@@ -585,7 +801,8 @@
       modal.classList.remove('show');
       modal.setAttribute('aria-hidden','true');
       modalImg.src = '';
-      document.body.style.overflow = '';
+      // viewer가 열려있으면 overflow 유지
+      if(!viewer.classList.contains('show')) document.body.style.overflow = '';
     }
 
     // 카드 클릭 → 모달
@@ -598,43 +815,109 @@
       tab.addEventListener('click', ()=> show(tab.dataset.kind));
     });
 
-    // 닫기
+    // 모달 닫기
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
 
-    // ESC 닫기
-    window.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+    /* =====================
+       원본 VIEWER (타일과 동일 컨셉)
+       ===================== */
+    const viewer = document.getElementById('viewer');
+    const viewerImg = document.getElementById('viewerImg');
+    const viewerClose = document.getElementById('viewerClose');
+
+    let vScale = 1;
+    let vX = 0, vY = 0;
+    let dragging = false;
+    let startX = 0, startY = 0;
+
+    function applyViewerTransform(){
+      viewerImg.style.transform = `translate(${vX}px, ${vY}px) scale(${vScale})`;
+    }
+
+    function resetViewer(){
+      vScale = 1; vX = 0; vY = 0;
+      applyViewerTransform();
+    }
+
+    function openViewer(src, alt){
+      if(!src) return;
+      viewerImg.src = src;
+      viewerImg.alt = alt || '';
+      resetViewer();
+      viewer.classList.add('show');
+      viewer.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeViewer(){
+      viewer.classList.remove('show');
+      viewer.setAttribute('aria-hidden','true');
+      viewerImg.src = '';
+      resetViewer();
+      // 모달이 열려있으면 overflow 유지
+      if(!modal.classList.contains('show')) document.body.style.overflow = '';
+    }
+
+    // ✅ 모달 이미지 클릭 → 원본 뷰어
+    modalImg.addEventListener('click', ()=>{
+      openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
     });
 
-    /* =====================
-       (선택) 카테고리 필터
-       - 지금은 버튼 UI가 있으니 기능도 같이 넣어둠
-       - 제품 추가할 때 data-category 값만 맞추면 됨
-       ===================== */
-    (function(){
-      const btns = document.querySelectorAll('.cat-btn');
-      const cards = document.querySelectorAll('.s-card');
-      if(!btns.length || !cards.length) return;
+    // ✅ 원본 보기 아이콘 클릭 → 원본 뷰어
+    openOriginalBtn.addEventListener('click', ()=>{
+      openViewer(modalImg.currentSrc || modalImg.src, modalImg.alt);
+    });
 
-      function apply(cat){
-        cards.forEach(card=>{
-          const c = card.dataset.category || '';
-          const show = (cat === 'all') || (c === cat);
-          card.style.display = show ? '' : 'none';
-        });
+    // 닫기
+    viewerClose.addEventListener('click', closeViewer);
+    viewer.addEventListener('click', (e)=>{ if(e.target === viewer) closeViewer(); });
+
+    // wheel zoom
+    viewer.addEventListener('wheel', (e)=>{
+      if(!viewer.classList.contains('show')) return;
+      e.preventDefault();
+
+      const delta = -e.deltaY;
+      const step = delta > 0 ? 0.12 : -0.12;
+      const nextScale = Math.min(6, Math.max(1, vScale + step));
+      if(nextScale === vScale) return;
+
+      vScale = nextScale;
+      applyViewerTransform();
+    }, { passive:false });
+
+    // drag pan
+    viewerImg.addEventListener('pointerdown', (e)=>{
+      if(!viewer.classList.contains('show')) return;
+      dragging = true;
+      startX = e.clientX - vX;
+      startY = e.clientY - vY;
+      viewerImg.setPointerCapture(e.pointerId);
+    });
+
+    viewerImg.addEventListener('pointermove', (e)=>{
+      if(!dragging) return;
+      if(vScale <= 1) return;
+      vX = e.clientX - startX;
+      vY = e.clientY - startY;
+      applyViewerTransform();
+    });
+
+    viewerImg.addEventListener('pointerup', ()=>{ dragging = false; });
+    viewerImg.addEventListener('pointercancel', ()=>{ dragging = false; });
+
+    // keyboard
+    window.addEventListener('keydown', (e)=>{
+      // viewer 우선
+      if(e.key === 'Escape' && viewer.classList.contains('show')){
+        closeViewer(); return;
       }
-
-      btns.forEach(b=>{
-        b.addEventListener('click', ()=>{
-          btns.forEach(x=>x.classList.remove('active'));
-          b.classList.add('active');
-          apply(b.dataset.cat);
-        });
-      });
-
-      apply('all');
-    })();
+      // modal
+      if(e.key === 'Escape' && modal.classList.contains('show')){
+        closeModal(); return;
+      }
+    });
   })();
   </script>
 </body>
